@@ -47,7 +47,7 @@ public class CageDetailMain : PageBase2 {
 
 	public int m_iItemSerial;
 
-	public DataItem m_dataItem;
+	public DataItemParam m_dataItemParam;
 	public DataItemMaster m_dataItemMaster;
 
 	protected override void initialize(){
@@ -70,8 +70,8 @@ public class CageDetailMain : PageBase2 {
 		m_pageHeader = makeHeader ("header_shisetsu1" ,  ITEM_DETAIL_TABS[0].m_strWordKey , "btn_katazuke");
 		makeCloseButton ();
 
-		m_dataItem = GameMain.dbItem.Select (m_iItemSerial);
-		m_dataItemMaster = GameMain.dbItemMaster.Select (m_dataItem.item_id);
+		m_dataItemParam = DataManager.Instance.m_dataItem.Select (m_iItemSerial);
+		m_dataItemMaster = GameMain.dbItemMaster.Select (m_dataItemParam.item_id);
 
 		// これ、別のところでもやってます
 		List<DataMonster> monster_list = GameMain.dbMonster.Select (" item_serial = " + m_iItemSerial.ToString ());
@@ -80,7 +80,7 @@ public class CageDetailMain : PageBase2 {
 			DataMonsterMaster data_master = GameMain.dbMonsterMaster.Select (monster.monster_id);
 			iUseCost += data_master.cost;
 		}
-		CsvItemDetailData detail_data = DataManager.GetItemDetail (m_dataItem.item_id, m_dataItem.level);
+		CsvItemDetailData detail_data = DataManager.GetItemDetail (m_dataItemParam.item_id, m_dataItemParam.level);
 		GameMain.Instance.m_iCostMax = detail_data.cost;
 		GameMain.Instance.m_iCostNow = iUseCost;
 		GameMain.Instance.m_iCostNokori = detail_data.cost - iUseCost;
@@ -158,8 +158,8 @@ public class CageDetailMain : PageBase2 {
 			}
 
 			// 消す予定のところに新しい土地を設置する
-			for (int x = m_dataItem.x; x < m_dataItem.x + m_dataItem.width; x++) {
-				for (int y = m_dataItem.y; y < m_dataItem.y + m_dataItem.height; y++) {
+			for (int x = m_dataItemParam.x; x < m_dataItemParam.x + m_dataItemParam.width; x++) {
+				for (int y = m_dataItemParam.y; y < m_dataItemParam.y + m_dataItemParam.height; y++) {
 					GameObject obj = PrefabManager.Instance.MakeObject ("prefab/PrefFieldItem", GameMain.ParkRoot.gameObject);
 					obj.name = "fielditem_" + x.ToString () + "_" + y.ToString ();
 					CtrlFieldItem script = obj.GetComponent<CtrlFieldItem> ();
@@ -172,7 +172,7 @@ public class CageDetailMain : PageBase2 {
 
 			int iRemoveIndex = 0;
 			foreach (CtrlFieldItem item in GameMain.ParkRoot.m_fieldItemList) {
-				if (item.m_dataItem.item_serial == GameMain.Instance.m_iSettingItemSerial) {
+				if (item.m_dataItemParam.item_serial == GameMain.Instance.m_iSettingItemSerial) {
 					item.Remove ();
 					GameMain.ParkRoot.m_fieldItemList.RemoveAt (iRemoveIndex);
 					break;
@@ -184,8 +184,8 @@ public class CageDetailMain : PageBase2 {
 			m_itemDetailBase.Remove ();
 
 			int iUriagePerHour = 0;
-			List<DataItem> item_list = GameMain.dbItem.Select (" item_serial != 0 ");
-			foreach (DataItem item in item_list) {
+			List<DataItemParam> item_list = DataManager.Instance.m_dataItem.Select (" item_serial != 0 ");
+			foreach (DataItemParam item in item_list) {
 				iUriagePerHour += item.GetUriagePerHour ();
 			}
 			GameMain.dbKvs.WriteInt (DefineOld.USER_URIAGE_PAR_HOUR, iUriagePerHour);

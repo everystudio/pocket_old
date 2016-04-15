@@ -206,7 +206,7 @@ public class InitialMain : MonoBehaviour {
 			if (true) {
 				//if (m_tkKvsOpen.Completed) {
 
-				List<DataItem> data_item_list =  m_dbItem.SelectAll ();
+				List<DataItemParam> data_item_list =  DataManager.Instance.m_dataItem.All;
 				// 最初しか通らない
 				if (data_item_list.Count == 0) {
 					Debug.LogError ("here");
@@ -218,9 +218,8 @@ public class InitialMain : MonoBehaviour {
 					var csvItem = new CsvItem ();
 					csvItem.Load ();
 					foreach (MapChipCSV csvMapChip in skitMasterTable.All) {
-						DataItem data = new DataItem (csvMapChip , csvItem );
-						m_dbItem.Replace (data);
-
+						DataItemParam data = new DataItemParam (csvMapChip , csvItem );
+						DataManager.Instance.m_dataItem.list.Add (data);
 					}
 				}
 
@@ -268,7 +267,7 @@ public class InitialMain : MonoBehaviour {
 				if (data_item_master.Count == 0) {
 					var csvItem = new CsvItem ();
 					csvItem.Load ();
-					foreach (CsvItemData csv_item_data in csvItem.All) {
+					foreach (CsvItemParam csv_item_data in csvItem.All) {
 						DataItemMaster data = new DataItemMaster (csv_item_data);
 						if (data.open_item_id == 0) {
 							data.status = 1;

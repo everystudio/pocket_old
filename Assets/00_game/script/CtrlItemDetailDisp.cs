@@ -28,7 +28,7 @@ public class CtrlItemDetailDisp : CtrlItemDetailBase {
 	override protected void close(){
 		// 閉じる的な終了時
 		m_ctrlFieldItem.gameObject.transform.parent = GameMain.ParkRoot.transform;
-		m_ctrlFieldItem.SetPos (m_dataItem.x, m_dataItem.y);
+		m_ctrlFieldItem.SetPos (m_dataItemParam.x, m_dataItemParam.y);
 		return;
 	}
 

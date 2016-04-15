@@ -282,14 +282,14 @@ public class Grid {
 		return;
 	}
 
-	static public void SetUsingGrid( ref List<Grid> _gridList , DataItem _dataItem ){
+	static public void SetUsingGrid( ref List<Grid> _gridList , DataItemParam _dataItem ){
 		setUsingGrid (ref _gridList, _dataItem.x, _dataItem.y, _dataItem.width, _dataItem.height);
 		return;
 	}
 
-	static public void SetUsingGrid( ref List<Grid> _gridList , List<DataItem> _dataItemList ){
+	static public void SetUsingGrid( ref List<Grid> _gridList , List<DataItemParam> _dataItemList ){
 		_gridList.Clear ();
-		foreach (DataItem data in _dataItemList) {
+		foreach (DataItemParam data in _dataItemList) {
 			List<Grid> grid_list = new List<Grid> ();
 			SetUsingGrid (ref grid_list, data);
 			foreach (Grid grid in grid_list) {

@@ -35,7 +35,7 @@ public class CtrlFieldItemBuildTime : ButtonBase {
 		m_lbNokoriTime.depth = iUseDepth + 1;
 		m_lbName.depth = iUseDepth + 1;
 
-		CsvItemData item_data = DataManager.GetItem (_iItemId);
+		CsvItemParam item_data = DataManager.GetItem (_iItemId);
 		m_lbName.text = item_data.name;
 
 		m_eStep = STEP.INIT;

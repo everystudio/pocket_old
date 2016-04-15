@@ -11,12 +11,12 @@ public class CtrlItemDetailBuildupCage : CtrlItemDetailBuildupBase {
 	}
 
 	override protected void buildup(){
-		CsvItemDetailData detail_pre_data = DataManager.GetItemDetail (m_dataItem.item_id, m_dataItem.level);
+		CsvItemDetailData detail_pre_data = DataManager.GetItemDetail (m_dataItemParam.item_id, m_dataItemParam.level);
 
 		int iCostPre = detail_pre_data.cost;
 		int iCostAfter = detail_pre_data.cost;
 
-		int iNextLevel = m_dataItem.level + 1;
+		int iNextLevel = m_dataItemParam.level + 1;
 
 		Dictionary< string , string > dict = new Dictionary< string , string > ();
 		dict.Add( "level" , iNextLevel.ToString() ); 
@@ -24,7 +24,7 @@ public class CtrlItemDetailBuildupCage : CtrlItemDetailBuildupBase {
 		/*
 		CsvItemDetailData itemdetail;
 		foreach (CsvItemDetailData csvData in DataManager.csv_item_detail) {
-			if (m_dataItem.item_id == csvData.item_id && iNextLevel == csvData.level) {
+			if (m_dataItemParam.item_id == csvData.item_id && iNextLevel == csvData.level) {
 				iCostAfter = csvData.cost;
 				dict.Add ("cost_max", csvData.cost.ToString ()); 
 				dict.Add ("revenue", csvData.revenue_rate.ToString ()); 
@@ -33,7 +33,7 @@ public class CtrlItemDetailBuildupCage : CtrlItemDetailBuildupBase {
 		*/
 
 		// 増えた分おコストを計算
-		CsvItemDetailData detail_data = DataManager.GetItemDetail (m_dataItem.item_id, iNextLevel);
+		CsvItemDetailData detail_data = DataManager.GetItemDetail (m_dataItemParam.item_id, iNextLevel);
 		iCostAfter = detail_data.cost;
 
 		int iAddCost = iCostAfter - iCostPre;
@@ -44,11 +44,11 @@ public class CtrlItemDetailBuildupCage : CtrlItemDetailBuildupBase {
 		GameMain.Instance.m_iCostMax = detail_data.cost;
 
 
-		GameMain.dbItem.Update( m_dataItem.item_serial , dict );
+		GameMain.dbItem.Update( m_dataItemParam.item_serial , dict );
 
-		m_dataItem = GameMain.dbItem.Select (m_dataItem.item_serial);
+		m_dataItemParam = DataManager.Instance.m_dataItem.Select (m_dataItemParam.item_serial);
 
-		dispUpdate (m_dataItem, ref m_dataNext);
+		dispUpdate (m_dataItemParam, ref m_dataNext);
 	}
 
 }

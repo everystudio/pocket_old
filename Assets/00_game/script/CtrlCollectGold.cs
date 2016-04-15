@@ -23,8 +23,8 @@ public class CtrlCollectGold : MonoBehaviourEx {
 	private void updateCollect(){
 		int iCollectGold = 0;
 		int iCollectExp = 0;
-		List<DataItem> aaa = GameMain.dbItem.Select (" item_serial != 0 " );
-		foreach (DataItem item in aaa) {
+		List<DataItemParam> aaa = DataManager.Instance.m_dataItem.Select (" item_serial != 0 " );
+		foreach (DataItemParam item in aaa) {
 			int iTempGold = 0;
 			int iTempExp = 0;
 
@@ -78,8 +78,8 @@ public class CtrlCollectGold : MonoBehaviourEx {
 
 			int iCollectGold = 0;
 			int iCollectExp = 0;
-			List<DataItem> aaa = GameMain.dbItem.Select (" item_serial != 0 ");
-			foreach (DataItem item in aaa) {
+			List<DataItemParam> aaa = DataManager.Instance.m_dataItem.Select (" item_serial != 0 ");
+			foreach (DataItemParam item in aaa) {
 				int iTempGold = 0;
 				int iTempExp = 0;
 

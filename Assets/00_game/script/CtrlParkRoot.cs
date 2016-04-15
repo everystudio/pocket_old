@@ -12,7 +12,7 @@ public class CtrlParkRoot : MonoBehaviourEx {
 		myTransform.localPosition += new Vector3 (_fX, _fY, 0.0f); 
 	}
 
-	public void Initialize( List<DataItem> _itemList ){
+	public void Initialize( List<DataItemParam> _itemList ){
 
 		if (m_bInitialized == false) {
 
@@ -39,7 +39,7 @@ public class CtrlParkRoot : MonoBehaviourEx {
 						obj.name = "fielditem_" + x.ToString () + "_" + y.ToString ();
 						CtrlFieldItem script = obj.GetComponent<CtrlFieldItem> ();
 						bool bHit = false;
-						foreach (DataItem item in _itemList) {
+						foreach (DataItemParam item in _itemList) {
 							if (item.x == x && item.y == y) {
 								script.Init (item);
 								bHit = true;
@@ -71,7 +71,7 @@ public class CtrlParkRoot : MonoBehaviourEx {
 				CtrlFieldItem fielditem = GetFieldItem (monster.item_serial);
 				GameObject objIcon = PrefabManager.Instance.MakeObject ("prefab/PrefIcon", fielditem.gameObject);
 				CtrlIconRoot iconRoot = objIcon.GetComponent<CtrlIconRoot> ();
-				//iconRoot.m_iSize = fielditem.m_dataItem.width;
+				//iconRoot.m_iSize = fielditem.m_dataItemParam.width;
 				iconRoot.Initialize (monster , fielditem );
 				fielditem.Add (iconRoot);
 			}
@@ -81,7 +81,7 @@ public class CtrlParkRoot : MonoBehaviourEx {
 				CtrlFieldItem fielditem = GetFieldItem (staff.item_serial);
 				GameObject objIcon = PrefabManager.Instance.MakeObject ("prefab/PrefIcon", fielditem.gameObject);
 				CtrlIconRoot iconRoot = objIcon.GetComponent<CtrlIconRoot> ();
-				//iconRoot.m_iSize = fielditem.m_dataItem.width;
+				//iconRoot.m_iSize = fielditem.m_dataItemParam.width;
 				iconRoot.Initialize (staff , fielditem );
 				fielditem.Add (iconRoot);
 			}
@@ -107,7 +107,7 @@ public class CtrlParkRoot : MonoBehaviourEx {
 
 	public CtrlFieldItem GetFieldItem( int _iSerial ){
 		foreach (CtrlFieldItem item in m_fieldItemList) {
-			if (item.m_dataItem.item_serial == _iSerial) {
+			if (item.m_dataItemParam.item_serial == _iSerial) {
 				return item;
 			}
 		}
@@ -116,7 +116,7 @@ public class CtrlParkRoot : MonoBehaviourEx {
 
 	public CtrlFieldItem GetFieldItem( int _iX , int _iY ){
 		foreach (CtrlFieldItem item in m_fieldItemList) {
-			if (item.m_dataItem.x == _iX && item.m_dataItem.y == _iY) {
+			if (item.m_dataItemParam.x == _iX && item.m_dataItemParam.y == _iY) {
 				return item;
 			}
 		}
@@ -127,7 +127,7 @@ public class CtrlParkRoot : MonoBehaviourEx {
 		int iIndex = 0;
 		CtrlFieldItem removeScript = null;
 		foreach (CtrlFieldItem script in m_fieldItemList) {
-			if (script.m_dataItem.x == _iX && script.m_dataItem.y == _iY) {
+			if (script.m_dataItemParam.x == _iX && script.m_dataItemParam.y == _iY) {
 				removeScript = script;
 				break;
 			}
@@ -144,8 +144,8 @@ public class CtrlParkRoot : MonoBehaviourEx {
 	}
 
 	public void AddFieldItem( CtrlFieldItem _ctrlFieldItem ){
-		for (int x = _ctrlFieldItem.m_dataItem.x; x < _ctrlFieldItem.m_dataItem.x + _ctrlFieldItem.m_dataItem.width; x++) {
-			for (int y = _ctrlFieldItem.m_dataItem.y ; y < _ctrlFieldItem.m_dataItem.y + _ctrlFieldItem.m_dataItem.height; y++) {
+		for (int x = _ctrlFieldItem.m_dataItemParam.x; x < _ctrlFieldItem.m_dataItemParam.x + _ctrlFieldItem.m_dataItemParam.width; x++) {
+			for (int y = _ctrlFieldItem.m_dataItemParam.y ; y < _ctrlFieldItem.m_dataItemParam.y + _ctrlFieldItem.m_dataItemParam.height; y++) {
 				RemoveFieldItem (x, y);
 				/*
 				CtrlFieldItem script = GetFieldItem (x, y);
@@ -155,7 +155,7 @@ public class CtrlParkRoot : MonoBehaviourEx {
 				*/
 			}
 		}
-		_ctrlFieldItem.gameObject.name = "fielditem_" + _ctrlFieldItem.m_dataItem.x.ToString () + "_" + _ctrlFieldItem.m_dataItem.y.ToString ();
+		_ctrlFieldItem.gameObject.name = "fielditem_" + _ctrlFieldItem.m_dataItemParam.x.ToString () + "_" + _ctrlFieldItem.m_dataItemParam.y.ToString ();
 		m_fieldItemList.Add (_ctrlFieldItem);
 		return;
 	}
@@ -167,7 +167,7 @@ public class CtrlParkRoot : MonoBehaviourEx {
 		// コントローラーがとれて、まだチェックしてないやつはチェック
 		if (temp != null && temp.m_eRoad == DefineOld.ROAD.NO_CHECK ){
 			//Debug.Log (temp.gameObject.name);
-			if (temp.m_dataItem.item_id == DefineOld.ITEM_ID_ROAD) {
+			if (temp.m_dataItemParam.item_id == DefineOld.ITEM_ID_ROAD) {
 				bRet = true;
 				temp.m_eRoad = DefineOld.ROAD.CONNECTION;
 			} else {
@@ -213,7 +213,7 @@ public class CtrlParkRoot : MonoBehaviourEx {
 	public void CheckRoadRoot( int _iX , int _iY ){
 
 		// 侵入されたらまず自分のチェック
-		if (GetFieldItem (_iX, _iY).m_dataItem.item_id == DefineOld.ITEM_ID_ROAD) {
+		if (GetFieldItem (_iX, _iY).m_dataItemParam.item_id == DefineOld.ITEM_ID_ROAD) {
 			GetFieldItem (_iX, _iY).m_eRoad = DefineOld.ROAD.CONNECTION;
 		}
 
@@ -221,7 +221,7 @@ public class CtrlParkRoot : MonoBehaviourEx {
 
 		// コントローラーがとれて、まだチェックしてないやつはチェック
 		if (temp != null && temp.m_eRoad != DefineOld.ROAD.NO_CHECK ){
-			if (temp.m_dataItem.item_id == DefineOld.ITEM_ID_ROAD) {
+			if (temp.m_dataItemParam.item_id == DefineOld.ITEM_ID_ROAD) {
 				temp.m_eRoad = DefineOld.ROAD.CONNECTION;
 			} else {
 				temp.m_eRoad = DefineOld.ROAD.DISCONNECT;
@@ -239,16 +239,16 @@ public class CtrlParkRoot : MonoBehaviourEx {
 
 		checkRaodSub (1, 1);
 
-		List<DataItem > item_list = GameMain.dbItem.Select (" status != 0 ");
+		List<DataItemParam > item_list = DataManager.Instance.m_dataItem.Select (" status != 0 ");
 
 		//Debug.Log( string.Format( "item_list.Count={0} " ,item_list.Count ));
 
 		// 状態を一度リセット
 		foreach (CtrlFieldItem field_item in m_fieldItemList) {
-			switch ((DefineOld.Item.Category)field_item.m_dataItem.category) {
+			switch ((DefineOld.Item.Category)field_item.m_dataItemParam.category) {
 			case DefineOld.Item.Category.CAGE:
 			case DefineOld.Item.Category.SHOP:
-				if (field_item.m_dataItem.item_id != DefineOld.ITEM_ID_ROAD) {
+				if (field_item.m_dataItemParam.item_id != DefineOld.ITEM_ID_ROAD) {
 					field_item.CheckAroundConnectRoad ();
 				}
 				break;

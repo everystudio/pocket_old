@@ -26,11 +26,11 @@ public class CtrlShopDetail : MonoBehaviour {
 	private int m_iItemSerial;
 	private CtrlParkRoot m_csParkRoot;
 
-	public DataItem m_dataItem;
+	public DataItemParam m_dataItemParam;
 
-	public void Init( DataItem _dataItem , CtrlParkRoot _parkRoot ){
+	public void Init( DataItemParam _dataItem , CtrlParkRoot _parkRoot ){
 
-		m_dataItem = _dataItem;
+		m_dataItemParam = _dataItem;
 		m_csParkRoot = _parkRoot;
 		m_iItemSerial = _dataItem.item_serial;
 
@@ -60,8 +60,8 @@ public class CtrlShopDetail : MonoBehaviour {
 			if (m_ButtonCollect.ButtonPushed) {
 
 				// 消す予定のところに新しい土地を設置する
-				for (int x = m_dataItem.x; x < m_dataItem.x + m_dataItem.width; x++) {
-					for (int y = m_dataItem.y; y < m_dataItem.y + m_dataItem.height; y++) {
+				for (int x = m_dataItemParam.x; x < m_dataItemParam.x + m_dataItemParam.width; x++) {
+					for (int y = m_dataItemParam.y; y < m_dataItemParam.y + m_dataItemParam.height; y++) {
 						GameObject obj = PrefabManager.Instance.MakeObject ("prefab/PrefFieldItem", GameMain.ParkRoot.gameObject);
 						obj.name = "fielditem_" + x.ToString () + "_" + y.ToString ();
 						CtrlFieldItem script = obj.GetComponent<CtrlFieldItem> ();
@@ -75,7 +75,7 @@ public class CtrlShopDetail : MonoBehaviour {
 
 				int iRemoveIndex = 0;
 				foreach (CtrlFieldItem item in GameMain.ParkRoot.m_fieldItemList) {
-					if (item.m_dataItem.item_serial == GameMain.Instance.m_iSettingItemSerial) {
+					if (item.m_dataItemParam.item_serial == GameMain.Instance.m_iSettingItemSerial) {
 						item.Remove ();
 						GameMain.ParkRoot.m_fieldItemList.RemoveAt (iRemoveIndex);
 						break;
@@ -84,7 +84,7 @@ public class CtrlShopDetail : MonoBehaviour {
 				}
 				/*
 				foreach (CtrlFieldItem script in m_csParkRoot.m_fieldItemList) {
-					if (script.m_dataItem.item_serial == m_iItemSerial) {
+					if (script.m_dataItemParam.item_serial == m_iItemSerial) {
 
 						m_csParkRoot.m_fieldItemList.Remove (script);
 						Destroy (script.gameObject);

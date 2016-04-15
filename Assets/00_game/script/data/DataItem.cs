@@ -40,8 +40,8 @@ public class DataItemParam : CsvDataParam{
 	}
 	public DataItemParam( MapChipCSV _mapChip , CsvItem _csvItem ){
 
-		CsvItemData item_data = new CsvItemData ();
-		foreach (CsvItemData data in _csvItem.All) {
+		CsvItemParam item_data = new CsvItemParam ();
+		foreach (CsvItemParam data in _csvItem.All) {
 			if (data.item_id == _mapChip.item_id) {
 				item_data = data;
 			}
@@ -89,72 +89,6 @@ public class DataItemParam : CsvDataParam{
 		return false;
 	}
 
-}
-
-public class DataItem : CsvData<DataItemParam>{
-
-
-	static public float GetSymbolRate(){
-		float fTotalRate = 1.0f;
-		//List<DataItem> symbol_list = GameMain.dbItem.Select (" type = " + ((int)(DefineOld.Item.Type.SYMBOL)).ToString () + " ");
-		List<DataItemParam> symbol_list = GameMain.dbItem.Select ( DefineOld.WHERE_PATTERN.RATE );
-		foreach( DataItemParam symbol in symbol_list ){
-			CsvItemData csv_symbol_item_data = DataManager.GetItem (symbol.item_id);
-			if ((int)(fTotalRate * 100.0f) < csv_symbol_item_data.revenue_up) {
-				fTotalRate = csv_symbol_item_data.revenue_up * 0.01f;
-			}
-		}
-		return fTotalRate;
-	}
-
-	/*
-	public void Set(Dictionary<string , string > _dict){
-
-		foreach (string key in _dict.Keys) {
-			switch (key) {
-			case "item_id":
-				item_id = int.Parse (_dict [key]);
-				break;
-			case "category":
-				category = int.Parse (_dict [key]);
-				break;
-			case "level":
-				level = int.Parse (_dict [key]);
-				break;
-			case "status":
-				status = int.Parse (_dict [key]);
-				break;
-			case "cost":
-				cost = int.Parse (_dict [key]);
-				break;
-			case "cost_max":
-				cost_max = int.Parse (_dict [key]);
-				break;
-			case "revenue_rate":
-				revenue_rate = int.Parse (_dict [key]);
-				break;
-			case "x":
-				x = int.Parse (_dict [key]);
-				break;
-			case "y":
-				y = int.Parse (_dict [key]);
-				break;
-			case "width":
-				width = int.Parse (_dict [key]);
-				break;
-			case "height":
-				height = int.Parse (_dict [key]);
-				break;
-			case "collect_time":
-				collect_time = _dict [key];
-				break;
-			case "create_time":
-				create_time = _dict [key];
-				break;
-			}
-		}
-	}
-	*/
 
 	public int GetCollect( bool _bCollect , out int _iCollectGold , out int _iCollectExp){
 
@@ -174,7 +108,7 @@ public class DataItem : CsvData<DataItemParam>{
 		}
 
 		int iShopCollectGold = 0;
-		CsvItemData csv_item_data = DataManager.GetItem (item_id);
+		CsvItemParam csv_item_data = DataManager.GetItem (item_id);
 		if (0 < csv_item_data.revenue) {
 			// お店自体金額回収
 			double diffSec = TimeManager.Instance.GetDiffNow (collect_time).TotalSeconds * -1.0d;
@@ -247,7 +181,7 @@ public class DataItem : CsvData<DataItemParam>{
 		//Debug.LogError (bHalf);
 
 		// 例外?処理
-		CsvItemData csv_item_data = DataManager.GetItem (item_id);
+		CsvItemParam csv_item_data = DataManager.GetItem (item_id);
 		if (0 < csv_item_data.revenue) {
 			int iCount = 3600 / csv_item_data.revenue_interval;
 			// お店自体金額回収
@@ -293,6 +227,84 @@ public class DataItem : CsvData<DataItemParam>{
 		}
 		return iShisyutsu;
 	}
+
+	static public float GetSymbolRate(){
+		float fTotalRate = 1.0f;
+		//List<DataItem> symbol_list = GameMain.dbItem.Select (" type = " + ((int)(DefineOld.Item.Type.SYMBOL)).ToString () + " ");
+		List<DataItemParam> symbol_list = GameMain.dbItem.Select ( DefineOld.WHERE_PATTERN.RATE );
+		foreach( DataItemParam symbol in symbol_list ){
+			CsvItemParam csv_symbol_item_data = DataManager.GetItem (symbol.item_id);
+			if ((int)(fTotalRate * 100.0f) < csv_symbol_item_data.revenue_up) {
+				fTotalRate = csv_symbol_item_data.revenue_up * 0.01f;
+			}
+		}
+		return fTotalRate;
+	}
+
+
+
+}
+
+public class DataItem : CsvData<DataItemParam>{
+
+	public DataItemParam Select( int _iSerial ){
+		foreach (DataItemParam param in list) {
+			if (param.item_serial == _iSerial) {
+				return param;
+			}
+		}
+		return new DataItemParam ();
+	}
+
+
+	/*
+	public void Set(Dictionary<string , string > _dict){
+
+		foreach (string key in _dict.Keys) {
+			switch (key) {
+			case "item_id":
+				item_id = int.Parse (_dict [key]);
+				break;
+			case "category":
+				category = int.Parse (_dict [key]);
+				break;
+			case "level":
+				level = int.Parse (_dict [key]);
+				break;
+			case "status":
+				status = int.Parse (_dict [key]);
+				break;
+			case "cost":
+				cost = int.Parse (_dict [key]);
+				break;
+			case "cost_max":
+				cost_max = int.Parse (_dict [key]);
+				break;
+			case "revenue_rate":
+				revenue_rate = int.Parse (_dict [key]);
+				break;
+			case "x":
+				x = int.Parse (_dict [key]);
+				break;
+			case "y":
+				y = int.Parse (_dict [key]);
+				break;
+			case "width":
+				width = int.Parse (_dict [key]);
+				break;
+			case "height":
+				height = int.Parse (_dict [key]);
+				break;
+			case "collect_time":
+				collect_time = _dict [key];
+				break;
+			case "create_time":
+				create_time = _dict [key];
+				break;
+			}
+		}
+	}
+	*/
 
 	static public void OpenNewItem( int _iKeyItemId ){
 
@@ -444,7 +456,7 @@ public class DataItemMaster :SODataParam{
 		return bRet;
 	}
 
-	public DataItemMaster( CsvItemData _data ){
+	public DataItemMaster( CsvItemParam _data ){
 		int count = 0;
 		item_id = _data.item_id;
 		status = 0;			// 通常は利用できるとして扱う

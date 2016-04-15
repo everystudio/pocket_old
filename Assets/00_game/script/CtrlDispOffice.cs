@@ -14,7 +14,7 @@ public class CtrlDispOffice : CtrlItemDetailBase {
 
 		m_ctrlFieldItem.gameObject.transform.parent = GameMain.ParkRoot.transform;
 		m_ctrlFieldItem.gameObject.transform.localScale = Vector3.one;
-		m_ctrlFieldItem.SetPos (m_dataItem.x, m_dataItem.y);
+		m_ctrlFieldItem.SetPos (m_dataItemParam.x, m_dataItemParam.y);
 		foreach (CtrlFieldItem field_item in m_areaFieldItem) {
 			field_item.gameObject.transform.parent = GameMain.ParkRoot.transform;
 			field_item.gameObject.transform.localScale = Vector3.one;
@@ -29,7 +29,7 @@ public class CtrlDispOffice : CtrlItemDetailBase {
 
 	public void SetColor( DefineOld.Item.Category _category , Color _color ){
 		foreach (CtrlFieldItem script in m_areaFieldItem) {
-			if (script.m_dataItem.category == (int)_category) {
+			if (script.m_dataItemParam.category == (int)_category) {
 				script.SetColor (_color);
 			}
 		}
@@ -59,19 +59,19 @@ public class CtrlDispOffice : CtrlItemDetailBase {
 		m_ctrlFieldItem.transform.localScale = Vector3.one;
 		m_ctrlFieldItem.ResetPos ();
 
-		DataItemMaster master_data = GameMain.dbItemMaster.Select( m_dataItem.item_id );
+		DataItemMaster master_data = GameMain.dbItemMaster.Select( m_dataItemParam.item_id );
 
 		Color color = new Color (0.75f, 0.75f, 0.75f);
 
-		for( int x = m_dataItem.x - (master_data.area ) ; x < m_dataItem.x + master_data.size + (master_data.area ) ; x++ ){
-			for( int y = m_dataItem.y - (master_data.area ) ; y < m_dataItem.y + master_data.size + (master_data.area ) ; y++ ){
+		for( int x = m_dataItemParam.x - (master_data.area ) ; x < m_dataItemParam.x + master_data.size + (master_data.area ) ; x++ ){
+			for( int y = m_dataItemParam.y - (master_data.area ) ; y < m_dataItemParam.y + master_data.size + (master_data.area ) ; y++ ){
 				//Debug.Log ("x=" + x.ToString () + " y=" + y.ToString ());
 
 				//foreach (DataItem data_item in DataManager.Instance.m_ItemDataList) {
 				foreach (CtrlFieldItem field_item in GameMain.ParkRoot.m_fieldItemList) {
 
 					// xyが合ってて、シリアルは別
-					if (field_item.m_dataItem.x == x && field_item.m_dataItem.y == y && m_dataItem.item_serial != field_item.m_dataItem.item_serial ) {
+					if (field_item.m_dataItemParam.x == x && field_item.m_dataItemParam.y == y && m_dataItemParam.item_serial != field_item.m_dataItemParam.item_serial ) {
 						//CtrlFieldItem script = GameMain.ParkRoot.GetFieldItem (data_item.item_serial);
 						CtrlFieldItem script = field_item;
 						m_areaFieldItem.Add (script);
@@ -85,13 +85,13 @@ public class CtrlDispOffice : CtrlItemDetailBase {
 
 
 		/*
-		for( int x = m_dataItem.x - (master_data.area ) ; x < m_dataItem.x + master_data.size + (master_data.area ) ; x++ ){
-			for( int y = m_dataItem.y - (master_data.area ) ; y < m_dataItem.y + master_data.size + (master_data.area ) ; y++ ){
+		for( int x = m_dataItemParam.x - (master_data.area ) ; x < m_dataItemParam.x + master_data.size + (master_data.area ) ; x++ ){
+			for( int y = m_dataItemParam.y - (master_data.area ) ; y < m_dataItemParam.y + master_data.size + (master_data.area ) ; y++ ){
 				//Debug.Log ("x=" + x.ToString () + " y=" + y.ToString ());
 				foreach (DataItem data_item in DataManager.Instance.m_ItemDataList) {
 
 					// xyが合ってて、シリアルは別
-					if (data_item.x == x && data_item.y == y && m_dataItem.item_serial != data_item.item_serial ) {
+					if (data_item.x == x && data_item.y == y && m_dataItemParam.item_serial != data_item.item_serial ) {
 						CtrlFieldItem script = GameMain.ParkRoot.GetFieldItem (data_item.item_serial);
 						m_areaFieldItem.Add (script);
 						script.gameObject.transform.parent = m_goRootPosition.transform;
@@ -104,7 +104,7 @@ public class CtrlDispOffice : CtrlItemDetailBase {
 
 		float fScale = 0.5f;
 		m_goRootPosition.transform.localScale = new Vector3 (fScale, fScale, fScale);
-		m_goRootPosition.transform.localPosition = (-1.0f * DefineOld.CELL_X_DIR.normalized * DefineOld.CELL_X_LENGTH * m_dataItem.x) + (-1.0f * DefineOld.CELL_Y_DIR.normalized * DefineOld.CELL_Y_LENGTH * m_dataItem.y + new Vector3(0.0f, -240.0f,0.0f ));
+		m_goRootPosition.transform.localPosition = (-1.0f * DefineOld.CELL_X_DIR.normalized * DefineOld.CELL_X_LENGTH * m_dataItemParam.x) + (-1.0f * DefineOld.CELL_Y_DIR.normalized * DefineOld.CELL_Y_LENGTH * m_dataItemParam.y + new Vector3(0.0f, -240.0f,0.0f ));
 		m_goRootPosition.transform.localPosition *= fScale;
 
 		return;
@@ -127,11 +127,11 @@ public class CtrlDispOffice : CtrlItemDetailBase {
 				if (GameMain.GetGrid (m_goRootPosition, InputManager.Info.TouchPoint, out iGridX, out iGridY)) {
 					//Debug.Log ("x=" + iGridX.ToString () + " y=" + iGridY.ToString ());
 
-					foreach (DataItem data_item in DataManager.Instance.m_ItemDataList) {
-						if (GameMain.GridHit (iGridX, iGridY, data_item)) {
+					foreach (DataItemParam data_item_param in DataManager.Instance.m_dataItem.list) {
+						if (GameMain.GridHit (iGridX, iGridY, data_item_param)) {
 
-							if (data_item.category == (int)DefineOld.Item.Category.CAGE) {
-								iSelectCageSerial = data_item.item_serial;
+							if (data_item_param.category == (int)DefineOld.Item.Category.CAGE) {
+								iSelectCageSerial = data_item_param.item_serial;
 								m_iSelectingCageSerial = iSelectCageSerial;
 								break;
 							}

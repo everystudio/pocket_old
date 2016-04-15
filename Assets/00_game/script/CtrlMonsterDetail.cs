@@ -145,13 +145,13 @@ public class CtrlMonsterDetail : MonoBehaviour {
 				Destroy (m_ojisanCheck.gameObject);
 
 				// これ、別のところでもやってます
-				List<DataMonster> monster_list = GameMain.dbMonster.Select (" item_serial = " + fielditem.m_dataItem.item_serial.ToString ());
+				List<DataMonster> monster_list = GameMain.dbMonster.Select (" item_serial = " + fielditem.m_dataItemParam.item_serial.ToString ());
 				int iUseCost = 0;
 				foreach (DataMonster monster in monster_list) {
 					DataMonsterMaster data_master = GameMain.dbMonsterMaster.Select (monster.monster_id);
 					iUseCost += data_master.cost;
 				}
-				CsvItemDetailData detail_data = DataManager.GetItemDetail (fielditem.m_dataItem.item_id, fielditem.m_dataItem.level);
+				CsvItemDetailData detail_data = DataManager.GetItemDetail (fielditem.m_dataItemParam.item_id, fielditem.m_dataItemParam.level);
 				GameMain.Instance.m_iCostMax = detail_data.cost;
 				GameMain.Instance.m_iCostNow = iUseCost;
 				GameMain.Instance.m_iCostNokori = detail_data.cost - iUseCost;

@@ -68,9 +68,9 @@ public class BannerScrollParent : MonoBehaviourEx {
 		m_Grid.enabled = true;
 	}
 
-	public void Display( List<DataItem> _itemList , int _iIndex , string _strButton = "" ){
+	public void Display( List<DataItemParam> _itemList , int _iIndex , string _strButton = "" ){
 		BannerBaseClear ();
-		foreach (DataItem data in _itemList) {
+		foreach (DataItemParam data in _itemList) {
 			GameObject objBanner = PrefabManager.Instance.MakeObject ("prefab/PrefBannerItem" , m_Grid.gameObject );
 			BannerItem script = objBanner.GetComponent<BannerItem> ();
 			script.Initialize (data, GameMain.Instance.m_iCostNokori);

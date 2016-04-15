@@ -50,7 +50,7 @@ abstract public class CtrlItemDetailBuildupBase : CtrlItemDetailBase {
 	public CsvItemDetailData m_dataNow;
 	public CsvItemDetailData m_dataNext;
 
-	virtual protected void dispUpdate( DataItem _data , ref CsvItemDetailData _next ){
+	virtual protected void dispUpdate( DataItemParam _data , ref CsvItemDetailData _next ){
 		_next = null;
 
 		m_lbNeedGold.text = "-";
@@ -101,7 +101,7 @@ abstract public class CtrlItemDetailBuildupBase : CtrlItemDetailBase {
 		m_eStep = STEP.IDLE;
 		m_eStepPre = STEP.MAX;
 
-		dispUpdate (m_dataItem , ref m_dataNext );
+		dispUpdate (m_dataItemParam , ref m_dataNext );
 		return;
 	}
 

@@ -107,9 +107,9 @@ public class ParkMain : PageBase2 {
 			if (bInit) {
 
 				m_csFieldItemList.Clear ();
-				DataManager.Instance.m_ItemDataList = GameMain.dbItem.Select ( " status != 0 " );
+				//DataManager.Instance.m_ItemDataList = GameMain.dbItem.Select ( " status != 0 " );
 				//Debug.LogError (DataManager.Instance.m_ItemDataList.Count);
-				m_csParkRoot.Initialize (DataManager.Instance.m_ItemDataList );
+				m_csParkRoot.Initialize (DataManager.Instance.m_dataItem.Select(" status != 0 ")  );
 				m_csParkRoot.ConnectingRoadCheck ();
 
 				// ここで仕事のチェックしますか

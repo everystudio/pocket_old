@@ -188,11 +188,11 @@ public class DataWork : SearchBase{
 
 			string strWhere = string.Format (" item_id = {0} and status = {1} " , mission_item , (int)DefineOld.Item.Status.SETTING);
 			//Debug.LogError (" item_id = " + mission_item.ToString () + " ");
-			List<DataItem> item_list = GameMain.dbItem.Select (" item_id = " + mission_item.ToString () + " ");
-			foreach (DataItem item in item_list) {
+			List<DataItemParam> item_list = DataManager.Instance.m_dataItem.Select (" item_id = " + mission_item.ToString () + " ");
+			foreach (DataItemParam item in item_list) {
 				//Debug.LogError (item.item_id);
 			}
-			int item_num = GameMain.dbItem.Select (" item_id = " + mission_item.ToString () + " ").Count;
+			int item_num = DataManager.Instance.m_dataItem.Select (" item_id = " + mission_item.ToString () + " ").Count;
 			if (mission_num <= item_num) {
 				bRet = true;
 			}

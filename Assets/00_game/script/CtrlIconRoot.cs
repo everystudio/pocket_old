@@ -74,7 +74,7 @@ public class CtrlIconRoot : MonoBehaviour {
 		CtrlIconMonster script = gameObject.AddComponent<CtrlIconMonster> ();
 
 		script.m_fukidashi = m_fukidashi;
-		m_iSize = _fieldItem.m_dataItem.width;
+		m_iSize = _fieldItem.m_dataItemParam.width;
 		script.Initialize (m_sprIcon , _monster , m_iSize );
 		m_ctrlIconBase = (CtrlIconBase)script;
 		m_dataMonster = _monster;
@@ -85,7 +85,7 @@ public class CtrlIconRoot : MonoBehaviour {
 		CtrlIconStaff script = gameObject.AddComponent<CtrlIconStaff> ();
 		//Debug.LogError (m_iSize);
 		script.m_fukidashi = m_fukidashi;
-		m_iSize = _fieldItem.m_dataItem.width;
+		m_iSize = _fieldItem.m_dataItemParam.width;
 		script.Initialize (m_sprIcon , _staff , m_iSize );
 		m_ctrlIconBase = (CtrlIconBase)script;
 		m_dataStaff = _staff;

@@ -4,7 +4,7 @@ using System.Collections;
 public class CtrlItemDetailBase : MonoBehaviourEx {
 
 	protected int m_iMainItemSerial;
-	protected DataItem m_dataItem;
+	protected DataItemParam m_dataItemParam;
 	protected CtrlFieldItem m_ctrlFieldItem;
 
 	public ButtonBase m_btnClose;				// 面倒なので直接押させない
@@ -24,7 +24,7 @@ public class CtrlItemDetailBase : MonoBehaviourEx {
 		m_iMainItemSerial = _iItemSerial;
 		//GameMain.Instance.m_
 		//Debug.Log (m_iMainItemSerial);
-		m_dataItem = GameMain.dbItem.Select (m_iMainItemSerial);
+		m_dataItemParam = DataManager.Instance.m_dataItem.Select (m_iMainItemSerial);
 		m_ctrlFieldItem = GameMain.ParkRoot.GetFieldItem (m_iMainItemSerial);
 
 		initialize ();

@@ -38,9 +38,9 @@ public class CtrlItemDetailCage : CtrlItemDetailBase {
 
 	void dispRefresh(){
 		//Debug.LogError ("dispRefresh");
-		int iUriageMax = m_ctrlFieldItem.m_dataItem.GetUriagePerHour ();
+		int iUriageMax = m_ctrlFieldItem.m_dataItemParam.GetUriagePerHour ();
 		/*
-		List<DataMonster > monster_list = GameMain.dbMonster.Select ( " item_serial = " + m_ctrlFieldItem.m_dataItem.item_serial.ToString() );
+		List<DataMonster > monster_list = GameMain.dbMonster.Select ( " item_serial = " + m_ctrlFieldItem.m_dataItemParam.item_serial.ToString() );
 		int iUriageMax = 0;
 		foreach (DataMonster monster in monster_list) {
 			CsvMonsterData monster_csv = DataManager.GetMonster (monster.monster_id);
@@ -53,19 +53,19 @@ public class CtrlItemDetailCage : CtrlItemDetailBase {
 		int iCollectGold = 0;
 		int iCollectExp= 0;
 
-		m_lbUriageNow.text = string.Format( "{0}G" , m_ctrlFieldItem.m_dataItem.GetCollect (false , out iCollectGold , out iCollectExp ) );
+		m_lbUriageNow.text = string.Format( "{0}G" , m_ctrlFieldItem.m_dataItemParam.GetCollect (false , out iCollectGold , out iCollectExp ) );
 		m_lbUriageMax.text = string.Format( "{0}G" , iUriageMax );
 	}
 
 	override protected void initialize(){
 
-		List<DataMonster> monster_list = GameMain.dbMonster.Select (" item_serial = " + m_ctrlFieldItem.m_dataItem.item_serial.ToString ());
+		List<DataMonster> monster_list = GameMain.dbMonster.Select (" item_serial = " + m_ctrlFieldItem.m_dataItemParam.item_serial.ToString ());
 		int iUseCost = 0;
 		foreach (DataMonster monster in monster_list) {
 			DataMonsterMaster data_master = GameMain.dbMonsterMaster.Select (monster.monster_id);
 			iUseCost += data_master.cost;
 		}
-		CsvItemDetailData detail_data = DataManager.GetItemDetail (m_dataItem.item_id, m_dataItem.level);
+		CsvItemDetailData detail_data = DataManager.GetItemDetail (m_dataItemParam.item_id, m_dataItemParam.level);
 		GameMain.Instance.m_iCostMax = detail_data.cost;
 		GameMain.Instance.m_iCostNow = iUseCost;
 		GameMain.Instance.m_iCostNokori = detail_data.cost - iUseCost;
@@ -108,7 +108,7 @@ public class CtrlItemDetailCage : CtrlItemDetailBase {
 
 			m_ctrlFieldItem.gameObject.transform.parent = GameMain.ParkRoot.transform;
 			m_ctrlFieldItem.gameObject.transform.localScale = Vector3.one;
-			m_ctrlFieldItem.SetPos (m_dataItem.x, m_dataItem.y);
+			m_ctrlFieldItem.SetPos (m_dataItemParam.x, m_dataItemParam.y);
 		} else {
 			// 閉じる的な終了時
 			Destroy (m_ctrlFieldItem.gameObject);

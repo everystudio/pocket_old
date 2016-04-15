@@ -43,7 +43,7 @@ public class OfficeDetailMain : PageBase2 {
 
 	public int m_iItemSerial;
 
-	public DataItem m_dataItem;
+	public DataItemParam m_dataItemParam;
 
 	protected override void initialize(){
 		m_WhereHash.Clear ();
@@ -65,7 +65,7 @@ public class OfficeDetailMain : PageBase2 {
 		m_pageHeader = makeHeader ("header_shisetsu2" , ITEM_DETAIL_TABS[0].m_strWordKey , "btn_katazuke");
 		makeCloseButton ();
 
-		m_dataItem = GameMain.dbItem.Select (m_iItemSerial);
+		m_dataItemParam = DataManager.Instance.m_dataItem.Select (m_iItemSerial);
 
 		List<DataStaff> staff_list = GameMain.dbStaff.Select (" office_serial = " + m_iItemSerial.ToString ());
 		int iUseCost = 0;
@@ -73,7 +73,7 @@ public class OfficeDetailMain : PageBase2 {
 			CsvStaffData data_master = DataManager.GetStaff (staff.staff_id);
 			iUseCost += data_master.cost;
 		}
-		CsvItemDetailData detail_data = DataManager.GetItemDetail (m_dataItem.item_id, m_dataItem.level);
+		CsvItemDetailData detail_data = DataManager.GetItemDetail (m_dataItemParam.item_id, m_dataItemParam.level);
 
 		Debug.Log (detail_data.cost);
 		Debug.Log (iUseCost);
@@ -90,7 +90,7 @@ public class OfficeDetailMain : PageBase2 {
 		Display (m_bannerScrollParen, ITEM_DETAIL_TABS, m_iTabIndex, m_iSwitchIndex);
 
 		m_csKatazukeCheck = null;
-		//m_dataItem.category 
+		//m_dataItemParam.category 
 
 	}
 
@@ -152,8 +152,8 @@ public class OfficeDetailMain : PageBase2 {
 			// 上のスタッフを削除したとにしてください
 			Debug.Log (GameMain.Instance.m_iSettingItemSerial);
 			CtrlFieldItem ctrlFieldItem = GameMain.ParkRoot.GetFieldItem (GameMain.Instance.m_iSettingItemSerial);
-			for (int x = m_dataItem.x; x < m_dataItem.x + m_dataItem.width; x++) {
-				for (int y = m_dataItem.y; y < m_dataItem.y + m_dataItem.height; y++) {
+			for (int x = m_dataItemParam.x; x < m_dataItemParam.x + m_dataItemParam.width; x++) {
+				for (int y = m_dataItemParam.y; y < m_dataItemParam.y + m_dataItemParam.height; y++) {
 					GameObject obj = PrefabManager.Instance.MakeObject ("prefab/PrefFieldItem", GameMain.ParkRoot.gameObject);
 					obj.name = "fielditem_" + x.ToString () + "_" + y.ToString ();
 					CtrlFieldItem script = obj.GetComponent<CtrlFieldItem> ();
@@ -166,7 +166,7 @@ public class OfficeDetailMain : PageBase2 {
 			GameMain.dbItem.Update (GameMain.Instance.m_iSettingItemSerial, 0, 0, 0);
 			int iRemoveIndex = 0;
 			foreach (CtrlFieldItem item in GameMain.ParkRoot.m_fieldItemList) {
-				if (item.m_dataItem.item_serial == GameMain.Instance.m_iSettingItemSerial) {
+				if (item.m_dataItemParam.item_serial == GameMain.Instance.m_iSettingItemSerial) {
 					GameMain.ParkRoot.m_fieldItemList.RemoveAt (iRemoveIndex);
 					break;
 				}

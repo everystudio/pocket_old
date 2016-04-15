@@ -159,7 +159,7 @@ public class BannerStaff : BannerBase {
 				Debug.Log (m_staffSetting);
 
 				// ここで取得するっていうのもなんか良くないっすね
-				DataItem officeData = GameMain.dbItem.Select (GameMain.Instance.m_iSettingItemSerial);
+				DataItemParam officeData = DataManager.Instance.m_dataItem.Select (GameMain.Instance.m_iSettingItemSerial);
 
 				Debug.Log (officeData);
 				Debug.Log (m_dataStaff.staff_id );

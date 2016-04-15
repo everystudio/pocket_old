@@ -101,7 +101,7 @@ public class BannerItem : BannerBase {
 		return bRet;
 
 	}
-	public bool Initialize( DataItem _data , int _iCostNokori ){
+	public bool Initialize( DataItemParam _data , int _iCostNokori ){
 
 		DataItemMaster item_master = DataManager.GetItemMaster (_data.item_id);
 		Initialize (item_master , _iCostNokori );

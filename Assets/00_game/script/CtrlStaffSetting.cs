@@ -11,7 +11,7 @@ public class CtrlStaffSetting : MonoBehaviour {
 
 	public float m_fTimer;
 
-	public DataItem m_dataOffice;
+	public DataItemParam m_dataOffice;
 	public int m_iSetStaffId;
 	public int m_iSetStaffSerial;
 
@@ -20,7 +20,7 @@ public class CtrlStaffSetting : MonoBehaviour {
 	 * どの種類のスタッフを配置するか
 	 * しかもお手持ちおスタッフかどうかも判断
 	 * */
-	public void Initialize( DataItem _dataOffice , int _iStaffId , int _iStaffSerial ){
+	public void Initialize( DataItemParam _dataOffice , int _iStaffId , int _iStaffSerial ){
 		/*
 		Debug.Log ("Initialize");
 		Debug.Log (_dataOffice);

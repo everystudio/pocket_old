@@ -22,7 +22,7 @@ public class ParkMainIdle : ParkMainController
 
 	public STEP m_eStep;
 	protected STEP m_eStepPre;
-	public DataItem m_selectItem;
+	public DataItemParam m_selectItem;
 
 	public CtrlShopDetail m_ctrlShopDetail;
 	public CtrlOjisanCheck m_ojisanCheck;
@@ -62,7 +62,7 @@ public class ParkMainIdle : ParkMainController
 				InputManager.Info.TouchUp = false;
 
 				// 更新
-				DataManager.Instance.m_ItemDataList = GameMain.dbItem.Select (" status != 0 ");
+				//DataManager.Instance.m_ItemDataList = GameMain.dbItem.Select (" status != 0 ");
 
 				m_fLongTapTime = 0.0f;
 				m_bLongTapCheck = false;
@@ -73,7 +73,7 @@ public class ParkMainIdle : ParkMainController
 				int iSelectSerial = GameMain.Instance.SwitchItemSerial;
 				GameMain.Instance.m_iSettingItemSerial = iSelectSerial;
 				GameMain.Instance.SwitchItemSerial = 0;
-				m_selectItem = GameMain.dbItem.Select (iSelectSerial);
+				m_selectItem = DataManager.Instance.m_dataItem.Select (iSelectSerial);
 				SoundManager.Instance.PlaySE (SoundName.BUTTON_SELECT);
 				CtrlFieldItem field_item = GameMain.ParkRoot.GetFieldItem (iSelectSerial);
 				GameMain.Instance.SetStatus (GameMain.STATUS.CAGE_DETAIL);
@@ -98,7 +98,7 @@ public class ParkMainIdle : ParkMainController
 						iSelectSerial = GameMain.Instance.BuildingSerial;
 						GameMain.Instance.BuildingSerial = 0;
 					} else {
-						foreach (DataItem data_item in DataManager.Instance.m_ItemDataList) {
+						foreach (DataItemParam data_item in DataManager.Instance.m_ItemDataList) {
 							if (GameMain.GridHit (iGridX, iGridY, data_item)) {
 								iSelectSerial = data_item.item_serial;
 							}
@@ -109,7 +109,7 @@ public class ParkMainIdle : ParkMainController
 						Debug.Log ("hit:serial=" + iSelectSerial.ToString ());
 
 						GameMain.Instance.m_iSettingItemSerial = iSelectSerial;
-						m_selectItem = GameMain.dbItem.Select (iSelectSerial);
+						m_selectItem = DataManager.Instance.m_dataItem.Select (iSelectSerial);
 						int iCategory = m_selectItem.category;
 						if (iCategory == (int)DefineOld.Item.Category.SHOP) {
 							SoundManager.Instance.PlaySE (SoundName.BUTTON_SELECT);
@@ -163,7 +163,7 @@ public class ParkMainIdle : ParkMainController
 					if (GameMain.GetGrid (InputManager.Info.TouchPoint, out iGridX, out iGridY)) {
 
 						int iSelectSerial = 0;
-						foreach (DataItem data_item in DataManager.Instance.m_ItemDataList) {
+						foreach (DataItemParam data_item in DataManager.Instance.m_ItemDataList) {
 							if (GameMain.GridHit (iGridX, iGridY, data_item)) {
 								iSelectSerial = data_item.item_serial;
 							}
@@ -172,7 +172,7 @@ public class ParkMainIdle : ParkMainController
 							Debug.Log ("hit:serial=" + iSelectSerial.ToString ());
 
 							GameMain.Instance.m_iSettingItemSerial = iSelectSerial;
-							m_selectItem = GameMain.dbItem.Select (iSelectSerial);
+							m_selectItem = DataManager.Instance.m_dataItem.Select (iSelectSerial);
 							int iCategory = m_selectItem.category;
 							if (iCategory == (int)DefineOld.Item.Category.SHOP) {
 							} else if (iCategory == (int)DefineOld.Item.Category.CAGE) {
@@ -291,7 +291,7 @@ public class ParkMainIdle : ParkMainController
 		case STEP.SPEED_BUILD:
 			Destroy (m_itemCheck.gameObject);
 
-			CsvItemData csv_item_data = DataManager.GetItem (m_selectItem.item_id);
+			CsvItemParam csv_item_data = DataManager.GetItem (m_selectItem.item_id);
 
 			Dictionary< string , string > dict = new Dictionary< string , string > ();
 			//dict.Add ("create_time", "\"1900-01-01 00:00:00\""); 

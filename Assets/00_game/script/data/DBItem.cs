@@ -54,8 +54,7 @@ public class DBItem  {
 
 	public void Update( int _iSerial , Dictionary<string , string > _dict , bool _bDebugLog = true){
 
-
-		foreach (DataItem data in m_soDataItem.list) {
+		foreach (DataItemParam data in DataManager.Instance.m_dataItem.list) {
 			if (data.item_serial == _iSerial) {
 				data.Set (_dict);
 			}
@@ -90,8 +89,8 @@ public class DBItem  {
 		string strCreateTime = TimeManager.StrNow ();
 		string strOpenTime =TimeManager.StrGetTime (_itemMaster.production_time);
 
-		DataItem insert_data = new DataItem ();
-		insert_data.item_serial = m_soDataItem.list.Count + 1;		// 事情があって+1
+		DataItemParam insert_data = new DataItemParam ();
+		insert_data.item_serial = DataManager.Instance.m_dataItem.list.Count + 1;		// 事情があって+1
 		insert_data.item_id = _itemMaster.item_id;
 		insert_data.category = _itemMaster.category;
 		insert_data.level = 1;
@@ -103,10 +102,10 @@ public class DBItem  {
 		insert_data.collect_time = strOpenTime;
 		insert_data.create_time = strCreateTime;
 
-		m_soDataItem.list.Add (insert_data);
+		DataManager.Instance.m_dataItem.list.Add (insert_data);
 
 		bool bHit = false;
-		foreach (DataItem data in m_soDataItem.list) {
+		foreach (DataItemParam data in DataManager.Instance.m_dataItem.list) {
 			if (data.item_serial == insert_data.item_serial) {
 				bHit = true;
 				Debug.LogError( string.Format( "serial{0} x={1} y={2}",data.item_serial,data.x,data.y ));
@@ -150,11 +149,11 @@ public class DBItem  {
 
 
 	//DBへ保存
-	public void Replace(DataItem _replocalData)
+	public void Replace(DataItemParam _replocalData)
 	{
-		DataItem insert_data = new DataItem ();
+		DataItemParam insert_data = new DataItemParam ();
 
-		m_soDataItem.list.Add (_replocalData);
+		DataManager.Instance.m_dataItem.list.Add (_replocalData);
 
 
 
@@ -184,9 +183,9 @@ public class DBItem  {
 		*/
 	}
 
-	public List<DataItem > Select ( string _strWhere ){
-		List<DataItem> ret = new List<DataItem> ();
-		foreach (DataItem data in m_soDataItem.list) {
+	public List<DataItemParam > Select ( string _strWhere ){
+		List<DataItemParam> ret = new List<DataItemParam> ();
+		foreach (DataItemParam data in DataManager.Instance.m_dataItem.list) {
 			if (data.Equals (_strWhere) == true) {
 				ret.Add (data);
 			}
@@ -196,9 +195,9 @@ public class DBItem  {
 
 	public List<DataItemParam> Select( DefineOld.WHERE_PATTERN _ePattern , List<int> _iList = null ){
 
-		List<DataItem> ret = new List<DataItem> ();
+		List<DataItemParam> ret = new List<DataItemParam> ();
 
-		foreach (DataItem data in m_soDataItem.list) {
+		foreach (DataItemParam data in DataManager.Instance.m_dataItem.list) {
 			if (data.Equals (_ePattern , _iList) == true) {
 				ret.Add (data);
 			}
@@ -232,7 +231,7 @@ public class DBItem  {
 		*/
 	}
 
-	public List<DataItem> Select(List<string> _whereList ){
+	public List<DataItemParam> Select(List<string> _whereList ){
 
 		string strWhere = "";
 
@@ -248,14 +247,14 @@ public class DBItem  {
 		return Select( strWhere );
 	}
 
-	public DataItem Select( int _iSerial ){
+	public DataItemParam Select( int _iSerial ){
 
-		foreach (DataItem data in m_soDataItem.list) {
+		foreach (DataItemParam data in DataManager.Instance.m_dataItem.list) {
 			if (data.item_serial == _iSerial) {
 				return data;
 			}
 		}
-		return new DataItem();
+		return new DataItemParam();
 		/*
 		DataItem ret;
 		string strQuery = "select * from " + TABLE_NAME + " where item_serial = '" + _iSerial + "';";
@@ -273,9 +272,9 @@ public class DBItem  {
 
 
 	//テーブル以下全て取ってくる
-	public List<DataItem> SelectAll()
+	public List<DataItemParam> SelectAll()
 	{
-		return m_soDataItem.list;
+		return DataManager.Instance.m_dataItem.list;
 
 		/*
 		//データをクリア

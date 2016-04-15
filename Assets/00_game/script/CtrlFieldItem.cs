@@ -23,7 +23,7 @@ public class CtrlFieldItem : MonoBehaviourEx {
 
 	public List<CtrlIconRoot> m_iconRootList = new List<CtrlIconRoot> ();
 
-	public DataItem m_dataItem = new DataItem();
+	public DataItemParam m_dataItemParam = new DataItemParam();
 	public DataItemMaster m_dataItemMaster;
 	[SerializeField]
 	private UISprite m_sprItem;
@@ -66,7 +66,7 @@ public class CtrlFieldItem : MonoBehaviourEx {
 	public void Add( CtrlIconRoot _iconRoot ){
 
 		_iconRoot.SetDepth (m_sprItem.depth);
-		_iconRoot.m_iSize = m_dataItem.width;
+		_iconRoot.m_iSize = m_dataItemParam.width;
 
 		m_iconRootList.Add (_iconRoot);
 		return;
@@ -74,13 +74,13 @@ public class CtrlFieldItem : MonoBehaviourEx {
 
 	public void Remove(){
 		Debug.Log ("Remove:" + gameObject.name);
-		if (0 < m_dataItem.item_serial) {
-			List<DataMonster> monster_list = GameMain.dbMonster.Select (" item_serial = " + m_dataItem.item_serial.ToString ());
+		if (0 < m_dataItemParam.item_serial) {
+			List<DataMonster> monster_list = GameMain.dbMonster.Select (" item_serial = " + m_dataItemParam.item_serial.ToString ());
 			foreach (DataMonster monster in monster_list) {
 				GameMain.dbMonster.Update (monster.monster_serial, 0);
 			}
 		
-			List<DataStaff> staff_list = GameMain.dbStaff.Select (" item_serial = " + m_dataItem.item_serial.ToString ());
+			List<DataStaff> staff_list = GameMain.dbStaff.Select (" item_serial = " + m_dataItemParam.item_serial.ToString ());
 			foreach (DataStaff staff in staff_list) {
 				Dictionary< string , string > dict = new Dictionary< string , string > ();
 				dict.Add ("office_serial", "0"); 
@@ -153,16 +153,16 @@ public class CtrlFieldItem : MonoBehaviourEx {
 			m_iconRootList.Clear ();
 		}
 
-		m_dataItem.x = _iX;
-		m_dataItem.y = _iY;
+		m_dataItemParam.x = _iX;
+		m_dataItemParam.y = _iY;
 
 		change_sprite (m_sprItem, _iItemId);
 		DataItemMaster master = GameMain.dbItemMaster.Select (_iItemId);
 
-		m_dataItem.width = master.size;
-		m_dataItem.height= master.size;
-		m_dataItem.item_id = _iItemId;
-		m_dataItem.category = master.category;
+		m_dataItemParam.width = master.size;
+		m_dataItemParam.height= master.size;
+		m_dataItemParam.item_id = _iItemId;
+		m_dataItemParam.category = master.category;
 
 		m_dataItemMaster = master;
 
@@ -175,10 +175,10 @@ public class CtrlFieldItem : MonoBehaviourEx {
 		m_bEditting = false;
 		m_eStep = STEP.INIT;
 
-		m_dataItem = GameMain.dbItem.Select (_iSerial);
+		m_dataItemParam = DataManager.Instance.m_dataItem.Select (_iSerial);
 
-		Debug.LogError (string.Format ("serial:{0} x:{1} y:{2}", _iSerial, m_dataItem.x, m_dataItem.y));
-		SetPos (m_dataItem.x, m_dataItem.y);
+		Debug.LogError (string.Format ("serial:{0} x:{1} y:{2}", _iSerial, m_dataItemParam.x, m_dataItemParam.y));
+		SetPos (m_dataItemParam.x, m_dataItemParam.y);
 		CheckAroundConnectRoad ();
 
 		return;
@@ -192,20 +192,20 @@ public class CtrlFieldItem : MonoBehaviourEx {
 	}
 
 
-	public void Init( DataItem _cell ){
+	public void Init( DataItemParam _cell ){
 		Init (_cell.x, _cell.y, _cell.item_id);
 
 		// マスター経由の方で書き込まれてるのもあるけどこっちで再上書き
-		m_dataItem = _cell;
+		m_dataItemParam = _cell;
 	}
 
 	// 自分おお店の周りに接続された道路があるかチェック＆セット
 	public void CheckAroundConnectRoad(){
 		//Debug.Log ("CheckAroundConnectRoad start");
 		CtrlFieldItem fieldItem = null;
-		for (int x = m_dataItem.x; x < m_dataItem.x + m_dataItem.width; x++) {
-			int iYMin = m_dataItem.y - 1;
-			int iYMax = m_dataItem.y + m_dataItem.height;
+		for (int x = m_dataItemParam.x; x < m_dataItemParam.x + m_dataItemParam.width; x++) {
+			int iYMin = m_dataItemParam.y - 1;
+			int iYMax = m_dataItemParam.y + m_dataItemParam.height;
 
 			fieldItem = GameMain.ParkRoot.GetFieldItem (x, iYMin);
 
@@ -221,9 +221,9 @@ public class CtrlFieldItem : MonoBehaviourEx {
 				return;
 			}
 		}
-		for (int y = m_dataItem.y; y < m_dataItem.y + m_dataItem.height; y++) {
-			int iXMin = m_dataItem.x - 1;
-			int iXMax = m_dataItem.x + m_dataItem.width;
+		for (int y = m_dataItemParam.y; y < m_dataItemParam.y + m_dataItemParam.height; y++) {
+			int iXMin = m_dataItemParam.x - 1;
+			int iXMax = m_dataItemParam.x + m_dataItemParam.width;
 
 			fieldItem = GameMain.ParkRoot.GetFieldItem (iXMin, y);
 			//Debug.Log (string.Format ("(x,y)=({0},{1})", iXMin, y));
@@ -244,7 +244,7 @@ public class CtrlFieldItem : MonoBehaviourEx {
 
 	protected bool IsConnectingRoad(){
 
-		if (m_dataItem.item_id == DefineOld.ITEM_ID_ROAD && m_eRoad == DefineOld.ROAD.CONNECTION ) {
+		if (m_dataItemParam.item_id == DefineOld.ITEM_ID_ROAD && m_eRoad == DefineOld.ROAD.CONNECTION ) {
 			return true;
 		}
 		return false;
@@ -254,14 +254,14 @@ public class CtrlFieldItem : MonoBehaviourEx {
 
 	public void ResetPos(){
 
-		//Debug.Log ("x=" + m_dataItem.x.ToString () + " y=" + m_dataItem.y.ToString ());
-		SetPos (m_dataItem.x, m_dataItem.y);
+		//Debug.Log ("x=" + m_dataItemParam.x.ToString () + " y=" + m_dataItemParam.y.ToString ());
+		SetPos (m_dataItemParam.x, m_dataItemParam.y);
 	}
 
 	public void SetPos( int _iX , int _iY ){
 		myTransform.localPosition = (DefineOld.CELL_X_DIR.normalized * DefineOld.CELL_X_LENGTH * _iX) + (DefineOld.CELL_Y_DIR.normalized * DefineOld.CELL_Y_LENGTH * _iY);
 
-		int iDepth = 100 - (_iX + _iY) - (m_dataItem.width-1);// + (m_dataItem.height-1));
+		int iDepth = 100 - (_iX + _iY) - (m_dataItemParam.width-1);// + (m_dataItemParam.height-1));
 
 		if (m_bEditting) {
 			iDepth += 10;		// こんだけ上なら
@@ -313,8 +313,8 @@ public class CtrlFieldItem : MonoBehaviourEx {
 			if (m_dataItemMaster.category == (int)DefineOld.Item.Category.NONE) {
 				m_eStep = STEP.IDLE;
 			} else {
-				double diff = TimeManager.Instance.GetDiffNow (m_dataItem.create_time).TotalSeconds;
-				//Debug.Log ( m_dataItem.item_id.ToString() + ":" + m_dataItem.item_serial.ToString() + ":" + diff.ToString ());
+				double diff = TimeManager.Instance.GetDiffNow (m_dataItemParam.create_time).TotalSeconds;
+				//Debug.Log ( m_dataItemParam.item_id.ToString() + ":" + m_dataItemParam.item_serial.ToString() + ":" + diff.ToString ());
 
 				// 絶対かこなので　
 				diff *= -1;
@@ -335,7 +335,7 @@ public class CtrlFieldItem : MonoBehaviourEx {
 				m_fCheckBuildInterval = 0.5f;
 				change_sprite (m_sprItem, GetReadyItemName (m_dataItemMaster.size));
 
-				double diff = TimeManager.Instance.GetDiffNow (m_dataItem.create_time).TotalSeconds;
+				double diff = TimeManager.Instance.GetDiffNow (m_dataItemParam.create_time).TotalSeconds;
 				diff *= -1;
 				m_iNokoriTime = m_dataItemMaster.production_time - (int)diff;
 
@@ -350,9 +350,9 @@ public class CtrlFieldItem : MonoBehaviourEx {
 				m_fCheckBuildTime -= m_fCheckBuildInterval;
 
 				// データ撮り直し
-				m_dataItem = GameMain.dbItem.Select (m_dataItem.item_serial);
+				m_dataItemParam = DataManager.Instance.m_dataItem.Select (m_dataItemParam.item_serial);
 
-				double diff = TimeManager.Instance.GetDiffNow (m_dataItem.create_time).TotalSeconds;
+				double diff = TimeManager.Instance.GetDiffNow (m_dataItemParam.create_time).TotalSeconds;
 				diff *= -1;
 				m_iNokoriTime = m_dataItemMaster.production_time - (int)diff;
 
@@ -368,14 +368,14 @@ public class CtrlFieldItem : MonoBehaviourEx {
 			if (m_csBuildTime) {
 				if (m_csBuildTime.ButtonPushed) {
 					m_csBuildTime.TriggerClear ();
-					GameMain.Instance.BuildingSerial = m_dataItem.item_serial;
+					GameMain.Instance.BuildingSerial = m_dataItemParam.item_serial;
 				}
 			}
 			break;
 
 		case STEP.IDLE:
 			if (bInit) {
-				change_sprite (m_sprItem, m_dataItem.item_id);
+				change_sprite (m_sprItem, m_dataItemParam.item_id);
 				m_fCheckBuildTime = 0.0f;
 			}
 
@@ -403,7 +403,7 @@ public class CtrlFieldItem : MonoBehaviourEx {
 
 		case STEP.EDITTING:
 			if (bInit) {
-				change_sprite (m_sprItem, m_dataItem.item_id);
+				change_sprite (m_sprItem, m_dataItemParam.item_id);
 			}
 			break;
 		case STEP.MAX:

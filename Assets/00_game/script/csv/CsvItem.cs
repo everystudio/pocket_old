@@ -1,14 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CsvItem : MasterTableBase<CsvItemData> {
+public class CsvItemParam : CsvDataParam {
 
-	private static readonly string FilePath = "csv/item";
-	public void Load() { Load(FilePath); }
-}
-
-public class CsvItemData : MasterBase
-{
 	public int item_id { get; private set; }
 	public string name { get; private set; }
 	public int category { get; private set; }
@@ -30,6 +24,12 @@ public class CsvItemData : MasterBase
 	public int open_item_id { get; private set; }
 	public int revenue_up2 { get; private set; }
 	public int add_coin { get; private set; }
+}
+
+public class CsvItem : CsvData< CsvItemParam>
+{
+	private static readonly string FilePath = "csv/item";
+	public void Load() { Load(FilePath); }
 }
 
 

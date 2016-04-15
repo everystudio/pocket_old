@@ -59,7 +59,7 @@ public class ParkMainSettingItem : ParkMainController {
 			// 道のみシリアルがあるものから利用
 			// あとあとを見越して、同じitem_idがあれば反応できるようにしておく
 			if (GameMain.Instance.m_iSettingItemId == DefineOld.ITEM_ID_ROAD) {
-				List<DataItem> same_list = GameMain.dbItem.Select (string.Format (" item_id = {0} and status = {1} ", GameMain.Instance.m_iSettingItemId, (int)DefineOld.Item.Status.NONE));
+				List<DataItemParam> same_list = DataManager.Instance.m_dataItem.Select (string.Format (" item_id = {0} and status = {1} ", GameMain.Instance.m_iSettingItemId, (int)DefineOld.Item.Status.NONE));
 				if (0 < same_list.Count) {
 					GameMain.Instance.m_iSettingItemSerial = same_list [0].item_serial;
 				} else {
@@ -71,17 +71,17 @@ public class ParkMainSettingItem : ParkMainController {
 			// 自分を一度消す
 			int iRemoveIndex = 0;
 			foreach (CtrlFieldItem item in GameMain.ParkRoot.m_fieldItemList) {
-				if (item.m_dataItem.item_serial == GameMain.Instance.m_iSettingItemSerial) {
+				if (item.m_dataItemParam.item_serial == GameMain.Instance.m_iSettingItemSerial) {
 					//item.Remove ();
 					moveFieldItem = item;
-					GameMain.Instance.m_iSettingItemId = moveFieldItem.m_dataItem.item_id;		// 別にここでやる必要はない
+					GameMain.Instance.m_iSettingItemId = moveFieldItem.m_dataItemParam.item_id;		// 別にここでやる必要はない
 					GameMain.ParkRoot.m_fieldItemList.RemoveAt (iRemoveIndex);
 					break;
 				}
 				iRemoveIndex += 1;
 			}
 
-			DataItem dataItem = GameMain.dbItem.Select (GameMain.Instance.m_iSettingItemSerial);
+			DataItemParam dataItem = DataManager.Instance.m_dataItem.Select (GameMain.Instance.m_iSettingItemSerial);
 			// 消す予定のところに新しい土地を設置する
 			for (int x = dataItem.x; x < dataItem.x + dataItem.width; x++) {
 				for (int y = dataItem.y; y < dataItem.y + dataItem.height; y++) {
@@ -145,9 +145,9 @@ public class ParkMainSettingItem : ParkMainController {
 			eEditMode = ParkMain.EDIT_MODE.MOVE;
 			m_editItem = moveFieldItem;//GameMain.ParkRoot.GetFieldItem (GameMain.Instance.m_iSettingItemSerial);
 
-			m_iEditItemX = m_editItem.m_dataItem.x;
-			m_iEditItemY = m_editItem.m_dataItem.y;
-			Debug.Log (m_editItem.m_dataItem.item_id);
+			m_iEditItemX = m_editItem.m_dataItemParam.x;
+			m_iEditItemY = m_editItem.m_dataItemParam.y;
+			Debug.Log (m_editItem.m_dataItemParam.item_id);
 		}
 		m_editItem.InitEdit (m_iEditItemX, m_iEditItemY, GameMain.Instance.m_iSettingItemId , eEditMode );
 		//Debug.LogError( string.Format( "x:{0} y:{1}" , m_iEditItemX , m_iEditItemY ));
@@ -170,8 +170,8 @@ public class ParkMainSettingItem : ParkMainController {
 		if (m_parkMain.m_eEditMode == ParkMain.EDIT_MODE.MOVE) {
 			strWhere = string.Format (" status != {0} and item_serial != {1} " , (int)DefineOld.Item.Status.NONE , GameMain.Instance.m_iSettingItemSerial );
 		}
-		DataManager.Instance.m_ItemDataList = GameMain.dbItem.Select (strWhere);
-		Grid.SetUsingGrid (ref m_DontSetGridList, DataManager.Instance.m_ItemDataList);
+		// 一時保存してたけど意味ある？
+		Grid.SetUsingGrid (ref m_DontSetGridList, DataManager.Instance.m_dataItem.Select (strWhere));
 		foreach (Grid dont in m_DontSetGridList) {
 			//Debug.Log (string.Format ("x={0} y={1} ", dont.x, dont.y)); 
 		}
@@ -207,7 +207,7 @@ public class ParkMainSettingItem : ParkMainController {
 				m_YesNoButtonManager.TriggerClearAll ();
 				m_bTapRelease = false;
 				m_bButtonLock = false;
-				Debug.Log (string.Format ("x={0} y={1} size={2} ", m_editItem.m_dataItem.x, m_editItem.m_dataItem.y, m_editItem.m_dataItem.width)); 
+				Debug.Log (string.Format ("x={0} y={1} size={2} ", m_editItem.m_dataItemParam.x, m_editItem.m_dataItemParam.y, m_editItem.m_dataItemParam.width)); 
 
 			}
 
@@ -240,7 +240,7 @@ public class ParkMainSettingItem : ParkMainController {
 
 				if ( Screen.height * 0.2f < InputManager.Info.TouchPoint.y ) {
 					if (GameMain.GetGrid (InputManager.Info.TouchPoint, out iGridX, out iGridY)) {
-						if (GameMain.GridHit (iGridX, iGridY, m_editItem.m_dataItem, out m_iEditOffsetX, out m_iEditOffsetY)) {
+						if (GameMain.GridHit (iGridX, iGridY, m_editItem.m_dataItemParam, out m_iEditOffsetX, out m_iEditOffsetY)) {
 							//iSelectSerial = data_item.item_serial;
 							m_eStep = STEP.EDIT_TOUCH;
 							//Debug.Log ("hit");
@@ -267,8 +267,8 @@ public class ParkMainSettingItem : ParkMainController {
 
 					m_iEditItemX = m_iTempX;
 					m_iEditItemY = m_iTempY;
-					m_editItem.m_dataItem.x = m_iEditItemX;
-					m_editItem.m_dataItem.y = m_iEditItemY;
+					m_editItem.m_dataItemParam.x = m_iEditItemX;
+					m_editItem.m_dataItemParam.y = m_iEditItemY;
 					bool bAbleSet = Grid.AbleSettingItem (m_editItemMaster, m_iEditItemX, m_iEditItemY, m_DontSetGridList);
 					m_editItem.SetEditAble (bAbleSet);
 				}
@@ -318,8 +318,8 @@ public class ParkMainSettingItem : ParkMainController {
 						m_editItem.SetPos (iGridX - m_iEditOffsetX, iGridY - m_iEditOffsetY);
 						m_iEditItemX = iGridX - m_iEditOffsetX;
 						m_iEditItemY = iGridY - m_iEditOffsetY;
-						m_editItem.m_dataItem.x = m_iEditItemX;
-						m_editItem.m_dataItem.y = m_iEditItemY;
+						m_editItem.m_dataItemParam.x = m_iEditItemX;
+						m_editItem.m_dataItemParam.y = m_iEditItemY;
 						bool bAbleSet = Grid.AbleSettingItem (m_editItemMaster, m_iEditItemX, m_iEditItemY, m_DontSetGridList);
 						m_editItem.SetEditAble (bAbleSet);
 
@@ -369,7 +369,7 @@ public class ParkMainSettingItem : ParkMainController {
 			} else {
 				GameMain.Instance.m_iSettingItemSerial = GameMain.dbItem.Insert (m_editItemMaster, (int)DefineOld.Item.Status.SETTING, m_iEditItemX, m_iEditItemY);
 
-				CsvItemData item_data = DataManager.GetItem (m_editItemMaster.item_id);
+				CsvItemParam item_data = DataManager.GetItem (m_editItemMaster.item_id);
 				if (0 < item_data.need_coin) {
 					DataManager.user.AddGold (-1 * item_data.need_coin);
 				} else if (0 < item_data.need_ticket) {
@@ -395,14 +395,14 @@ public class ParkMainSettingItem : ParkMainController {
 
 			m_editItem.EditEnd (GameMain.Instance.m_iSettingItemSerial);
 
-			Debug.Log (m_editItem.m_dataItem.width);
+			Debug.Log (m_editItem.m_dataItemParam.width);
 			GameMain.ParkRoot.AddFieldItem (m_editItem);
 			GameMain.Instance.HeaderRefresh ();
 			//m_fieldItemList.Add (m_editItem);
-			GameMain.Instance.PreSettingItemId = m_editItem.m_dataItem.item_id;
+			GameMain.Instance.PreSettingItemId = m_editItem.m_dataItemParam.item_id;
 
-			if (m_editItem.m_dataItem.item_id == DefineOld.ITEM_ID_ROAD && m_parkMain.m_eEditMode == ParkMain.EDIT_MODE.NORMAL) {
-				Debug.Log (m_editItem.m_dataItem.item_id);
+			if (m_editItem.m_dataItemParam.item_id == DefineOld.ITEM_ID_ROAD && m_parkMain.m_eEditMode == ParkMain.EDIT_MODE.NORMAL) {
+				Debug.Log (m_editItem.m_dataItemParam.item_id);
 
 				// ここでやり直し
 				initialize ();
@@ -419,7 +419,7 @@ public class ParkMainSettingItem : ParkMainController {
 
 				Debug.LogError (GameMain.Instance.m_iSettingItemSerial);
 
-				DataItem return_data_item = GameMain.dbItem.Select (GameMain.Instance.m_iSettingItemSerial );
+				DataItemParam return_data_item = DataManager.Instance.m_dataItem.Select (GameMain.Instance.m_iSettingItemSerial );
 				m_iEditItemX = return_data_item.x;
 				m_iEditItemY = return_data_item.y;
 				m_eStep = STEP.SETTING;

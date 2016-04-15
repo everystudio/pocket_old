@@ -23,10 +23,6 @@ public class DataManager : DataManagerBase <DataManager>{
 
 		//m_tDataUser.Initialize (iWidth,iHeight);
 
-		m_masterTableAudio.Load ();
-		m_masterTablePrefab.Load ();
-		m_masterTableSprite.Load ();
-
 		m_csvItem.Load ();
 		m_csvMonster.Load ();
 		m_csvItemDetail.Load ();
@@ -57,7 +53,6 @@ public class DataManager : DataManagerBase <DataManager>{
 		}
 	}
 
-	public List<DataItem> m_ItemDataList = new List<DataItem>();
 	public List<DataItemMaster> m_ItemMasterList = new List<DataItemMaster>();
 	static public List<DataItemMaster> itemMaster {
 		get{ return Instance.m_ItemMasterList; }
@@ -73,38 +68,30 @@ public class DataManager : DataManagerBase <DataManager>{
 	}
 
 	#region For CSV
-	public MasterTableAudio m_masterTableAudio = new MasterTableAudio();
-	static public List<MasterAudioCSV> master_audio_list {
-		get{ 
-			return Instance.m_masterTableAudio.All;
-		}
-	}
-	public MasterTablePrefab m_masterTablePrefab = new MasterTablePrefab();
-	static public List<MasterPrefabCSV> master_prefab_list {
-		get{ 
-			return Instance.m_masterTablePrefab.All;
-		}
-	}
-	public MasterTableSprite m_masterTableSprite = new MasterTableSprite();
-	static public List<MasterSpriteCSV> master_sprite_list {
-		get{ 
-			return Instance.m_masterTableSprite.All;
-		}
-	}
 	public CsvItem m_csvItem = new CsvItem();
-	static public List<CsvItemData> csv_item {
+	static public List<CsvItemParam> csv_item {
 		get{ 
 			return Instance.m_csvItem.All;
 		}
 	}
-	static public CsvItemData GetItem( int _iItemId ){
-		foreach (CsvItemData data in csv_item) {
+	static public CsvItemParam GetItem( int _iItemId ){
+		foreach (CsvItemParam data in csv_item) {
 			if (_iItemId == data.item_id) {
 				return data;
 			}
 		}
-		return new CsvItemData ();
+		return new CsvItemParam ();
 	}
+
+	public DataItem m_dataItem = new DataItem();
+
+	public List<DataItemParam> m_ItemDataList {
+		get{ 
+			return m_dataItem.Select (" status != 0 ");
+		}
+	}
+
+
 	public CsvMonster m_csvMonster = new CsvMonster();
 	static public List<CsvMonsterData> csv_monster {
 		get{ 

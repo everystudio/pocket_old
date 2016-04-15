@@ -63,7 +63,7 @@ public class PageBase2 : MonoBehaviourEx {
 			_parent.Display (GameMain.dbItemMaster.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );
 			break;
 		case GameMain.TABLE_TYPE.ITEM:
-			_parent.Display (GameMain.dbItem.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );
+			_parent.Display (DataManager.Instance.m_dataItem.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );
 			break;
 		case GameMain.TABLE_TYPE.MONSTER:
 			_parent.Display (GameMain.dbMonster.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );

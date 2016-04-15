@@ -341,6 +341,7 @@ public class GameMain : MonoBehaviour {
 			break;
 
 		case STEP.BACKUP_CHECK:
+			/*
 			if (bInit) {
 
 				string sourceDB = System.IO.Path.Combine (Application.persistentDataPath, DefineOld.DB_NAME_DOUBTSUEN );
@@ -357,7 +358,7 @@ public class GameMain : MonoBehaviour {
 				try
 				{
 					// DBおかしくなってたらここでThrowされる
-					List<DataItem> check = m_dbItemBackup.SelectAll ();
+					List<DataItemParam> check = m_dbItemBackup.SelectAll ();
 
 					//Debug.Log( "Copy" );
 					//string sourcePath = System.IO.Path.Combine (Application.streamingAssetsPath, DefineOld.DB_FILE_DIRECTORY + DefineOld.DB_NAME_DOUBTSUEN );
@@ -369,6 +370,7 @@ public class GameMain : MonoBehaviour {
 				}catch{
 					//Debug.LogError ("まずー");
 				}
+				*/
 			break;
 
 		default:
@@ -397,15 +399,15 @@ public class GameMain : MonoBehaviour {
 
 		// 一時間あたりの売上
 		int iUriagePerHour = 0;
-		List<DataItem> item_list = GameMain.dbItem.Select (" item_serial != 0 ");
-		foreach (DataItem item in item_list) {
+		List<DataItemParam> item_list = DataManager.Instance.m_dataItem.Select (" item_serial != 0 ");
+		foreach (DataItemParam item in item_list) {
 			iUriagePerHour += item.GetUriagePerHour ();
 		}
 		GameMain.dbKvs.WriteInt (DefineOld.USER_URIAGE_PAR_HOUR, iUriagePerHour);
 
 		// 一時間あたりの支出
 		int iShisyutsuHour = 0;
-		foreach (DataItem item in item_list) {
+		foreach (DataItemParam item in item_list) {
 			iShisyutsuHour += item.GetShiSyutsuPerHour ();
 		}
 		GameMain.dbKvs.WriteInt (DefineOld.USER_SHISYUTU_PAR_HOUR, iShisyutsuHour);
@@ -463,7 +465,7 @@ public class GameMain : MonoBehaviour {
 		return GetGrid (ParkRoot.gameObject, _inputPoint, out _iX, out _iY );
 	}
 
-	static public bool GridHit( int _iX , int _iY , DataItem _dataItem , out int _iOffsetX , out int _iOffsetY ){
+	static public bool GridHit( int _iX , int _iY , DataItemParam _dataItem , out int _iOffsetX , out int _iOffsetY ){
 		_iOffsetX = 0;
 		_iOffsetY = 0;
 
@@ -484,7 +486,7 @@ public class GameMain : MonoBehaviour {
 		return bHit;
 	}
 
-	static public bool GridHit( int _iX , int _iY , DataItem _dataItem ){
+	static public bool GridHit( int _iX , int _iY , DataItemParam _dataItem ){
 
 		int iOffsetX = 0;
 		int iOffsetY = 0;
