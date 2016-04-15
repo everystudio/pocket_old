@@ -1,0 +1,28 @@
+{"frames": {
+
+"btn_gamestart.png":
+{
+	"frame": {"x":648,"y":4,"w":465,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":465,"h":80},
+	"sourceSize": {"w":465,"h":80}
+},
+"help_start.png":
+{
+	"frame": {"x":4,"y":4,"w":640,"h":900},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":640,"h":900},
+	"sourceSize": {"w":640,"h":900}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "help.png",
+	"format": "RGBA8888",
+	"size": {"w":2048,"h":2048},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:e01e9249690a31c890eb05f0764dd389:e1c4cd1179726829f02cdc5746f21226:6a76acc614ae8d2d711e53a3e901cbc0$"
+}
+}
