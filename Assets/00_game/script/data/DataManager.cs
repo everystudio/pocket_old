@@ -159,7 +159,7 @@ public class DataManager : DataManagerBase <DataManager>{
 			}
 		}
 		Debug.LogError ("ignore staff_id:" + _iStaffId.ToString ());
-		return new CsvStaffData ();
+		return new CsvStaffParam ();
 	}
 	public CsvLevel m_csvLevel = new CsvLevel();
 	static public List<CsvLevelData> csv_level {

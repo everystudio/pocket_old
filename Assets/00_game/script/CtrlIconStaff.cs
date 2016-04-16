@@ -18,7 +18,7 @@ public class CtrlIconStaff : CtrlIconBase {
 		m_iCheckCount = 100;
 		AnimationIdol (true);
 
-		m_csvStaffData = DataManager.GetStaff (m_dataStaff.staff_id);
+		m_CsvStaffParam = DataManager.GetStaff (m_dataStaff.staff_id);
 		m_fieldItem = GameMain.ParkRoot.GetFieldItem (m_dataStaff.item_serial);
 
 	}
@@ -28,7 +28,7 @@ public class CtrlIconStaff : CtrlIconBase {
 
 	public int m_iCheckCount;
 
-	public CsvStaffParam m_csvStaffData;
+	public CsvStaffParam m_CsvStaffParam;
 	public CtrlFieldItem m_fieldItem;
 
 	public override void update_idle (bool _bInit)
@@ -38,10 +38,10 @@ public class CtrlIconStaff : CtrlIconBase {
 
 			if (30 < m_iCheckCount) {
 				m_iCheckCount = 0;
-				if (m_csvStaffData.effect_param == (int)DefineOld.Staff.EFFECT_PARAM.CLEAN || m_csvStaffData.effect_param == (int)DefineOld.Staff.EFFECT_PARAM.MEAL_CLEAN) {
+				if (m_CsvStaffParam.effect_param == (int)DefineOld.Staff.EFFECT_PARAM.CLEAN || m_CsvStaffParam.effect_param == (int)DefineOld.Staff.EFFECT_PARAM.MEAL_CLEAN) {
 					m_fieldItem.Clean ();
 				}
-				if (m_csvStaffData.effect_param == (int)DefineOld.Staff.EFFECT_PARAM.MEAL || m_csvStaffData.effect_param == (int)DefineOld.Staff.EFFECT_PARAM.MEAL_CLEAN) {
+				if (m_CsvStaffParam.effect_param == (int)DefineOld.Staff.EFFECT_PARAM.MEAL || m_CsvStaffParam.effect_param == (int)DefineOld.Staff.EFFECT_PARAM.MEAL_CLEAN) {
 					m_fieldItem.Meal ();
 				}
 			}

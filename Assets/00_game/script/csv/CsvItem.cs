@@ -4,6 +4,7 @@ using System.Collections;
 public class CsvItemParam : CsvDataParam {
 
 	public int item_id { get; private set; }
+	public int status { get; private set; }
 	public string name { get; private set; }
 	public int category { get; private set; }
 	public int type { get; private set; }
@@ -24,6 +25,7 @@ public class CsvItemParam : CsvDataParam {
 	public int open_item_id { get; private set; }
 	public int revenue_up2 { get; private set; }
 	public int add_coin { get; private set; }
+
 }
 
 
@@ -32,9 +34,11 @@ public class CsvItem : CsvData< CsvItemParam>
 {
 	private static readonly string FilePath = "csv/item";
 	public void Load() { Load(FilePath); }
+
+	public CsvItemParam Select( int _iItemId ){
+		return SelectOne( string.Format( " item_id = {0} " , _iItemId ));
+	}
+
 }
-
-
-
 
 

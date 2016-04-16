@@ -23,7 +23,7 @@ public class DataStaffParam : CsvDataParam {
 
 	public int GetShisyutsuParHour(){
 		int iRet = 0;
-		CsvStaffData staff_csv = DataManager.GetStaff (staff_id);
+		CsvStaffParam staff_csv = DataManager.GetStaff (staff_id);
 
 		int iCount = 3600 / staff_csv.expenditure_interval;
 		iRet += staff_csv.expenditure * iCount;
@@ -35,7 +35,7 @@ public class DataStaffParam : CsvDataParam {
 	public int GetPayGold( bool _bCollect ){
 
 		int iPay = 0;
-		CsvStaffData csv_staff = DataManager.GetStaff (staff_id);
+		CsvStaffParam csv_staff = DataManager.GetStaff (staff_id);
 
 		double diffSec = TimeManager.Instance.GetDiffNow (setting_time).TotalSeconds * -1.0d;
 

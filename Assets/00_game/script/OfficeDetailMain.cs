@@ -70,7 +70,7 @@ public class OfficeDetailMain : PageBase2 {
 		List<DataStaffParam> staff_list = DataManager.Instance.dataStaff.Select (" office_serial = " + m_iItemSerial.ToString ());
 		int iUseCost = 0;
 		foreach (DataStaffParam staff in staff_list) {
-			CsvStaffData data_master = DataManager.GetStaff (staff.staff_id);
+			CsvStaffParam data_master = DataManager.GetStaff (staff.staff_id);
 			iUseCost += data_master.cost;
 		}
 		CsvItemDetailData detail_data = DataManager.GetItemDetail (m_dataItemParam.item_id, m_dataItemParam.level);

@@ -90,12 +90,12 @@ public class CtrlStaffSetting : MonoBehaviour {
 				dict.Add ("setting_time", "\"" + strNow + "\"");
 				staff = DataManager.Instance.dataStaff.UpdateGet (m_iSetStaffSerial,dict);
 
-				CsvStaffData staff_data = DataManager.GetStaff (m_iSetStaffId);
+				CsvStaffParam staff_data = DataManager.GetStaff (m_iSetStaffId);
 				iStaffCost = staff_data.coin;
 			} else {
 				staff = DataManager.Instance.dataStaff.Insert ( m_iSetStaffId , m_dataOffice.item_serial , m_dispOffice.SelectingCageSerial);
 
-				CsvStaffData staff_data = DataManager.GetStaff (m_iSetStaffId);
+				CsvStaffParam staff_data = DataManager.GetStaff (m_iSetStaffId);
 				if (0 < staff_data.coin) {
 					DataManager.user.AddGold (-1 * staff_data.coin);
 				} else if (0 < staff_data.ticket) {

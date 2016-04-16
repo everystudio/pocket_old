@@ -27,14 +27,14 @@ public class DBStaff {
 		string strNow = TimeManager.StrNow ();
 		//データの上書きのコマンドを設定する　
 
-		DataStaff insert_data = new DataStaff ();
+		DataStaffParam insert_data = new DataStaffParam ();
 		insert_data.staff_serial = topIndex;
 		insert_data.staff_id = _iStaffId;
 		insert_data.office_serial = _iOfficeSerial;
 		insert_data.item_serial = _iItemSerial;
 		insert_data.setting_time = strNow;
 		insert_data.create_time = strNow;
-		m_soDataStaff.list.Add (insert_data);
+		DataManager.Instance.dataStaff.list.Add (insert_data);
 		return insert_data;
 		/*
 		string strQuery = "insert into " + TABLE_NAME + " (staff_serial,staff_id,office_serial,item_serial,setting_time,create_time) values( '" +
@@ -54,15 +54,15 @@ public class DBStaff {
 		*/
 	}
 
-	public DataStaff Update( int _iSerial , Dictionary<string , string > _dict ){
+	public DataStaffParam Update( int _iSerial , Dictionary<string , string > _dict ){
 
-		foreach (DataStaff data in m_soDataStaff.list) {
+		foreach (DataStaffParam data in DataManager.Instance.dataStaff.list) {
 			if (data.staff_serial == _iSerial) {
 				data.Set (_dict);
 				return data;
 			}
 		}
-		return new DataStaff ();
+		return new DataStaffParam ();
 		/*
 		string strQuery = "update " + TABLE_NAME + " set ";
 		bool bHead = true;
@@ -85,13 +85,13 @@ public class DBStaff {
 		*/
 	}
 
-	public DataStaff Select( int _iStaffSerial ){
-		foreach (DataStaff data in m_soDataStaff.list) {
+	public DataStaffParam Select( int _iStaffSerial ){
+		foreach (DataStaffParam data in DataManager.Instance.dataStaff.list) {
 			if (data.staff_serial == _iStaffSerial) {
 				return data;
 			}
 		}
-		return new DataStaff();
+		return new DataStaffParam();
 		/*
 		DataStaff ret;
 		string strQuery = "select * from " + TABLE_NAME + " where staff_serial = '" + _iStaffSerial + "';";
@@ -107,10 +107,10 @@ public class DBStaff {
 		*/
 	}
 
-	public List<DataStaff> Select(string _strWhere = null ){
+	public List<DataStaffParam> Select(string _strWhere = null ){
 		Debug.Log (_strWhere);
-		List<DataStaff> ret_list = new List<DataStaff> ();
-		foreach (DataStaff data in m_soDataStaff.list) {
+		List<DataStaffParam> ret_list = new List<DataStaffParam> ();
+		foreach (DataStaffParam data in DataManager.Instance.dataStaff.list) {
 			if (data.Equals( _strWhere )) {
 				ret_list.Add( data);
 			}
@@ -142,9 +142,9 @@ public class DBStaff {
 	}
 
 	//テーブル以下全て取ってくる
-	public List<DataStaff> SelectAll()
+	public List<DataStaffParam> SelectAll()
 	{
-		return m_soDataStaff.list;
+		return DataManager.Instance.dataStaff.list;
 		/*
 		//データをクリア
 		data_list.Clear ();

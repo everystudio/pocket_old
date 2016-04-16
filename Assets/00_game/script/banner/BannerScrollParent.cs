@@ -50,9 +50,9 @@ public class BannerScrollParent : MonoBehaviourEx {
 		setSwitchButton (_strButton, m_goScrollViewParent, m_Grid , _iIndex);
 	}
 
-	public void Display( List<DataItemMaster> _itemMasterList , int _iIndex , string _strButton = "" ){
+	public void Display( List<CsvItemParam> _itemMasterList , int _iIndex , string _strButton = "" ){
 		BannerBaseClear ();
-		foreach (DataItemMaster data in _itemMasterList) {
+		foreach (CsvItemParam data in _itemMasterList) {
 			GameObject objBanner = PrefabManager.Instance.MakeObject ("prefab/PrefBannerItem" , gameObject );
 			BannerItem script = objBanner.GetComponent<BannerItem> ();
 			if (script.Initialize (data, GameMain.Instance.m_iCostNokori)) {

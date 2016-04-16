@@ -48,7 +48,7 @@ public class CageDetailMain : PageBase2 {
 	public int m_iItemSerial;
 
 	public DataItemParam m_dataItemParam;
-	public DataItemMaster m_dataItemMaster;
+	public CsvItemParam m_dataItemMaster;
 
 	protected override void initialize(){
 		m_WhereHash.Clear ();

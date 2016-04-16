@@ -86,9 +86,9 @@ public class GameMain : MonoBehaviour {
 			return instance.m_dbItem;
 		}
 	}
-	static public DBItemMaster dbItemMaster{
+	static public CsvItem dbItemMaster{
 		get{
-			return instance.m_dbItemMaster;
+			return DataManager.Instance.m_csvItem;
 		}
 	}
 	static public DBMonster dbMonster{

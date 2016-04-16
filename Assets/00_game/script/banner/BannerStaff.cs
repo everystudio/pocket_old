@@ -37,34 +37,34 @@ public class BannerStaff : BannerBase {
 	public CtrlStaffSetting m_staffSetting;
 	public CtrlOjisanCheck m_ojisanCheck;
 
-	public void Initialize( CsvStaffParam _csvStaffData ,int _iCostNokori){
+	public void Initialize( CsvStaffParam _CsvStaffParam ,int _iCostNokori){
 		m_bIsUserData = false;
 		m_eStep = STEP.IDLE;
 		m_eStepPre = STEP.MAX;
 
-		m_lbTitle.text = _csvStaffData.name;
-		m_lbTitle2.text = _csvStaffData.name;
-		m_lbDescription.text = _csvStaffData.description;
+		m_lbTitle.text = _CsvStaffParam.name;
+		m_lbTitle2.text = _CsvStaffParam.name;
+		m_lbDescription.text = _CsvStaffParam.description;
 
 		// コスト
-		m_lbPrize.text = _csvStaffData.cost.ToString();
+		m_lbPrize.text = _CsvStaffParam.cost.ToString();
 
-		string strIcon = GetSpriteName (_csvStaffData);
+		string strIcon = GetSpriteName (_CsvStaffParam);
 		//UIAtlas atlas = AtlasManager.Instance.GetAtlas (strIcon);
 		//m_sprIcon.atlas = atlas;
 		m_sprIcon.spriteName = strIcon;
 
-		SetPrice (_csvStaffData);
+		SetPrice (_CsvStaffParam);
 
-		m_lbDifficulty.text = _csvStaffData.expenditure.ToString() + "/1時間";
+		m_lbDifficulty.text = _CsvStaffParam.expenditure.ToString() + "/1時間";
 
 		m_buttonBase = GetComponent<ButtonBase> ();
 
-		m_dataStaff = new DataStaff ();
-		m_dataStaff.staff_id = _csvStaffData.staff_id;
+		m_dataStaff = new DataStaffParam ();
+		m_dataStaff.staff_id = _CsvStaffParam.staff_id;
 		m_dataStaff.staff_serial = 0;
 
-		m_bAbleUse = DataManager.user.AbleBuy (_csvStaffData.coin, _csvStaffData.ticket, _csvStaffData.cost, _iCostNokori, 0, 0, ref m_eReason);
+		m_bAbleUse = DataManager.user.AbleBuy (_CsvStaffParam.coin, _CsvStaffParam.ticket, _CsvStaffParam.cost, _iCostNokori, 0, 0, ref m_eReason);
 		SetReasonSprite (m_sprReason, m_eReason);
 		m_sprIgnoreBlack.gameObject.SetActive (!m_bAbleUse);
 		SetEnableIcon (m_bAbleUse);
