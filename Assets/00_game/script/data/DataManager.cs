@@ -27,6 +27,8 @@ public class DataManager : DataManagerBase <DataManager>{
 		m_csvMonster.Load ();
 		m_csvItemDetail.Load ();
 		m_csvWork.Load ();
+		dataWork.Load (DataWork.FILENAME);
+
 		m_csvStaff.Load ();
 		m_csvLevel.Load ();
 		m_csvTime.Load ();
@@ -122,20 +124,22 @@ public class DataManager : DataManagerBase <DataManager>{
 	}
 
 	public CsvWork m_csvWork = new CsvWork();
-	static public List<CsvWorkData> csv_work {
+	static public List<CsvWorkParam> csv_work {
 		get{ 
 			return Instance.m_csvWork.All;
 		}
 	}
-	static public CsvWorkData GetWork( int _iWorkId ){
-		foreach (CsvWorkData work in csv_work) {
+	static public CsvWorkParam GetWork( int _iWorkId ){
+		foreach (CsvWorkParam work in csv_work) {
 			if (work.work_id == _iWorkId) {
 				return work;
 			}
 		}
 		Debug.LogError ("ignore staff_id:" + _iWorkId.ToString ());
-		return new CsvWorkData ();
+		return new CsvWorkParam ();
 	}
+	public DataWork dataWork = new DataWork ();
+
 
 	public CsvStaff m_csvStaff = new CsvStaff();
 	static public List<CsvStaffData> csv_staff {

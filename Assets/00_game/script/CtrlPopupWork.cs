@@ -125,7 +125,7 @@ public class CtrlPopupWork : MonoBehaviourEx{
 
 				m_sprWorkIcon.spriteName = BannerWork.GetSpriteName (m_iPopupWorkId);
 				//m_sprWorkIcon.atlas = AtlasManager.Instance.GetAtlas (m_sprWorkIcon.spriteName);
-				CsvWorkData work_data = DataManager.GetWork (m_iPopupWorkId);
+				CsvWorkParam work_data = DataManager.GetWork (m_iPopupWorkId);
 
 				m_lbTitle.text = work_data.title;
 				m_lbTitle2.text = work_data.title;

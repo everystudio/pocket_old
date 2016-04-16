@@ -69,7 +69,7 @@ public class CtrlFukidashiWork : MonoBehaviourEx{
 				m_fTimer = 0.0f;
 				m_bQuickEnd = false;
 
-				List<DataWork> osusume_list = GameMain.dbWork.Select (" status = 1 " , false );
+				List<DataWorkParam> osusume_list = DataManager.Instance.dataWork.Select (" status = 1 " );
 				if (0 < osusume_list.Count && m_MessageQueue.Count == 0) {
 
 					m_bQuickEnd = true;

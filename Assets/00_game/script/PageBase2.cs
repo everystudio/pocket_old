@@ -57,7 +57,7 @@ public class PageBase2 : MonoBehaviourEx {
 		//Debug.Log (searchData.m_eTableType);
 		switch (searchData.m_eTableType) {
 		case GameMain.TABLE_TYPE.WORK:
-			_parent.Display (GameMain.dbWork.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );
+			_parent.Display (DataManager.Instance.dataWork.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );
 			break;
 		case GameMain.TABLE_TYPE.ITEM_MASTER:
 			_parent.Display (GameMain.dbItemMaster.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );

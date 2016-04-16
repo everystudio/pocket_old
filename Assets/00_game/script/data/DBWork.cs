@@ -7,11 +7,11 @@ public class DBWork  {
 	//テーブル名
 	public const string TABLE_NAME = "work";
 	public const string FILE_NAME = "SODataWork";
-	public SODataWork m_soDataWork;
+	//public SODataWork m_soDataWork;
 
 	private bool m_bDebugLog = false;
 
-	public List<DataWork> data_list = new List<DataWork>();
+	public List<DataWorkParam> data_list = new List<DataWorkParam>();
 
 	public DBWork( string _strAsyncName ){
 		//m_soDataWork = PrefabManager.Instance.PrefabLoadInstance (FILE_NAME).GetComponent<SODataWork> ();
@@ -24,7 +24,7 @@ public class DBWork  {
 
 	public void Update( int _iWorkId , Dictionary<string , string > _dict ){
 
-		foreach (DataWork data in m_soDataWork.list) {
+		foreach (DataWorkParam data in DataManager.Instance.dataWork.list) {
 			if (data.work_id == _iWorkId) {
 				data.Set (_dict);
 			}
@@ -56,9 +56,9 @@ public class DBWork  {
 
 
 	//DBへ保存
-	public void Replace(DataWork _replocalData)
+	public void Replace(DataWorkParam _replocalData)
 	{
-		m_soDataWork.list.Add (_replocalData);
+		DataManager.Instance.dataWork.list.Add (_replocalData);
 		return;
 		/*
 		//データの上書きのコマンドを設定する　
@@ -94,13 +94,13 @@ public class DBWork  {
 		*/
 	}
 
-	public DataWork Select( int _iWorkId ){
-		foreach (DataWork data in m_soDataWork.list) {
+	public DataWorkParam Select( int _iWorkId ){
+		foreach (DataWorkParam data in DataManager.Instance.dataWork.list) {
 			if (data.work_id == _iWorkId) {
 				return data;
 			}
 		}
-		return new DataWork ();
+		return new DataWorkParam ();
 		/*
 		DataWork ret;
 		string strQuery = "select * from " + TABLE_NAME + " where work_id = '" + _iWorkId + "';";
@@ -117,10 +117,10 @@ public class DBWork  {
 	}
 
 
-	public List<DataWork> Select( string _strWhere = null , bool _bDebugLog = true ){
+	public List<DataWorkParam> Select( string _strWhere = null , bool _bDebugLog = true ){
 
-		List<DataWork> ret_list = new List<DataWork> ();
-		foreach (DataWork data in m_soDataWork.list) {
+		List<DataWorkParam> ret_list = new List<DataWorkParam> ();
+		foreach (DataWorkParam data in DataManager.Instance.dataWork.list) {
 			if (data.Equals (_strWhere)) {
 				ret_list.Add (data);
 			}
@@ -152,7 +152,7 @@ public class DBWork  {
 		*/
 	}
 
-	public List<DataWork> Select(List<string> _whereList ){
+	public List<DataWorkParam> Select(List<string> _whereList ){
 
 		string strWhere = "";
 
@@ -219,9 +219,9 @@ public class DBWork  {
 
 
 	//テーブル以下全て取ってくる
-	public List<DataWork> SelectAll()
+	public List<DataWorkParam> SelectAll()
 	{
-		return m_soDataWork.list;
+		return DataManager.Instance.dataWork.list;
 		/*
 		List<DataWork> ret = new List<DataWork> ();
 

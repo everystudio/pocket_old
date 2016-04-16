@@ -45,10 +45,18 @@ public class InitialMain : MonoBehaviour {
 	[SerializeField]
 	private GameObject m_posDisplay;
 	#region DB関係
-	DBKvs m_dbKvs;
+	CsvKvs m_dbKvs{
+		get{ 
+			return DataManager.Instance.kvs;
+		}
+	}
+	DataWork m_dbWork {
+		get{
+			return DataManager.Instance.dataWork;
+		}
+	}
 	DBItem m_dbItem;
 	DBItemMaster m_dbItemMaster;
-	DBWork m_dbWork;
 	DBMonster m_dbMonster;
 	DBMonsterMaster m_dbMonsterMaster;
 	#endregion
@@ -190,10 +198,9 @@ public class InitialMain : MonoBehaviour {
 
 				m_dbItem = new DBItem (DefineOld.DB_TABLE_ASYNC_ITEM);
 				m_dbItemMaster = new DBItemMaster (DefineOld.DB_TABLE_ASYNC_ITEM_MASTER);
-				m_dbWork = new DBWork (DefineOld.DB_TABLE_ASYNC_WORK);
+				//m_dbWork = new DBWork (DefineOld.DB_TABLE_ASYNC_WORK);
 				m_dbMonster = new DBMonster (DefineOld.DB_TABLE_ASYNC_MONSTER);
 				m_dbMonsterMaster = new DBMonsterMaster (DefineOld.DB_TABLE_ASYNC_MONSTER_MASTER);
-				m_dbKvs = new DBKvs (DefineOld.DB_TABLE_ASYNC_KVS);
 				/*
 				m_dbItem.Open (DefineOld.DB_NAME_DOUBTSUEN, DefineOld.DB_FILE_DIRECTORY, "");
 				m_dbItemMaster.Open (DefineOld.DB_NAME_DOUBTSUEN, DefineOld.DB_FILE_DIRECTORY, "");
@@ -213,6 +220,7 @@ public class InitialMain : MonoBehaviour {
 					m_dbKvs.WriteInt (DefineOld.USER_SYAKKIN,300000000);
 					m_dbKvs.WriteInt (DefineOld.USER_TICKET,5);
 					m_dbKvs.WriteInt (DefineOld.USER_SYOJIKIN,10000);
+					m_dbKvs.Save (CsvKvs.FILE_NAME);
 					var skitMasterTable = new MasterTableMapChip ();
 					skitMasterTable.Load ();
 					var csvItem = new CsvItem ();
@@ -223,18 +231,19 @@ public class InitialMain : MonoBehaviour {
 					}
 				}
 
-				List<DataWork> data_work_list = m_dbWork.SelectAll ();
+				List<DataWorkParam> data_work_list = m_dbWork.All;
 				if (data_work_list.Count == 0) {
 					var csvWork = new CsvWork ();
 					csvWork.Load ();
-					foreach (CsvWorkData csv_work_data in csvWork.All) {
-						DataWork data = new DataWork (csv_work_data);
+					foreach (CsvWorkParam csv_work_data in csvWork.All) {
+						DataWorkParam data = new DataWorkParam (csv_work_data);
 						// 最初に出現していいのはappear_work_id== 0とlevel<=1のものだけ
 						if (data.appear_work_id == 0 && data.level <= 1 ) {
 							data.status = 1;
 						}
-						m_dbWork.Replace (data);
+						m_dbWork.list.Add(data);
 					}
+					m_dbWork.Save (DataWork.FILENAME);
 				}
 
 				List<DataMonster> data_monster_list = m_dbMonster.SelectAll ();
@@ -289,8 +298,8 @@ public class InitialMain : MonoBehaviour {
 			if (true) {
 
 				// とりあえず全部調べる
-				List<DataWork> cleared_work_list = m_dbWork.Select ( string.Format(" status = {0} " , (int)DefineOld.Work.STATUS.CLEARD ));
-				foreach (DataWork work in cleared_work_list) {
+				List<DataWorkParam> cleared_work_list = m_dbWork.Select ( string.Format(" status = {0} " , (int)DefineOld.Work.STATUS.CLEARD ));
+				foreach (DataWorkParam work in cleared_work_list) {
 					List<DataMonsterMaster> list_monster = m_dbMonsterMaster.Select ( string.Format(" status = 0 and open_work_id = {0} " , work.work_id ));
 					foreach (DataMonsterMaster data_monster_master in list_monster) {
 						Dictionary< string , string > monster_master_dict = new Dictionary< string , string > ();

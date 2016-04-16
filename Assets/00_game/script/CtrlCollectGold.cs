@@ -99,8 +99,8 @@ public class CtrlCollectGold : MonoBehaviourEx {
 				m_lbCollectGold.text = "0";
 
 				// ここで仕事のチェックしますか
-				List<DataWork> check_work_list = GameMain.dbWork.Select (" status = 1 ");
-				foreach (DataWork work in check_work_list) {
+				List<DataWorkParam> check_work_list = DataManager.Instance.dataWork.Select (" status = 1 ");
+				foreach (DataWorkParam work in check_work_list) {
 					if (work.ClearCheck ()) {
 						work.MissionClear ();
 					}

@@ -171,7 +171,7 @@ public class ParkMainSettingItem : ParkMainController {
 			strWhere = string.Format (" status != {0} and item_serial != {1} " , (int)DefineOld.Item.Status.NONE , GameMain.Instance.m_iSettingItemSerial );
 		}
 		// 一時保存してたけど意味ある？
-		Grid.SetUsingGrid (ref m_DontSetGridList, DataManager.Instance.m_dataItem.Select (strWhere));
+		Grid.SetUsingGrid (ref m_DontSetGridList, DataManager.Instance.m_dataItem.Select (strWhere) );
 		foreach (Grid dont in m_DontSetGridList) {
 			//Debug.Log (string.Format ("x={0} y={1} ", dont.x, dont.y)); 
 		}

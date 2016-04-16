@@ -60,9 +60,9 @@ public class WorkNewButton : MonoBehaviour {
 			}
 
 			// 表示される仕事一覧
-			List<DataWork> data_work_list = GameMain.dbWork.Select (string.Format ("status = {0}", (int)DefineOld.Work.STATUS.APPEAR));
+			List<DataWorkParam> data_work_list = DataManager.Instance.dataWork.Select (string.Format ("status = {0}", (int)DefineOld.Work.STATUS.APPEAR));
 
-			foreach (DataWork check_work in data_work_list) {
+			foreach (DataWorkParam check_work in data_work_list) {
 				if (PlayerPrefs.HasKey (DefineOld.GetWorkNewKey (check_work.work_id))) {
 					if (PlayerPrefs.GetInt (DefineOld.GetWorkNewKey (check_work.work_id)) == 0) {
 						m_sprNew.enabled = false;

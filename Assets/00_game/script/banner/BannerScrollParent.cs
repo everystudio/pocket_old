@@ -39,9 +39,9 @@ public class BannerScrollParent : MonoBehaviourEx {
 	private BannerScrollSwitch m_bannerScrollSwitch;
 	#endregion
 
-	public void Display( List<DataWork> _workList , int _iIndex , string _strButton = "" ){
+	public void Display( List<DataWorkParam> _workList , int _iIndex , string _strButton = "" ){
 		BannerBaseClear ();
-		foreach (DataWork data in _workList) {
+		foreach (DataWorkParam data in _workList) {
 			GameObject objBanner = PrefabManager.Instance.MakeObject ("prefab/PrefBannerWork" , m_Grid.gameObject );
 			BannerWork script = objBanner.GetComponent<BannerWork> ();
 			script.Initialize (data);

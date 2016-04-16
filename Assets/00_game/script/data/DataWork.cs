@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class DataWork : SearchBase{
+public class DataWorkParam : CsvDataParam{
 
 	public int m_work_id;
 	public int m_status;
@@ -49,9 +49,9 @@ public class DataWork : SearchBase{
 	public int mission_login{ get{ return m_mission_login;} set{m_mission_login = value; } }
 	public int mission_num{ get{ return m_mission_num;} set{m_mission_num = value; } }
 
-	public DataWork(){
+	public DataWorkParam(){
 	}
-	public DataWork( CsvWorkData _work ){
+	public DataWorkParam( CsvWorkParam _work ){
 		work_id = _work.work_id;
 		status = 0;
 		title = _work.title;
@@ -74,28 +74,13 @@ public class DataWork : SearchBase{
 		mission_num= _work.mission_num;
 	}
 
-	static public void WorkCheck(){
-
-		if (TutorialManager.Instance.IsTutorial ()) {
-			;// チュートリアル中はチェックしない
-		} else {
-			List<DataWork> check_work_list = GameMain.dbWork.Select (string.Format (" status = {0} ", (int)DefineOld.Work.STATUS.APPEAR));
-			foreach (DataWork work in check_work_list) {
-				if (work.ClearCheck ()) {
-					work.MissionClear ();
-				}
-			}
-			DataWork.WorkOpen ();
-		}
-	}
-
 	static public void WorkOpen(){
 
 		Dictionary< string , string > dict_appear = new Dictionary< string , string > ();
 		dict_appear.Add( "status" , ((int)DefineOld.Work.STATUS.APPEAR).ToString() ); 
 
-		List<DataWork> list_work = GameMain.dbWork.Select ( string.Format( " status = {0} and appear_work_id = 0 " , (int)DefineOld.Work.STATUS.NONE ));
-		foreach (DataWork appear_work in list_work) {
+		List<DataWorkParam> list_work = GameMain.dbWork.Select ( string.Format( " status = {0} and appear_work_id = 0 " , (int)DefineOld.Work.STATUS.NONE ));
+		foreach (DataWorkParam appear_work in list_work) {
 			if (appear_work.level <= GameMain.dbKvs.ReadInt (DefineOld.USER_LEVEL)) {
 				GameMain.dbWork.Update ( appear_work.work_id , dict_appear );
 
@@ -140,14 +125,14 @@ public class DataWork : SearchBase{
 		// 先に仕事idの制限を切って,レベルでの制限に引っかかってないか確認する
 
 		// この完了した仕事につられて起きる仕事
-		List<DataWork> list_work = GameMain.dbWork.Select (" status = 0 and appear_work_id = " + work_id.ToString () + " ");
+		List<DataWorkParam> list_work = GameMain.dbWork.Select (" status = 0 and appear_work_id = " + work_id.ToString () + " ");
 		Dictionary< string , string > dict_appear = new Dictionary< string , string > ();
 		dict_appear.Add( "appear_work_id" , "0" ); 
-		foreach (DataWork appear_work in list_work) {
+		foreach (DataWorkParam appear_work in list_work) {
 			GameMain.dbWork.Update ( appear_work.work_id , dict_appear );
 		}
 
-		DataWork.WorkOpen ();
+		DataWorkParam.WorkOpen ();
 
 		return;
 	}
@@ -250,8 +235,26 @@ public class DataWork : SearchBase{
 	public bool Login( int _iMonsterId ){
 	}
 	*/
+}
 
+public class DataWork : CsvData<DataWorkParam>
+{
+	public const string FILENAME = "data/work";
 
+	static public void WorkCheck(){
+
+		if (TutorialManager.Instance.IsTutorial ()) {
+			;// チュートリアル中はチェックしない
+		} else {
+			List<DataWorkParam> check_work_list = DataManager.Instance.dataWork.Select (string.Format (" status = {0} ", (int)DefineOld.Work.STATUS.APPEAR));
+			foreach (DataWorkParam work in check_work_list) {
+				if (work.ClearCheck ()) {
+					work.MissionClear ();
+				}
+			}
+			DataWorkParam.WorkOpen ();
+		}
+	}
 
 }
 

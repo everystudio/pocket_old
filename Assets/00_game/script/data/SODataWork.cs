@@ -3,8 +3,8 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 
-public class SODataWork : SODataBase<DataWork> {
-
+public class SODataWork {//: SODataBase<DataWorkParam> {
+	/*
 	protected override void save ()
 	{
 		StreamWriter sw = Textreader.Open (string.Format ("{0}.csv", DBWork.FILE_NAME));
@@ -33,7 +33,7 @@ public class SODataWork : SODataBase<DataWork> {
 		);
 
 		Textreader.Write (sw, strHead);
-		foreach (DataWork data in list) {
+		foreach (DataWorkParam data in list) {
 			string strData = string.Format ("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16},{17},{18},{19}",
 				data.work_id,
 				data.status,
@@ -62,5 +62,6 @@ public class SODataWork : SODataBase<DataWork> {
 		Textreader.Close( sw );
 		return;
 	}
+	*/
 
 }

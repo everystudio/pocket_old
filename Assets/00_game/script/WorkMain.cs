@@ -33,7 +33,7 @@ public class WorkMain : PageBase2 {
 	};
 
 	// 表示用
-	public List<DataWork > m_dataWorkDispList = new List<DataWork>();
+	public List<DataWorkParam > m_dataWorkDispList = new List<DataWorkParam>();
 
 	protected override void initialize(){
 		m_pageHeader = makeHeader ("header_work" , WORK_TABS[0].m_strWordKey);

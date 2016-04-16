@@ -26,14 +26,14 @@ public class BannerWork : BannerBase {
 	public CtrlOjisanCheck m_ojisanCheck;
 
 	private ButtonBase m_buttonBase;// = GetComponent<ButtonBase> ();
-	private DataWork m_dataWork;
+	private DataWorkParam m_dataWork;
 
 	[SerializeField]
 	private UISprite m_sprNew;
 
 	// please check BannerBase
 
-	public void Initialize( DataWork _data ){
+	public void Initialize( DataWorkParam _data ){
 		m_buttonBase = GetComponent<ButtonBase> ();
 		Debug.Log (m_buttonBase);
 		m_eStep = STEP.IDLE;
@@ -79,12 +79,12 @@ public class BannerWork : BannerBase {
 		return;
 	}
 
-	public static string GetSpriteName( DataWork _data ){
+	public static string GetSpriteName( DataWorkParam _data ){
 		return GetSpriteName (_data.work_id);
 	}
 
 	public static string GetSpriteName ( int _iWorkId ){
-		CsvWorkData work_data = DataManager.GetWork (_iWorkId);
+		CsvWorkParam work_data = DataManager.GetWork (_iWorkId);
 		string strRet = "";
 		if (0 < work_data.mission_staff) {
 			strRet = "staff_icon" + work_data.mission_staff.ToString ();
