@@ -220,7 +220,7 @@ public class DataItemParam : CsvDataParam{
 
 	public int GetShiSyutsuPerHour(){
 		int iShisyutsu = 0;
-		List<DataStaff > staff_list = GameMain.dbStaff.Select (" item_serial = " + item_serial.ToString ());
+		List<DataStaff > staff_list = DataManager.Instance.dataStaff.Select (" item_serial = " + item_serial.ToString ());
 
 		foreach (DataStaff staff in staff_list) {
 			iShisyutsu += staff.GetShisyutsuParHour ();

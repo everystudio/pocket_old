@@ -80,12 +80,12 @@ public class CtrlFieldItem : MonoBehaviourEx {
 				GameMain.dbMonster.Update (monster.monster_serial, 0);
 			}
 		
-			List<DataStaff> staff_list = GameMain.dbStaff.Select (" item_serial = " + m_dataItemParam.item_serial.ToString ());
-			foreach (DataStaff staff in staff_list) {
+			List<DataStaffParam> staff_list = DataManager.Instance.dataStaff.Select (" item_serial = " + m_dataItemParam.item_serial.ToString ());
+			foreach (DataStaffParam staff in staff_list) {
 				Dictionary< string , string > dict = new Dictionary< string , string > ();
 				dict.Add ("office_serial", "0"); 
 				dict.Add ("item_serial", "0"); 
-				GameMain.dbStaff.Update (staff.staff_serial, dict);
+				DataManager.Instance.dataStaff.Update (staff.staff_serial, dict);
 			}
 		}
 

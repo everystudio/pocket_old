@@ -1,14 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CsvStaff : MasterTableBase<CsvStaffData> {
-
-	private static readonly string FilePath = "csv/staff";
-	public void Load() { Load(FilePath); }
-}
-
-public class CsvStaffData : MasterBase
-{
+public class CsvStaffParam : CsvDataParam {
 	public int staff_id { get; private set; }
 	public string name { get; private set; }
 	public string description { get; private set; }
@@ -19,6 +12,15 @@ public class CsvStaffData : MasterBase
 	public int expenditure_interval { get; private set; }
 	public int effect_param { get; private set; }
 	public int effect_num { get; private set; }
+
+}
+
+public class CsvStaffData : CsvData<CsvStaffParam>
+{
+	private static readonly string FilePath = "csv/staff";
+	public void Load() { Load(FilePath); }
+
+
 }
 
 

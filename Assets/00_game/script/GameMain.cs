@@ -106,14 +106,9 @@ public class GameMain : MonoBehaviour {
 			return instance.m_dbStaff;
 		}
 	}
-	static public DBKvs dbKvs{
+	static public CsvKvs dbKvs{
 		get{
-			/*
-			if (Instance.m_dbKvs == null) {
-				Instance.m_dbKvs = new DBKvs (DefineOld.DB_TABLE_ASYNC_KVS);
-			}
-			*/
-			return Instance.m_dbKvs;
+			return DataManager.Instance.kvs;
 		}
 	}
 

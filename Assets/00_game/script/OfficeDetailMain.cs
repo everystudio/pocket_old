@@ -67,9 +67,9 @@ public class OfficeDetailMain : PageBase2 {
 
 		m_dataItemParam = DataManager.Instance.m_dataItem.Select (m_iItemSerial);
 
-		List<DataStaff> staff_list = GameMain.dbStaff.Select (" office_serial = " + m_iItemSerial.ToString ());
+		List<DataStaffParam> staff_list = DataManager.Instance.dataStaff.Select (" office_serial = " + m_iItemSerial.ToString ());
 		int iUseCost = 0;
-		foreach (DataStaff staff in staff_list) {
+		foreach (DataStaffParam staff in staff_list) {
 			CsvStaffData data_master = DataManager.GetStaff (staff.staff_id);
 			iUseCost += data_master.cost;
 		}
@@ -138,15 +138,15 @@ public class OfficeDetailMain : PageBase2 {
 			if (bInit) {
 			}
 
-			List<DataStaff> staff_list = GameMain.dbStaff.Select (" office_serial = " + GameMain.Instance.m_iSettingItemSerial.ToString ());
+			List<DataStaffParam> staff_list = DataManager.Instance.dataStaff.Select (" office_serial = " + GameMain.Instance.m_iSettingItemSerial.ToString ());
 
 			Dictionary< string , string > dict = new Dictionary< string , string > ();
 			dict.Add ("office_serial", "0"); 
 			dict.Add ("item_serial", "0"); 
-			foreach (DataStaff staff in staff_list) {
+			foreach (DataStaffParam staff in staff_list) {
 				CtrlFieldItem fielditem = GameMain.ParkRoot.GetFieldItem (staff.item_serial);
 				fielditem.RemoveStaff (staff.staff_serial);
-				GameMain.dbStaff.Update (staff.staff_serial, dict);
+				DataManager.Instance.dataStaff.Update (staff.staff_serial, dict);
 			}
 
 			// 上のスタッフを削除したとにしてください

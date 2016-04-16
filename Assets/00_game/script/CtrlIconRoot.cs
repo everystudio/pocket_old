@@ -37,7 +37,7 @@ public class CtrlIconRoot : MonoBehaviour {
 	public int m_iSize;
 	protected CtrlIconBase m_ctrlIconBase;
 	protected DataMonsterParam m_dataMonster;
-	protected DataStaff m_dataStaff;
+	protected DataStaffParam m_dataStaff;
 
 	public bool Clean(){
 		return m_ctrlIconBase.CleanDust ();
@@ -80,7 +80,7 @@ public class CtrlIconRoot : MonoBehaviour {
 		m_dataMonster = _monster;
 
 	}
-	public void Initialize( DataStaff _staff , CtrlFieldItem _fieldItem  ){
+	public void Initialize( DataStaffParam _staff , CtrlFieldItem _fieldItem  ){
 		m_eIconType = ICON_TYPE.STAFF;
 		CtrlIconStaff script = gameObject.AddComponent<CtrlIconStaff> ();
 		//Debug.LogError (m_iSize);

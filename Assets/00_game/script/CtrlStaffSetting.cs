@@ -78,22 +78,22 @@ public class CtrlStaffSetting : MonoBehaviour {
 
 		if (m_buttonYesNo.IsYes ()) {
 			m_bIsEnd = true;
-			DataStaff staff;
+			DataStaffParam staff;
 			int iStaffCost = 0;
 			if (0 < m_iSetStaffSerial) {
-				//GameMain.dbStaff.Update(
+				//DataManager.Instance.dataStaff.Update(
 				Debug.Log (string.Format( "set staff from backyard:{0}", m_iSetStaffSerial));
 				string strNow = TimeManager.StrNow ();
 				Dictionary< string , string > dict = new Dictionary< string , string > ();
 				dict.Add( "office_serial" , m_dataOffice.item_serial.ToString() ); 
 				dict.Add( "item_serial" , m_dispOffice.SelectingCageSerial.ToString() ); 
 				dict.Add ("setting_time", "\"" + strNow + "\"");
-				staff = GameMain.dbStaff.Update (m_iSetStaffSerial,dict);
+				staff = DataManager.Instance.dataStaff.UpdateGet (m_iSetStaffSerial,dict);
 
 				CsvStaffData staff_data = DataManager.GetStaff (m_iSetStaffId);
 				iStaffCost = staff_data.coin;
 			} else {
-				staff = GameMain.dbStaff.Insert ( m_iSetStaffId , m_dataOffice.item_serial , m_dispOffice.SelectingCageSerial);
+				staff = DataManager.Instance.dataStaff.Insert ( m_iSetStaffId , m_dataOffice.item_serial , m_dispOffice.SelectingCageSerial);
 
 				CsvStaffData staff_data = DataManager.GetStaff (m_iSetStaffId);
 				if (0 < staff_data.coin) {

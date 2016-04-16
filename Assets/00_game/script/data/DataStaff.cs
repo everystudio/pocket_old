@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 
 [System.Serializable]
-public class DataStaff : SearchBase {
+public class DataStaffParam : CsvDataParam {
 
 	public int m_staff_serial;
 	public int m_office_serial;
@@ -49,11 +49,49 @@ public class DataStaff : SearchBase {
 
 			Dictionary< string , string > dict = new Dictionary< string , string > ();
 			dict.Add ("setting_time", "\"" + strResetTime + "\"");
-			GameMain.dbStaff.Update (staff_serial, dict);
+			DataManager.Instance.dataStaff.Update (staff_serial, dict);
 		}
 		//int iCount = 
 
 		return (int)dRet;
+	}
+}
+
+
+public class DataStaff : CsvData<DataStaffParam>
+{
+	public const string FILENAME = "data/staff";
+
+	public DataStaffParam Select( int _iStaffSerial ){
+		return SelectOne (string.Format (" staff_serial = {0}", _iStaffSerial));
+	}
+
+	public int Update( int _iStaffSerial , Dictionary<string , string > _dictUpdate ){
+		return Update (_dictUpdate, string.Format (" staff_serial = {0} ", _iStaffSerial));
+	}
+
+	public DataStaffParam UpdateGet(int _iStaffSerial , Dictionary<string , string > _dictUpdate){
+
+		Update (_iStaffSerial, _dictUpdate);
+		return Select (_iStaffSerial);
+
+	}
+
+	public DataStaffParam Insert( int _iStaffId , int _iOfficeItemSerial , int _iCageSerial ){
+		string strNow = TimeManager.StrNow ();
+
+		DataStaffParam insert_data = new DataStaffParam ();
+		insert_data.staff_serial = list.Count;
+		insert_data.staff_id = _iStaffId;
+		insert_data.office_serial = _iOfficeItemSerial;
+		insert_data.item_serial = _iCageSerial;
+		insert_data.setting_time = strNow;
+		insert_data.create_time = strNow;
+		list.Add (insert_data);
+		return insert_data;
+
+		//m_iSetStaffId , m_dataOffice.item_serial , m_dispOffice.SelectingCageSerial
+
 	}
 
 }

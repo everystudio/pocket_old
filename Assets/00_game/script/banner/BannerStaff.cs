@@ -31,13 +31,13 @@ public class BannerStaff : BannerBase {
 
 	private ButtonBase m_buttonBase;
 
-	private DataStaff m_dataStaff;
+	private DataStaffParam m_dataStaff;
 
 	// スタッフを配置する処理
 	public CtrlStaffSetting m_staffSetting;
 	public CtrlOjisanCheck m_ojisanCheck;
 
-	public void Initialize( CsvStaffData _csvStaffData ,int _iCostNokori){
+	public void Initialize( CsvStaffParam _csvStaffData ,int _iCostNokori){
 		m_bIsUserData = false;
 		m_eStep = STEP.IDLE;
 		m_eStepPre = STEP.MAX;
@@ -72,9 +72,9 @@ public class BannerStaff : BannerBase {
 		return;
 	}
 
-	public void Initialize( DataStaff _data , int _iCostNokori ){
+	public void Initialize( DataStaffParam _data , int _iCostNokori ){
 		//Debug.LogError (_iCostNokori);
-		CsvStaffData staff_data = DataManager.GetStaff (_data.staff_id);
+		CsvStaffParam staff_data = DataManager.GetStaff (_data.staff_id);
 		Initialize (staff_data,_iCostNokori);
 		m_dataStaff = _data;
 		m_bIsUserData = true;
@@ -93,13 +93,13 @@ public class BannerStaff : BannerBase {
 		return;
 	}
 
-	private string GetSpriteName( CsvStaffData _csvStaff ){
+	private string GetSpriteName( CsvStaffParam _csvStaff ){
 		string strRet = "";
 		strRet = "staff_icon" + _csvStaff.staff_id.ToString ();
 		return strRet;
 	}
 
-	private void SetPrice( CsvStaffData _csvStaff ){
+	private void SetPrice( CsvStaffParam _csvStaff ){
 		string strText = "";
 		string strImageName = "";
 
@@ -201,9 +201,9 @@ public class BannerStaff : BannerBase {
 			dict.Add ("office_serial", 0.ToString ()); 
 			dict.Add ("item_serial", 0.ToString ()); 
 			//dict.Add ("setting_time", "\"" + strNow + "\"");
-			GameMain.dbStaff.Update (m_dataStaff.staff_serial, dict);
+			DataManager.Instance.dataStaff.Update (m_dataStaff.staff_serial, dict);
 
-			CsvStaffData staff_data = DataManager.GetStaff (m_dataStaff.staff_id);
+			CsvStaffParam staff_data = DataManager.GetStaff (m_dataStaff.staff_id);
 			GameMain.Instance.m_iCostNokori += staff_data.cost;
 
 			GameMain.ListRefresh = true;

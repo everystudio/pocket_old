@@ -7,7 +7,6 @@ public class DBStaff {
 	//テーブル名
 	public const string TABLE_NAME = "staff";
 	public const string FILE_NAME = "SODataStaff";
-	public SODataStaff m_soDataStaff;
 
 	private bool m_bDebugLog = false;
 
@@ -21,10 +20,10 @@ public class DBStaff {
 
 	// 新規購入の場合
 	// とり得る数からシリアルを返すようにする
-	public DataStaff Insert( int _iStaffId , int _iOfficeSerial , int _iItemSerial ){
+	public DataStaffParam Insert( int _iStaffId , int _iOfficeSerial , int _iItemSerial ){
 		//data_list = SelectAll ();
 		//int topIndex = data_list.Count + 1;
-		int topIndex = m_soDataStaff.list.Count + 1;
+		int topIndex = DataManager.Instance.dataStaff.list.Count + 1;
 		string strNow = TimeManager.StrNow ();
 		//データの上書きのコマンドを設定する　
 

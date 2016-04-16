@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CtrlIconStaff : CtrlIconBase {
 
-	public void Initialize( UISprite _sprite , DataStaff _dataStaff , int _iSize ){
+	public void Initialize( UISprite _sprite , DataStaffParam _dataStaff , int _iSize ){
 		SetSize (_iSize);
 		myTransform.localPosition = GetMovePos ();
 		m_sprIcon = _sprite;
@@ -28,7 +28,7 @@ public class CtrlIconStaff : CtrlIconBase {
 
 	public int m_iCheckCount;
 
-	public CsvStaffData m_csvStaffData;
+	public CsvStaffParam m_csvStaffData;
 	public CtrlFieldItem m_fieldItem;
 
 	public override void update_idle (bool _bInit)

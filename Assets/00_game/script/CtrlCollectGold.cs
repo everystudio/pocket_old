@@ -37,8 +37,8 @@ public class CtrlCollectGold : MonoBehaviourEx {
 
 		// 支出の計算
 		int iShisyutsu = 0;
-		List<DataStaff> staff_list = GameMain.dbStaff.Select (" office_serial != 0 ");
-		foreach (DataStaff staff in staff_list) {
+		List<DataStaffParam> staff_list = DataManager.Instance.dataStaff.Select (" office_serial != 0 ");
+		foreach (DataStaffParam staff in staff_list) {
 			iShisyutsu += staff.GetPayGold (true);
 		}
 		if (0 < iShisyutsu) {

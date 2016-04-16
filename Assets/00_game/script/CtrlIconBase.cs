@@ -27,7 +27,7 @@ abstract public class CtrlIconBase : MonoBehaviourEx {
 
 	public UISprite m_sprIcon;
 	public DataMonsterParam m_dataMonster;
-	public DataStaff m_dataStaff;
+	public DataStaffParam m_dataStaff;
 
 	public GameObject m_goMeal;
 

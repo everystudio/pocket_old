@@ -37,9 +37,9 @@ public class CtrlItemDetailOffice : CtrlItemDetailBase {
 
 		int iCostNow = 0;
 		int iShisyutsu = 0;
-		List<DataStaff> staff_list = GameMain.dbStaff.Select (" office_serial = " + m_dataItemParam.item_serial.ToString() + " " );
-		foreach (DataStaff staff in staff_list) {
-			CsvStaffData data = DataManager.GetStaff (staff.staff_id);
+		List<DataStaffParam> staff_list = DataManager.Instance.dataStaff.Select (" office_serial = " + m_dataItemParam.item_serial.ToString() + " " );
+		foreach (DataStaffParam staff in staff_list) {
+			CsvStaffParam data = DataManager.GetStaff (staff.staff_id);
 
 			iCostNow += data.cost;
 			iShisyutsu += data.expenditure;		// わかりにくい名前にしてしまったな

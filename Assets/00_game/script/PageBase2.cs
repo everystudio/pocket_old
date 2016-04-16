@@ -72,7 +72,7 @@ public class PageBase2 : MonoBehaviourEx {
 			_parent.Display (GameMain.dbMonsterMaster.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );
 			break;
 		case GameMain.TABLE_TYPE.STAFF:
-			_parent.Display (GameMain.dbStaff.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );
+			_parent.Display (DataManager.Instance.dataStaff.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );
 			break;
 		case GameMain.TABLE_TYPE.STAFF_MASTER:
 			_parent.Display (DataManager.csv_staff , _iSwitchIndex , tabData.m_strSwitchHeader );

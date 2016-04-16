@@ -165,7 +165,7 @@ public class DataWorkParam : CsvDataParam{
 				bRet = true;
 			}
 		} else if (0 < mission_staff) {
-			int staff_num = GameMain.dbStaff.Select ( string.Format(  " staff_id = {0} and item_serial != {1} " , mission_staff , 0 ) ).Count;
+			int staff_num = DataManager.Instance.dataStaff.Select ( string.Format(  " staff_id = {0} and item_serial != {1} " , mission_staff , 0 ) ).Count;
 			if (mission_num <= staff_num) {
 				bRet = true;
 			}

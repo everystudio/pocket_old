@@ -2,7 +2,7 @@
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-
+/*
 public class SODataStaff : SODataBase<DataStaff> {
 
 	protected override void save ()
@@ -35,3 +35,4 @@ public class SODataStaff : SODataBase<DataStaff> {
 		return;
 	}
 }
+*/

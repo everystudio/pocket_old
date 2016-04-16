@@ -101,9 +101,9 @@ public class BannerScrollParent : MonoBehaviourEx {
 		setSwitchButton (_strButton, m_goScrollViewParent, m_Grid , _iIndex);
 	}
 
-	public void Display( List<DataStaff> _StaffList , int _iIndex , string _strButton = "" ){
+	public void Display( List<DataStaffParam> _StaffList , int _iIndex , string _strButton = "" ){
 		BannerBaseClear ();
-		foreach (DataStaff data in _StaffList) {
+		foreach (DataStaffParam data in _StaffList) {
 			GameObject objBanner = PrefabManager.Instance.MakeObject ("prefab/PrefBannerStaff" , m_Grid.gameObject );
 			BannerStaff script = objBanner.GetComponent<BannerStaff> ();
 			script.Initialize (data, GameMain.Instance.m_iCostNokori);
@@ -111,9 +111,9 @@ public class BannerScrollParent : MonoBehaviourEx {
 		}
 		setSwitchButton (_strButton, m_goScrollViewParent, m_Grid , _iIndex);
 	}
-	public void Display( List<CsvStaffData> _csvStaffList , int _iIndex , string _strButton = "" ){
+	public void Display( List<CsvStaffParam> _csvStaffList , int _iIndex , string _strButton = "" ){
 		BannerBaseClear ();
-		foreach (CsvStaffData data in _csvStaffList) {
+		foreach (CsvStaffParam data in _csvStaffList) {
 			GameObject objBanner = PrefabManager.Instance.MakeObject ("prefab/PrefBannerStaff" , m_Grid.gameObject );
 			BannerStaff script = objBanner.GetComponent<BannerStaff> ();
 			script.Initialize (data, GameMain.Instance.m_iCostNokori);

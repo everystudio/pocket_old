@@ -76,8 +76,8 @@ public class CtrlParkRoot : MonoBehaviourEx {
 				fielditem.Add (iconRoot);
 			}
 
-			List<DataStaff> staff_list = GameMain.dbStaff.Select (" item_serial != 0 ");
-			foreach (DataStaff staff in staff_list) {
+			List<DataStaffParam> staff_list = DataManager.Instance.dataStaff.Select (" item_serial != 0 ");
+			foreach (DataStaffParam staff in staff_list) {
 				CtrlFieldItem fielditem = GetFieldItem (staff.item_serial);
 				GameObject objIcon = PrefabManager.Instance.MakeObject ("prefab/PrefIcon", fielditem.gameObject);
 				CtrlIconRoot iconRoot = objIcon.GetComponent<CtrlIconRoot> ();

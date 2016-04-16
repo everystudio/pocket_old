@@ -143,16 +143,17 @@ public class DataManager : DataManagerBase <DataManager>{
 	}
 	public DataWork dataWork = new DataWork ();
 	public DataMonster dataMonster = new DataMonster ();
+	public DataStaff dataStaff= new DataStaff();
 
 
-	public CsvStaff m_csvStaff = new CsvStaff();
-	static public List<CsvStaffData> csv_staff {
+	public CsvStaffData m_csvStaff = new CsvStaffData();
+	static public List<CsvStaffParam> csv_staff {
 		get{ 
 			return Instance.m_csvStaff.All;
 		}
 	}
-	static public CsvStaffData GetStaff( int _iStaffId ){
-		foreach (CsvStaffData staff in csv_staff) {
+	static public CsvStaffParam GetStaff( int _iStaffId ){
+		foreach (CsvStaffParam staff in csv_staff) {
 			if (staff.staff_id == _iStaffId) {
 				return staff;
 			}
