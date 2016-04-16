@@ -146,7 +146,7 @@ public class BannerWork : BannerBase {
 				GameObject objOjisan = PrefabManager.Instance.MakeObject ("prefab/PrefOjisanCheck", gameObject.transform.parent.parent.parent.parent.gameObject);
 				m_ojisanCheck = objOjisan.GetComponent<CtrlOjisanCheck> ();
 
-				CsvMonsterData monster_data = DataManager.GetMonster (m_dataWork.mission_monster);
+				CsvMonsterParam monster_data = DataManager.GetMonster (m_dataWork.mission_monster);
 
 				string strDisp = "";
 				if ( monster_data.coin <= DataManager.user.m_iGold ) {
@@ -185,7 +185,7 @@ public class BannerWork : BannerBase {
 				dict.Add( "condition" , iConditionFine.ToString() ); 
 				*/
 				GameMain.dbMonster.Insert (m_dataWork.mission_monster, 0);
-				CsvMonsterData monster_data = DataManager.GetMonster (m_dataWork.mission_monster);
+				CsvMonsterParam monster_data = DataManager.GetMonster (m_dataWork.mission_monster);
 
 				DataManager.user.AddGold (monster_data.coin * -1);
 				DataWork.WorkCheck ();

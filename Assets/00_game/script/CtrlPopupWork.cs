@@ -136,7 +136,7 @@ public class CtrlPopupWork : MonoBehaviourEx{
 				if (0 < work_data.prize_coin) {
 					strPrize = string.Format ("{0}G", work_data.prize_coin);
 				} else if (0 < work_data.prize_monster) {
-					CsvMonsterData monster_data = DataManager.GetMonster (work_data.prize_monster);
+					CsvMonsterParam monster_data = DataManager.GetMonster (work_data.prize_monster);
 					strPrize = string.Format ("{0}", monster_data.name);
 				} else if (0 < work_data.prize_ticket) {
 					strPrize = string.Format ("チケット{0}枚", work_data.prize_ticket);

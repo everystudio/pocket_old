@@ -45,7 +45,7 @@ public class CtrlMonsterDetail : MonoBehaviour {
 	public STEP m_eStep;
 	private STEP m_eStepPre;
 
-	protected DataMonster m_dataMonster;
+	protected DataMonsterParam m_dataMonster;
 	private CtrlOjisanCheck m_ojisanCheck;
 
 
@@ -59,13 +59,13 @@ public class CtrlMonsterDetail : MonoBehaviour {
 		m_eStepPre = STEP.MAX;
 		m_bIsEnd = false;
 
-		m_dataMonster = GameMain.dbMonster.Select (_iSerial);
+		m_dataMonster = DataManager.Instance.dataMonster.Select (_iSerial);
 		int iCleanLevel = 0;
 		int iMealLevel = 0;
 		m_dataMonster.GetConditions (ref iCleanLevel, ref iMealLevel);
 		m_dispHungry.Set (iMealLevel);
 
-		DataMonsterMaster master_data = GameMain.dbMonsterMaster.Select (m_dataMonster.monster_id);
+		CsvMonsterParam master_data = GameMain.dbMonsterMaster.Select (m_dataMonster.monster_id);
 
 		List<DataStaff> staff_list = GameMain.dbStaff.Select (string.Format (" item_serial = {0}", m_dataMonster.item_serial));
 
@@ -145,10 +145,10 @@ public class CtrlMonsterDetail : MonoBehaviour {
 				Destroy (m_ojisanCheck.gameObject);
 
 				// これ、別のところでもやってます
-				List<DataMonster> monster_list = GameMain.dbMonster.Select (" item_serial = " + fielditem.m_dataItemParam.item_serial.ToString ());
+				List<DataMonsterParam> monster_list = DataManager.Instance.dataMonster.Select (" item_serial = " + fielditem.m_dataItemParam.item_serial.ToString ());
 				int iUseCost = 0;
-				foreach (DataMonster monster in monster_list) {
-					DataMonsterMaster data_master = GameMain.dbMonsterMaster.Select (monster.monster_id);
+				foreach (DataMonsterParam monster in monster_list) {
+					CsvMonsterParam data_master = GameMain.dbMonsterMaster.Select (monster.monster_id);
 					iUseCost += data_master.cost;
 				}
 				CsvItemDetailData detail_data = DataManager.GetItemDetail (fielditem.m_dataItemParam.item_id, fielditem.m_dataItemParam.level);

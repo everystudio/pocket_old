@@ -101,11 +101,11 @@ public class DataWorkParam : CsvDataParam{
 		GameMain.dbWork.Update ( work_id , dict );
 
 		// ふういんされているモンスターを解き放つ
-		List<DataMonsterMaster> list_monster = GameMain.dbMonsterMaster.Select ( string.Format(" status = 0 and open_work_id = {0} " , work_id ));
-		foreach (DataMonsterMaster data_monster_master in list_monster) {
+		List<CsvMonsterParam> list_monster = DataManager.Instance.m_csvMonster.Select ( string.Format(" status = 0 and open_work_id = {0} " , work_id ));
+		foreach (CsvMonsterParam data_monster_master in list_monster) {
 			Dictionary< string , string > monster_master_dict = new Dictionary< string , string > ();
 			monster_master_dict.Add ("status", "1");
-			GameMain.dbMonsterMaster.Update (data_monster_master.monster_id , monster_master_dict);
+			DataManager.Instance.m_csvMonster.Update (data_monster_master.monster_id , monster_master_dict);
 		}
 
 
@@ -151,7 +151,7 @@ public class DataWorkParam : CsvDataParam{
 		} else if (0 < mission_monster) {
 			// 確認したいモンスターを何体持っているか
 			string strSql = string.Format (" monster_id = {0} and item_serial != {1} ", mission_monster, 0);
-			List<DataMonster> monster_list = GameMain.dbMonster.Select (strSql);
+			List<DataMonsterParam> monster_list = DataManager.Instance.dataMonster.Select (strSql);
 			/*
 			Debug.LogError (strSql);
 			foreach (DataMonster monst in monster_list) {

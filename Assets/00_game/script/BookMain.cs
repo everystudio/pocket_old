@@ -52,7 +52,7 @@ public class BookMain : PageBase2 {
 		m_background.SetSprite ("bg002");
 
 
-		List<CsvMonsterData> data_list = MasterData.MonsterList;
+		List<CsvMonsterParam> data_list = DataManager.Instance.m_csvMonster.list;
 
 		int iTotalNum = data_list.Count;
 		int iDiscoverNum = 0;

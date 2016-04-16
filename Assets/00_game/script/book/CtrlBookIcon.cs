@@ -13,12 +13,12 @@ public class CtrlBookIcon : ButtonBase {
 	private UISprite m_sprMonster;
 	#endregion
 
-	public CsvMonsterData m_monsterData;
+	public CsvMonsterParam m_monsterData;
 
 	private CtrlBookMonster m_ctrlBookMonster;
 	private GameObject m_posDisplay;
 
-	public bool Initialize( CsvMonsterData _data , GameObject _posDisplay ){
+	public bool Initialize( CsvMonsterParam _data , GameObject _posDisplay ){
 		bool bRet = true;
 		m_monsterData = _data;
 
@@ -31,7 +31,7 @@ public class CtrlBookIcon : ButtonBase {
 		//m_sprMonster.atlas = AtlasManager.Instance.GetAtlas (strMonster);
 		m_sprMonster.spriteName = strMonster;
 
-		List<DataMonster> datamonster_list = GameMain.dbMonster.Select (string.Format (" monster_id = {0}", m_monsterData.monster_id));
+		List<DataMonsterParam> datamonster_list = DataManager.Instance.dataMonster.Select (string.Format (" monster_id = {0}", m_monsterData.monster_id));
 
 		if (datamonster_list.Count == 0) {
 			bRet = false;

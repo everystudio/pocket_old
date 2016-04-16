@@ -59,10 +59,10 @@ public class CtrlItemDetailCage : CtrlItemDetailBase {
 
 	override protected void initialize(){
 
-		List<DataMonster> monster_list = GameMain.dbMonster.Select (" item_serial = " + m_ctrlFieldItem.m_dataItemParam.item_serial.ToString ());
+		List<DataMonsterParam> monster_list = DataManager.Instance.dataMonster.Select (" item_serial = " + m_ctrlFieldItem.m_dataItemParam.item_serial.ToString ());
 		int iUseCost = 0;
-		foreach (DataMonster monster in monster_list) {
-			DataMonsterMaster data_master = GameMain.dbMonsterMaster.Select (monster.monster_id);
+		foreach (DataMonsterParam monster in monster_list) {
+			CsvMonsterParam data_master = DataManager.Instance.m_csvMonster.Select (monster.monster_id);
 			iUseCost += data_master.cost;
 		}
 		CsvItemDetailData detail_data = DataManager.GetItemDetail (m_dataItemParam.item_id, m_dataItemParam.level);

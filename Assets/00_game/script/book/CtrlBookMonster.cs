@@ -8,7 +8,7 @@ public class CtrlBookMonster : CtrlMonsterDetail {
 
 	public void Initialize( int _iMonsterId ){
 		m_eStep = STEP.IDLE;
-		CsvMonsterData master_data = DataManager.GetMonster (_iMonsterId);
+		CsvMonsterParam master_data = DataManager.GetMonster (_iMonsterId);
 
 		m_lbNumber.text = string.Format ("No.{0}", master_data.monster_id);
 

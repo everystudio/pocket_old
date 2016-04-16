@@ -66,8 +66,8 @@ public class CtrlParkRoot : MonoBehaviourEx {
 			}
 
 			// 所属しているモンスターのみを取り出す
-			List<DataMonster> monster_list = GameMain.dbMonster.Select (" item_serial != 0 ");
-			foreach (DataMonster monster in monster_list) {
+			List<DataMonsterParam> monster_list = DataManager.Instance.dataMonster.Select (" item_serial != 0 ");
+			foreach (DataMonsterParam monster in monster_list) {
 				CtrlFieldItem fielditem = GetFieldItem (monster.item_serial);
 				GameObject objIcon = PrefabManager.Instance.MakeObject ("prefab/PrefIcon", fielditem.gameObject);
 				CtrlIconRoot iconRoot = objIcon.GetComponent<CtrlIconRoot> ();

@@ -7,7 +7,7 @@ public class DBMonster  {
 	//テーブル名
 	public const string TABLE_NAME = "monster";
 	public const string FILE_NAME = "SODataMonster";
-	public SODataMonster m_soDataMonster;
+	//public SODataMonster m_soDataMonster;
 
 	private bool m_bDebugLog = false;
 
@@ -23,10 +23,11 @@ public class DBMonster  {
 	*/
 
 	//DBへ保存
-	public void Replace(DataMonster _replocalData)
+	public void Replace(DataMonsterParam _replocalData)
 	{
 		// ここ、最初しか呼ばれてないのでもうチェックしない
-		m_soDataMonster.list.Add (_replocalData);
+		DataManager.Instance.dataMonster.list.Add (_replocalData);
+
 		return;
 		/*
 		//データの上書きのコマンドを設定する　
@@ -51,7 +52,7 @@ public class DBMonster  {
 
 	public void Update( int _iSerial , Dictionary<string , string > _dict ){
 		//Debug.LogError (_iSerial);
-		foreach (DataMonster data in m_soDataMonster.list) {
+		foreach (DataMonsterParam data in DataManager.Instance.dataMonster.list) {
 			//Debug.LogError (data.item_serial);
 			if (data.monster_serial == _iSerial) {
 				data.Set (_dict);
@@ -84,7 +85,7 @@ public class DBMonster  {
 
 	public void Update( int _iMonsterSerial , int _iItemSerial , int _iCondition = -1 ){
 
-		foreach (DataMonster data in m_soDataMonster.list) {
+		foreach (DataMonsterParam data in DataManager.Instance.dataMonster.list) {
 			if (data.monster_serial == _iMonsterSerial) {
 				data.item_serial = _iItemSerial;
 				if (_iCondition != -1) {
@@ -111,14 +112,14 @@ public class DBMonster  {
 
 	// 新規購入の場合
 	// とり得る数からシリアルを返すようにする
-	public DataMonster Insert( int _iMonsterId , int _iItemSerial ){
+	public DataMonsterParam Insert( int _iMonsterId , int _iItemSerial ){
 
-		int topIndex = m_soDataMonster.list.Count + 1;
+		int topIndex = DataManager.Instance.dataMonster.list.Count + 1;
 
 		string strNow = TimeManager.StrNow ();
 		int iStartCondition = (int)DefineOld.Monster.CONDITION.FINE;
 
-		DataMonster insert_data = new DataMonster ();
+		DataMonsterParam insert_data = new DataMonsterParam ();
 		insert_data.monster_id = _iMonsterId;
 		insert_data.monster_serial = topIndex;
 		insert_data.item_serial = _iItemSerial;
@@ -126,7 +127,7 @@ public class DBMonster  {
 		insert_data.collect_time = strNow;
 		insert_data.meal_time = strNow;
 		insert_data.clean_time = strNow;
-		m_soDataMonster.list.Add (insert_data);
+		DataManager.Instance.dataMonster.list.Add (insert_data);
 
 		return insert_data;
 		/*
@@ -153,13 +154,13 @@ public class DBMonster  {
 		*/
 	}
 
-	public DataMonster Select( int _iSerial ){
-		foreach (DataMonster data in m_soDataMonster.list) {
+	public DataMonsterParam Select( int _iSerial ){
+		foreach (DataMonsterParam data in DataManager.Instance.dataMonster.list) {
 			if (data.monster_serial == _iSerial) {
 				return data;
 			}
 		}
-		return new DataMonster ();
+		return new DataMonsterParam ();
 		/*
 		DataMonster ret;
 		string strQuery = "select * from " + TABLE_NAME + " where monster_serial = '" + _iSerial + "';";
@@ -177,9 +178,9 @@ public class DBMonster  {
 
 
 	//テーブル以下全て取ってくる
-	public List<DataMonster> SelectAll()
+	public List<DataMonsterParam> SelectAll()
 	{
-		return m_soDataMonster.list;
+		return DataManager.Instance.dataMonster.list;
 		/*
 		//データをクリア
 		data_list.Clear ();
@@ -199,10 +200,10 @@ public class DBMonster  {
 		*/
 	}
 
-	public List<DataMonster> Select( string _strWhere = null ){
-		List<DataMonster> ret_list = new List<DataMonster> ();
+	public List<DataMonsterParam> Select( string _strWhere = null ){
+		List<DataMonsterParam> ret_list = new List<DataMonsterParam> ();
 
-		foreach (DataMonster data in m_soDataMonster.list) {
+		foreach (DataMonsterParam data in DataManager.Instance.dataMonster.list) {
 			if (data.Equals (_strWhere)) {
 				ret_list.Add (data);
 			}
@@ -228,7 +229,7 @@ public class DBMonster  {
 		*/
 	}
 
-	public List<DataMonster> Select(List<string> _whereList ){
+	public List<DataMonsterParam> Select(List<string> _whereList ){
 
 		string strWhere = "";
 

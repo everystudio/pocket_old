@@ -42,13 +42,13 @@ public class BannerMonster : BannerBase {
 	private ButtonBase m_buttonBase;
 
 	private CtrlMonsterDetail m_monsterDetail;
-	private DataMonster m_dataMonster;
-	private DataMonsterMaster m_dataMonsterMaster;
+	private CsvMonsterParam m_csvMonsterParam;
+	private DataMonsterParam m_dataMonsterParam;
 	public CtrlOjisanCheck m_ojisanCheck;
 
 	public bool m_bGoldLess;
 
-	public void Initialize( DataMonsterMaster _dataMaster , int _iCostNokori ){
+	public void Initialize( CsvMonsterParam _dataMaster , int _iCostNokori ){
 		m_bIsUserData = false;
 		m_eStep = STEP.IDLE;
 		m_eStepPre = STEP.MAX;
@@ -71,11 +71,11 @@ public class BannerMonster : BannerBase {
 		m_buttonBase = GetComponent<ButtonBase> ();
 		m_monsterDetail = null;
 
-		m_dataMonsterMaster = _dataMaster;
+		m_csvMonsterParam = _dataMaster;
 
-		m_lbDifficulty.text = UtilString.GetSyuunyuu (m_dataMonsterMaster.revenew_coin, m_dataMonsterMaster.revenew_interval);
+		m_lbDifficulty.text = UtilString.GetSyuunyuu (m_csvMonsterParam.revenew_coin, m_csvMonsterParam.revenew_interval);
 
-		m_bAbleUse = DataManager.user.AbleBuy (_dataMaster.coin, _dataMaster.ticket,  m_dataMonsterMaster.cost , _iCostNokori , 0 , 0 , ref m_eReason );
+		m_bAbleUse = DataManager.user.AbleBuy (_dataMaster.coin, _dataMaster.ticket,  m_csvMonsterParam.cost , _iCostNokori , 0 , 0 , ref m_eReason );
 
 		if (0 < GameMain.Instance.TutorialMonster) {
 			if (GameMain.Instance.TutorialMonster == _dataMaster.monster_id) {
@@ -95,16 +95,15 @@ public class BannerMonster : BannerBase {
 
 	}
 
-	public void Initialize( DataMonster _data , int _iCostNokori ){
-		DataMonsterMaster master_data = GameMain.dbMonsterMaster.Select (_data.monster_id);
+	public void Initialize( DataMonsterParam _data , int _iCostNokori ){
+		CsvMonsterParam master_data = DataManager.Instance.m_csvMonster.Select (_data.monster_id);
 		Initialize (master_data , _iCostNokori);
-		m_dataMonster = _data;
-
+		m_dataMonsterParam = _data;
 		m_bIsUserData = true;
 
-		Debug.Log (m_dataMonsterMaster.cost);
+		//Debug.Log (m_dataMonsterMaster.cost);
 		Debug.Log (_iCostNokori);
-		m_bAbleUse = DataManager.user.AbleBuy (0, 0, m_dataMonsterMaster.cost, _iCostNokori, 0, 0, ref m_eReason);
+		m_bAbleUse = DataManager.user.AbleBuy (0, 0, m_csvMonsterParam.cost, _iCostNokori, 0, 0, ref m_eReason);
 		SetReasonSprite (m_sprReason, m_eReason);
 		if (BannerBase.Mode == BannerBase.MODE.MONSTER_DETAIL) {
 			m_bAbleUse = true;
@@ -114,7 +113,7 @@ public class BannerMonster : BannerBase {
 		}
 
 		m_sprIllness.enabled = false;
-		if (m_dataMonster.condition == (int)DefineOld.Monster.CONDITION.SICK) {
+		if (m_dataMonsterParam.condition == (int)DefineOld.Monster.CONDITION.SICK) {
 			m_sprIllness.enabled = true;
 		}
 		m_sprIgnoreBlack.gameObject.SetActive (!m_bAbleUse);
@@ -123,13 +122,13 @@ public class BannerMonster : BannerBase {
 		m_sprBuyBase.gameObject.SetActive (false);
 	}
 
-	private string GetSpriteName( DataMonsterMaster _data ){
+	private string GetSpriteName( CsvMonsterParam _data ){
 		string strRet = "";
 		strRet = "chara" + _data.monster_id.ToString ();
 		return strRet;
 	}
 
-	private void SetPrice( DataMonsterMaster _data ){
+	private void SetPrice( CsvMonsterParam _data ){
 		string strText = "";
 		string strImageName = "";
 
@@ -209,7 +208,7 @@ public class BannerMonster : BannerBase {
 				// この作り方はいただけませんねぇ・・・
 				GameObject obj = PrefabManager.Instance.MakeObject ("prefab/PrefMonsterDetail", gameObject.transform.parent.parent.parent.parent.gameObject);
 				m_monsterDetail = obj.GetComponent<CtrlMonsterDetail> ();
-				m_monsterDetail.Initialize (m_dataMonster.monster_serial);
+				m_monsterDetail.Initialize (m_dataMonsterParam.monster_serial);
 			}
 			if (m_monsterDetail.IsEnd ()) {
 				SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH);
@@ -225,7 +224,7 @@ public class BannerMonster : BannerBase {
 
 				SoundManager.Instance.PlaySE (SoundName.SET_ANIMAL);
 
-				CsvMonsterData monster_data = DataManager.GetMonster (m_dataMonsterMaster.monster_id);
+				CsvMonsterParam monster_data = DataManager.GetMonster (m_dataMonsterParam.monster_id);
 				if (0 < monster_data.coin) {
 					DataManager.user.AddGold (-1 * monster_data.coin);
 				} else if (0 < monster_data.ticket) {
@@ -235,7 +234,7 @@ public class BannerMonster : BannerBase {
 				}
 
 				// 0番のページに飛ばす
-				DataMonster insertMonster = GameMain.dbMonster.Insert (m_dataMonsterMaster.monster_id, GameMain.Instance.m_iSettingItemSerial);
+				DataMonsterParam insertMonster = DataManager.Instance.dataMonster.Insert (m_csvMonsterParam.monster_id, GameMain.Instance.m_iSettingItemSerial);
 
 				m_tabParent.TriggerOn (0);
 
@@ -265,12 +264,12 @@ public class BannerMonster : BannerBase {
 				dict.Add( "item_serial" , GameMain.Instance.m_iSettingItemSerial.ToString() ); 
 				dict.Add( "collect_time" , "\"" + TimeManager.StrNow() +  "\""); 
 
-				GameMain.dbMonster.Update (m_dataMonster.monster_serial , dict );
+				GameMain.dbMonster.Update (m_dataMonsterParam.monster_serial , dict );
 				//GameMain.dbMonster.Update (m_dataMonster.monster_serial, GameMain.Instance.m_iSettingItemSerial);
 
 				m_tabParent.TriggerOn (0);
 
-				DataMonster insertMonster = GameMain.dbMonster.Select (m_dataMonster.monster_serial);
+				DataMonsterParam insertMonster = GameMain.dbMonster.Select (m_dataMonsterParam.monster_serial);
 				CtrlFieldItem fielditem = GameMain.ParkRoot.GetFieldItem (GameMain.Instance.m_iSettingItemSerial);
 				GameObject objIcon = PrefabManager.Instance.MakeObject ("prefab/PrefIcon", fielditem.gameObject);
 				CtrlIconRoot iconRoot = objIcon.GetComponent<CtrlIconRoot> ();
@@ -287,7 +286,7 @@ public class BannerMonster : BannerBase {
 			if (bInit) {
 				GameObject objOjisan = PrefabManager.Instance.MakeObject ("prefab/PrefOjisanCheck", gameObject.transform.parent.parent.parent.parent.gameObject );
 
-				CsvMonsterData monster = DataManager.GetMonster (m_dataMonster.monster_id);
+				CsvMonsterParam monster = DataManager.GetMonster (m_dataMonsterParam.monster_id);
 
 				int iCost = monster.revenew_coin * (int)(600.0f / (float)monster.revenew_interval);
 
@@ -306,7 +305,7 @@ public class BannerMonster : BannerBase {
 				if (m_bGoldLess) {
 				} else {
 					SoundManager.Instance.PlaySE ("se_cure");
-					CsvMonsterData monster = DataManager.GetMonster (m_dataMonster.monster_id);
+					CsvMonsterParam monster = DataManager.GetMonster (m_dataMonsterParam.monster_id);
 					int iCost = monster.revenew_coin * (int)(600.0f / (float)monster.revenew_interval);
 					DataManager.user.AddGold (-1 * iCost);
 
@@ -321,7 +320,7 @@ public class BannerMonster : BannerBase {
 
 					dict.Add ("clean_time", string.Format ("\"{0}\" ", strSetTime)); 
 					Debug.Log (TimeManager.StrGetTime ());
-					GameMain.dbMonster.Update (m_dataMonster.monster_serial, dict);
+					GameMain.dbMonster.Update (m_dataMonsterParam.monster_serial, dict);
 				}
 				Destroy (m_ojisanCheck.gameObject);
 				m_eStep = STEP.IDLE;

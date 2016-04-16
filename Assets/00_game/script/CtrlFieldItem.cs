@@ -75,8 +75,8 @@ public class CtrlFieldItem : MonoBehaviourEx {
 	public void Remove(){
 		Debug.Log ("Remove:" + gameObject.name);
 		if (0 < m_dataItemParam.item_serial) {
-			List<DataMonster> monster_list = GameMain.dbMonster.Select (" item_serial = " + m_dataItemParam.item_serial.ToString ());
-			foreach (DataMonster monster in monster_list) {
+			List<DataMonsterParam> monster_list = DataManager.Instance.dataMonster.Select (" item_serial = " + m_dataItemParam.item_serial.ToString ());
+			foreach (DataMonsterParam monster in monster_list) {
 				GameMain.dbMonster.Update (monster.monster_serial, 0);
 			}
 		

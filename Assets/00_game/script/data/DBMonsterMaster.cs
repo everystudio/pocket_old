@@ -7,11 +7,9 @@ public class DBMonsterMaster {
 	//テーブル名
 	public const string TABLE_NAME = "monster_master";
 	public const string FILE_NAME = "SODataMonsterMaster";
-	public SODataMonsterMaster m_soDataMonsterMaster;
 
 	private bool m_bDebugLog = false;
 
-	public List<DataMonsterMaster> data_list = new List<DataMonsterMaster>();
 
 	public DBMonsterMaster( string _strAsyncName ){
 		//m_soDataMonsterMaster = PrefabManager.Instance.PrefabLoadInstance (FILE_NAME).GetComponent<SODataMonsterMaster> ();
@@ -24,7 +22,7 @@ public class DBMonsterMaster {
 
 	public void Update( int _iMonsterId , Dictionary<string , string > _dict ){
 
-		foreach (DataMonsterMaster data in m_soDataMonsterMaster.list) {
+		foreach (CsvMonsterParam data in DataManager.Instance.m_csvMonster.list) {
 			if (data.monster_id == _iMonsterId) {
 				data.Set (_dict);
 			}
@@ -55,7 +53,7 @@ public class DBMonsterMaster {
 
 
 	//DBへ保存
-	public void Replace(CsvMonsterData _replocalData)
+	public void Replace(CsvMonsterParam _replocalData)
 	{
 		int iInitStatus = 0;
 		if (_replocalData.open_work_id == 0) {
@@ -66,7 +64,7 @@ public class DBMonsterMaster {
 		string strDescriptionBook = (_replocalData.description_book);
 		string strDescriptionCell = (_replocalData.description_cell);
 
-		DataMonsterMaster data_replace = new DataMonsterMaster ();
+		CsvMonsterParam data_replace = new CsvMonsterParam ();
 
 		data_replace.monster_id = _replocalData.monster_id;
 		data_replace.name = strName;
@@ -85,7 +83,7 @@ public class DBMonsterMaster {
 		data_replace.rare = _replocalData.rare;
 		data_replace.status = iInitStatus;
 
-		m_soDataMonsterMaster.list.Add (data_replace);
+		DataManager.Instance.m_csvMonster.list.Add (data_replace);
 
 		/*
 		//データの上書きのコマンドを設定する　
@@ -118,10 +116,10 @@ public class DBMonsterMaster {
 	}
 
 
-	public List<DataMonsterMaster> Select( string _strWhere = null ){
+	public List<CsvMonsterParam> Select( string _strWhere = null ){
 
-		List<DataMonsterMaster> ret_list = new List<DataMonsterMaster> ();
-		foreach (DataMonsterMaster data in m_soDataMonsterMaster.list) {
+		List<CsvMonsterParam> ret_list = new List<CsvMonsterParam> ();
+		foreach (CsvMonsterParam data in DataManager.Instance.m_csvMonster.list) {
 
 			if (data.Equals (_strWhere) == true) {
 				ret_list.Add (data);
@@ -153,7 +151,7 @@ public class DBMonsterMaster {
 		*/
 	}
 
-	public List<DataMonsterMaster> Select(List<string> _whereList ){
+	public List<CsvMonsterParam> Select(List<string> _whereList ){
 
 		string strWhere = "";
 
@@ -169,13 +167,13 @@ public class DBMonsterMaster {
 		return Select( strWhere );
 	}
 
-	public DataMonsterMaster Select( int _iMonsterId ){
-		foreach (DataMonsterMaster data in m_soDataMonsterMaster.list) {
+	public CsvMonsterParam Select( int _iMonsterId ){
+		foreach (CsvMonsterParam data in DataManager.Instance.m_csvMonster.list) {
 			if (data.monster_id == _iMonsterId) {
 				return data;
 			}
 		}
-		return new DataMonsterMaster ();
+		return new CsvMonsterParam ();
 		/*
 		DataMonsterMaster ret;
 		string strQuery = "select * from " + TABLE_NAME + " where monster_id = '" + _iMonsterId + "';";
@@ -193,9 +191,9 @@ public class DBMonsterMaster {
 
 
 	//テーブル以下全て取ってくる
-	public List<DataMonsterMaster> SelectAll()
+	public List<CsvMonsterParam> SelectAll()
 	{
-		return m_soDataMonsterMaster.list;
+		return DataManager.Instance.m_csvMonster.list;
 		/*
 		//データをクリア
 		data_list.Clear ();

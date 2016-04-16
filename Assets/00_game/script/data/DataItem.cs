@@ -96,8 +96,8 @@ public class DataItemParam : CsvDataParam{
 
 		int iCollectGold = 0;
 		int iCollectExp = 0;
-		List<DataMonster> monster_list = GameMain.dbMonster.Select (" item_serial = " + item_serial.ToString ());
-		foreach (DataMonster monster in monster_list) {
+		List<DataMonsterParam> monster_list = DataManager.Instance.dataMonster.Select (" item_serial = " + item_serial.ToString ());
+		foreach (DataMonsterParam monster in monster_list) {
 			int iTempGold = 0;
 			int iTempExp = 0;
 
@@ -199,10 +199,10 @@ public class DataItemParam : CsvDataParam{
 			return iRet;
 		}
 
-		List<DataMonster > monster_list = GameMain.dbMonster.Select (" item_serial = " + item_serial.ToString ());
+		List<DataMonsterParam > monster_list = DataManager.Instance.dataMonster.Select (" item_serial = " + item_serial.ToString ());
 		int iUriageMax = 0;
-		foreach (DataMonster monster in monster_list) {
-			CsvMonsterData monster_csv = DataManager.GetMonster (monster.monster_id);
+		foreach (DataMonsterParam monster in monster_list) {
+			CsvMonsterParam monster_csv = DataManager.GetMonster (monster.monster_id);
 
 			int iCount = 3600 / monster_csv.revenew_interval;
 			iUriageMax += monster_csv.revenew_coin * iCount;

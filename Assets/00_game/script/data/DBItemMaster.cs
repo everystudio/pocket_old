@@ -177,9 +177,10 @@ public class DBItemMaster {
 
 
 	//テーブル以下全て取ってくる
-	public List<DataItemMaster> SelectAll()
+	public List<CsvItemParam> SelectAll()
 	{
-		return m_soDataItemMaster.list;
+		return DataManager.Instance.m_csvItem.list;
+		//return m_soDataItemMaster.list;
 		/*
 		//データをクリア
 		data_list.Clear ();

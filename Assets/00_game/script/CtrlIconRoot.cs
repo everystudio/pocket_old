@@ -36,7 +36,7 @@ public class CtrlIconRoot : MonoBehaviour {
 	public ICON_TYPE m_eIconType;
 	public int m_iSize;
 	protected CtrlIconBase m_ctrlIconBase;
-	protected DataMonster m_dataMonster;
+	protected DataMonsterParam m_dataMonster;
 	protected DataStaff m_dataStaff;
 
 	public bool Clean(){
@@ -69,7 +69,7 @@ public class CtrlIconRoot : MonoBehaviour {
 		m_eStepPre = STEP.MAX;
 	}
 
-	public void Initialize( DataMonster _monster , CtrlFieldItem _fieldItem ){
+	public void Initialize( DataMonsterParam _monster , CtrlFieldItem _fieldItem ){
 		m_eIconType = ICON_TYPE.MONSTER;
 		CtrlIconMonster script = gameObject.AddComponent<CtrlIconMonster> ();
 

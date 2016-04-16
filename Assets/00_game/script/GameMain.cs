@@ -96,9 +96,9 @@ public class GameMain : MonoBehaviour {
 			return instance.m_dbMonster;
 		}
 	}
-	static public DBMonsterMaster dbMonsterMaster{
+	static public CsvMonster dbMonsterMaster{
 		get{
-			return instance.m_dbMonsterMaster;
+			return DataManager.Instance.m_csvMonster;
 		}
 	}
 	static public DBStaff dbStaff{
@@ -298,7 +298,7 @@ public class GameMain : MonoBehaviour {
 			}
 			//if (m_tkKvsOpen.Completed) {
 			if (true) {
-				DataManager.itemMaster = m_dbItemMaster.SelectAll ();
+				//DataManager.itemMaster = m_dbItemMaster.SelectAll ();
 
 				m_header.Initialize ();
 				m_header.RefleshNum ();

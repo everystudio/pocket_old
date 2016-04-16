@@ -25,7 +25,10 @@ public class DataManager : DataManagerBase <DataManager>{
 
 		m_csvItem.Load ();
 		m_csvMonster.Load ();
+		dataMonster.Load (DataMonster.FILENAME);
+
 		m_csvItemDetail.Load ();
+
 		m_csvWork.Load ();
 		dataWork.Load (DataWork.FILENAME);
 
@@ -95,18 +98,18 @@ public class DataManager : DataManagerBase <DataManager>{
 
 
 	public CsvMonster m_csvMonster = new CsvMonster();
-	static public List<CsvMonsterData> csv_monster {
+	static public List<CsvMonsterParam> csv_monster {
 		get{ 
 			return Instance.m_csvMonster.All;
 		}
 	}
-	static public CsvMonsterData GetMonster( int _iMonsterId ){
-		foreach (CsvMonsterData data in csv_monster) {
+	static public CsvMonsterParam GetMonster( int _iMonsterId ){
+		foreach (CsvMonsterParam data in csv_monster) {
 			if (_iMonsterId == data.monster_id) {
 				return data;
 			}
 		}
-		return new CsvMonsterData ();
+		return new CsvMonsterParam ();
 	}
 	public CsvItemDetal m_csvItemDetail = new CsvItemDetal();
 	static public List<CsvItemDetailData> csv_item_detail {
@@ -139,6 +142,7 @@ public class DataManager : DataManagerBase <DataManager>{
 		return new CsvWorkParam ();
 	}
 	public DataWork dataWork = new DataWork ();
+	public DataMonster dataMonster = new DataMonster ();
 
 
 	public CsvStaff m_csvStaff = new CsvStaff();

@@ -58,7 +58,11 @@ public class InitialMain : MonoBehaviour {
 	DBItem m_dbItem;
 	DBItemMaster m_dbItemMaster;
 	DBMonster m_dbMonster;
-	DBMonsterMaster m_dbMonsterMaster;
+	CsvMonster m_dbMonsterMaster{
+		get{
+			return DataManager.Instance.m_csvMonster;
+		}
+	}
 	#endregion
 
 
@@ -200,13 +204,13 @@ public class InitialMain : MonoBehaviour {
 				m_dbItemMaster = new DBItemMaster (DefineOld.DB_TABLE_ASYNC_ITEM_MASTER);
 				//m_dbWork = new DBWork (DefineOld.DB_TABLE_ASYNC_WORK);
 				m_dbMonster = new DBMonster (DefineOld.DB_TABLE_ASYNC_MONSTER);
-				m_dbMonsterMaster = new DBMonsterMaster (DefineOld.DB_TABLE_ASYNC_MONSTER_MASTER);
+				//DataMonster = new DBMonsterMaster (DefineOld.DB_TABLE_ASYNC_MONSTER_MASTER);
 				/*
 				m_dbItem.Open (DefineOld.DB_NAME_DOUBTSUEN, DefineOld.DB_FILE_DIRECTORY, "");
 				m_dbItemMaster.Open (DefineOld.DB_NAME_DOUBTSUEN, DefineOld.DB_FILE_DIRECTORY, "");
 				m_dbWork.Open (DefineOld.DB_NAME_DOUBTSUEN, DefineOld.DB_FILE_DIRECTORY, "");
 				m_dbMonster.Open (DefineOld.DB_NAME_DOUBTSUEN, DefineOld.DB_FILE_DIRECTORY, "");
-				m_dbMonsterMaster.Open (DefineOld.DB_NAME_DOUBTSUEN, DefineOld.DB_FILE_DIRECTORY, "");
+				DataMonster.Open (DefineOld.DB_NAME_DOUBTSUEN, DefineOld.DB_FILE_DIRECTORY, "");
 				m_tkKvsOpen = m_dbKvs.Open (DefineOld.DB_NAME_DOUBTSUEN, DefineOld.DB_FILE_DIRECTORY, ""); // DefineOld.DB_PASSWORD
 				*/
 			}
@@ -246,10 +250,10 @@ public class InitialMain : MonoBehaviour {
 					m_dbWork.Save (DataWork.FILENAME);
 				}
 
-				List<DataMonster> data_monster_list = m_dbMonster.SelectAll ();
+				List<DataMonsterParam> data_monster_list = DataManager.Instance.dataMonster.list;
 				//Debug.LogError( string.Format( "data_monster_list.Count:{0}" , data_monster_list.Count ));
 				if (data_monster_list.Count == 0) {
-					DataMonster monster = new DataMonster ();
+					DataMonsterParam monster = new DataMonsterParam ();
 					monster.monster_serial = 1;
 					monster.monster_id = 1;
 					monster.item_serial = 12;
@@ -262,20 +266,23 @@ public class InitialMain : MonoBehaviour {
 					m_dbMonster.Replace (monster);
 				}
 
-				List<DataMonsterMaster> data_monster_master_list = m_dbMonsterMaster.SelectAll ();
+				/*
+				List<CsvMonsterParam> data_monster_master_list = DataManager.Instance.m_csvMonster.list;
 				if (data_monster_master_list.Count == 0) {
 					var csvMonsterMaster = new CsvMonster ();
 					csvMonsterMaster.Load ();
 					foreach (CsvMonsterData csv_monster_master_data in csvMonsterMaster.All) {
-						m_dbMonsterMaster.Replace (csv_monster_master_data);
+						DataMonster.Replace (csv_monster_master_data);
 					}
 				}
+				*/
 
-				List<DataItemMaster> data_item_master = m_dbItemMaster.SelectAll ();
+				/*
+				//マスターデータの生成用ですが、状況的にこれはおこらないようにする
+				//List<DataItemMaster> data_item_master = m_dbItemMaster.SelectAll ();
+				List<CsvItemParam> data_item_master = DataManager.Instance.m_csvItem.list;
 				//Debug.LogError (string.Format ("count:{0}", data_item_master.Count));
 				if (data_item_master.Count == 0) {
-					var csvItem = new CsvItem ();
-					csvItem.Load ();
 					foreach (CsvItemParam csv_item_data in csvItem.All) {
 						DataItemMaster data = new DataItemMaster (csv_item_data);
 						if (data.open_item_id == 0) {
@@ -284,6 +291,7 @@ public class InitialMain : MonoBehaviour {
 						m_dbItemMaster.Replace (data);
 					}
 				}
+				*/
 				m_eStep = STEP.INPUT_WAIT;
 			} else {
 				//Debug.Log ("wait");
@@ -300,11 +308,12 @@ public class InitialMain : MonoBehaviour {
 				// とりあえず全部調べる
 				List<DataWorkParam> cleared_work_list = m_dbWork.Select ( string.Format(" status = {0} " , (int)DefineOld.Work.STATUS.CLEARD ));
 				foreach (DataWorkParam work in cleared_work_list) {
-					List<DataMonsterMaster> list_monster = m_dbMonsterMaster.Select ( string.Format(" status = 0 and open_work_id = {0} " , work.work_id ));
-					foreach (DataMonsterMaster data_monster_master in list_monster) {
+					List<CsvMonsterParam> list_monster = m_dbMonsterMaster.Select ( string.Format(" status = 0 and open_work_id = {0} " , work.work_id ));
+					foreach (CsvMonsterParam data_monster_master in list_monster) {
 						Dictionary< string , string > monster_master_dict = new Dictionary< string , string > ();
 						monster_master_dict.Add ("status", "1");
-						m_dbMonsterMaster.Update (data_monster_master.monster_id , monster_master_dict);
+
+						m_dbMonsterMaster.Update (monster_master_dict , string.Format( "monster_id = {0}" , data_monster_master.monster_id ) );
 					}
 
 				}

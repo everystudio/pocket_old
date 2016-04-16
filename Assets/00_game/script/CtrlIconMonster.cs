@@ -6,7 +6,7 @@ public class CtrlIconMonster : CtrlIconBase {
 
 	public int m_iMealLevel;
 	public int m_iCleanLevel;
-	public void Initialize( UISprite _sprite , DataMonster _dataMonster , int _iSize ){
+	public void Initialize( UISprite _sprite , DataMonsterParam _dataMonster , int _iSize ){
 
 		SetSize (_iSize);
 

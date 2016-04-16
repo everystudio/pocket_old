@@ -26,6 +26,8 @@ public class CsvItemParam : CsvDataParam {
 	public int add_coin { get; private set; }
 }
 
+
+
 public class CsvItem : CsvData< CsvItemParam>
 {
 	private static readonly string FilePath = "csv/item";

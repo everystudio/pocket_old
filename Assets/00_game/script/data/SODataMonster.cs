@@ -2,8 +2,8 @@
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-
-public class SODataMonster : SODataBase<DataMonster> {
+/*
+public class SODataMonsteraa : SODataBase<DataMonster> {
 
 	protected override void save ()
 	{
@@ -37,3 +37,5 @@ public class SODataMonster : SODataBase<DataMonster> {
 		return;
 	}
 }
+*/
+

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Reflection;
 
 [System.Serializable]
-public class DataMonster : SODataParam{
+public class DataMonsterParam : CsvDataParam{
 
 	public int m_monster_serial;
 	public int m_monster_id;
@@ -23,7 +23,7 @@ public class DataMonster : SODataParam{
 	public string meal_time { get{ return m_meal_time;} set{m_meal_time = value; } }
 	public string clean_time { get{ return m_clean_time;} set{m_clean_time = value; } }
 
-
+	/*
 	public void Set(Dictionary<string , string > _dict){
 
 		foreach (string key in _dict.Keys) {
@@ -44,13 +44,13 @@ public class DataMonster : SODataParam{
 				Debug.LogError ("error type unknown");
 			}
 		}
-
 	}
+	*/
 
 	public int GetCollect( bool _bCollect , out int _iCollectGold , out int _iCollectExp){
 		double diffSec = TimeManager.Instance.GetDiffNow (collect_time).TotalSeconds * -1.0d;
 		//Debug.Log (diffSec.ToString() + ":" + condition.ToString() );
-		CsvMonsterData csvMonster = DataManager.GetMonster (monster_id);
+		CsvMonsterParam csvMonster = DataManager.GetMonster (monster_id);
 		double dCount = diffSec / csvMonster.revenew_interval;
 
 		if (1 < dCount) {
@@ -136,45 +136,9 @@ public class DataMonster : SODataParam{
 		}
 		return bRet;
 	}
-}
 
-
-[System.Serializable]
-public class DataMonsterMaster : SODataParam {
-	public int m_monster_id;
-	public string m_name;
-	public string m_description_cell;
-	public int m_cost;
-	public int m_fill;
-	public int m_dust;
-	public int m_coin;
-	public int m_ticket;
-	public int m_revenew_coin;
-	public int m_revenew_exp;
-	public int m_revenew_interval;
-	public int m_open_work_id;
-	public string m_description_book;
-	public int m_size;
-	public int m_rare;
-	public int m_status;
-
-	public int monster_id { get{ return m_monster_id;} set{m_monster_id = value; } }
-	public string name { get{ return m_name;} set{m_name = value; } }
-	public string description_cell { get{ return m_description_cell;} set{m_description_cell = value; } }
-	public int cost { get{ return m_cost;} set{m_cost = value; } }
-	public int fill { get{ return m_fill;} set{m_fill = value; } }
-	public int dust { get{ return m_dust;} set{m_dust = value; } }
-	public int coin { get{ return m_coin;} set{m_coin = value; } }
-	public int ticket { get{ return m_ticket;} set{m_ticket = value; } }
-	public int revenew_coin { get{ return m_revenew_coin;} set{m_revenew_coin = value; } }
-	public int revenew_exp { get{ return m_revenew_exp;} set{m_revenew_exp = value; } }
-	public int revenew_interval { get{ return m_revenew_interval;} set{m_revenew_interval = value; } }
-	public int open_work_id { get{ return m_open_work_id;} set{m_open_work_id = value; } }
-	public string description_book { get{ return m_description_book;} set{m_description_book = value; } }
-	public int size { get{ return m_size;} set{m_size = value; } }
-	public int rare { get{ return m_rare;} set{m_rare = value; } }
-	public int status { get{ return m_status;} set{m_status = value; } }
-
+	/*
+	 * たぶんいらんので消す
 	public void Set(Dictionary<string , string > _dict){
 
 		foreach (string key in _dict.Keys) {
@@ -194,6 +158,7 @@ public class DataMonsterMaster : SODataParam {
 			}
 		}
 	}
+
 
 
 	public bool Equals( string _strWhere ){
@@ -228,6 +193,80 @@ public class DataMonsterMaster : SODataParam {
 		}
 		return bRet;
 	}
+
+	*/
+}
+
+
+[System.Serializable]
+public class DataMonster : CsvData<DataMonsterParam> {
+	public const string FILENAME = "data/monster";
+
+	public DataMonsterParam Select( int _iSerial ){
+		foreach (DataMonsterParam param in list) {
+			if (param.monster_serial == _iSerial) {
+				return param;
+			}
+		}
+		return new DataMonsterParam ();
+	}
+
+	// 新規購入の場合
+	// とり得る数からシリアルを返すようにする
+	public DataMonsterParam Insert( int _iMonsterId , int _iItemSerial ){
+
+		int topIndex = DataManager.Instance.dataMonster.list.Count + 1;
+
+		string strNow = TimeManager.StrNow ();
+		int iStartCondition = (int)DefineOld.Monster.CONDITION.FINE;
+
+		DataMonsterParam insert_data = new DataMonsterParam ();
+		insert_data.monster_id = _iMonsterId;
+		insert_data.monster_serial = topIndex;
+		insert_data.item_serial = _iItemSerial;
+		insert_data.condition = iStartCondition;
+		insert_data.collect_time = strNow;
+		insert_data.meal_time = strNow;
+		insert_data.clean_time = strNow;
+		DataManager.Instance.dataMonster.list.Add (insert_data);
+
+		return insert_data;
+	}
+
+	//テーブル以下全て取ってくる
+	public List<DataMonsterParam> SelectAll()
+	{
+		return DataManager.Instance.dataMonster.list;
+	}
+
+	public List<DataMonsterParam> Select( string _strWhere = null ){
+		List<DataMonsterParam> ret_list = new List<DataMonsterParam> ();
+
+		foreach (DataMonsterParam data in DataManager.Instance.dataMonster.list) {
+			if (data.Equals (_strWhere)) {
+				ret_list.Add (data);
+			}
+		}
+		return ret_list;
+	}
+
+	public List<DataMonsterParam> Select(List<string> _whereList ){
+
+		string strWhere = "";
+
+		int iWhereCount = 0;
+		if (_whereList != null) {
+			foreach (string temp in _whereList) {
+				if (0 < iWhereCount ) {
+					strWhere += " and ";
+				}
+				strWhere += temp;
+			}
+		}
+		return Select( strWhere );
+	}
+
+
 
 }
 
