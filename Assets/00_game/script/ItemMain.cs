@@ -61,7 +61,7 @@ public class ItemMain : PageBase2 {
 		/*
 		// 自動削除の登録
 		m_goDeleteList.Add (objTabParent);
-		List<DataItemMaster> list = GameMain.dbItemMaster.Select ( " 0 < status ");
+		List<CsvItemParam> list = GameMain.dbItemMaster.Select ( " 0 < status ");
 		m_bannerScrollParen.Display (list,0);
 		*/
 	}

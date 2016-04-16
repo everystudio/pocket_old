@@ -279,12 +279,12 @@ public class InitialMain : MonoBehaviour {
 
 				/*
 				//マスターデータの生成用ですが、状況的にこれはおこらないようにする
-				//List<DataItemMaster> data_item_master = m_dbItemMaster.SelectAll ();
+				//List<CsvItemParam> data_item_master = m_dbItemMaster.SelectAll ();
 				List<CsvItemParam> data_item_master = DataManager.Instance.m_csvItem.list;
 				//Debug.LogError (string.Format ("count:{0}", data_item_master.Count));
 				if (data_item_master.Count == 0) {
 					foreach (CsvItemParam csv_item_data in csvItem.All) {
-						DataItemMaster data = new DataItemMaster (csv_item_data);
+						CsvItemParam data = new CsvItemParam (csv_item_data);
 						if (data.open_item_id == 0) {
 							data.status = 1;
 						}

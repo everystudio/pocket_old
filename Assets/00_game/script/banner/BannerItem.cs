@@ -36,11 +36,11 @@ public class BannerItem : BannerBase {
 	private ButtonBase m_buttonBase;
 	public int m_iTicketNum;
 
-	public DataItemMaster m_ItemMaster;
+	public CsvItemParam m_ItemMaster;
 	public CtrlOjisanCheck m_ojisanCheck;
 
 
-	public bool Initialize( DataItemMaster _data , int _iCostNokori ){
+	public bool Initialize( CsvItemParam _data , int _iCostNokori ){
 
 		bool bRet = true;
 
@@ -103,7 +103,7 @@ public class BannerItem : BannerBase {
 	}
 	public bool Initialize( DataItemParam _data , int _iCostNokori ){
 
-		DataItemMaster item_master = DataManager.GetItemMaster (_data.item_id);
+		CsvItemParam item_master = DataManager.GetItemMaster (_data.item_id);
 		Initialize (item_master , _iCostNokori );
 		m_iItemSerial = _data.item_serial;
 
@@ -121,7 +121,7 @@ public class BannerItem : BannerBase {
 		return true;
 	}
 
-	private void SetPrice( DataItemMaster _data ){
+	private void SetPrice( CsvItemParam _data ){
 		string strText = "";
 		string strImageName = "";
 		if (0 < _data.need_coin) {
@@ -181,7 +181,7 @@ public class BannerItem : BannerBase {
 		return strRet;
 	}
 
-	private string GetSpriteName( DataItemMaster _data ){
+	private string GetSpriteName( CsvItemParam _data ){
 
 		return GetItemSpriteName(_data.item_id);
 	}

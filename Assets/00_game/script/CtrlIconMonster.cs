@@ -6,7 +6,7 @@ public class CtrlIconMonster : CtrlIconBase {
 
 	public int m_iMealLevel;
 	public int m_iCleanLevel;
-	public void Initialize( UISprite _sprite , DataMonsterParam _dataMonster , int _iSize ){
+	public void Initialize( UI2DSprite _sprite , DataMonsterParam _dataMonster , int _iSize ){
 
 		SetSize (_iSize);
 
@@ -148,7 +148,8 @@ public class CtrlIconMonster : CtrlIconBase {
 		if (_bInit) {
 			string strName = "chara" + m_dataMonster.monster_id.ToString () + "_eat1";
 			//m_sprIcon.atlas = AtlasManager.Instance.GetAtlas (strName);
-			m_sprIcon.spriteName = strName;
+			m_sprIcon.sprite2D = SpriteManager.Instance.Load( string.Format( "texture/monster/{0}.png" , strName ));
+			//m_sprIcon.spriteName = strName;
 		}
 	}
 
@@ -169,7 +170,8 @@ public class CtrlIconMonster : CtrlIconBase {
 
 			int iDispFrame = m_iAnimationFrame + 1;
 
-			m_sprIcon.spriteName = "chara" + m_dataMonster.monster_id.ToString () + "_move" + iDispFrame.ToString();
+			string strName = "chara" + m_dataMonster.monster_id.ToString () + "_move" + iDispFrame.ToString();
+			m_sprIcon.sprite2D = SpriteManager.Instance.Load( string.Format( "texture/monster/{0}.png" , strName ));
 		}
 		return;
 	}
@@ -198,7 +200,8 @@ public class CtrlIconMonster : CtrlIconBase {
 
 			int iDispFrame = m_iAnimationFrame + 1;
 
-			m_sprIcon.spriteName = "chara" + m_dataMonster.monster_id.ToString () + "_eat" + iDispFrame.ToString();
+			string strName = "chara" + m_dataMonster.monster_id.ToString () + "_eat" + iDispFrame.ToString();
+			m_sprIcon.sprite2D = SpriteManager.Instance.Load( string.Format( "texture/monster/{0}.png" , strName ));
 		}
 		return;
 	}

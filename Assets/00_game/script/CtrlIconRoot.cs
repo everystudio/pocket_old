@@ -28,7 +28,7 @@ public class CtrlIconRoot : MonoBehaviour {
 
 	#region SerializeField
 	[SerializeField]
-	public UISprite m_sprIcon;
+	public UI2DSprite m_sprIcon;
 	[SerializeField]
 	public CtrlIconFukidashi m_fukidashi;
 	#endregion

@@ -71,7 +71,7 @@ public class CtrlDebit : MonoBehaviourEx {
 
 		case STEP.INITIALIZE:
 			if (bInit) {
-				m_switchSprite.SetSprite ("debt_finish");
+				m_switchSprite.SetSprite ("texture/image/debt_finish.png");
 			}
 
 			//Debug.LogError (SpriteManager.Instance.IsIdle ());

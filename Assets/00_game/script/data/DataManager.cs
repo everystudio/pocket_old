@@ -26,6 +26,8 @@ public class DataManager : DataManagerBase <DataManager>{
 		m_csvItem.Load ();
 		m_csvMonster.Load ();
 		dataMonster.Load (DataMonster.FILENAME);
+		Debug.LogError ("here");
+		m_dataItem.Load (DataItem.FILENAME);
 
 		m_csvItemDetail.Load ();
 
@@ -58,18 +60,18 @@ public class DataManager : DataManagerBase <DataManager>{
 		}
 	}
 
-	public List<DataItemMaster> m_ItemMasterList = new List<DataItemMaster>();
-	static public List<DataItemMaster> itemMaster {
+	public List<CsvItemParam> m_ItemMasterList = new List<CsvItemParam>();
+	static public List<CsvItemParam> itemMaster {
 		get{ return Instance.m_ItemMasterList; }
 		set{ Instance.m_ItemMasterList = value; }
 	}
-	static public DataItemMaster GetItemMaster( int _iItemId ){
-		foreach( DataItemMaster data in itemMaster ){
+	static public CsvItemParam GetItemMaster( int _iItemId ){
+		foreach( CsvItemParam data in itemMaster ){
 			if (data.item_id == _iItemId) {
 				return data;
 			}
 		}
-		return new DataItemMaster ();
+		return new CsvItemParam ();
 	}
 
 	#region For CSV

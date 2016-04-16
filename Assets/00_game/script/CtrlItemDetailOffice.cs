@@ -30,7 +30,7 @@ public class CtrlItemDetailOffice : CtrlItemDetailBase {
 		m_ctrlFieldItem.gameObject.transform.localScale = Vector3.one;
 		m_ctrlFieldItem.ResetPos ();
 
-		DataItemMaster master_data = GameMain.dbItemMaster.Select( m_dataItemParam.item_id );
+		CsvItemParam master_data = GameMain.dbItemMaster.Select( m_dataItemParam.item_id );
 
 		CsvItemDetailData item_detail = DataManager.GetItemDetail (m_dataItemParam.item_id, m_dataItemParam.level);
 		m_lbCostMax.text = item_detail.cost.ToString();

@@ -126,7 +126,7 @@ public class BannerWork : BannerBase {
 						m_eStep = STEP.MONSTER_BUY_CHECK;
 					} else if (0 < m_dataWork.mission_item) {
 
-						DataItemMaster item_master = GameMain.dbItemMaster.Select (m_dataWork.mission_item);
+						CsvItemParam item_master = GameMain.dbItemMaster.Select (m_dataWork.mission_item);
 
 						if (item_master.status == (int)DefineOld.Item.Status.NONE) {
 							m_eStep = STEP.ITEM_HINT;
@@ -202,8 +202,8 @@ public class BannerWork : BannerBase {
 				GameObject objOjisan = PrefabManager.Instance.MakeObject ("prefab/PrefOjisanCheck", gameObject.transform.parent.parent.parent.parent.gameObject);
 				m_ojisanCheck = objOjisan.GetComponent<CtrlOjisanCheck> ();
 
-				DataItemMaster item_mission = GameMain.dbItemMaster.Select (m_dataWork.mission_item);
-				DataItemMaster item_open = GameMain.dbItemMaster.Select (item_mission.open_item_id);
+				CsvItemParam item_mission = GameMain.dbItemMaster.Select (m_dataWork.mission_item);
+				CsvItemParam item_open = GameMain.dbItemMaster.Select (item_mission.open_item_id);
 
 				string strDisp = string.Format("HINT!\n\n{0}は\n[FF0000]{1}[-]を購入すると\n購入可能になります" , item_mission.name , item_open.name );
 				m_ojisanCheck.Initialize (strDisp, true);
@@ -226,7 +226,7 @@ public class BannerWork : BannerBase {
 			if (m_ojisanCheck.IsYes ()) {
 				Destroy (m_ojisanCheck.gameObject);
 
-				DataItemMaster item_mission = GameMain.dbItemMaster.Select (m_dataWork.mission_item);
+				CsvItemParam item_mission = GameMain.dbItemMaster.Select (m_dataWork.mission_item);
 				switch (item_mission.category) {
 
 				case 1:

@@ -55,7 +55,7 @@ public class DataSave : MonoBehaviour {
 
 		/*
 		m_dbItem.m_soDataItem.Save ();
-		m_dbItemMaster.m_soDataItemMaster.Save ();
+		m_dbItemMaster.m_soCsvItemParam.Save ();
 		m_dbWork.m_soDataWork.Save ();
 		m_dbMonster.m_soDataMonster.Save ();
 		m_dbMonsterMaster.m_soDataMonsterMaster.Save ();
@@ -71,7 +71,7 @@ public class DataSave : MonoBehaviour {
 		Initialize ();
 		/*
 		m_dbItem.m_soDataItem.Load (DBItem.FILE_NAME);
-		m_dbItemMaster.m_soDataItemMaster.Load (DBItemMaster.FILE_NAME);
+		m_dbItemMaster.m_soCsvItemParam.Load (DBItemMaster.FILE_NAME);
 		m_dbWork.m_soDataWork.Load (DBWork.FILE_NAME);
 		m_dbMonster.m_soDataMonster.Load (DBMonster.FILE_NAME);
 		m_dbMonsterMaster.m_soDataMonsterMaster.Load (DBMonsterMaster.FILE_NAME);

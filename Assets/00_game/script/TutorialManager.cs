@@ -265,7 +265,7 @@ public class TutorialManager : MonoBehaviour {
 				switch_sprite.GetComponent<Fuwafuwa> ().enabled = false;
 				switch_sprite.GetComponent<Chikachika> ().enabled = false;
 
-				switch_sprite.SetSprite (m_CurrentData.string_param ,
+				switch_sprite.SetSprite (string.Format( "texture/image/tutorial/{0}.png" , m_CurrentData.string_param ),
 					m_CurrentData.param1,
 					m_CurrentData.param2,
 					m_CurrentData.param3);

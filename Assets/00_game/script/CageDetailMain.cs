@@ -48,7 +48,7 @@ public class CageDetailMain : PageBase2 {
 	public int m_iItemSerial;
 
 	public DataItemParam m_dataItemParam;
-	public CsvItemParam m_dataItemMaster;
+	public CsvItemParam m_CsvItemParam;
 
 	protected override void initialize(){
 		m_WhereHash.Clear ();
@@ -71,7 +71,7 @@ public class CageDetailMain : PageBase2 {
 		makeCloseButton ();
 
 		m_dataItemParam = DataManager.Instance.m_dataItem.Select (m_iItemSerial);
-		m_dataItemMaster = GameMain.dbItemMaster.Select (m_dataItemParam.item_id);
+		m_CsvItemParam = GameMain.dbItemMaster.Select (m_dataItemParam.item_id);
 
 		// これ、別のところでもやってます
 		List<DataMonsterParam> monster_list = DataManager.Instance.dataMonster.Select (" item_serial = " + m_iItemSerial.ToString ());

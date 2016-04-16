@@ -36,7 +36,7 @@ public class CtrlShopDetail : MonoBehaviour {
 
 		m_bIsEnd = false;
 
-		DataItemMaster master_data = GameMain.dbItemMaster.Select (_dataItem.item_id);
+		CsvItemParam master_data = GameMain.dbItemMaster.Select (_dataItem.item_id);
 
 		m_lbName.text = master_data.name;
 		m_lbUriage.text = UtilString.GetSyuunyuu( master_data.revenue , master_data.revenue_interval );

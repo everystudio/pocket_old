@@ -109,6 +109,8 @@ public class ParkMain : PageBase2 {
 				m_csFieldItemList.Clear ();
 				//DataManager.Instance.m_ItemDataList = GameMain.dbItem.Select ( " status != 0 " );
 				//Debug.LogError (DataManager.Instance.m_ItemDataList.Count);
+
+				Debug.LogError (DataManager.Instance.m_dataItem.list.Count);
 				m_csParkRoot.Initialize (DataManager.Instance.m_dataItem.Select(" status != 0 ")  );
 				m_csParkRoot.ConnectingRoadCheck ();
 
@@ -128,7 +130,7 @@ public class ParkMain : PageBase2 {
 
 		case STEP.IDLE:
 			if (bInit) {
-				SoundManager.Instance.PlayBGM (SoundName.BGM_MAIN);
+				SoundManager.Instance.PlayBGM (SoundName.BGM_MAIN , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/bgm");
 
 				m_eEditMode = ParkMain.EDIT_MODE.NORMAL;
 				m_footer.gameObject.SetActive (true);

@@ -231,7 +231,7 @@ public class DataItemParam : CsvDataParam{
 	static public float GetSymbolRate(){
 		float fTotalRate = 1.0f;
 		//List<DataItem> symbol_list = GameMain.dbItem.Select (" type = " + ((int)(DefineOld.Item.Type.SYMBOL)).ToString () + " ");
-		List<DataItemParam> symbol_list = GameMain.dbItem.Select ( DefineOld.WHERE_PATTERN.RATE );
+		List<DataItemParam> symbol_list = DataManager.Instance.m_dataItem.Select ( DefineOld.WHERE_PATTERN.RATE );
 		foreach( DataItemParam symbol in symbol_list ){
 			CsvItemParam csv_symbol_item_data = DataManager.GetItem (symbol.item_id);
 			if ((int)(fTotalRate * 100.0f) < csv_symbol_item_data.revenue_up) {
@@ -245,7 +245,9 @@ public class DataItemParam : CsvDataParam{
 
 }
 
+[System.Serializable]
 public class DataItem : CsvData<DataItemParam>{
+	public const string FILENAME = "data/item";
 
 	public DataItemParam Select( int _iSerial ){
 		foreach (DataItemParam param in list) {
@@ -254,6 +256,19 @@ public class DataItem : CsvData<DataItemParam>{
 			}
 		}
 		return new DataItemParam ();
+	}
+
+
+	public List<DataItemParam> Select( DefineOld.WHERE_PATTERN _ePattern , List<int> _iList = null ){
+
+		List<DataItemParam> ret = new List<DataItemParam> ();
+
+		foreach (DataItemParam data in DataManager.Instance.m_dataItem.list) {
+			if (data.Equals (_ePattern , _iList) == true) {
+				ret.Add (data);
+			}
+		}
+		return ret;
 	}
 
 
@@ -308,8 +323,8 @@ public class DataItem : CsvData<DataItemParam>{
 
 	static public void OpenNewItem( int _iKeyItemId ){
 
-		List<DataItemMaster> open_item_list = GameMain.dbItemMaster.Select (string.Format (" status = {0} and open_item_id = {1} ", (int)DefineOld.Item.Status.NONE, _iKeyItemId));
-		foreach (DataItemMaster open_item in open_item_list) {
+		List<CsvItemParam> open_item_list = GameMain.dbItemMaster.Select (string.Format (" status = {0} and open_item_id = {1} ", (int)DefineOld.Item.Status.NONE, _iKeyItemId));
+		foreach (CsvItemParam open_item in open_item_list) {
 			Dictionary<string , string > update_value = new Dictionary<string , string > ();
 			update_value.Add ("status", string.Format ( "{0}" , (int)DefineOld.Item.Status.SETTING ));
 			GameMain.dbItemMaster.Update ( open_item.item_id , update_value);
@@ -321,7 +336,7 @@ public class DataItem : CsvData<DataItemParam>{
 }
 
 [System.Serializable]
-public class DataItemMaster :SODataParam{
+public class CsvItemParamPre :SODataParam{
 
 	public int m_item_id;
 	public int m_status;
@@ -369,7 +384,7 @@ public class DataItemMaster :SODataParam{
 	public int revenue_up2 { get{ return m_revenue_up2;} set{m_revenue_up2 = value; } }
 	public int add_coin { get{ return m_add_coin;} set{m_add_coin = value; } }
 
-	public DataItemMaster(){
+	public CsvItemParamPre(){
 		category = 0;
 		size = 1;
 		area = 1;
@@ -396,7 +411,7 @@ public class DataItemMaster :SODataParam{
 
 	}
 
-	public void Copy( DataItemMaster _data ){
+	public void Copy( CsvItemParam _data ){
 		item_id = _data.item_id;
 		status = 0;			// 通常は利用できるとして扱う
 		name = _data.name;
@@ -456,7 +471,7 @@ public class DataItemMaster :SODataParam{
 		return bRet;
 	}
 
-	public DataItemMaster( CsvItemParam _data ){
+	public CsvItemParamPre( CsvItemParam _data ){
 		int count = 0;
 		item_id = _data.item_id;
 		status = 0;			// 通常は利用できるとして扱う

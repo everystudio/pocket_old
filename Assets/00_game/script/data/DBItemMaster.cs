@@ -6,16 +6,16 @@ using System;
 public class DBItemMaster {
 	//テーブル名
 	public const string TABLE_NAME = "item_master";
-	public const string FILE_NAME = "SODataItemMaster";
+	public const string FILE_NAME = "SOCsvItemParam";
 
 	private bool m_bDebugLog = false;
 
-	public SODataItemMaster m_soDataItemMaster;
+	//public SOCsvItemParam m_soCsvItemParam;
 
-	public List<DataItemMaster> data_list = new List<DataItemMaster>();
+	public List<CsvItemParam> data_list = new List<CsvItemParam>();
 
 	public DBItemMaster( string _strAsyncName ){
-		//m_soDataItemMaster = PrefabManager.Instance.PrefabLoadInstance (FILE_NAME).GetComponent<SODataItemMaster> ();
+		//m_soCsvItemParam = PrefabManager.Instance.PrefabLoadInstance (FILE_NAME).GetComponent<SOCsvItemParam> ();
 	}
 	public string READ_ERROR_STRING = "sql_datamanager_read_error";
 
@@ -24,15 +24,15 @@ public class DBItemMaster {
 	*/
 
 	//DBへ保存
-	public void Replace(DataItemMaster _replocalData)
+	public void Replace(CsvItemParam _replocalData)
 	{
-		foreach (DataItemMaster data in m_soDataItemMaster.list) {
+		foreach (CsvItemParam data in DataManager.Instance.m_csvItem.list) {
 			if (data.item_id == _replocalData.item_id) {
 				data.Copy (_replocalData);
 				return;
 			}
 		}
-		m_soDataItemMaster.list.Add (_replocalData);
+		DataManager.Instance.m_csvItem.list.Add (_replocalData);
 
 		/*
 
@@ -73,7 +73,7 @@ public class DBItemMaster {
 	}
 
 	public void Update( int _iItemId , Dictionary<string , string > _dict , bool _bDebugLog = true){
-		foreach (DataItemMaster data in m_soDataItemMaster.list) {
+		foreach (CsvItemParam data in DataManager.Instance.m_csvItem.list) {
 			if (data.item_id == _iItemId) {
 				data.Set (_dict);
 				return;
@@ -105,12 +105,12 @@ public class DBItemMaster {
 	}
 
 
-	public List<DataItemMaster> Select( string _strWhere = null ){
+	public List<CsvItemParam> Select( string _strWhere = null ){
 
-		List<DataItemMaster> ret_list = new List<DataItemMaster> ();
+		List<CsvItemParam> ret_list = new List<CsvItemParam> ();
 
 		if (_strWhere.Equals ("ticket_gold") == true) {
-			foreach (DataItemMaster data in m_soDataItemMaster.list) {
+			foreach (CsvItemParam data in DataManager.Instance.m_csvItem.list) {
 				if( data.status == 1 &&( data.category==(int)DefineOld.Item.Category.TICKET || data.category== (int)DefineOld.Item.Category.GOLD)){
 					ret_list.Add (data);
 				}
@@ -119,7 +119,7 @@ public class DBItemMaster {
 		}
 
 
-		foreach (DataItemMaster data in m_soDataItemMaster.list) {
+		foreach (CsvItemParam data in DataManager.Instance.m_csvItem.list) {
 			if (data.Equals (_strWhere) == true) {
 				ret_list.Add (data);
 			}
@@ -137,11 +137,11 @@ public class DBItemMaster {
 		//m_sqlDBはDBDataBaseのプロテクト変数
 		SQLiteQuery query = new SQLiteQuery(m_sqlDB,strQuery);
 
-		List<DataItemMaster> ret = new List<DataItemMaster> ();
+		List<CsvItemParam> ret = new List<CsvItemParam> ();
 
 		//テーブルからデータを取ってくる
 		while (query.Step ()) {
-			DataItemMaster data = MakeData (query);
+			CsvItemParam data = MakeData (query);
 			ret.Add (data);
 		}
 		query.Release ();
@@ -150,18 +150,18 @@ public class DBItemMaster {
 		*/
 	}
 
-	public DataItemMaster Select( int _iItemId ){
+	public CsvItemParam Select( int _iItemId ){
 
-		foreach (DataItemMaster data in m_soDataItemMaster.list) {
+		foreach (CsvItemParam data in DataManager.Instance.m_csvItem.list) {
 			if (data.item_id == _iItemId) {
 				return data;
 			}
 		}
-		return new DataItemMaster ();
+		return new CsvItemParam ();
 		/*
-		return new DataItemMaster();;
+		return new CsvItemParam();;
 
-		DataItemMaster ret;
+		CsvItemParam ret;
 		string strQuery = "select * from " + TABLE_NAME + " where item_id = '" + _iItemId + "';";
 
 		SQLiteQuery query = new SQLiteQuery(m_sqlDB , strQuery );
@@ -169,7 +169,7 @@ public class DBItemMaster {
 			ret = MakeData (query);
 		}
 		else {
-			ret = new DataItemMaster();
+			ret = new CsvItemParam();
 		}
 		return ret;
 		*/
@@ -180,7 +180,7 @@ public class DBItemMaster {
 	public List<CsvItemParam> SelectAll()
 	{
 		return DataManager.Instance.m_csvItem.list;
-		//return m_soDataItemMaster.list;
+		//return m_soCsvItemParam.list;
 		/*
 		//データをクリア
 		data_list.Clear ();
@@ -191,7 +191,7 @@ public class DBItemMaster {
 
 		//テーブルからデータを取ってくる
 		while (query.Step ()) {
-			DataItemMaster data = MakeData (query);
+			CsvItemParam data = MakeData (query);
 			data_list.Add (data);
 		}
 		query.Release ();
@@ -201,10 +201,10 @@ public class DBItemMaster {
 	}
 
 
-	public DataItemMaster MakeData( ){
+	public CsvItemParam MakeData( ){
 		/*
 		SQLiteQuery qr = _qr;
-		DataItemMaster data = new DataItemMaster();
+		CsvItemParam data = new CsvItemParam();
 
 		if( m_bDebugLog ){
 			//Debug.Log( "key  :" + strKey );
@@ -235,7 +235,7 @@ public class DBItemMaster {
 
 		return data;
 		*/
-		return new DataItemMaster ();
+		return new CsvItemParam ();
 	}
 
 

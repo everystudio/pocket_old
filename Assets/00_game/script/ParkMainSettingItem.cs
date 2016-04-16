@@ -29,7 +29,7 @@ public class ParkMainSettingItem : ParkMainController {
 	public int m_iEditOffsetX;
 	public int m_iEditOffsetY;
 	public CtrlFieldItem m_editItem;
-	public DataItemMaster m_editItemMaster;
+	public CsvItemParam m_editItemMaster;
 
 	public List<Grid> m_DontSetGridList = new List<Grid>();
 	public ButtonManager m_YesNoButtonManager;
@@ -381,8 +381,8 @@ public class ParkMainSettingItem : ParkMainController {
 
 				DataItem.OpenNewItem (m_editItemMaster.item_id);
 				/*
-				List<DataItemMaster> open_item_list = GameMain.dbItemMaster.Select (string.Format (" status = {0} and open_item_id = {1} ", (int)DefineOld.Item.Status.NONE, m_editItemMaster.item_id));
-				foreach (DataItemMaster open_item in open_item_list) {
+				List<CsvItemParam> open_item_list = GameMain.dbItemMaster.Select (string.Format (" status = {0} and open_item_id = {1} ", (int)DefineOld.Item.Status.NONE, m_editItemMaster.item_id));
+				foreach (CsvItemParam open_item in open_item_list) {
 					Dictionary<string , string > update_value = new Dictionary<string , string > ();
 					update_value.Add ("status", string.Format ( "{0}" , (int)DefineOld.Item.Status.SETTING ));
 					GameMain.dbItemMaster.Update ( open_item.item_id , update_value);

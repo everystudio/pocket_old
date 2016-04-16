@@ -84,7 +84,7 @@ public class DBItem  {
 		*/
 	}
 
-	public int Insert( DataItemMaster _itemMaster , int _iStatus , int _iX , int _iY ){
+	public int Insert( CsvItemParam _itemMaster , int _iStatus , int _iX , int _iY ){
 		//データの上書きのコマンドを設定する　
 		string strCreateTime = TimeManager.StrNow ();
 		string strOpenTime =TimeManager.StrGetTime (_itemMaster.production_time);

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CtrlIconStaff : CtrlIconBase {
 
-	public void Initialize( UISprite _sprite , DataStaffParam _dataStaff , int _iSize ){
+	public void Initialize( UI2DSprite _sprite , DataStaffParam _dataStaff , int _iSize ){
 		SetSize (_iSize);
 		myTransform.localPosition = GetMovePos ();
 		m_sprIcon = _sprite;
@@ -53,7 +53,9 @@ public class CtrlIconStaff : CtrlIconBase {
 		if (_bInit) {
 			string strName = "staff_icon" + m_dataStaff.staff_id.ToString ();
 			//m_sprIcon.atlas = AtlasManager.Instance.GetAtlas (strName);
-			m_sprIcon.spriteName = strName;
+			//m_sprIcon.spriteName = strName;
+			m_sprIcon.sprite2D = SpriteManager.Instance.Load( string.Format( "texture/staff/{0}.png" , strName ));
+
 		}
 	}
 
@@ -76,7 +78,9 @@ public class CtrlIconStaff : CtrlIconBase {
 			if (m_iAnimationFrame == 1) {
 				strName += "_2";
 			}
-			m_sprIcon.spriteName = strName;
+			m_sprIcon.sprite2D = SpriteManager.Instance.Load( string.Format( "texture/staff/{0}.png" , strName ));
+
+
 		}
 		return;
 	}

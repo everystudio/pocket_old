@@ -25,7 +25,7 @@ abstract public class CtrlIconBase : MonoBehaviourEx {
 	public float m_fAnimationInterval = 0.032f;
 	public int m_iAnimationFrame;
 
-	public UISprite m_sprIcon;
+	public UI2DSprite m_sprIcon;
 	public DataMonsterParam m_dataMonster;
 	public DataStaffParam m_dataStaff;
 

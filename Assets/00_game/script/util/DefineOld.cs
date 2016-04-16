@@ -299,7 +299,7 @@ public class Grid {
 		return;
 	}
 
-	static public bool AbleSettingItem( DataItemMaster _dataItem , int _iX , int _iY , List<Grid> _gridList ){
+	static public bool AbleSettingItem( CsvItemParam _dataItem , int _iX , int _iY , List<Grid> _gridList ){
 		bool bRet = true;
 
 		List<Grid> useGrid = new List<Grid> ();

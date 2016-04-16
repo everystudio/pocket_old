@@ -82,7 +82,7 @@ public class CtrlItemDetailCage : CtrlItemDetailBase {
 
 		m_ctrlFieldItem.gameObject.transform.localPosition = new Vector3 (0.0f, -240.0f, 0.0f);
 
-		if (6 <= m_ctrlFieldItem.m_dataItemMaster.size) {
+		if (6 <= m_ctrlFieldItem.m_CsvItemParam.size) {
 			m_ctrlFieldItem.gameObject.transform.localPosition = new Vector3 (0.0f, -415.0f, 0.0f);
 		}
 		// こっちの画面であ後ろの方に移動しておいてください

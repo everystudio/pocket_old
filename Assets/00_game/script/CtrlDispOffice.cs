@@ -59,7 +59,7 @@ public class CtrlDispOffice : CtrlItemDetailBase {
 		m_ctrlFieldItem.transform.localScale = Vector3.one;
 		m_ctrlFieldItem.ResetPos ();
 
-		DataItemMaster master_data = GameMain.dbItemMaster.Select( m_dataItemParam.item_id );
+		CsvItemParam master_data = GameMain.dbItemMaster.Select( m_dataItemParam.item_id );
 
 		Color color = new Color (0.75f, 0.75f, 0.75f);
 

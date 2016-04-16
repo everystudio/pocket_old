@@ -60,6 +60,7 @@ public class CtrlParkRoot : MonoBehaviourEx {
 							}
 							script.Init (x, y, iDummyItemId);
 						}
+						//Debug.LogError ("here:" + obj.name);
 						m_fieldItemList.Add (script);
 					}
 				}
@@ -68,6 +69,7 @@ public class CtrlParkRoot : MonoBehaviourEx {
 			// 所属しているモンスターのみを取り出す
 			List<DataMonsterParam> monster_list = DataManager.Instance.dataMonster.Select (" item_serial != 0 ");
 			foreach (DataMonsterParam monster in monster_list) {
+
 				CtrlFieldItem fielditem = GetFieldItem (monster.item_serial);
 				GameObject objIcon = PrefabManager.Instance.MakeObject ("prefab/PrefIcon", fielditem.gameObject);
 				CtrlIconRoot iconRoot = objIcon.GetComponent<CtrlIconRoot> ();

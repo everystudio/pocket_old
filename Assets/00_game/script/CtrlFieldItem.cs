@@ -24,11 +24,16 @@ public class CtrlFieldItem : MonoBehaviourEx {
 	public List<CtrlIconRoot> m_iconRootList = new List<CtrlIconRoot> ();
 
 	public DataItemParam m_dataItemParam = new DataItemParam();
-	public DataItemMaster m_dataItemMaster;
+	public CsvItemParam m_CsvItemParam;
+	/*
 	[SerializeField]
 	private UISprite m_sprItem;
+	*/
 
-	public UISprite ItemSprite {
+	[SerializeField]
+	private UI2DSprite m_sprItem;
+
+	public UI2DSprite ItemSprite {
 		get{ return m_sprItem; }
 	}
 
@@ -124,18 +129,21 @@ public class CtrlFieldItem : MonoBehaviourEx {
 	}
 
 
-	private void change_sprite( UISprite _spr , string _strName ){
+	private void change_sprite( UI2DSprite _spr , string _strName ){
 		//_spr.atlas = AtlasManager.Instance.GetAtlas (_strName);
-		_spr.spriteName = _strName;
+		//_spr.spriteName = _strName;
 
-		UISpriteData spriteData = _spr.GetAtlasSprite ();
+		//UISpriteData spriteData = _spr.GetAtlasSprite ();
+		string strLoadImage = string.Format ("texture/item/{0}.png", _strName);
+		//Debug.LogError (strLoadImage);
+		_spr.sprite2D = SpriteManager.Instance.Load (strLoadImage);
 
-		_spr.width = spriteData.width;
-		_spr.height = spriteData.height;
+		_spr.width =  (int)_spr.sprite2D.rect.width;
+		_spr.height = (int)_spr.sprite2D.rect.height;
 	}
 
-	private void change_sprite( UISprite _spr , int _iItemId ){
-		string strName = "item" + _iItemId.ToString ();
+	private void change_sprite( UI2DSprite _spr , int _iItemId ){
+		string strName = "item" + string.Format( "{0:D2}" , _iItemId );
 
 		change_sprite (_spr, strName);
 
@@ -157,14 +165,14 @@ public class CtrlFieldItem : MonoBehaviourEx {
 		m_dataItemParam.y = _iY;
 
 		change_sprite (m_sprItem, _iItemId);
-		DataItemMaster master = GameMain.dbItemMaster.Select (_iItemId);
+		CsvItemParam master = GameMain.dbItemMaster.Select (_iItemId);
 
 		m_dataItemParam.width = master.size;
 		m_dataItemParam.height= master.size;
 		m_dataItemParam.item_id = _iItemId;
 		m_dataItemParam.category = master.category;
 
-		m_dataItemMaster = master;
+		m_CsvItemParam = master;
 
 		SetPos (_iX, _iY);
 
@@ -261,7 +269,7 @@ public class CtrlFieldItem : MonoBehaviourEx {
 	public void SetPos( int _iX , int _iY ){
 		myTransform.localPosition = (DefineOld.CELL_X_DIR.normalized * DefineOld.CELL_X_LENGTH * _iX) + (DefineOld.CELL_Y_DIR.normalized * DefineOld.CELL_Y_LENGTH * _iY);
 
-		int iDepth = 100 - (_iX + _iY) - (m_dataItemParam.width-1);// + (m_dataItemParam.height-1));
+		int iDepth = 100 - (_iX + _iY);// - (m_dataItemParam.width-1);// + (m_dataItemParam.height-1));
 
 		if (m_bEditting) {
 			iDepth += 10;		// こんだけ上なら
@@ -310,7 +318,7 @@ public class CtrlFieldItem : MonoBehaviourEx {
 
 
 			m_eStep = STEP.READY;
-			if (m_dataItemMaster.category == (int)DefineOld.Item.Category.NONE) {
+			if (m_CsvItemParam.category == (int)DefineOld.Item.Category.NONE) {
 				m_eStep = STEP.IDLE;
 			} else {
 				double diff = TimeManager.Instance.GetDiffNow (m_dataItemParam.create_time).TotalSeconds;
@@ -319,9 +327,9 @@ public class CtrlFieldItem : MonoBehaviourEx {
 				// 絶対かこなので　
 				diff *= -1;
 
-				if (m_dataItemMaster.production_time < diff) {
+				if (m_CsvItemParam.production_time < diff) {
 					m_eStep = STEP.IDLE;
-				} else if (0 == m_dataItemMaster.production_time) {
+				} else if (0 == m_CsvItemParam.production_time) {
 					m_eStep = STEP.IDLE;
 				} else {
 				}
@@ -333,16 +341,16 @@ public class CtrlFieldItem : MonoBehaviourEx {
 
 				m_fCheckBuildTime = 0.0f;
 				m_fCheckBuildInterval = 0.5f;
-				change_sprite (m_sprItem, GetReadyItemName (m_dataItemMaster.size));
+				change_sprite (m_sprItem, GetReadyItemName (m_CsvItemParam.size));
 
 				double diff = TimeManager.Instance.GetDiffNow (m_dataItemParam.create_time).TotalSeconds;
 				diff *= -1;
-				m_iNokoriTime = m_dataItemMaster.production_time - (int)diff;
+				m_iNokoriTime = m_CsvItemParam.production_time - (int)diff;
 
 				GameObject obj = PrefabManager.Instance.MakeObject ("Prefab/PrefFieldItemBuildTime", gameObject);
-				obj.transform.localPosition = new Vector3 (0.0f, 40.0f * m_dataItemMaster.size, 0.0f);
+				obj.transform.localPosition = new Vector3 (0.0f, 40.0f * m_CsvItemParam.size, 0.0f);
 				m_csBuildTime = obj.GetComponent<CtrlFieldItemBuildTime> ();
-				m_csBuildTime.Init (m_iNokoriTime, m_sprItem.depth, m_dataItemMaster.item_id);
+				m_csBuildTime.Init (m_iNokoriTime, m_sprItem.depth, m_CsvItemParam.item_id);
 				m_csBuildTime.TriggerClear ();
 			}
 			m_fCheckBuildTime += Time.deltaTime;
@@ -354,7 +362,7 @@ public class CtrlFieldItem : MonoBehaviourEx {
 
 				double diff = TimeManager.Instance.GetDiffNow (m_dataItemParam.create_time).TotalSeconds;
 				diff *= -1;
-				m_iNokoriTime = m_dataItemMaster.production_time - (int)diff;
+				m_iNokoriTime = m_CsvItemParam.production_time - (int)diff;
 
 				if (0 < m_iNokoriTime) {
 					m_csBuildTime.SetNokoriSec (m_iNokoriTime);
@@ -386,14 +394,14 @@ public class CtrlFieldItem : MonoBehaviourEx {
 
 					int iIndex = 0;
 
-					List<UISprite> sprList = new List<UISprite> ();
+					List<UI2DSprite> sprList = new List<UI2DSprite> ();
 					foreach (CtrlIconRoot icon in m_iconRootList) {
 						sprList.Add (icon.m_sprIcon);
 					}
 					sprList.Sort (CompareByID);
 
 					int iLoop = 2;
-					foreach (UISprite sprite in sprList) {
+					foreach (UI2DSprite sprite in sprList) {
 						sprite.depth = m_sprItem.depth + iLoop;
 						iLoop += 1;
 					}
@@ -412,7 +420,7 @@ public class CtrlFieldItem : MonoBehaviourEx {
 		}
 	}
 
-	private static int CompareByID (UISprite a, UISprite b)
+	private static int CompareByID (UI2DSprite a, UI2DSprite b)
 	{
 		if (a.transform.position.y > b.transform.position.y) {
 			return -1;
