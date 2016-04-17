@@ -59,8 +59,7 @@ public class CageDetailMain : PageBase2 {
 		m_eStepPre = STEP.MAX;
 
 		m_iItemSerial = GameMain.Instance.m_iSettingItemSerial;
-
-		Debug.Log ("serial:" + m_iItemSerial.ToString ());
+		//Debug.Log ("serial:" + m_iItemSerial.ToString ());
 
 		GameObject objTabParent = PrefabManager.Instance.MakeObject ("prefab/PrefTabParent", gameObject);
 		m_tabParent = objTabParent.GetComponent<CtrlTabParent> ();
@@ -107,7 +106,7 @@ public class CageDetailMain : PageBase2 {
 		if (m_eStepPre != m_eStep) {
 			m_eStepPre  = m_eStep;
 			bInit = true;
-			Debug.Log (m_eStep);
+			//Debug.Log (m_eStep);
 		}
 
 		if (m_iTabIndex == 4 && m_bDisp == false) {

@@ -324,7 +324,7 @@ public class CtrlFieldItem : MonoBehaviourEx {
 			} else {
 				double diff = TimeManager.Instance.GetDiffNow (m_dataItemParam.create_time).TotalSeconds;
 
-				Debug.LogError (string.Format ("id:{0} create_time:{1}", m_dataItemParam.item_id, m_dataItemParam.create_time));
+				//Debug.LogError (string.Format ("id:{0} create_time:{1}", m_dataItemParam.item_id, m_dataItemParam.create_time));
 				//Debug.Log ( m_dataItemParam.item_id.ToString() + ":" + m_dataItemParam.item_serial.ToString() + ":" + diff.ToString ());
 
 				// 絶対かこなので　

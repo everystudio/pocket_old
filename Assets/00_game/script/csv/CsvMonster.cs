@@ -51,7 +51,7 @@ public class CsvMonsterParam : CsvDataParam
 [System.Serializable]
 public class CsvMonster : CsvData<CsvMonsterParam> {
 
-	private static readonly string FilePath = "csv/monster";
+	public const string FilePath = "csv/monster";
 	public void Load() {
 		Load (FilePath);
 	}

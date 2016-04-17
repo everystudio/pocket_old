@@ -56,7 +56,7 @@ public class CtrlTabParent : ButtonManager {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	new void Update () {
 
 		if (ButtonPushed || (m_iSelectingTabIndex != Index)) {
 			m_iSelectingTabIndex = Index;

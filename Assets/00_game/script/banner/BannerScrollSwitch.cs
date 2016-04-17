@@ -75,7 +75,7 @@ public class BannerScrollSwitch : ButtonManager {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	new void Update () {
 
 		if (ButtonPushed) {
 			SetIndex (Index);

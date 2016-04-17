@@ -17,7 +17,7 @@ public class CsvStaffParam : CsvDataParam {
 
 public class CsvStaffData : CsvData<CsvStaffParam>
 {
-	private static readonly string FilePath = "csv/staff";
+	public const string FilePath = "csv/staff";
 	public void Load() { Load(FilePath); }
 
 

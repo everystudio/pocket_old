@@ -103,7 +103,7 @@ public class DataMonsterParam : CsvDataParam{
 		return;
 	}
 
-	public bool Equals( string _strWhere ){
+	new public bool Equals( string _strWhere ){
 
 		//Debug.Log (_strWhere);
 		string[] test = _strWhere.Trim().Split (' ');

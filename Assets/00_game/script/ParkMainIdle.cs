@@ -106,7 +106,7 @@ public class ParkMainIdle : ParkMainController
 					}
 
 					if (0 < iSelectSerial) {
-						Debug.Log ("hit:serial=" + iSelectSerial.ToString ());
+						//Debug.Log ("hit:serial=" + iSelectSerial.ToString ());
 
 						GameMain.Instance.m_iSettingItemSerial = iSelectSerial;
 						m_selectItem = DataManager.Instance.m_dataItem.Select (iSelectSerial);

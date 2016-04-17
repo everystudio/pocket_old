@@ -448,6 +448,9 @@ public class GameMain : MonoBehaviour {
 			bRet = true;
 			_iX = calc_x;
 			_iY = calc_y;
+
+			//Debug.LogError (string.Format ("x:{0} y:{1} posx{2} posy{3}", calc_x, calc_y, objPoint.transform.localPosition.x, objPoint.transform.localPosition.y));
+
 			Destroy (objPoint);
 		}
 		return bRet;

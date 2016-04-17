@@ -91,7 +91,9 @@ public class CsvItemParam : CsvDataParam {
 [System.Serializable]
 public class CsvItem : CsvData< CsvItemParam>
 {
-	private static readonly string FilePath = "csv/item";
+
+	public const string FilePath = "csv/item";
+
 	public void Load() { Load(FilePath); }
 
 	public CsvItemParam Select( int _iItemId ){
@@ -103,7 +105,7 @@ public class CsvItem : CsvData< CsvItemParam>
 		return;
 	}
 
-	public List<CsvItemParam> Select( string _strWhere ){
+	new public List<CsvItemParam> Select( string _strWhere ){
 		if (_strWhere.Equals ("ticket_gold") == true) {
 			List<CsvItemParam> ret_list = new List<CsvItemParam> ();
 			foreach (CsvItemParam data in DataManager.Instance.m_csvItem.list) {

@@ -44,8 +44,23 @@ public class DataManager : DataManagerBase <DataManager>{
 			LocalNotificationManager.Instance.Add (data);
 		}
 		return;
+	}
+
+	public void DataSave(){
+		m_dataKvs.Save (DataKvs.FILE_NAME);
+		dataMonster.Save (DataMonster.FILENAME);
+		dataStaff.Save (DataStaff.FILENAME);
+		m_dataItem.Save (DataItem.FILENAME);
+		dataWork.Save (DataWork.FILENAME);
+
+		m_csvItem.Save (CsvItem.FilePath);
+		m_csvMonster.Save (CsvMonster.FilePath);
+		m_csvStaff.Save (CsvStaffData.FilePath);
+
 
 	}
+
+
 	public void DummyCall(){
 		return;
 	}
@@ -205,6 +220,30 @@ public class DataManager : DataManagerBase <DataManager>{
 	}
 
 	#endregion
+	public float m_fInterval;
+	public const float EDITOR_SAVE_INTERVAL = 10.0f;
+
+	void OnApplicationPause(bool pauseStatus) {
+		///Debug.LogError ("here");
+		Initialize ();
+		if (pauseStatus) {
+			DataSave ();
+
+		} else {
+		}
+	}
+	#if UNITY_EDITOR
+	void Update(){
+
+		m_fInterval += Time.deltaTime;
+
+		if (EDITOR_SAVE_INTERVAL < m_fInterval) {
+			m_fInterval -= EDITOR_SAVE_INTERVAL;
+			DataSave ();
+		}
+
+	}
+	#endif
 
 }
 

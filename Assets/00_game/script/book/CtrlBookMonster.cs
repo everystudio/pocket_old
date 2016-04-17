@@ -6,7 +6,7 @@ public class CtrlBookMonster : CtrlMonsterDetail {
 	public UILabel m_lbNumber;
 	public UILabel m_lbExplain;
 
-	public void Initialize( int _iMonsterId ){
+	new public void Initialize( int _iMonsterId ){
 		m_eStep = STEP.IDLE;
 		CsvMonsterParam master_data = DataManager.GetMonster (_iMonsterId);
 

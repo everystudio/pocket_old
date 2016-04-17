@@ -111,7 +111,7 @@ public class PageBase2 : MonoBehaviourEx {
 	}
 
 	protected virtual void close(){
-		Debug.LogWarning ("dont override close");
+		//Debug.LogWarning ("dont override close");
 	}
 	public virtual void Close (){
 
