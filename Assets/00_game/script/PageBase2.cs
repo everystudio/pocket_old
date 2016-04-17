@@ -60,6 +60,7 @@ public class PageBase2 : MonoBehaviourEx {
 			_parent.Display (DataManager.Instance.dataWork.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );
 			break;
 		case GameMain.TABLE_TYPE.ITEM_MASTER:
+			//Debug.LogError (strWhere);
 			_parent.Display (GameMain.dbItemMaster.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );
 			break;
 		case GameMain.TABLE_TYPE.ITEM:
@@ -192,11 +193,11 @@ public class PageBase2 : MonoBehaviourEx {
 
 				m_tabParent.TriggerClearAll ();
 				bChange = true;
-				Debug.Log ("tab:" + m_iTabIndex.ToString ());
+				//Debug.Log ("tab:" + m_iTabIndex.ToString ());
 			}
 		} else if (m_iSwitchIndex != m_bannerScrollParen.GetSwitchIndex () ) {
 			m_iSwitchIndex = m_bannerScrollParen.GetSwitchIndex ();
-			Debug.Log ("switch_index:" + m_iSwitchIndex.ToString ());
+			//Debug.Log ("switch_index:" + m_iSwitchIndex.ToString ());
 			bChange = true;
 		} else {
 			;//特に何もなし

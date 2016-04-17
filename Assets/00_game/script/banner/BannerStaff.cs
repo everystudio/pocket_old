@@ -52,7 +52,7 @@ public class BannerStaff : BannerBase {
 		string strIcon = GetSpriteName (_CsvStaffParam);
 		//UIAtlas atlas = AtlasManager.Instance.GetAtlas (strIcon);
 		//m_sprIcon.atlas = atlas;
-		m_sprIcon.spriteName = strIcon;
+		m_sprIcon.sprite2D = SpriteManager.Instance.Load( strIcon );
 
 		SetPrice (_CsvStaffParam);
 
@@ -95,7 +95,7 @@ public class BannerStaff : BannerBase {
 
 	private string GetSpriteName( CsvStaffParam _csvStaff ){
 		string strRet = "";
-		strRet = "staff_icon" + _csvStaff.staff_id.ToString ();
+		strRet = string.Format( "texture/staff/staff_icon{0}.png" ,_csvStaff.staff_id );
 		return strRet;
 	}
 

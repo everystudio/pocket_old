@@ -29,7 +29,7 @@ public class PurchasesManager : MonoBehaviour {
 		}
 	}
 	public void DummyCall(){
-		Debug.Log ("dummy");
+		//Debug.Log ("dummy");
 	}
 	public enum STATUS {
 		NONE		= 0,

@@ -92,7 +92,7 @@ public class ParkMain : PageBase2 {
 		if (m_eStepPre != m_eStep) {
 			m_eStepPre  = m_eStep;
 			bInit = true;
-			Debug.Log (m_eStep);
+			//Debug.Log (m_eStep);
 		}
 
 		switch (m_eStep) {
@@ -110,7 +110,7 @@ public class ParkMain : PageBase2 {
 				//DataManager.Instance.m_ItemDataList = GameMain.dbItem.Select ( " status != 0 " );
 				//Debug.LogError (DataManager.Instance.m_ItemDataList.Count);
 
-				Debug.LogError (DataManager.Instance.m_dataItem.list.Count);
+				//Debug.LogError (DataManager.Instance.m_dataItem.list.Count);
 				m_csParkRoot.Initialize (DataManager.Instance.m_dataItem.Select(" status != 0 ")  );
 				m_csParkRoot.ConnectingRoadCheck ();
 

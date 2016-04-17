@@ -107,7 +107,7 @@ public class DataUser {
 		}
 
 		if (0 < _iLimit) {
-			Debug.Log( string.Format( "setting_limit={0}" , _iLimit ));
+			//Debug.Log( string.Format( "setting_limit={0}" , _iLimit ));
 			if (_iLimit <= _iHave) {
 				_eReason = BannerBase.ABLE_BUY_REASON.LIMIT;
 			}

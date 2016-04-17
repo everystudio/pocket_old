@@ -6,7 +6,7 @@ public class CtrlMonsterDetail : MonoBehaviour {
 
 	#region SerializeField
 	[SerializeField]
-	protected UISprite m_sprMonster;
+	protected UI2DSprite m_sprMonster;
 
 	[SerializeField]
 	protected UILabel m_lbName;
@@ -88,15 +88,16 @@ public class CtrlMonsterDetail : MonoBehaviour {
 		string strSpriteName = GetSpriteName (m_dataMonster.monster_id);
 		//UIAtlas atlas = AtlasManager.Instance.GetAtlas (strSpriteName);
 		//m_sprMonster.atlas = atlas;
-		m_sprMonster.spriteName = strSpriteName;
+		m_sprMonster.sprite2D =  SpriteManager.Instance.Load( strSpriteName );
 
 
 	}
 
 	protected string GetSpriteName( int _iMonsterId ){
 		string strRet = "";
-		strRet = "chara" + _iMonsterId.ToString ();
-		return strRet;
+		strRet = string.Format(  "chara{0:D2}" , _iMonsterId );
+		return string.Format ("texture/monster/{0}.png", strRet);
+		//return strRet;
 	}
 
 	// Update is called once per frame

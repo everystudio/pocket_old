@@ -52,7 +52,7 @@ public class ParkMainIdle : ParkMainController
 		if (m_eStepPre != m_eStep) {
 			m_eStepPre = m_eStep;
 			bInit = true;
-			Debug.Log (m_eStep);
+			//Debug.Log (m_eStep);
 		}
 
 		switch (m_eStep) {

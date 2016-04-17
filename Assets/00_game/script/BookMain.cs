@@ -49,7 +49,7 @@ public class BookMain : PageBase2 {
 		m_pageHeader = makeHeader ("header_book" , "Book1");
 		makeCloseButton ();
 
-		m_background.SetSprite ("bg002");
+		m_background.SetSprite ("texture/back/bg002.png");
 
 
 		List<CsvMonsterParam> data_list = DataManager.Instance.m_csvMonster.list;

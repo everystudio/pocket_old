@@ -108,12 +108,12 @@ public class DBItem  {
 		foreach (DataItemParam data in DataManager.Instance.m_dataItem.list) {
 			if (data.item_serial == insert_data.item_serial) {
 				bHit = true;
-				Debug.LogError( string.Format( "serial{0} x={1} y={2}",data.item_serial,data.x,data.y ));
+				//Debug.LogError( string.Format( "serial{0} x={1} y={2}",data.item_serial,data.x,data.y ));
 			}
 		}
 
 		if (bHit == false) {
-			Debug.LogError ("no hit");
+			//Debug.LogError ("no hit");
 		}
 
 		return insert_data.item_serial;

@@ -64,7 +64,7 @@ public class BannerItem : BannerBase {
 		string strIcon = GetSpriteName (_data);
 		//UIAtlas atlas = AtlasManager.Instance.GetAtlas (strIcon);
 		//m_sprIcon.atlas = atlas;
-		m_sprIcon.spriteName = strIcon;
+		m_sprIcon.sprite2D = SpriteManager.Instance.Load( strIcon );
 
 		SetPrice (_data);
 
@@ -77,12 +77,12 @@ public class BannerItem : BannerBase {
 		if ((DefineOld.Item.Category)_data.category == DefineOld.Item.Category.SHOP) {
 			m_lbPrize.text = _data.size.ToString();
 			m_lbPrizeExp.text = "";
-			m_sprBackground.spriteName = "list_item_2";
+			m_sprBackground.sprite2D= SpriteManager.Instance.Load (string.Format ("texture/ui/list_item_2.png"));
 			m_lbDifficulty.text = UtilString.GetSyuunyuu( m_ItemMaster.revenue , m_ItemMaster.revenue_interval );
 		} else if ((DefineOld.Item.Category)_data.category == DefineOld.Item.Category.EXPAND || 
 			(DefineOld.Item.Category)_data.category == DefineOld.Item.Category.GOLD ||
 			(DefineOld.Item.Category)_data.category == DefineOld.Item.Category.TICKET ) {
-			m_sprBackground.spriteName = "list_item_4";
+			m_sprBackground.sprite2D= SpriteManager.Instance.Load (string.Format ("texture/ui/list_item_4.png"));
 			m_lbPrize.text = "";
 			m_lbPrizeExp.text = "";
 			m_lbDifficulty.text = "";
@@ -144,13 +144,15 @@ public class BannerItem : BannerBase {
 	static public string GetItemSpriteName( int _iItemId ){
 		string strRet = "";
 
+		bool bIsUI = true;
+
 		switch (_iItemId) {
 
 		case 30:
-			strRet = "ticket10";
+			strRet = "ticket010";
 			break;
 		case 31:
-			strRet = "ticket55";
+			strRet = "ticket055";
 			break;
 		case 32:
 			strRet = "ticket125";
@@ -171,12 +173,20 @@ public class BannerItem : BannerBase {
 			strRet = "coin125000";
 			break;
 		case 38:
-			strRet = "coin500000";
+			strRet = "coin550000";
 			break;
 
 		default:
-			strRet = "item" + _iItemId.ToString ();
+			bIsUI = false;
+			strRet = string.Format ("item{0:D2}_01", _iItemId);
+			//Debug.LogError (strRet);
 			break;
+		}
+
+		if (bIsUI) {
+			strRet = string.Format ("texture/ui/{0}.png", strRet);
+		} else {
+			strRet = string.Format ("texture/item/{0}.png", strRet);
 		}
 		return strRet;
 	}

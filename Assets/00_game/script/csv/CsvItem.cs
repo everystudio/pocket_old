@@ -103,6 +103,21 @@ public class CsvItem : CsvData< CsvItemParam>
 		return;
 	}
 
+	public List<CsvItemParam> Select( string _strWhere ){
+		if (_strWhere.Equals ("ticket_gold") == true) {
+			List<CsvItemParam> ret_list = new List<CsvItemParam> ();
+			foreach (CsvItemParam data in DataManager.Instance.m_csvItem.list) {
+				if (data.status == 1 && (data.category == (int)DefineOld.Item.Category.TICKET || data.category == (int)DefineOld.Item.Category.GOLD)) {
+					ret_list.Add (data);
+				}
+			}
+			return ret_list;
+		} else {
+			return base.Select(_strWhere);
+		}
+	}
+
+
 }
 
 

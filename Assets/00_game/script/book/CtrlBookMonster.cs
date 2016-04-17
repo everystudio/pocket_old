@@ -30,7 +30,7 @@ public class CtrlBookMonster : CtrlMonsterDetail {
 		string strSpriteName = GetSpriteName (master_data.monster_id);
 		//UIAtlas atlas = AtlasManager.Instance.GetAtlas (strSpriteName);
 		//m_sprMonster.atlas = atlas;
-		m_sprMonster.spriteName = strSpriteName;
+		m_sprMonster.sprite2D = SpriteManager.Instance.Load( strSpriteName );
 	}
 
 }

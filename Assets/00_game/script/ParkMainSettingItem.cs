@@ -207,7 +207,7 @@ public class ParkMainSettingItem : ParkMainController {
 				m_YesNoButtonManager.TriggerClearAll ();
 				m_bTapRelease = false;
 				m_bButtonLock = false;
-				Debug.Log (string.Format ("x={0} y={1} size={2} ", m_editItem.m_dataItemParam.x, m_editItem.m_dataItemParam.y, m_editItem.m_dataItemParam.width)); 
+				//Debug.Log (string.Format ("x={0} y={1} size={2} ", m_editItem.m_dataItemParam.x, m_editItem.m_dataItemParam.y, m_editItem.m_dataItemParam.width)); 
 
 			}
 

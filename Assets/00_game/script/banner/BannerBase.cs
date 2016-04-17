@@ -9,6 +9,30 @@ using System.Collections;
 /// </summary>
 
 public class BannerBase : MonoBehaviour {
+	#region SerializeField設定
+	[SerializeField]
+	protected UILabel m_lbTitle;
+	[SerializeField]
+	protected UILabel m_lbTitle2;
+	[SerializeField]
+	protected UILabel m_lbDescription;
+	[SerializeField]
+	protected UILabel m_lbPrize;		// gold or ticket
+	[SerializeField]
+	protected UILabel m_lbPrizeExp;
+	[SerializeField]
+	protected UILabel m_lbDifficulty;
+	[SerializeField]
+	protected UI2DSprite m_sprIcon;			// これはアトラスも変更しないとダメ
+	[SerializeField]
+	protected UI2DSprite m_sprBackground;		// 背景
+	[SerializeField]
+	protected UI2DSprite m_sprIgnoreBlack;
+	[SerializeField]
+	protected UILabel m_lbReason;
+	[SerializeField]
+	protected UI2DSprite m_sprReason;
+	#endregion
 
 	public enum MODE
 	{
@@ -60,7 +84,7 @@ public class BannerBase : MonoBehaviour {
 		return;
 	}
 
-	public string SetReasonSprite( UISprite _sprite , ABLE_BUY_REASON _eReason ){
+	public string SetReasonSprite( UI2DSprite _sprite , ABLE_BUY_REASON _eReason ){
 		string strRet = "";
 		switch (_eReason) {
 		case ABLE_BUY_REASON.COST:
@@ -81,9 +105,8 @@ public class BannerBase : MonoBehaviour {
 			break;
 		}
 
-		// 別に突っ込んでもいいんだけどね
 		if (strRet.Equals ("") == false) {
-			_sprite.spriteName = strRet;
+			_sprite.sprite2D = SpriteManager.Instance.Load (string.Format ("texture/ui/{0}.png", strRet));
 		}
 
 		return strRet;
@@ -128,30 +151,6 @@ public class BannerBase : MonoBehaviour {
 		m_tabParent = _tabParent;
 	}
 
-	#region SerializeField設定
-	[SerializeField]
-	protected UILabel m_lbTitle;
-	[SerializeField]
-	protected UILabel m_lbTitle2;
-	[SerializeField]
-	protected UILabel m_lbDescription;
-	[SerializeField]
-	protected UILabel m_lbPrize;		// gold or ticket
-	[SerializeField]
-	protected UILabel m_lbPrizeExp;
-	[SerializeField]
-	protected UILabel m_lbDifficulty;
-	[SerializeField]
-	protected UISprite m_sprIcon;			// これはアトラスも変更しないとダメ
-	[SerializeField]
-	protected UISprite m_sprBackground;		// 背景
-	[SerializeField]
-	protected UISprite m_sprIgnoreBlack;
-	[SerializeField]
-	protected UILabel m_lbReason;
-	[SerializeField]
-	protected UISprite m_sprReason;
-	#endregion
 }
 
 

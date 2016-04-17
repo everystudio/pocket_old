@@ -19,7 +19,7 @@ public class CtrlShopDetail : MonoBehaviour {
 	[SerializeField]
 	private UILabel m_lbDescription;
 	[SerializeField]
-	private UISprite m_sprItem;
+	private UI2DSprite m_sprItem;
 	#endregion
 
 	public bool m_bIsEnd;
@@ -44,7 +44,7 @@ public class CtrlShopDetail : MonoBehaviour {
 		m_lbDescription.text = master_data.description;
 
 		string strName = "item" + _dataItem.item_id.ToString ();
-		m_sprItem.spriteName = strName;
+		m_sprItem.sprite2D = SpriteManager.Instance.Load( string.Format( "texture/item/item{0:D2}_01.png" ,_dataItem.item_id ));
 
 		return;
 	}

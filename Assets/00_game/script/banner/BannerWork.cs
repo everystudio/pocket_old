@@ -29,13 +29,13 @@ public class BannerWork : BannerBase {
 	private DataWorkParam m_dataWork;
 
 	[SerializeField]
-	private UISprite m_sprNew;
+	private UI2DSprite m_sprNew;
 
 	// please check BannerBase
 
 	public void Initialize( DataWorkParam _data ){
 		m_buttonBase = GetComponent<ButtonBase> ();
-		Debug.Log (m_buttonBase);
+		//Debug.Log (m_buttonBase);
 		m_eStep = STEP.IDLE;
 		m_eStepPre = STEP.MAX;
 
@@ -75,7 +75,7 @@ public class BannerWork : BannerBase {
 		string strIcon = GetSpriteName (_data);
 		//UIAtlas atlas = AtlasManager.Instance.GetAtlas (strIcon);
 		//m_sprIcon.atlas = atlas;
-		m_sprIcon.spriteName = strIcon;
+		m_sprIcon.sprite2D = SpriteManager.Instance.Load( strIcon );
 		return;
 	}
 
@@ -92,7 +92,7 @@ public class BannerWork : BannerBase {
 
 		} else if (0 < work_data.mission_item) {
 			strRet = "item" + work_data.mission_item.ToString ();
-			strRet = string.Format ("texture/item/item_{0:D2}.png",work_data.mission_item);
+			strRet = string.Format ("texture/item/item{0:D2}_01.png",work_data.mission_item);
 		} else if (0 < work_data.mission_level) {
 			strRet = "icon_lv";
 			strRet = string.Format ("texture/ui/icon_lv.png");

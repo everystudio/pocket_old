@@ -64,7 +64,7 @@ public class BannerMonster : BannerBase {
 		string strIcon = GetSpriteName (_dataMaster);
 		//UIAtlas atlas = AtlasManager.Instance.GetAtlas (strIcon);
 		//m_sprIcon.atlas = atlas;
-		m_sprIcon.spriteName = strIcon;
+		m_sprIcon.sprite2D = SpriteManager.Instance.Load( strIcon );
 
 		SetPrice (_dataMaster);
 
@@ -99,7 +99,7 @@ public class BannerMonster : BannerBase {
 		CsvMonsterParam master_data = DataManager.Instance.m_csvMonster.Select (_data.monster_id);
 		Initialize (master_data , _iCostNokori);
 
-		Debug.LogError (_data);
+		//Debug.LogError (_data);
 		m_dataMonsterParam = _data;
 		m_bIsUserData = true;
 
@@ -127,6 +127,8 @@ public class BannerMonster : BannerBase {
 	private string GetSpriteName( CsvMonsterParam _data ){
 		string strRet = "";
 		strRet = "chara" + _data.monster_id.ToString ();
+
+		strRet = string.Format ("texture/monster/chara{0}.png", _data.monster_id);
 		return strRet;
 	}
 

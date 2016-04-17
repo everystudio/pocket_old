@@ -41,8 +41,6 @@ public class DefineOld : MonoBehaviour {
 
 	}
 
-
-
 	public enum ENVIROMENT
 	{
 		PRODUCTION			= 0,

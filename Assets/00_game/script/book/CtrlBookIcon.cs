@@ -10,7 +10,7 @@ public class CtrlBookIcon : ButtonBase {
 	[SerializeField]
 	private UILabel m_lbName;
 	[SerializeField]
-	private UISprite m_sprMonster;
+	private UI2DSprite m_sprMonster;
 	#endregion
 
 	public CsvMonsterParam m_monsterData;
@@ -29,7 +29,7 @@ public class CtrlBookIcon : ButtonBase {
 
 		string strMonster = "chara" + m_monsterData.monster_id.ToString ();
 		//m_sprMonster.atlas = AtlasManager.Instance.GetAtlas (strMonster);
-		m_sprMonster.spriteName = strMonster;
+		m_sprMonster.sprite2D = SpriteManager.Instance.Load( string.Format( "texture/monster/chara{0:D2}.png", m_monsterData.monster_id));
 
 		List<DataMonsterParam> datamonster_list = DataManager.Instance.dataMonster.Select (string.Format (" monster_id = {0}", m_monsterData.monster_id));
 

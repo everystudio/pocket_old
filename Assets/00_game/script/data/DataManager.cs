@@ -26,7 +26,7 @@ public class DataManager : DataManagerBase <DataManager>{
 		m_csvItem.Load ();
 		m_csvMonster.Load ();
 		dataMonster.Load (DataMonster.FILENAME);
-		Debug.LogError ("here");
+		//Debug.LogError ("here");
 		m_dataItem.Load (DataItem.FILENAME);
 
 		m_csvItemDetail.Load ();

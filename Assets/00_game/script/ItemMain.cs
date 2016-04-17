@@ -47,7 +47,7 @@ public class ItemMain : PageBase2 {
 		GameObject objTabParent = PrefabManager.Instance.MakeObject ("prefab/PrefTabParent", gameObject);
 		m_tabParent = objTabParent.GetComponent<CtrlTabParent> ();
 
-		Debug.Log (GameMain.Instance.m_iMoveTab);
+		//Debug.Log (GameMain.Instance.m_iMoveTab);
 		m_tabParent.Init (ITEM_TABS , GameMain.Instance.m_iMoveTab );
 
 		GameObject bannerParent = PrefabManager.Instance.MakeObject ("prefab/PrefBannerScrollParent", gameObject);

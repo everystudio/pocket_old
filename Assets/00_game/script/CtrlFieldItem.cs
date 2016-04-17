@@ -78,7 +78,7 @@ public class CtrlFieldItem : MonoBehaviourEx {
 	}
 
 	public void Remove(){
-		Debug.Log ("Remove:" + gameObject.name);
+		//Debug.Log ("Remove:" + gameObject.name);
 		if (0 < m_dataItemParam.item_serial) {
 			List<DataMonsterParam> monster_list = DataManager.Instance.dataMonster.Select (" item_serial = " + m_dataItemParam.item_serial.ToString ());
 			foreach (DataMonsterParam monster in monster_list) {
@@ -144,7 +144,7 @@ public class CtrlFieldItem : MonoBehaviourEx {
 	}
 
 	private void change_sprite( UI2DSprite _spr , int _iItemId ){
-		string strName = "item" + string.Format( "{0:D2}" , _iItemId );
+		string strName = "item" + string.Format( "{0:D2}_01" , _iItemId );
 
 		change_sprite (_spr, strName);
 
@@ -186,7 +186,7 @@ public class CtrlFieldItem : MonoBehaviourEx {
 
 		m_dataItemParam = DataManager.Instance.m_dataItem.Select (_iSerial);
 
-		Debug.LogError (string.Format ("serial:{0} x:{1} y:{2}", _iSerial, m_dataItemParam.x, m_dataItemParam.y));
+		//Debug.LogError (string.Format ("serial:{0} x:{1} y:{2}", _iSerial, m_dataItemParam.x, m_dataItemParam.y));
 		SetPos (m_dataItemParam.x, m_dataItemParam.y);
 		CheckAroundConnectRoad ();
 
@@ -323,6 +323,8 @@ public class CtrlFieldItem : MonoBehaviourEx {
 				m_eStep = STEP.IDLE;
 			} else {
 				double diff = TimeManager.Instance.GetDiffNow (m_dataItemParam.create_time).TotalSeconds;
+
+				Debug.LogError (string.Format ("id:{0} create_time:{1}", m_dataItemParam.item_id, m_dataItemParam.create_time));
 				//Debug.Log ( m_dataItemParam.item_id.ToString() + ":" + m_dataItemParam.item_serial.ToString() + ":" + diff.ToString ());
 
 				// 絶対かこなので　

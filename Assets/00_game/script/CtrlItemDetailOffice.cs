@@ -92,13 +92,13 @@ public class CtrlItemDetailOffice : CtrlItemDetailBase {
 		//m_goRootPosition.transform.localScale = Vector3.one;
 
 		if (m_bRemove == false) {
-			Debug.Log ("remove false");
+			//Debug.Log ("remove false");
 			// 閉じる的な終了時
 			m_ctrlFieldItem.gameObject.transform.parent = GameMain.ParkRoot.transform;
 			m_ctrlFieldItem.gameObject.transform.localScale = Vector3.one;
 			m_ctrlFieldItem.SetPos (m_dataItemParam.x, m_dataItemParam.y);
 		} else {
-			Debug.Log ("remove true");
+			//Debug.Log ("remove true");
 			// 閉じる的な終了時
 			Destroy (m_ctrlFieldItem.gameObject);
 		}

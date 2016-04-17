@@ -65,7 +65,7 @@ public class BannerScrollSwitch : ButtonManager {
 			strRight = m_strImageHeader + "2_off";
 		}
 
-		Debug.Log (strLeft + " : " + strRight);
+		//Debug.Log (strLeft + " : " + strRight);
 		m_sprLeft.spriteName = strLeft;
 		m_btnLeft.normalSprite = m_sprLeft.spriteName;
 		m_sprRight.spriteName = strRight;
