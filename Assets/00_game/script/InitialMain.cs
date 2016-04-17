@@ -45,9 +45,9 @@ public class InitialMain : MonoBehaviour {
 	[SerializeField]
 	private GameObject m_posDisplay;
 	#region DB関係
-	CsvKvs m_dbKvs{
+	DataKvs m_dbKvs{
 		get{ 
-			return DataManager.Instance.kvs;
+			return DataManager.Instance.kvs_data;
 		}
 	}
 	DataWork m_dbWork {
@@ -183,7 +183,7 @@ public class InitialMain : MonoBehaviour {
 			}
 			if (m_btnStart.ButtonPushed) {
 				m_eStep = STEP.DB_SETUP;
-				SoundManager.Instance.PlaySE ("se_cleanup");
+				SoundManager.Instance.PlaySE ("se_cleanup" , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 			} else if (m_btnBackup.ButtonPushed) {
 
 				string backupDB = System.IO.Path.Combine (Application.persistentDataPath, DefineOld.DB_NAME_DOUBTSUEN_BK );
@@ -341,11 +341,11 @@ public class InitialMain : MonoBehaviour {
 				m_ojisanCheck.Initialize ("自動保存されたデータ\nを利用して\nバックアップを行います\n\nよろしいですか");
 			}
 			if (m_ojisanCheck.IsYes ()) {
-				//SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH);
+				SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 				Destroy (m_ojisanCheck.gameObject);
 				m_eStep = STEP.DB_BACKUP;
 			} else if (m_ojisanCheck.IsNo ()) {
-				//SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH);
+				SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 				Destroy (m_ojisanCheck.gameObject);
 				m_eStep = STEP.IDLE;
 			} else {

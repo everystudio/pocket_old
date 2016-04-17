@@ -88,14 +88,20 @@ public class BannerWork : BannerBase {
 		string strRet = "";
 		if (0 < work_data.mission_staff) {
 			strRet = "staff_icon" + work_data.mission_staff.ToString ();
+			strRet = string.Format ("texture/staff/{0}.png", strRet);
+
 		} else if (0 < work_data.mission_item) {
 			strRet = "item" + work_data.mission_item.ToString ();
+			strRet = string.Format ("texture/item/item_{0:D2}.png",work_data.mission_item);
 		} else if (0 < work_data.mission_level) {
 			strRet = "icon_lv";
+			strRet = string.Format ("texture/ui/icon_lv.png");
 		} else if (0 < work_data.mission_monster) {
 			strRet = "chara" + work_data.mission_monster.ToString ();
+			strRet = string.Format ("texture/monster/{0}.png" , strRet );
 		} else if (0 < work_data.mission_collect) {
 			strRet = "icon_gold";
+			strRet = string.Format ("texture/ui/icon_gold.png");
 		} else {
 			Debug.LogError ("none work icon");
 			strRet = "";
@@ -161,11 +167,11 @@ public class BannerWork : BannerBase {
 			}
 			if (m_ojisanCheck.IsYes ()) {
 				Destroy (m_ojisanCheck.gameObject);
-				SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH);
+				SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 				m_eStep = STEP.MONSTER_BUY;
 			} else if (m_ojisanCheck.IsNo ()) {
 				Destroy (m_ojisanCheck.gameObject);
-				SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH);
+				SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 				m_eStep = STEP.IDLE;
 			} else {
 			}

@@ -99,11 +99,11 @@ public class CtrlShopDetail : MonoBehaviour {
 				m_csParkRoot.ConnectingRoadCheck ();
 
 				m_bIsEnd = true;
-				SoundManager.Instance.PlaySE (SoundName.BUTTON_CANCEL);
+				SoundManager.Instance.PlaySE (SoundName.BUTTON_CANCEL , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 
 			} else if (m_ButtonClose.ButtonPushed) {
 				m_bIsEnd = true;
-				SoundManager.Instance.PlaySE (SoundName.BUTTON_CANCEL);
+				SoundManager.Instance.PlaySE (SoundName.BUTTON_CANCEL, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 
 			} else {
 			}

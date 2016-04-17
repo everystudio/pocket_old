@@ -42,8 +42,8 @@ public class BannerMonster : BannerBase {
 	private ButtonBase m_buttonBase;
 
 	private CtrlMonsterDetail m_monsterDetail;
-	private CsvMonsterParam m_csvMonsterParam;
-	private DataMonsterParam m_dataMonsterParam;
+	public CsvMonsterParam m_csvMonsterParam;
+	public DataMonsterParam m_dataMonsterParam;
 	public CtrlOjisanCheck m_ojisanCheck;
 
 	public bool m_bGoldLess;
@@ -98,6 +98,8 @@ public class BannerMonster : BannerBase {
 	public void Initialize( DataMonsterParam _data , int _iCostNokori ){
 		CsvMonsterParam master_data = DataManager.Instance.m_csvMonster.Select (_data.monster_id);
 		Initialize (master_data , _iCostNokori);
+
+		Debug.LogError (_data);
 		m_dataMonsterParam = _data;
 		m_bIsUserData = true;
 
@@ -180,7 +182,7 @@ public class BannerMonster : BannerBase {
 
 				if (m_bAbleUse) {
 					Debug.Log ("clicked:BannerBase.Mode=" + BannerBase.Mode.ToString ());
-					//SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH);
+					SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 
 					switch (BannerBase.Mode) {
 					case BannerBase.MODE.MONSTER_DETAIL:
@@ -204,14 +206,14 @@ public class BannerMonster : BannerBase {
 
 		case STEP.DETAIL:
 			if (bInit) {
-				SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH);
+				SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 				// この作り方はいただけませんねぇ・・・
 				GameObject obj = PrefabManager.Instance.MakeObject ("prefab/PrefMonsterDetail", gameObject.transform.parent.parent.parent.parent.gameObject);
 				m_monsterDetail = obj.GetComponent<CtrlMonsterDetail> ();
 				m_monsterDetail.Initialize (m_dataMonsterParam.monster_serial);
 			}
 			if (m_monsterDetail.IsEnd ()) {
-				SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH);
+				SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 
 				Destroy (m_monsterDetail.gameObject);
 				m_monsterDetail = null;
@@ -222,9 +224,10 @@ public class BannerMonster : BannerBase {
 		case STEP.SET_BUY:
 			if (bInit) {
 
-				SoundManager.Instance.PlaySE (SoundName.SET_ANIMAL);
-
-				CsvMonsterParam monster_data = DataManager.GetMonster (m_dataMonsterParam.monster_id);
+				SoundManager.Instance.PlaySE (SoundName.SET_ANIMAL, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
+				Debug.LogError (m_csvMonsterParam);
+				Debug.LogError (m_csvMonsterParam.monster_id);
+				CsvMonsterParam monster_data = DataManager.GetMonster (m_csvMonsterParam.monster_id);
 				if (0 < monster_data.coin) {
 					DataManager.user.AddGold (-1 * monster_data.coin);
 				} else if (0 < monster_data.ticket) {
@@ -259,7 +262,7 @@ public class BannerMonster : BannerBase {
 		case STEP.SET_MINE:
 			if (bInit) {
 
-				SoundManager.Instance.PlaySE (SoundName.SET_ANIMAL);
+				SoundManager.Instance.PlaySE (SoundName.SET_ANIMAL, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 				Dictionary< string , string > dict = new Dictionary< string , string > ();
 				dict.Add( "item_serial" , GameMain.Instance.m_iSettingItemSerial.ToString() ); 
 				dict.Add( "collect_time" , "\"" + TimeManager.StrNow() +  "\""); 
@@ -304,7 +307,7 @@ public class BannerMonster : BannerBase {
 				Debug.Log ("here");
 				if (m_bGoldLess) {
 				} else {
-					SoundManager.Instance.PlaySE ("se_cure");
+					SoundManager.Instance.PlaySE ("se_cure", "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 					CsvMonsterParam monster = DataManager.GetMonster (m_dataMonsterParam.monster_id);
 					int iCost = monster.revenew_coin * (int)(600.0f / (float)monster.revenew_interval);
 					DataManager.user.AddGold (-1 * iCost);
@@ -325,7 +328,7 @@ public class BannerMonster : BannerBase {
 				Destroy (m_ojisanCheck.gameObject);
 				m_eStep = STEP.IDLE;
 			} else if (m_ojisanCheck.IsNo ()) {
-				SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH);
+				SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 
 				Destroy (m_ojisanCheck.gameObject);
 				m_eStep = STEP.IDLE;

@@ -34,7 +34,7 @@ public class CtrlPopupWork : MonoBehaviourEx{
 
 	public UISprite m_sprWhite;
 	public UtilSwitchSprite m_switchSprite;
-	public UISprite m_sprWorkIcon;
+	public UI2DSprite m_sprWorkIcon;
 
 	public GameObject m_goHit;
 	public ButtonBase m_btnClose;
@@ -117,13 +117,14 @@ public class CtrlPopupWork : MonoBehaviourEx{
 			if (bInit) {
 
 				GameMain.Instance.TutorialInputLock = true;
-				//SoundManager.Instance.PlaySE ("se_work_clear");
+				SoundManager.Instance.PlaySE ("se_work_clear" , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 
 				m_goHit.SetActive (true);
 				m_sprWhite.gameObject.SetActive (true);
 				m_btnClose.gameObject.SetActive (true);
 
-				m_sprWorkIcon.spriteName = BannerWork.GetSpriteName (m_iPopupWorkId);
+				//m_sprWorkIcon.spriteName = BannerWork.GetSpriteName (m_iPopupWorkId);
+				m_sprWorkIcon.sprite2D = SpriteManager.Instance.Load( BannerWork.GetSpriteName (m_iPopupWorkId) );
 				//m_sprWorkIcon.atlas = AtlasManager.Instance.GetAtlas (m_sprWorkIcon.spriteName);
 				CsvWorkParam work_data = DataManager.GetWork (m_iPopupWorkId);
 

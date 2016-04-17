@@ -106,9 +106,9 @@ public class GameMain : MonoBehaviour {
 			return instance.m_dbStaff;
 		}
 	}
-	static public CsvKvs dbKvs{
+	static public DataKvs dbKvs{
 		get{
-			return DataManager.Instance.kvs;
+			return DataManager.Instance.kvs_data;
 		}
 	}
 

@@ -223,7 +223,7 @@ public class ParkMainSettingItem : ParkMainController {
 						m_eStep = STEP.SETTING;
 
 						// わけあってこっちから鳴らします
-						SoundManager.Instance.PlaySE (SoundName.SET_ITEM);
+						SoundManager.Instance.PlaySE (SoundName.SET_ITEM, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 
 					} else {
 						;// エラー音
@@ -424,7 +424,7 @@ public class ParkMainSettingItem : ParkMainController {
 				m_iEditItemY = return_data_item.y;
 				m_eStep = STEP.SETTING;
 
-				SoundManager.Instance.PlaySE (SoundName.BUTTON_CANCEL);
+				SoundManager.Instance.PlaySE (SoundName.BUTTON_CANCEL, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 
 
 			} else {

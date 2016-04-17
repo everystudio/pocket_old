@@ -90,7 +90,7 @@ public class CtrlCollectGold : MonoBehaviourEx {
 
 			m_iCollectGold = iCollectGold;
 			if (0 < m_iCollectGold) {
-				//SoundManager.Instance.PlaySE ("se_cash");
+				SoundManager.Instance.PlaySE ("se_cash" , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 
 				DataManager.user.AddCollect ();
 				DataManager.user.AddGold (m_iCollectGold);

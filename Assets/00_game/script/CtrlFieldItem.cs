@@ -140,6 +140,7 @@ public class CtrlFieldItem : MonoBehaviourEx {
 
 		_spr.width =  (int)_spr.sprite2D.rect.width;
 		_spr.height = (int)_spr.sprite2D.rect.height;
+
 	}
 
 	private void change_sprite( UI2DSprite _spr , int _iItemId ){

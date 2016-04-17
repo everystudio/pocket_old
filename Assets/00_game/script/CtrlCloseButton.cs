@@ -29,7 +29,7 @@ public class CtrlCloseButton : MonoBehaviourEx {
 
 		// 戻り先ったん固定（変えれるようにしておいたほうがよいかも）
 		if (m_btnClose.ButtonPushed || m_bForceClose ) {
-			//SoundManager.Instance.PlaySE (SoundName.BUTTON_CANCEL);
+			SoundManager.Instance.PlaySE (SoundName.BUTTON_CANCEL , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 			if (GameMain.IsInstance ()) {
 				GameMain.Instance.SetStatus (GameMain.STATUS.PARK);
 			}

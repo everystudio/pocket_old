@@ -207,7 +207,7 @@ public class PageBase2 : MonoBehaviourEx {
 				m_itemDetailBase.Close ();
 				m_itemDetailBase = null;
 			}
-			//SoundManager.Instance.PlaySE (SoundName.TAB_CHANGE);
+			SoundManager.Instance.PlaySE (SoundName.TAB_CHANGE , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 
 			Release (m_bannerScrollParen.gameObject);
 			GameObject bannerParent = PrefabManager.Instance.MakeObject ("prefab/PrefBannerScrollParent", gameObject);

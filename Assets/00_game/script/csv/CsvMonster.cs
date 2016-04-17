@@ -3,6 +3,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
+[System.Serializable]
 public class CsvMonsterParam : CsvDataParam
 {
 	public int m_monster_id;
@@ -23,21 +24,21 @@ public class CsvMonsterParam : CsvDataParam
 	public int m_status;
 
 
-	public int monster_id { get; set; }
-	public string name { get; set; }
-	public string description_cell { get; set; }
-	public int cost { get; set; }
-	public int fill { get; set; }
-	public int dust { get; set; }
-	public int coin { get; set; }
-	public int ticket { get; set; }
-	public int revenew_coin { get; set; }
-	public int revenew_exp { get; set; }
-	public int revenew_interval { get; set; }
-	public int open_work_id { get; set; }
-	public string description_book { get; set; }
-	public int size { get; set; }
-	public int rare { get; set; }
+	public int monster_id { get{ return m_monster_id; } set{m_monster_id= value;} }
+	public string name { get{ return m_name; } set{m_name= value;} }
+	public string description_cell { get{ return m_description_cell; } set{m_description_cell= value;} }
+	public int cost { get{ return m_cost; } set{m_cost= value;} }
+	public int fill { get{ return m_fill; } set{m_fill= value;} }
+	public int dust { get{ return m_dust; } set{m_dust= value;} }
+	public int coin { get{ return m_coin; } set{m_coin= value;} }
+	public int ticket { get{ return m_ticket; } set{m_ticket= value;} }
+	public int revenew_coin { get{ return m_revenew_coin; } set{m_revenew_coin= value;} }
+	public int revenew_exp { get{ return m_revenew_exp; } set{m_revenew_exp= value;} }
+	public int revenew_interval { get{ return m_revenew_interval; } set{m_revenew_interval= value;} }
+	public int open_work_id { get{ return m_open_work_id; } set{m_open_work_id= value;} }
+	public string description_book { get{ return m_description_book; } set{m_description_book= value;} }
+	public int size { get{ return m_size; } set{m_size= value;} }
+	public int rare { get{ return m_rare; } set{m_rare= value;} }
 	public int status { get{ return m_status;} set{m_status = value; } }
 
 
@@ -47,7 +48,7 @@ public class CsvMonsterParam : CsvDataParam
 }
 
 
-
+[System.Serializable]
 public class CsvMonster : CsvData<CsvMonsterParam> {
 
 	private static readonly string FilePath = "csv/monster";

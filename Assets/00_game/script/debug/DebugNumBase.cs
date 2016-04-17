@@ -44,18 +44,18 @@ abstract public class DebugNumBase : MonoBehaviour {
 	void Update () {
 
 		if (m_btnPlus.ButtonPushed) {
-			SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH);
+			SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 			m_btnPlus.TriggerClear ();
 			func_plus ();
 		}
 		if (m_btnMinus.ButtonPushed) {
-			SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH);
+			SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 			m_btnMinus.TriggerClear ();
 			func_minus ();
 		}
 
 		if (m_btnRate.ButtonPushed) {
-			SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH);
+			SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 			m_btnRate.TriggerClear ();
 			string strRate = "";
 

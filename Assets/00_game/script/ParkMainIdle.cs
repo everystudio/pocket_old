@@ -74,7 +74,7 @@ public class ParkMainIdle : ParkMainController
 				GameMain.Instance.m_iSettingItemSerial = iSelectSerial;
 				GameMain.Instance.SwitchItemSerial = 0;
 				m_selectItem = DataManager.Instance.m_dataItem.Select (iSelectSerial);
-				SoundManager.Instance.PlaySE (SoundName.BUTTON_SELECT);
+				SoundManager.Instance.PlaySE (SoundName.BUTTON_SELECT, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 				CtrlFieldItem field_item = GameMain.ParkRoot.GetFieldItem (iSelectSerial);
 				GameMain.Instance.SetStatus (GameMain.STATUS.CAGE_DETAIL);
 			}
@@ -112,7 +112,7 @@ public class ParkMainIdle : ParkMainController
 						m_selectItem = DataManager.Instance.m_dataItem.Select (iSelectSerial);
 						int iCategory = m_selectItem.category;
 						if (iCategory == (int)DefineOld.Item.Category.SHOP) {
-							SoundManager.Instance.PlaySE (SoundName.BUTTON_SELECT);
+							SoundManager.Instance.PlaySE (SoundName.BUTTON_SELECT, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 							CtrlFieldItem field_item = GameMain.ParkRoot.GetFieldItem (iSelectSerial);
 							if (field_item.IsReady ()) {
 								m_iNokoriTime = field_item.GetNokoriTime ();
@@ -121,7 +121,7 @@ public class ParkMainIdle : ParkMainController
 								m_eStep = STEP.SHOP;
 							}
 						} else if (iCategory == (int)DefineOld.Item.Category.CAGE) {
-							SoundManager.Instance.PlaySE (SoundName.BUTTON_SELECT);
+							SoundManager.Instance.PlaySE (SoundName.BUTTON_SELECT, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 							CtrlFieldItem field_item = GameMain.ParkRoot.GetFieldItem (iSelectSerial);
 							if (field_item.IsReady ()) {
 								m_iNokoriTime = field_item.GetNokoriTime ();
@@ -131,7 +131,7 @@ public class ParkMainIdle : ParkMainController
 							}
 
 						} else if (iCategory == (int)DefineOld.Item.Category.OFFICE) {
-							SoundManager.Instance.PlaySE (SoundName.BUTTON_SELECT);
+							SoundManager.Instance.PlaySE (SoundName.BUTTON_SELECT, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 							CtrlFieldItem field_item = GameMain.ParkRoot.GetFieldItem (iSelectSerial);
 							if (field_item.IsReady ()) {
 								m_iNokoriTime = field_item.GetNokoriTime ();

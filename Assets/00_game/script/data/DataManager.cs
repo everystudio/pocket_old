@@ -22,7 +22,7 @@ public class DataManager : DataManagerBase <DataManager>{
 		int iHeight= PlayerPrefs.GetInt (DefineOld.USER_HEIGHT);
 
 		//m_tDataUser.Initialize (iWidth,iHeight);
-
+		kvs_data.Load( DataKvs.FILE_NAME );
 		m_csvItem.Load ();
 		m_csvMonster.Load ();
 		dataMonster.Load (DataMonster.FILENAME);

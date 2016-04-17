@@ -163,7 +163,7 @@ public class CtrlHeaderExp : MonoBehaviour {
 			if (bInit) {
 				m_fTime = 0.0f;
 				m_PopupAnimation.Popup ();
-				//SoundManager.Instance.PlaySE ("se_levelup");
+				SoundManager.Instance.PlaySE ("se_levelup" , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 			}
 			m_fTime += Time.deltaTime;
 
