@@ -114,7 +114,7 @@ public class DBPurchase {
 		//データをクリア
         data_list.Clear ();
 
-        string strQuery = "SELECT * FROM "+TABLE_NAME;
+        //string strQuery = "SELECT * FROM "+TABLE_NAME;
 
 
         return data_list;

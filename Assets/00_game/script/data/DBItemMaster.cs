@@ -8,8 +8,6 @@ public class DBItemMaster {
 	public const string TABLE_NAME = "item_master";
 	public const string FILE_NAME = "SOCsvItemParam";
 
-	private bool m_bDebugLog = false;
-
 	//public SOCsvItemParam m_soCsvItemParam;
 
 	public List<CsvItemParam> data_list = new List<CsvItemParam>();

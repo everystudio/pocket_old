@@ -9,8 +9,6 @@ public class DBMonster  {
 	public const string FILE_NAME = "SODataMonster";
 	//public SODataMonster m_soDataMonster;
 
-	private bool m_bDebugLog = false;
-
 	public List<DataMonster> data_list = new List<DataMonster>();
 
 	public DBMonster( string _strAsyncName ){

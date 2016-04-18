@@ -30,11 +30,6 @@ public class SearchBase : SODataParam{
 	public bool Equals( string _strWhere ){
 		//Debug.Log (_strWhere);
 		string[] test = _strWhere.Trim().Split (' ');
-		int count = 0;
-		foreach (string check in test) {
-			//Debug.Log (string.Format ("{0}:{1}", count, check));
-			count += 1;
-		}
 
 		bool bRet = true;
 

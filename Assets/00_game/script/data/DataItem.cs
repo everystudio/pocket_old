@@ -130,7 +130,7 @@ public class DataItemParam : CsvDataParam{
 				string strNow = TimeManager.StrGetTime (-1* (int)amari);
 				Dictionary< string , string > dict = new Dictionary< string , string > ();
 				dict.Add ("collect_time", "\"" + strNow + "\"");
-				GameMain.dbItem.Update (item_serial, dict);
+				DataManager.Instance.m_dataItem.Update (item_serial, dict);
 			}
 		}
 
@@ -323,15 +323,73 @@ public class DataItem : CsvData<DataItemParam>{
 
 	static public void OpenNewItem( int _iKeyItemId ){
 
-		List<CsvItemParam> open_item_list = GameMain.dbItemMaster.Select (string.Format (" status = {0} and open_item_id = {1} ", (int)DefineOld.Item.Status.NONE, _iKeyItemId));
+		List<CsvItemParam> open_item_list = DataManager.Instance.m_csvItem.Select (string.Format (" status = {0} and open_item_id = {1} ", (int)DefineOld.Item.Status.NONE, _iKeyItemId));
 		foreach (CsvItemParam open_item in open_item_list) {
 			Dictionary<string , string > update_value = new Dictionary<string , string > ();
 			update_value.Add ("status", string.Format ( "{0}" , (int)DefineOld.Item.Status.SETTING ));
-			GameMain.dbItemMaster.Update ( open_item.item_id , update_value);
+			DataManager.Instance.m_csvItem.Update ( open_item.item_id , update_value);
+		}
+		return;
+	
+	}
+
+	public void Update( int _iSerial , int _iStatus , int _iX , int _iY ){
+		foreach (DataItemParam data in list) {
+			if (data.item_serial == _iSerial) {
+				data.status = _iStatus;
+				data.x = _iX;
+				data.y = _iY;
+			}
 		}
 		return;
 	}
 
+
+	public void Update( int _iSerial , Dictionary<string , string > _dict , bool _bDebugLog = true){
+		foreach (DataItemParam data in list) {
+			if (data.item_serial == _iSerial) {
+				data.Set (_dict);
+			}
+		}
+		return;
+	}
+
+
+	public int Insert( CsvItemParam _itemMaster , int _iStatus , int _iX , int _iY ){
+		//データの上書きのコマンドを設定する　
+		string strCreateTime = TimeManager.StrNow ();
+		string strOpenTime =TimeManager.StrGetTime (_itemMaster.production_time);
+
+		DataItemParam insert_data = new DataItemParam ();
+		insert_data.item_serial = DataManager.Instance.m_dataItem.list.Count + 1;		// 事情があって+1
+		insert_data.item_id = _itemMaster.item_id;
+		insert_data.category = _itemMaster.category;
+		insert_data.level = 1;
+		insert_data.status = _iStatus;
+		insert_data.x = _iX;
+		insert_data.y = _iY;
+		insert_data.width = _itemMaster.size;
+		insert_data.height = _itemMaster.size;
+		insert_data.collect_time = strOpenTime;
+		insert_data.create_time = strCreateTime;
+
+		DataManager.Instance.m_dataItem.list.Add (insert_data);
+
+		bool bHit = false;
+		foreach (DataItemParam data in DataManager.Instance.m_dataItem.list) {
+			if (data.item_serial == insert_data.item_serial) {
+				bHit = true;
+				//Debug.LogError( string.Format( "serial{0} x={1} y={2}",data.item_serial,data.x,data.y ));
+			}
+		}
+
+		if (bHit == false) {
+			//Debug.LogError ("no hit");
+		}
+
+		return insert_data.item_serial;
+
+	}
 
 }
 
@@ -441,11 +499,6 @@ public class CsvItemParamPre :SODataParam{
 
 		//Debug.Log (_strWhere);
 		string[] test = _strWhere.Trim().Split (' ');
-		int count = 0;
-		foreach (string check in test) {
-			//Debug.Log (string.Format ("{0}:{1}", count, check));
-			count += 1;
-		}
 
 		bool bRet = true;
 
@@ -472,7 +525,7 @@ public class CsvItemParamPre :SODataParam{
 	}
 
 	public CsvItemParamPre( CsvItemParam _data ){
-		int count = 0;
+		//int count = 0;
 		item_id = _data.item_id;
 		status = 0;			// 通常は利用できるとして扱う
 		name = _data.name;

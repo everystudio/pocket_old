@@ -36,14 +36,13 @@ public class CtrlShopDetail : MonoBehaviour {
 
 		m_bIsEnd = false;
 
-		CsvItemParam master_data = GameMain.dbItemMaster.Select (_dataItem.item_id);
+		CsvItemParam master_data = DataManager.Instance.m_csvItem.Select (_dataItem.item_id);
 
 		m_lbName.text = master_data.name;
 		m_lbUriage.text = UtilString.GetSyuunyuu( master_data.revenue , master_data.revenue_interval );
 		m_lbExp.text = "";
 		m_lbDescription.text = master_data.description;
 
-		string strName = "item" + _dataItem.item_id.ToString ();
 		m_sprItem.sprite2D = SpriteManager.Instance.Load( string.Format( "texture/item/item{0:D2}_01.png" ,_dataItem.item_id ));
 
 		return;
@@ -70,7 +69,7 @@ public class CtrlShopDetail : MonoBehaviour {
 					}
 				}
 				// 取り下げ
-				GameMain.dbItem.Update (m_iItemSerial, 0, 0, 0);
+				DataManager.Instance.m_dataItem.Update (m_iItemSerial, 0, 0, 0);
 
 
 				int iRemoveIndex = 0;

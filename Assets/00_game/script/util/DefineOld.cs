@@ -337,17 +337,12 @@ public class SearchData {
 	public GameMain.TABLE_TYPE m_eTableType;
 	public string m_strWhere;
 
-	DefineOld.WHERE_PATTERN m_eWherePattern;
-	List<int> int_list = new List<int> ();
-
 	public BannerBase.MODE m_eBannerMode;
 
 	public SearchData(){
 	}
 	public SearchData( GameMain.TABLE_TYPE _eTableType , DefineOld.WHERE_PATTERN _eWherePattern , List<int> _int_list  , BannerBase.MODE _eBannerMode = BannerBase.MODE.NONE ){
 		m_eTableType = _eTableType;
-		m_eWherePattern = _eWherePattern;
-		int_list = _int_list;
 		m_strWhere = "";
 		m_eBannerMode = _eBannerMode;
 	}

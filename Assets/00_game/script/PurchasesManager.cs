@@ -139,6 +139,7 @@ public class PurchasesManager : MonoBehaviour {
 
 		if(result.IsSucceeded) {
 			Debug.Log("Inited successfully, Available products count: " + IOSInAppPurchaseManager.Instance.Products.Count.ToString());
+			/*
 			foreach(IOSProductTemplate tpl in IOSInAppPurchaseManager.Instance.Products) {
 				Debug.Log (string.Format ("id:{0} title:{1} description:{2} price:{3} localizedPrice:{4} currencySymbol:{5} currencyCode:{6}" ,
 					tpl.Id,
@@ -150,6 +151,7 @@ public class PurchasesManager : MonoBehaviour {
 					tpl.CurrencyCode));
 				Debug.Log("-------------");
 			}
+			*/
 		} else {
 			Debug.LogError("StoreKit Init Failed.  Error code: " + result.Error.Code + "\n" + "Error description:" + result.Error.Description);
 		}

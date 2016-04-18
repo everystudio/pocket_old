@@ -25,13 +25,6 @@ public class GameMain : MonoBehaviour {
 	public int PreSettingItemId;
 
 	#region DB関係
-	DBKvs m_dbKvs;
-	DBItem m_dbItem;
-	DBItemMaster m_dbItemMaster;
-	DBWork m_dbWork;
-	DBMonster m_dbMonster;
-	DBMonsterMaster m_dbMonsterMaster;
-	DBStaff m_dbStaff;
 	#endregion
 
 	#region SerializeField
@@ -75,45 +68,6 @@ public class GameMain : MonoBehaviour {
 		m_fukidashiWork.AddMessage (_strMessage);
 		//m_fukidashiWork.m_MessageQueue.Enqueue ( string.Format( "[000000]{0}[-]" , _strMessage ) );
 	}
-
-	static public DBWork dbWork{
-		get{
-			return instance.m_dbWork;
-		}
-	}
-	static public DBItem dbItem{
-		get{
-			return instance.m_dbItem;
-		}
-	}
-	static public CsvItem dbItemMaster{
-		get{
-			return DataManager.Instance.m_csvItem;
-		}
-	}
-	static public DBMonster dbMonster{
-		get{
-			return instance.m_dbMonster;
-		}
-	}
-	static public CsvMonster dbMonsterMaster{
-		get{
-			return DataManager.Instance.m_csvMonster;
-		}
-	}
-	static public DBStaff dbStaff{
-		get{
-			return instance.m_dbStaff;
-		}
-	}
-	static public DataKvs dbKvs{
-		get{
-			return DataManager.Instance.kvs_data;
-		}
-	}
-
-	private DBItem m_dbItemBackup;
-
 
 	private bool m_bListRefresh;
 	static public bool ListRefresh{
@@ -272,6 +226,7 @@ public class GameMain : MonoBehaviour {
 		switch (m_eStep) {
 		case STEP.DB_SETUP:
 			if (bInit) {
+				/*
 				m_dbItem = new DBItem (DefineOld.DB_TABLE_ASYNC_ITEM);
 				m_dbItemMaster = new DBItemMaster (DefineOld.DB_TABLE_ASYNC_ITEM_MASTER);
 				m_dbWork = new DBWork (DefineOld.DB_TABLE_ASYNC_WORK);
@@ -281,7 +236,6 @@ public class GameMain : MonoBehaviour {
 				if (m_dbKvs == null) {
 					m_dbKvs = new DBKvs (DefineOld.DB_TABLE_ASYNC_KVS);
 				}
-				/*
 				m_dbItem.Open (DefineOld.DB_NAME_DOUBTSUEN, DefineOld.DB_FILE_DIRECTORY, "");
 				m_dbItemMaster.Open (DefineOld.DB_NAME_DOUBTSUEN, DefineOld.DB_FILE_DIRECTORY, "");
 				m_dbWork.Open (DefineOld.DB_NAME_DOUBTSUEN, DefineOld.DB_FILE_DIRECTORY, "");
@@ -398,14 +352,14 @@ public class GameMain : MonoBehaviour {
 		foreach (DataItemParam item in item_list) {
 			iUriagePerHour += item.GetUriagePerHour ();
 		}
-		GameMain.dbKvs.WriteInt (DefineOld.USER_URIAGE_PAR_HOUR, iUriagePerHour);
+		DataManager.Instance.kvs_data.WriteInt (DefineOld.USER_URIAGE_PAR_HOUR, iUriagePerHour);
 
 		// 一時間あたりの支出
 		int iShisyutsuHour = 0;
 		foreach (DataItemParam item in item_list) {
 			iShisyutsuHour += item.GetShiSyutsuPerHour ();
 		}
-		GameMain.dbKvs.WriteInt (DefineOld.USER_SHISYUTU_PAR_HOUR, iShisyutsuHour);
+		DataManager.Instance.kvs_data.WriteInt (DefineOld.USER_SHISYUTU_PAR_HOUR, iShisyutsuHour);
 
 		m_header.RefleshNum (_bForce);
 	}
@@ -435,7 +389,6 @@ public class GameMain : MonoBehaviour {
 		//レイを投射してオブジェクトを検出
 		if (Physics.Raycast (ray, out hit, fDistance)) {
 
-			Vector3 v3Dir = hit.point - _goRoot.transform.position;
 			GameObject objPoint = new GameObject ();
 			objPoint.transform.position = hit.point;
 			objPoint.transform.parent = _goRoot.transform;

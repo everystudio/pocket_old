@@ -55,7 +55,7 @@ public class WorkMain : PageBase2 {
 
 		Display (m_bannerScrollParen, WORK_TABS, m_iTabIndex, m_iSwitchIndex);
 		/*
-		List<DataWork> list = GameMain.dbWork.Select ( " work_id < 10 ");
+		List<DataWork> list = DataManager.Instance.dataWork.Select ( " work_id < 10 ");
 		m_bannerScrollParen.Display (list);
 		m_goDeleteList.Add (bannerParent);
 		*/

@@ -163,7 +163,7 @@ public class OfficeDetailMain : PageBase2 {
 			}
 			ctrlFieldItem.Remove ();
 
-			GameMain.dbItem.Update (GameMain.Instance.m_iSettingItemSerial, 0, 0, 0);
+			DataManager.Instance.m_dataItem.Update (GameMain.Instance.m_iSettingItemSerial, 0, 0, 0);
 			int iRemoveIndex = 0;
 			foreach (CtrlFieldItem item in GameMain.ParkRoot.m_fieldItemList) {
 				if (item.m_dataItemParam.item_serial == GameMain.Instance.m_iSettingItemSerial) {

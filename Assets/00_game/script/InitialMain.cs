@@ -56,8 +56,6 @@ public class InitialMain : MonoBehaviour {
 		}
 	}
 	DBItem m_dbItem;
-	DBItemMaster m_dbItemMaster;
-	DBMonster m_dbMonster;
 	CsvMonster m_dbMonsterMaster{
 		get{
 			return DataManager.Instance.m_csvMonster;
@@ -199,20 +197,6 @@ public class InitialMain : MonoBehaviour {
 
 		case STEP.DB_SETUP:
 			if (bInit) {
-
-				m_dbItem = new DBItem (DefineOld.DB_TABLE_ASYNC_ITEM);
-				m_dbItemMaster = new DBItemMaster (DefineOld.DB_TABLE_ASYNC_ITEM_MASTER);
-				//m_dbWork = new DBWork (DefineOld.DB_TABLE_ASYNC_WORK);
-				m_dbMonster = new DBMonster (DefineOld.DB_TABLE_ASYNC_MONSTER);
-				//DataMonster = new DBMonsterMaster (DefineOld.DB_TABLE_ASYNC_MONSTER_MASTER);
-				/*
-				m_dbItem.Open (DefineOld.DB_NAME_DOUBTSUEN, DefineOld.DB_FILE_DIRECTORY, "");
-				m_dbItemMaster.Open (DefineOld.DB_NAME_DOUBTSUEN, DefineOld.DB_FILE_DIRECTORY, "");
-				m_dbWork.Open (DefineOld.DB_NAME_DOUBTSUEN, DefineOld.DB_FILE_DIRECTORY, "");
-				m_dbMonster.Open (DefineOld.DB_NAME_DOUBTSUEN, DefineOld.DB_FILE_DIRECTORY, "");
-				DataMonster.Open (DefineOld.DB_NAME_DOUBTSUEN, DefineOld.DB_FILE_DIRECTORY, "");
-				m_tkKvsOpen = m_dbKvs.Open (DefineOld.DB_NAME_DOUBTSUEN, DefineOld.DB_FILE_DIRECTORY, ""); // DefineOld.DB_PASSWORD
-				*/
 			}
 			if (true) {
 				//if (m_tkKvsOpen.Completed) {
@@ -249,7 +233,7 @@ public class InitialMain : MonoBehaviour {
 					}
 					m_dbWork.Save (DataWork.FILENAME);
 				}
-
+				/*
 				List<DataMonsterParam> data_monster_list = DataManager.Instance.dataMonster.list;
 				//Debug.LogError( string.Format( "data_monster_list.Count:{0}" , data_monster_list.Count ));
 				if (data_monster_list.Count == 0) {
@@ -265,6 +249,7 @@ public class InitialMain : MonoBehaviour {
 					monster.clean_time = strHungry;
 					m_dbMonster.Replace (monster);
 				}
+				*/
 
 				/*
 				List<CsvMonsterParam> data_monster_master_list = DataManager.Instance.m_csvMonster.list;
@@ -293,8 +278,6 @@ public class InitialMain : MonoBehaviour {
 				}
 				*/
 				m_eStep = STEP.INPUT_WAIT;
-			} else {
-				//Debug.Log ("wait");
 			}
 
 			break;
@@ -352,6 +335,7 @@ public class InitialMain : MonoBehaviour {
 			}
 			break;
 		case STEP.DB_BACKUP:
+			/*
 			if (bInit) {
 				GameObject objOjisan = PrefabManager.Instance.MakeObject ("prefab/PrefOjisanCheck", m_posDisplay);
 				m_ojisanCheck = objOjisan.GetComponent<CtrlOjisanCheck> ();
@@ -372,6 +356,7 @@ public class InitialMain : MonoBehaviour {
 				Destroy (m_ojisanCheck.gameObject);
 				m_eStep = STEP.IDLE;
 			}
+			*/
 			break;
 
 		default:

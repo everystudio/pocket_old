@@ -75,7 +75,6 @@ public class ParkMainIdle : ParkMainController
 				GameMain.Instance.SwitchItemSerial = 0;
 				m_selectItem = DataManager.Instance.m_dataItem.Select (iSelectSerial);
 				SoundManager.Instance.PlaySE (SoundName.BUTTON_SELECT, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
-				CtrlFieldItem field_item = GameMain.ParkRoot.GetFieldItem (iSelectSerial);
 				GameMain.Instance.SetStatus (GameMain.STATUS.CAGE_DETAIL);
 			}
 			else if (GameMain.Instance.TutorialInputLock == true ) {
@@ -146,11 +145,6 @@ public class ParkMainIdle : ParkMainController
 				}
 			} else if (m_parkMain.m_bInputTrigger == false && InputManager.Info.TouchON) {
 				m_parkMain.m_bInputTrigger = true;
-				Vector2 pos = InputManager.Info.TouchPoint;
-
-				Vector2 offset = new Vector2 (Screen.width * 0.5f, Screen.height * 0.5f - 40.0f);
-
-				Vector2 use = InputManager.Info.TouchPoint - offset;
 
 			} else if (InputManager.Info.TouchON == false) {
 				m_parkMain.m_bInputTrigger = false;
@@ -298,7 +292,7 @@ public class ParkMainIdle : ParkMainController
 			//dict.Add ("setting_time", "\""+ TimeManager.StrGetTime() + "\""); 
 			dict.Add ("create_time", "\""+ TimeManager.StrGetTime(-1*csv_item_data.production_time) + "\""); 
 
-			GameMain.dbItem.Update (m_selectItem.item_serial, dict);
+			DataManager.Instance.m_dataItem.Update (m_selectItem.item_serial, dict);
 			DataManager.user.AddTicket (-1 * RequireTicketNum (m_iNokoriTime));
 
 			// 仕事の確認

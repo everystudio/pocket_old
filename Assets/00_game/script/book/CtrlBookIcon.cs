@@ -16,18 +16,14 @@ public class CtrlBookIcon : ButtonBase {
 	public CsvMonsterParam m_monsterData;
 
 	private CtrlBookMonster m_ctrlBookMonster;
-	private GameObject m_posDisplay;
 
 	public bool Initialize( CsvMonsterParam _data , GameObject _posDisplay ){
 		bool bRet = true;
 		m_monsterData = _data;
 
-		m_posDisplay = _posDisplay;
-
 		m_lbNumber.text = "NO." + m_monsterData.monster_id.ToString ();
 		m_lbName.text = m_monsterData.name;
 
-		string strMonster = "chara" + m_monsterData.monster_id.ToString ();
 		//m_sprMonster.atlas = AtlasManager.Instance.GetAtlas (strMonster);
 		m_sprMonster.sprite2D = SpriteManager.Instance.Load( string.Format( "texture/monster/chara{0:D2}.png", m_monsterData.monster_id));
 

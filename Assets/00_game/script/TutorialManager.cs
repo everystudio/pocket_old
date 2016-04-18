@@ -111,34 +111,24 @@ public class TutorialManager : MonoBehaviour {
 		switch (_data.command) {
 		case "input_limited":
 			return STEP.INPUT_LIMITED;
-			break;
 		case "white":
 			return STEP.WHITE;
-			break;
 		case "image":
 			return STEP.IMAGE;
-			break;
 		case "touch_screen":
 			return STEP.TOUCH_SCREEN;
-			break;
 		case "touch_rect":
 			return STEP.TOUCH_RECT;
-			break;
 		case "wait":
 			return STEP.WAIT;
-			break;
 		case "end_parent":
 			return STEP.END_PARENT;
-			break;
 		case "banner":
 			return STEP.BANNER;
-			break;
 		case "touch_banner":
 			return STEP.TOUCH_BANNER;
-			break;
 		case "finish":
 			return STEP.FINISH;
-			break;
 		default:
 			break;
 

@@ -18,8 +18,8 @@ public class DataManager : DataManagerBase <DataManager>{
 			PlayerPrefs.SetInt (DefineOld.USER_HEIGHT, DefineOld.DEFUALT_USER_WIDTH);
 		}
 
-		int iWidth = PlayerPrefs.GetInt (DefineOld.USER_WIDTH);
-		int iHeight= PlayerPrefs.GetInt (DefineOld.USER_HEIGHT);
+		//int iWidth = PlayerPrefs.GetInt (DefineOld.USER_WIDTH);
+		//int iHeight= PlayerPrefs.GetInt (DefineOld.USER_HEIGHT);
 
 		//m_tDataUser.Initialize (iWidth,iHeight);
 		kvs_data.Load( DataKvs.FILE_NAME );

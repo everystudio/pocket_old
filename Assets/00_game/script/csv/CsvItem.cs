@@ -57,7 +57,6 @@ public class CsvItemParam : CsvDataParam {
 
 
 	public void Copy( CsvItemParam _data ){
-		int count = 0;
 		item_id = _data.item_id;
 		status = 0;			// 通常は利用できるとして扱う
 		name = _data.name;

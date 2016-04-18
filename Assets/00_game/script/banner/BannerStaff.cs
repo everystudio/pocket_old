@@ -114,8 +114,6 @@ public class BannerStaff : BannerBase {
 	// Update is called once per frame
 	void Update () {
 
-		string strPrefab = "prefab/PrefItemDetailDisp";
-
 		bool bInit = false;
 		if (m_eStepPre != m_eStep) {
 			m_eStepPre  = m_eStep;

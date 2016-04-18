@@ -41,7 +41,7 @@ public abstract class SODataBase<T> : MonoBehaviour where T : SODataParam, new()
 		FileInfo fi = new FileInfo(pathDB);
 		StreamReader sr = new StreamReader(fi.OpenRead());
 
-		int iLoop = 0;
+		//int iLoop = 0;
 		string strFirst = sr.ReadLine ();
 		var headerElements = strFirst.Split (',');
 		/*

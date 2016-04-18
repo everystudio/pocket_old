@@ -62,7 +62,7 @@ public class DataMonsterParam : CsvDataParam{
 			string strNow = TimeManager.StrNow ();
 			Dictionary< string , string > dict = new Dictionary< string , string > ();
 			dict.Add ("collect_time", "\"" + strNow + "\"");
-			GameMain.dbMonster.Update (monster_serial, dict );
+			DataManager.Instance.dataMonster.Update (monster_serial, dict );
 		}
 
 		_iCollectGold = iCollectGold;
@@ -107,11 +107,6 @@ public class DataMonsterParam : CsvDataParam{
 
 		//Debug.Log (_strWhere);
 		string[] test = _strWhere.Trim().Split (' ');
-		int count = 0;
-		foreach (string check in test) {
-			//Debug.Log (string.Format ("{0}:{1}", count, check));
-			count += 1;
-		}
 
 		bool bRet = true;
 
@@ -239,9 +234,8 @@ public class DataMonster : CsvData<DataMonsterParam> {
 		return DataManager.Instance.dataMonster.list;
 	}
 
-	public List<DataMonsterParam> Select( string _strWhere = null ){
+	new public List<DataMonsterParam> Select( string _strWhere = null ){
 		List<DataMonsterParam> ret_list = new List<DataMonsterParam> ();
-
 		foreach (DataMonsterParam data in DataManager.Instance.dataMonster.list) {
 			if (data.Equals (_strWhere)) {
 				ret_list.Add (data);
@@ -266,8 +260,30 @@ public class DataMonster : CsvData<DataMonsterParam> {
 		return Select( strWhere );
 	}
 
+	public void Update( int _iMonsterSerial , int _iItemSerial , int _iCondition = -1 ){
+
+		foreach (DataMonsterParam data in list) {
+			if (data.monster_serial == _iMonsterSerial) {
+				data.item_serial = _iItemSerial;
+				if (_iCondition != -1) {
+					data.condition = _iCondition;
+				}
+			}
+		}
+		return;
+	}
 
 
+	public void Update( int _iSerial , Dictionary<string , string > _dict ){
+		//Debug.LogError (_iSerial);
+		foreach (DataMonsterParam data in list) {
+			//Debug.LogError (data.item_serial);
+			if (data.monster_serial == _iSerial) {
+				data.Set (_dict);
+			}
+		}
+		return;
+	}
 }
 
 

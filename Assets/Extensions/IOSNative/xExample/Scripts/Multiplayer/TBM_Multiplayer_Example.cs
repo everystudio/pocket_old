@@ -30,7 +30,7 @@ public class TBM_Multiplayer_Example : BaseIOSFeaturePreview {
 		//Optionally you can provide and invitation message
 		string invitationMessage = "Come play with me, bro.";
 
-		//Optinally you can preDefineOld.invited friends list to the match
+		//Optinally you can predefine invited friends list to the match
 		//Teh code bellow assumes that player has atleast one friend, and you already loaded the friend list
 		//so we can send an invite to the first player in the firendlist
 		string[] invitations  = new string[] { GameCenterManager.FriendsList[0] };
@@ -189,7 +189,7 @@ public class TBM_Multiplayer_Example : BaseIOSFeaturePreview {
 		
 		if(GUI.Button(new Rect(StartX, StartY, buttonWidth, buttonHeight), "Remove Match")) {
 			GameCenter_TBM.Instance.RemoveMatch(CurrentMatch.Id);
-			GameCenter_TBM.ActionMacthRemoved += ActionMacthRemoved;
+			GameCenter_TBM.ActionMatchRemoved += ActionMacthRemoved;
 			
 		}
 	}
@@ -254,7 +254,7 @@ public class TBM_Multiplayer_Example : BaseIOSFeaturePreview {
 	}
 
 	void ActionMacthRemoved (GK_TBM_MatchRemovedResult result) {
-		GameCenter_TBM.ActionMacthRemoved -= ActionMacthRemoved;
+		GameCenter_TBM.ActionMatchRemoved -= ActionMacthRemoved;
 		Debug.Log("ActionMacthRemoved IsSucceeded: " + result.IsSucceeded);
 
 		if(result.IsFailed) {

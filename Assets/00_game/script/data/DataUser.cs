@@ -21,13 +21,13 @@ public class DataUser {
 	public bool m_bInitialized;
 
 	public void ParamUpdate(){
-		m_iSyakkin = (GameMain.dbKvs.ReadInt (DefineOld.USER_SYAKKIN));
-		m_iGold = (GameMain.dbKvs.ReadInt (DefineOld.USER_SYOJIKIN));
-		m_iTicket = (GameMain.dbKvs.ReadInt (DefineOld.USER_TICKET));
-		m_iLevel = (GameMain.dbKvs.ReadInt (DefineOld.USER_LEVEL));
-		m_iTotalExp = (GameMain.dbKvs.ReadInt (DefineOld.USER_TOTAL_EXP));
+		m_iSyakkin = (DataManager.Instance.kvs_data.ReadInt (DefineOld.USER_SYAKKIN));
+		m_iGold = (DataManager.Instance.kvs_data.ReadInt (DefineOld.USER_SYOJIKIN));
+		m_iTicket = (DataManager.Instance.kvs_data.ReadInt (DefineOld.USER_TICKET));
+		m_iLevel = (DataManager.Instance.kvs_data.ReadInt (DefineOld.USER_LEVEL));
+		m_iTotalExp = (DataManager.Instance.kvs_data.ReadInt (DefineOld.USER_TOTAL_EXP));
 
-		m_iCollectCount = GameMain.dbKvs.ReadInt (DefineOld.USER_COLLECT_COUNT);
+		m_iCollectCount = DataManager.Instance.kvs_data.ReadInt (DefineOld.USER_COLLECT_COUNT);
 		return;
 	}
 
@@ -57,7 +57,7 @@ public class DataUser {
 			}
 
 		}
-		GameMain.dbKvs.WriteInt (DefineOld.USER_SYAKKIN, m_iSyakkin);
+		DataManager.Instance.kvs_data.WriteInt (DefineOld.USER_SYAKKIN, m_iSyakkin);
 		GameMain.Instance.HeaderRefresh ();
 	}
 
@@ -68,24 +68,24 @@ public class DataUser {
 		if (m_iGold < 0) {
 			m_iGold = 0;
 		}
-		GameMain.dbKvs.WriteInt (DefineOld.USER_SYOJIKIN, m_iGold);
+		DataManager.Instance.kvs_data.WriteInt (DefineOld.USER_SYOJIKIN, m_iGold);
 		GameMain.Instance.HeaderRefresh ();
 	}
 	public void AddTicket( int _iTicket ){
 		m_iTicket += _iTicket;
-		GameMain.dbKvs.WriteInt (DefineOld.USER_TICKET, m_iTicket);
+		DataManager.Instance.kvs_data.WriteInt (DefineOld.USER_TICKET, m_iTicket);
 		GameMain.Instance.HeaderRefresh ();
 	}
 
 	public void AddExp( int _iExp ){
 		m_iTotalExp += _iExp;
-		GameMain.dbKvs.WriteInt(DefineOld.USER_TOTAL_EXP , m_iTotalExp);
+		DataManager.Instance.kvs_data.WriteInt(DefineOld.USER_TOTAL_EXP , m_iTotalExp);
 	}
 	public void AddCollect( int _iCount = 1 ){
 		m_iCollectCount += _iCount;
 		//Debug.LogError (m_iCollectCount); 
-		GameMain.dbKvs.WriteInt(DefineOld.USER_COLLECT_COUNT , m_iCollectCount);
-		//Debug.LogError (GameMain.dbKvs.ReadInt (DefineOld.USER_COLLECT_COUNT));
+		DataManager.Instance.kvs_data.WriteInt(DefineOld.USER_COLLECT_COUNT , m_iCollectCount);
+		//Debug.LogError (DataManager.Instance.kvs_data.ReadInt (DefineOld.USER_COLLECT_COUNT));
 	}
 
 

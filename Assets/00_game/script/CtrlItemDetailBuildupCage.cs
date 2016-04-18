@@ -44,7 +44,7 @@ public class CtrlItemDetailBuildupCage : CtrlItemDetailBuildupBase {
 		GameMain.Instance.m_iCostMax = detail_data.cost;
 
 
-		GameMain.dbItem.Update( m_dataItemParam.item_serial , dict );
+		DataManager.Instance.m_dataItem.Update( m_dataItemParam.item_serial , dict );
 
 		m_dataItemParam = DataManager.Instance.m_dataItem.Select (m_dataItemParam.item_serial);
 

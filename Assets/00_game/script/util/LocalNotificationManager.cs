@@ -109,10 +109,9 @@ public class LocalNotificationManager : MonoBehaviour {
 			}
 			//IOSNotificationController.Instance.CancelAllLocalNotifications ();
 			#elif UNITY_ANDROID
-			int iTemp = 0;
-			foreach( CsvLocalNotificationData data in m_localNotificationDataList ){
-				m_plugin2.Call ("clearNotification", iTemp );
-				iTemp += 1;
+			for( int i = 0 ; i < m_localNotificationDataList.Count ; i++ ){
+			//foreach( CsvLocalNotificationData data in m_localNotificationDataList ){
+				m_plugin2.Call ("clearNotification", i );
 			}
 			#endif
 		}

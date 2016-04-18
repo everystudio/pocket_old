@@ -34,7 +34,6 @@ public class DataStaffParam : CsvDataParam {
 
 	public int GetPayGold( bool _bCollect ){
 
-		int iPay = 0;
 		CsvStaffParam csv_staff = DataManager.GetStaff (staff_id);
 
 		double diffSec = TimeManager.Instance.GetDiffNow (setting_time).TotalSeconds * -1.0d;

@@ -69,7 +69,7 @@ public class BannerItem : BannerBase {
 		SetPrice (_data);
 
 		// 上限確認の為にここで所持数チェック
-		int iHave = GameMain.dbItem.Select (string.Format (" item_id = {0} ", _data.item_id)).Count;
+		int iHave = DataManager.Instance.m_dataItem.Select (string.Format (" item_id = {0} ", _data.item_id)).Count;
 
 		m_bAbleUse = DataManager.user.AbleBuy (_data.need_coin, _data.need_ticket, 0 , _iCostNokori , iHave , _data.setting_limit ,ref m_eReason);
 		SetReasonSprite (m_sprReason, m_eReason);
@@ -263,7 +263,7 @@ public class BannerItem : BannerBase {
 				m_ojisanCheck = objOjisan.GetComponent<CtrlOjisanCheck> ();
 				m_ojisanCheck.Initialize ("拡張いたしました！", true);
 
-				GameMain.dbItem.Insert (m_ItemMaster, 0, 0, 0);
+				DataManager.Instance.m_dataItem.Insert (m_ItemMaster, 0, 0, 0);
 				DataItem.OpenNewItem (m_ItemMaster.item_id);
 
 				GameObject prefab = PrefabManager.Instance.PrefabLoadInstance ("prefab/PrefFieldItem");

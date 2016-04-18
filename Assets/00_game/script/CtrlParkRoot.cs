@@ -241,10 +241,6 @@ public class CtrlParkRoot : MonoBehaviourEx {
 
 		checkRaodSub (1, 1);
 
-		List<DataItemParam > item_list = DataManager.Instance.m_dataItem.Select (" status != 0 ");
-
-		//Debug.Log( string.Format( "item_list.Count={0} " ,item_list.Count ));
-
 		// 状態を一度リセット
 		foreach (CtrlFieldItem field_item in m_fieldItemList) {
 			switch ((DefineOld.Item.Category)field_item.m_dataItemParam.category) {

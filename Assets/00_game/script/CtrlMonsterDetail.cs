@@ -65,7 +65,7 @@ public class CtrlMonsterDetail : MonoBehaviour {
 		m_dataMonster.GetConditions (ref iCleanLevel, ref iMealLevel);
 		m_dispHungry.Set (iMealLevel);
 
-		CsvMonsterParam master_data = GameMain.dbMonsterMaster.Select (m_dataMonster.monster_id);
+		CsvMonsterParam master_data = DataManager.Instance.m_csvMonster.Select (m_dataMonster.monster_id);
 
 		List<DataStaffParam> staff_list = DataManager.Instance.dataStaff.Select (string.Format (" item_serial = {0}", m_dataMonster.item_serial));
 
@@ -138,7 +138,7 @@ public class CtrlMonsterDetail : MonoBehaviour {
 				CtrlFieldItem fielditem = GameMain.ParkRoot.GetFieldItem (m_dataMonster.item_serial);
 				fielditem.RemoveMonster (m_dataMonster.monster_serial);
 
-				GameMain.dbMonster.Update (m_dataMonster.monster_serial, 0 );
+				DataManager.Instance.dataMonster.Update (m_dataMonster.monster_serial, 0 );
 				GameMain.ListRefresh = true;
 				m_bIsEnd = true;
 				GameMain.Instance.HeaderRefresh ();
@@ -149,7 +149,7 @@ public class CtrlMonsterDetail : MonoBehaviour {
 				List<DataMonsterParam> monster_list = DataManager.Instance.dataMonster.Select (" item_serial = " + fielditem.m_dataItemParam.item_serial.ToString ());
 				int iUseCost = 0;
 				foreach (DataMonsterParam monster in monster_list) {
-					CsvMonsterParam data_master = GameMain.dbMonsterMaster.Select (monster.monster_id);
+					CsvMonsterParam data_master = DataManager.Instance.m_csvMonster.Select (monster.monster_id);
 					iUseCost += data_master.cost;
 				}
 				CsvItemDetailData detail_data = DataManager.GetItemDetail (fielditem.m_dataItemParam.item_id, fielditem.m_dataItemParam.level);

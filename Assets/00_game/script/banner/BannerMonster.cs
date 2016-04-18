@@ -269,12 +269,12 @@ public class BannerMonster : BannerBase {
 				dict.Add( "item_serial" , GameMain.Instance.m_iSettingItemSerial.ToString() ); 
 				dict.Add( "collect_time" , "\"" + TimeManager.StrNow() +  "\""); 
 
-				GameMain.dbMonster.Update (m_dataMonsterParam.monster_serial , dict );
+				DataManager.Instance.dataMonster.Update (m_dataMonsterParam.monster_serial , dict );
 				//GameMain.dbMonster.Update (m_dataMonster.monster_serial, GameMain.Instance.m_iSettingItemSerial);
 
 				m_tabParent.TriggerOn (0);
 
-				DataMonsterParam insertMonster = GameMain.dbMonster.Select (m_dataMonsterParam.monster_serial);
+				DataMonsterParam insertMonster = DataManager.Instance.dataMonster.Select (m_dataMonsterParam.monster_serial);
 				CtrlFieldItem fielditem = GameMain.ParkRoot.GetFieldItem (GameMain.Instance.m_iSettingItemSerial);
 				GameObject objIcon = PrefabManager.Instance.MakeObject ("prefab/PrefIcon", fielditem.gameObject);
 				CtrlIconRoot iconRoot = objIcon.GetComponent<CtrlIconRoot> ();
@@ -325,7 +325,7 @@ public class BannerMonster : BannerBase {
 
 					dict.Add ("clean_time", string.Format ("\"{0}\" ", strSetTime)); 
 					Debug.Log (TimeManager.StrGetTime ());
-					GameMain.dbMonster.Update (m_dataMonsterParam.monster_serial, dict);
+					DataManager.Instance.dataMonster.Update (m_dataMonsterParam.monster_serial, dict);
 				}
 				Destroy (m_ojisanCheck.gameObject);
 				m_eStep = STEP.IDLE;

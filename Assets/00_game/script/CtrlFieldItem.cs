@@ -82,7 +82,7 @@ public class CtrlFieldItem : MonoBehaviourEx {
 		if (0 < m_dataItemParam.item_serial) {
 			List<DataMonsterParam> monster_list = DataManager.Instance.dataMonster.Select (" item_serial = " + m_dataItemParam.item_serial.ToString ());
 			foreach (DataMonsterParam monster in monster_list) {
-				GameMain.dbMonster.Update (monster.monster_serial, 0);
+				DataManager.Instance.dataMonster.Update (monster.monster_serial, 0);
 			}
 		
 			List<DataStaffParam> staff_list = DataManager.Instance.dataStaff.Select (" item_serial = " + m_dataItemParam.item_serial.ToString ());
@@ -166,7 +166,7 @@ public class CtrlFieldItem : MonoBehaviourEx {
 		m_dataItemParam.y = _iY;
 
 		change_sprite (m_sprItem, _iItemId);
-		CsvItemParam master = GameMain.dbItemMaster.Select (_iItemId);
+		CsvItemParam master = DataManager.Instance.m_csvItem.Select (_iItemId);
 
 		m_dataItemParam.width = master.size;
 		m_dataItemParam.height= master.size;
@@ -394,8 +394,6 @@ public class CtrlFieldItem : MonoBehaviourEx {
 				m_fCheckBuildTime += Time.deltaTime;
 				if (1.0f < m_fCheckBuildTime) {
 					m_fCheckBuildTime -= 1.0f;
-
-					int iIndex = 0;
 
 					List<UI2DSprite> sprList = new List<UI2DSprite> ();
 					foreach (CtrlIconRoot icon in m_iconRootList) {

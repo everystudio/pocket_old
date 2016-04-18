@@ -46,13 +46,13 @@ public class CtrlIconMonster : CtrlIconBase {
 
 			Dictionary< string , string > dict = new Dictionary< string , string > ();
 			dict.Add ("clean_time", "\"" + TimeManager.StrGetTime () + "\"");
-			GameMain.dbMonster.Update (m_dataMonster.monster_serial, dict);
-			m_dataMonster = GameMain.dbMonster.Select (m_dataMonster.monster_serial);
+			DataManager.Instance.dataMonster.Update (m_dataMonster.monster_serial, dict);
+			m_dataMonster = DataManager.Instance.dataMonster.Select (m_dataMonster.monster_serial);
 			/*
 			string strNow = TimeManager.StrNow ();
 			Dictionary< string , string > dict = new Dictionary< string , string > ();
 			dict.Add ("collect_time", "\"" + strNow + "\"");
-			GameMain.dbMonster.Update (monster_serial, dict );
+			DataManager.Instance.dataMonster.Update (monster_serial, dict );
 			*/
 
 
@@ -71,8 +71,8 @@ public class CtrlIconMonster : CtrlIconBase {
 
 			Dictionary< string , string > dict = new Dictionary< string , string > ();
 			dict.Add ("meal_time", "\"" + TimeManager.StrGetTime () + "\"");
-			GameMain.dbMonster.Update (m_dataMonster.monster_serial, dict);
-			m_dataMonster = GameMain.dbMonster.Select (m_dataMonster.monster_serial);
+			DataManager.Instance.dataMonster.Update (m_dataMonster.monster_serial, dict);
+			m_dataMonster = DataManager.Instance.dataMonster.Select (m_dataMonster.monster_serial);
 			bRet = true;
 		}
 		return bRet;
@@ -84,7 +84,7 @@ public class CtrlIconMonster : CtrlIconBase {
 		if (_bInit) {
 			// 空腹状態
 			// 新しくする
-			m_dataMonster = GameMain.dbMonster.Select (m_dataMonster.monster_serial);
+			m_dataMonster = DataManager.Instance.dataMonster.Select (m_dataMonster.monster_serial);
 
 			m_iLocalCondition = -1;
 
@@ -120,8 +120,8 @@ public class CtrlIconMonster : CtrlIconBase {
 			if (iCleanLevel < 1 && m_dataMonster.condition == (int)DefineOld.Monster.CONDITION.FINE ) {
 				Dictionary< string , string > dict = new Dictionary< string , string > ();
 				dict.Add ("condition", ((int)(DefineOld.Monster.CONDITION.SICK)).ToString ()); 
-				GameMain.dbMonster.Update (m_dataMonster.monster_serial, dict);
-				m_dataMonster = GameMain.dbMonster.Select (m_dataMonster.monster_serial);
+				DataManager.Instance.dataMonster.Update (m_dataMonster.monster_serial, dict);
+				m_dataMonster = DataManager.Instance.dataMonster.Select (m_dataMonster.monster_serial);
 			}
 
 			//if (m_dataMonster.condition == (int)(DefineOld.Monster.CONDITION.SICK) && iCleanLevel == 0) {

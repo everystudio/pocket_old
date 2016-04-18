@@ -8,10 +8,6 @@ public class DBStaff {
 	public const string TABLE_NAME = "staff";
 	public const string FILE_NAME = "SODataStaff";
 
-	private bool m_bDebugLog = false;
-
-	public List<DataStaff> data_list = new List<DataStaff>();
-
 	public DBStaff( string _strAsyncName ){
 		//m_soDataStaff = PrefabManager.Instance.PrefabLoadInstance (FILE_NAME).GetComponent<SODataStaff> ();
 	}

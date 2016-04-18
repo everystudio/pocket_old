@@ -57,13 +57,12 @@ public class CtrlDownloadDialog : MonoBehaviour {
 	}
 
 	public void SetSliderValue( float _fNow , float _fMax ){
-		float temp = _fNow / _fMax;
 		SetSliderValue( _fNow / _fMax );
 		return;
 	}
 	public void SetSliderValue( float _fValue ){
 		if( m_slDownloadBar ){
-			m_slDownloadBar.sliderValue = _fValue;
+			m_slDownloadBar.value = _fValue;
 		}
 		return;
 	}
@@ -108,6 +107,9 @@ public class CtrlDownloadDialog : MonoBehaviour {
 			tAlpha.ResetToBeginning();
 			break;
 		case STEP.MAX:
+			if (bInit) {
+				Debug.Log ("max");
+			}
 			break;
 		}
 	}

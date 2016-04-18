@@ -100,7 +100,7 @@ public class ParkMainSettingItem : ParkMainController {
 			m_parkMain.m_pageHeader = m_parkMain.makeHeader ("header_item" , "Setting1");
 		}
 
-		m_editItemMaster = GameMain.dbItemMaster.Select (GameMain.Instance.m_iSettingItemId);
+		m_editItemMaster = DataManager.Instance.m_csvItem.Select (GameMain.Instance.m_iSettingItemId);
 		m_DontSetGridList.Clear ();
 
 		Release (m_goBuyType);
@@ -172,9 +172,6 @@ public class ParkMainSettingItem : ParkMainController {
 		}
 		// 一時保存してたけど意味ある？
 		Grid.SetUsingGrid (ref m_DontSetGridList, DataManager.Instance.m_dataItem.Select (strWhere) );
-		foreach (Grid dont in m_DontSetGridList) {
-			//Debug.Log (string.Format ("x={0} y={1} ", dont.x, dont.y)); 
-		}
 		bool bAbleSet = Grid.AbleSettingItem (m_editItemMaster, m_iEditItemX, m_iEditItemY, m_DontSetGridList);
 
 		m_editItem.SetEditAble (bAbleSet);
@@ -327,7 +324,6 @@ public class ParkMainSettingItem : ParkMainController {
 				}
 
 				int iWidth = (int)(Screen.width * 0.1f);
-				int iHeight = (int)(Screen.height * 0.3f);
 				float fDelta = 20.0f;
 
 				if (InputManager.Info.TouchPoint.x < iWidth) {
@@ -364,10 +360,10 @@ public class ParkMainSettingItem : ParkMainController {
 
 			if (0 < GameMain.Instance.m_iSettingItemSerial) {
 
-				Debug.LogError (string.Format ("setting serial:{0}", GameMain.Instance.m_iSettingItemSerial));
- 				GameMain.dbItem.Update (GameMain.Instance.m_iSettingItemSerial, (int)DefineOld.Item.Status.SETTING, m_iEditItemX, m_iEditItemY);
+				//Debug.LogError (string.Format ("setting serial:{0}", GameMain.Instance.m_iSettingItemSerial));
+				DataManager.Instance.m_dataItem.Update (GameMain.Instance.m_iSettingItemSerial, (int)DefineOld.Item.Status.SETTING, m_iEditItemX, m_iEditItemY);
 			} else {
-				GameMain.Instance.m_iSettingItemSerial = GameMain.dbItem.Insert (m_editItemMaster, (int)DefineOld.Item.Status.SETTING, m_iEditItemX, m_iEditItemY);
+				GameMain.Instance.m_iSettingItemSerial = DataManager.Instance.m_dataItem.Insert (m_editItemMaster, (int)DefineOld.Item.Status.SETTING, m_iEditItemX, m_iEditItemY);
 
 				CsvItemParam item_data = DataManager.GetItem (m_editItemMaster.item_id);
 				if (0 < item_data.need_coin) {

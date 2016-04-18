@@ -146,7 +146,6 @@ public class BookMain : PageBase2 {
 	// バナーがドラッグされて切り替わった際に呼ばれるイベント
 	public void DragBanner(GameObject _goBanner) {
 		//Debug.Log (_goBanner.name);
-		int iBannerNo = 0;
 		SetBanner(_goBanner);
 		return;
 	}

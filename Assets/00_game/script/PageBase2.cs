@@ -61,7 +61,7 @@ public class PageBase2 : MonoBehaviourEx {
 			break;
 		case GameMain.TABLE_TYPE.ITEM_MASTER:
 			//Debug.LogError (strWhere);
-			_parent.Display (GameMain.dbItemMaster.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );
+			_parent.Display (DataManager.Instance.m_csvItem.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );
 			break;
 		case GameMain.TABLE_TYPE.ITEM:
 			_parent.Display (DataManager.Instance.m_dataItem.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );
@@ -70,7 +70,7 @@ public class PageBase2 : MonoBehaviourEx {
 			_parent.Display (DataManager.Instance.dataMonster.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );
 			break;
 		case GameMain.TABLE_TYPE.MONSTER_MASTER:
-			_parent.Display (GameMain.dbMonsterMaster.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );
+			_parent.Display (DataManager.Instance.m_csvMonster.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );
 			break;
 		case GameMain.TABLE_TYPE.STAFF:
 			_parent.Display (DataManager.Instance.dataStaff.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );

@@ -8,9 +8,6 @@ public class DBMonsterMaster {
 	public const string TABLE_NAME = "monster_master";
 	public const string FILE_NAME = "SODataMonsterMaster";
 
-	private bool m_bDebugLog = false;
-
-
 	public DBMonsterMaster( string _strAsyncName ){
 		//m_soDataMonsterMaster = PrefabManager.Instance.PrefabLoadInstance (FILE_NAME).GetComponent<SODataMonsterMaster> ();
 	}
@@ -61,8 +58,6 @@ public class DBMonsterMaster {
 		}
 
 		string strName = _replocalData.name;
-		string strDescriptionBook = (_replocalData.description_book);
-		string strDescriptionCell = (_replocalData.description_cell);
 
 		CsvMonsterParam data_replace = new CsvMonsterParam ();
 

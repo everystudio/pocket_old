@@ -22,15 +22,12 @@ public class TestScrollView : MonoBehaviour {
 	// バナーがドラッグされて切り替わった際に呼ばれるイベント
 	public void DragBanner(GameObject _goBanner) {
 		//Debug.Log (_goBanner.name);
-		int iBannerNo = 0;
 		SetBanner(_goBanner);
 		return;
 	}
 
 	// デッキ（バナー）を切り替える処理
 	public void SetBanner(int _iNo) {
-		int next = 0;
-		int pre = 0;
 
 		// バナーの移動
 

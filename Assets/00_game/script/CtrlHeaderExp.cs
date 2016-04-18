@@ -70,16 +70,16 @@ public class CtrlHeaderExp : MonoBehaviour {
 		m_lbMade = _lbMade;
 		m_PopupAnimation = _popupAnimation;
 
-		m_iTotalExp = GameMain.dbKvs.ReadInt (DefineOld.USER_TOTAL_EXP);
+		m_iTotalExp = DataManager.Instance.kvs_data.ReadInt (DefineOld.USER_TOTAL_EXP);
 		foreach (CsvLevelData level_data in DataManager.csv_level) {
 			if (m_iTotalExp < level_data.need_exp) {
 				break;
 			}
 			m_iLevel = level_data.level;
 		}
-		GameMain.dbKvs.WriteInt (DefineOld.USER_LEVEL, m_iLevel);
-		//m_iLevel = GameMain.dbKvs.ReadInt (DefineOld.USER_LEVEL);
-		m_iTotalExpTarget = GameMain.dbKvs.ReadInt (DefineOld.USER_TOTAL_EXP);
+		DataManager.Instance.kvs_data.WriteInt (DefineOld.USER_LEVEL, m_iLevel);
+		//m_iLevel = DataManager.Instance.kvs_data.ReadInt (DefineOld.USER_LEVEL);
+		m_iTotalExpTarget = DataManager.Instance.kvs_data.ReadInt (DefineOld.USER_TOTAL_EXP);
 
 		SetExp (m_iLevel, out m_iLevelExpNow, out m_iLevelExpNext);
 
@@ -125,7 +125,7 @@ public class CtrlHeaderExp : MonoBehaviour {
 					m_lbMade.text = "";
 				}
 
-				m_iTotalExpTarget = GameMain.dbKvs.ReadInt (DefineOld.USER_TOTAL_EXP);
+				m_iTotalExpTarget = DataManager.Instance.kvs_data.ReadInt (DefineOld.USER_TOTAL_EXP);
 				if (m_iLevelExpNext < m_iTotalExpTarget) {
 					m_iTotalExpTarget = m_iLevelExpNext;
 				}
@@ -134,7 +134,7 @@ public class CtrlHeaderExp : MonoBehaviour {
 			if (m_fCheckInterval < m_fCheckTime) {
 				m_fCheckTime -= m_fCheckInterval;
 
-				m_iTotalExpTarget = GameMain.dbKvs.ReadInt (DefineOld.USER_TOTAL_EXP);
+				m_iTotalExpTarget = DataManager.Instance.kvs_data.ReadInt (DefineOld.USER_TOTAL_EXP);
 				if (m_iLevelExpNext < m_iTotalExpTarget) {
 					m_iTotalExpTarget = m_iLevelExpNext;
 				}
@@ -170,7 +170,7 @@ public class CtrlHeaderExp : MonoBehaviour {
 			if (0.5f < m_fTime) {
 				m_eStep = STEP.IDLE;
 				m_iLevel += 1;
-				GameMain.dbKvs.WriteInt (DefineOld.USER_LEVEL, m_iLevel);
+				DataManager.Instance.kvs_data.WriteInt (DefineOld.USER_LEVEL, m_iLevel);
 				DataWork.WorkCheck ();
 			}
 			break;

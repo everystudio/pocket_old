@@ -79,10 +79,10 @@ public class DataWorkParam : CsvDataParam{
 		Dictionary< string , string > dict_appear = new Dictionary< string , string > ();
 		dict_appear.Add( "status" , ((int)DefineOld.Work.STATUS.APPEAR).ToString() ); 
 
-		List<DataWorkParam> list_work = GameMain.dbWork.Select ( string.Format( " status = {0} and appear_work_id = 0 " , (int)DefineOld.Work.STATUS.NONE ));
+		List<DataWorkParam> list_work = DataManager.Instance.dataWork.Select ( string.Format( " status = {0} and appear_work_id = 0 " , (int)DefineOld.Work.STATUS.NONE ));
 		foreach (DataWorkParam appear_work in list_work) {
-			if (appear_work.level <= GameMain.dbKvs.ReadInt (DefineOld.USER_LEVEL)) {
-				GameMain.dbWork.Update ( appear_work.work_id , dict_appear );
+			if (appear_work.level <= DataManager.Instance.kvs_data.ReadInt (DefineOld.USER_LEVEL)) {
+				DataManager.Instance.dataWork.Update ( appear_work.work_id , dict_appear );
 
 				// NEWの表示を出す
 				PlayerPrefs.SetInt (DefineOld.GetWorkNewKey (appear_work.work_id), 1);
@@ -98,7 +98,7 @@ public class DataWorkParam : CsvDataParam{
 		//string strNow = TimeManager.StrNow ();
 		Dictionary< string , string > dict = new Dictionary< string , string > ();
 		dict.Add( "status" , ((int)DefineOld.Work.STATUS.CLEARD).ToString() ); 
-		GameMain.dbWork.Update ( work_id , dict );
+		DataManager.Instance.dataWork.Update ( work_id , dict );
 
 		// ふういんされているモンスターを解き放つ
 		List<CsvMonsterParam> list_monster = DataManager.Instance.m_csvMonster.Select ( string.Format(" status = 0 and open_work_id = {0} " , work_id ));
@@ -118,18 +118,18 @@ public class DataWorkParam : CsvDataParam{
 			DataManager.user.AddTicket (prize_ticket);
 		}
 		if (0 < prize_monster) {
-			GameMain.dbMonster.Insert (prize_monster, 0);
+			DataManager.Instance.dataMonster.Insert (prize_monster, 0);
 		}
 
 		// お仕事の開放は絞られた仕事idと、レベルによって開放されます。
 		// 先に仕事idの制限を切って,レベルでの制限に引っかかってないか確認する
 
 		// この完了した仕事につられて起きる仕事
-		List<DataWorkParam> list_work = GameMain.dbWork.Select (" status = 0 and appear_work_id = " + work_id.ToString () + " ");
+		List<DataWorkParam> list_work = DataManager.Instance.dataWork.Select (" status = 0 and appear_work_id = " + work_id.ToString () + " ");
 		Dictionary< string , string > dict_appear = new Dictionary< string , string > ();
 		dict_appear.Add( "appear_work_id" , "0" ); 
 		foreach (DataWorkParam appear_work in list_work) {
-			GameMain.dbWork.Update ( appear_work.work_id , dict_appear );
+			DataManager.Instance.dataWork.Update ( appear_work.work_id , dict_appear );
 		}
 
 		DataWorkParam.WorkOpen ();
@@ -142,7 +142,7 @@ public class DataWorkParam : CsvDataParam{
 		bool bRet = false;
 
 		if (0 < mission_level) {
-			int iLevel = GameMain.dbKvs.ReadInt (DefineOld.USER_LEVEL);
+			int iLevel = DataManager.Instance.kvs_data.ReadInt (DefineOld.USER_LEVEL);
 
 			//Debug.LogError (mission_level);
 			if (mission_level <= iLevel) {
@@ -171,18 +171,15 @@ public class DataWorkParam : CsvDataParam{
 			}
 		} else if (0 < mission_item) {
 
-			string strWhere = string.Format (" item_id = {0} and status = {1} " , mission_item , (int)DefineOld.Item.Status.SETTING);
+			//string strWhere = string.Format (" item_id = {0} and status = {1} " , mission_item , (int)DefineOld.Item.Status.SETTING);
 			//Debug.LogError (" item_id = " + mission_item.ToString () + " ");
-			List<DataItemParam> item_list = DataManager.Instance.m_dataItem.Select (" item_id = " + mission_item.ToString () + " ");
-			foreach (DataItemParam item in item_list) {
-				//Debug.LogError (item.item_id);
-			}
+
 			int item_num = DataManager.Instance.m_dataItem.Select (" item_id = " + mission_item.ToString () + " ").Count;
 			if (mission_num <= item_num) {
 				bRet = true;
 			}
 		} else if (0 < mission_collect) {
-			int collect_count = GameMain.dbKvs.ReadInt (DefineOld.USER_COLLECT_COUNT);
+			int collect_count = DataManager.Instance.kvs_data.ReadInt (DefineOld.USER_COLLECT_COUNT);
 
 			//Debug.LogError (string.Format ("here:{0}", collect_count));
 			// 注意！ここはmission_numじゃないです
@@ -190,12 +187,12 @@ public class DataWorkParam : CsvDataParam{
 				bRet = true;
 			}
 		} else if (0 < mission_tweet) {
-			int tweet_count = GameMain.dbKvs.ReadInt (DefineOld.USER_TWEET_COUNT);
+			int tweet_count = DataManager.Instance.kvs_data.ReadInt (DefineOld.USER_TWEET_COUNT);
 			if (mission_tweet < tweet_count) {
 				bRet = true;
 			}
 		} else if (0 < mission_login) {
-			int login_count = GameMain.dbKvs.ReadInt (DefineOld.USER_LOGIN_COUNT);
+			int login_count = DataManager.Instance.kvs_data.ReadInt (DefineOld.USER_LOGIN_COUNT);
 			if (mission_login < login_count) {
 				bRet = true;
 			}
@@ -204,7 +201,6 @@ public class DataWorkParam : CsvDataParam{
 
 		return bRet;
 	}
-
 
 
 
@@ -254,6 +250,16 @@ public class DataWork : CsvData<DataWorkParam>
 			}
 			DataWorkParam.WorkOpen ();
 		}
+	}
+
+	public void Update( int _iWorkId , Dictionary<string , string > _dict ){
+
+		foreach (DataWorkParam data in DataManager.Instance.dataWork.list) {
+			if (data.work_id == _iWorkId) {
+				data.Set (_dict);
+			}
+		}
+		return;
 	}
 
 }

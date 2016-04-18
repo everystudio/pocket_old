@@ -70,7 +70,7 @@ public class CageDetailMain : PageBase2 {
 		makeCloseButton ();
 
 		m_dataItemParam = DataManager.Instance.m_dataItem.Select (m_iItemSerial);
-		m_CsvItemParam = GameMain.dbItemMaster.Select (m_dataItemParam.item_id);
+		m_CsvItemParam = DataManager.Instance.m_csvItem.Select (m_dataItemParam.item_id);
 
 		// これ、別のところでもやってます
 		List<DataMonsterParam> monster_list = DataManager.Instance.dataMonster.Select (" item_serial = " + m_iItemSerial.ToString ());
@@ -167,7 +167,7 @@ public class CageDetailMain : PageBase2 {
 				}
 			}
 
-			GameMain.dbItem.Update (GameMain.Instance.m_iSettingItemSerial, 0, 0, 0);
+			DataManager.Instance.m_dataItem.Update (GameMain.Instance.m_iSettingItemSerial, 0, 0, 0);
 
 			int iRemoveIndex = 0;
 			foreach (CtrlFieldItem item in GameMain.ParkRoot.m_fieldItemList) {
@@ -187,7 +187,7 @@ public class CageDetailMain : PageBase2 {
 			foreach (DataItemParam item in item_list) {
 				iUriagePerHour += item.GetUriagePerHour ();
 			}
-			GameMain.dbKvs.WriteInt (DefineOld.USER_URIAGE_PAR_HOUR, iUriagePerHour);
+			DataManager.Instance.kvs_data.WriteInt (DefineOld.USER_URIAGE_PAR_HOUR, iUriagePerHour);
 
 			// 仕事の確認
 			DataWork.WorkCheck ();

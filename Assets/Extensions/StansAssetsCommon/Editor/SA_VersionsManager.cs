@@ -29,7 +29,7 @@ public static class SA_VersionsManager  {
 	
 	public static bool Is_AN_Installed {
 		get { 
-			return FileStaticAPI.IsFileExists(PluginsInstalationUtil.ANDROID_DESTANATION_PATH + "androidnative.jar") && FileStaticAPI.IsFileExists(AN_VERSION_INFO_PATH);
+			return FileStaticAPI.IsFileExists(AN_VERSION_INFO_PATH);
 		}
 	}
 
@@ -89,7 +89,7 @@ public static class SA_VersionsManager  {
 	 
 	public static bool Is_UM_Installed {
 		get {
-			return FileStaticAPI.IsFileExists(UM_VERSION_INFO_PATH) && FileStaticAPI.IsFileExists(PluginsInstalationUtil.ANDROID_DESTANATION_PATH + "androidnative.jar") && FileStaticAPI.IsFileExists(UM_IOS_INSTALATION_MARK);
+			return FileStaticAPI.IsFileExists(UM_VERSION_INFO_PATH);
 		} 
 	}
 	

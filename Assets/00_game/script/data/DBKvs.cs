@@ -13,7 +13,6 @@ public class KVSData : SODataParam {
 
 public class DBKvs {
 
-	private bool m_bDebugLog = false;
 	public const string FILE_NAME = "SODataKvs";
 
 	public List<KVSData> data_list = new List<KVSData>();
@@ -53,7 +52,6 @@ public class DBKvs {
 		query.Step();
 		query.Release();
 		*/
-		return;
 	}
 	public void WriteString(string _strKey , string _strValue){
 		this.Write(_strKey , _strValue);

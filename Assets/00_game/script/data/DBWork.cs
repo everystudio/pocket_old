@@ -9,8 +9,6 @@ public class DBWork  {
 	public const string FILE_NAME = "SODataWork";
 	//public SODataWork m_soDataWork;
 
-	private bool m_bDebugLog = false;
-
 	public List<DataWorkParam> data_list = new List<DataWorkParam>();
 
 	public DBWork( string _strAsyncName ){

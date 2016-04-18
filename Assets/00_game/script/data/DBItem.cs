@@ -10,10 +10,6 @@ public class DBItem  {
 	//public const string FILE_NAME = "SODataItem";
 	public const string FILE_NAME = "NameChange";
 
-	//public SODataItem m_soDataItem;
-
-	private bool m_bDebugLog = false;
-
 	public List<DataItem> data_list = new List<DataItem>();
 
 	public DBItem( string _strAsyncName ){
@@ -151,12 +147,7 @@ public class DBItem  {
 	//DBへ保存
 	public void Replace(DataItemParam _replocalData)
 	{
-		DataItemParam insert_data = new DataItemParam ();
-
 		DataManager.Instance.m_dataItem.list.Add (_replocalData);
-
-
-
 		return;
 		/*
 		//データの上書きのコマンドを設定する　

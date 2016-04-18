@@ -34,7 +34,7 @@ public class CtrlItemDetailBuildupOffice : CtrlItemDetailBuildupBase {
 		// 増えた分おコストを計算
 		GameMain.Instance.m_iCostNokori += (iCostAfter - iCostPre);
 
-		GameMain.dbItem.Update( m_dataItemParam.item_serial , dict );
+		DataManager.Instance.m_dataItem.Update( m_dataItemParam.item_serial , dict );
 
 		m_dataItemParam = DataManager.Instance.m_dataItem.Select (m_dataItemParam.item_serial);
 
