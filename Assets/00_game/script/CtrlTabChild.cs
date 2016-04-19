@@ -5,7 +5,7 @@ public class CtrlTabChild : ButtonBase {
 
 	#region SerializeField設定
 	[SerializeField]
-	private UISprite m_sprImage;
+	private UI2DSprite m_sprImage;
 	[SerializeField]
 	private UIButton m_uiButton;
 	#endregion
@@ -31,7 +31,7 @@ public class CtrlTabChild : ButtonBase {
 		} else {
 			strSpriteName += "_off";
 		}
-		m_sprImage.spriteName = strSpriteName;
+		m_sprImage.sprite2D = SpriteManager.Instance.Load (string.Format ("texture/ui/{0}.png", strSpriteName));
 		m_uiButton.normalSprite = strSpriteName;
 		return;
 	}

@@ -13,7 +13,7 @@ public class CtrlIconFukidashi : MonoBehaviour {
 	}
 
 	[SerializeField]
-	private UISprite m_sprIcon;
+	private UI2DSprite m_sprIcon;
 
 	public STATUS m_eStatus;
 	public STATUS m_eStatusPre;	// いらないかも
@@ -51,7 +51,7 @@ public class CtrlIconFukidashi : MonoBehaviour {
 			break;
 		}
 
-		m_sprIcon.spriteName = strName;
+		m_sprIcon.sprite2D = SpriteManager.Instance.Load (string.Format ("texture/ui/{0}.png", strName));
 		m_sprIcon.enabled = bDisp;
 
 	}

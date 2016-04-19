@@ -2,31 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class TutorialManager : MonoBehaviour {
+public class TutorialManager : Singleton<TutorialManager> {
 
-	static TutorialManager instance = null;
-	public static TutorialManager Instance {
-		get {
-			if (instance == null) {
-				GameObject obj = GameObject.Find ("TutorialManager");
-				if (obj == null) {
-					obj = new GameObject("TutorialManager");
-				}
-				instance = obj.GetComponent<TutorialManager> ();
-				if (instance == null) {
-					instance = obj.AddComponent<TutorialManager>() as TutorialManager;
-				}
-				instance.initialize ();
-			}
-			return instance;
-		}
-	}
-
-	public bool IsTutorial(){
-		return m_eStep != STEP.END;
-	}
-	public void initialize(){
-		DontDestroyOnLoad(gameObject);
+	public override void Initialize ()
+	{
+		base.Initialize ();
 		//PlayerPrefs.SetInt (DefineOld.KEY_TUTORIAL_PARENT_ID , 3);
 		//PlayerPrefs.DeleteKey(DefineOld.KEY_TUTORIAL_PARENT_ID);
 		int iParentTutorialId = 0;
@@ -48,12 +28,11 @@ public class TutorialManager : MonoBehaviour {
 				m_eStep = STEP.COMMAND;
 			}
 		}
-		//m_eStep = STEP.END;
-
-
-		return;
 	}
 
+	public bool IsTutorial(){
+		return m_eStep != STEP.END;
+	}
 
 	public CsvTutorialData m_CurrentData;
 

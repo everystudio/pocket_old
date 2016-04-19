@@ -97,7 +97,7 @@ public class BannerWork : BannerBase {
 			strRet = "icon_lv";
 			strRet = string.Format ("texture/ui/icon_lv.png");
 		} else if (0 < work_data.mission_monster) {
-			strRet = "chara" + work_data.mission_monster.ToString ();
+			strRet = string.Format( "chara{0:D2}", work_data.mission_monster );
 			strRet = string.Format ("texture/monster/{0}.png" , strRet );
 		} else if (0 < work_data.mission_collect) {
 			strRet = "icon_gold";

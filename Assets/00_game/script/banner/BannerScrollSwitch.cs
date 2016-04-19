@@ -14,12 +14,12 @@ public class BannerScrollSwitch : ButtonManager {
 	#region SerializeField設定
 	// 配列かリストにする方がよかったかも
 	[SerializeField]
-	private UISprite m_sprLeft;
+	private UI2DSprite m_sprLeft;
 	[SerializeField]
 	private UIButton m_btnLeft;
 
 	[SerializeField]
-	private UISprite m_sprRight;
+	private UI2DSprite m_sprRight;
 	[SerializeField]
 	private UIButton m_btnRight;
 	#endregion
@@ -66,10 +66,10 @@ public class BannerScrollSwitch : ButtonManager {
 		}
 
 		//Debug.Log (strLeft + " : " + strRight);
-		m_sprLeft.spriteName = strLeft;
-		m_btnLeft.normalSprite = m_sprLeft.spriteName;
-		m_sprRight.spriteName = strRight;
-		m_btnRight.normalSprite = m_sprRight.spriteName;
+		m_sprLeft.sprite2D = SpriteManager.Instance.Load( string.Format( "texture/ui/{0}.png" , strLeft));;
+		m_btnLeft.normalSprite = strLeft;
+		m_sprRight.sprite2D = SpriteManager.Instance.Load( string.Format( "texture/ui/{0}.png" , strRight));;
+		m_btnRight.normalSprite = strRight;
 		m_iSelectingIndex = _iIndex;
 		return;
 	}

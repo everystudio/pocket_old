@@ -26,12 +26,12 @@ public class BannerMonster : BannerBase {
 
 	#region SerializeField設定
 	[SerializeField]
-	private UISprite m_sprBuyBase;
+	private UI2DSprite m_sprBuyBase;
 	[SerializeField]
 	private UILabel m_lbBuyPrice;
 
 	[SerializeField]
-	private UISprite m_sprIllness;
+	private UI2DSprite m_sprIllness;
 
 	#endregion
 
@@ -128,7 +128,7 @@ public class BannerMonster : BannerBase {
 		string strRet = "";
 		strRet = "chara" + _data.monster_id.ToString ();
 
-		strRet = string.Format ("texture/monster/chara{0}.png", _data.monster_id);
+		strRet = string.Format ("texture/monster/chara{0:D2}.png", _data.monster_id);
 		return strRet;
 	}
 
@@ -159,7 +159,7 @@ public class BannerMonster : BannerBase {
 			Debug.LogError ("no need");
 		}
 		*/
-		m_sprBuyBase.spriteName = strImageName;
+		m_sprBuyBase.sprite2D = SpriteManager.Instance.Load( string.Format( "texture/ui/{0}.png" , strImageName ));
 		m_lbBuyPrice.text = strText;
 		return;
 	}

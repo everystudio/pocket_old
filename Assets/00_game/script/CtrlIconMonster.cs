@@ -32,7 +32,7 @@ public class CtrlIconMonster : CtrlIconBase {
 
 			m_goDust.transform.localPosition += 0.2f * (DefineOld.CELL_X_DIR + DefineOld.CELL_Y_DIR);
 
-			m_goDust.GetComponent<UISprite> ().depth = m_sprIcon.depth-1;
+			m_goDust.GetComponent<UI2DSprite> ().depth = m_sprIcon.depth-1;
 		}
 	}
 	override public bool CleanDust(){
@@ -146,7 +146,7 @@ public class CtrlIconMonster : CtrlIconBase {
 
 	override public void AnimationIdol(bool _bInit){
 		if (_bInit) {
-			string strName = "chara" + m_dataMonster.monster_id.ToString () + "_eat1";
+			string strName = string.Format( "chara{0:D2}_eat1" ,m_dataMonster.monster_id );
 			//m_sprIcon.atlas = AtlasManager.Instance.GetAtlas (strName);
 			m_sprIcon.sprite2D = SpriteManager.Instance.Load( string.Format( "texture/monster/{0}.png" , strName ));
 			//m_sprIcon.spriteName = strName;
@@ -155,9 +155,9 @@ public class CtrlIconMonster : CtrlIconBase {
 
 	override public void AnimationMove(bool _bInit){
 		if (_bInit) {
-			m_fAnimationTime = 0.0f;
-			m_iAnimationFrame = 0;
 			m_fAnimationInterval = 0.2f;
+			m_fAnimationTime = m_fAnimationInterval;
+			m_iAnimationFrame = 0;
 		}
 
 		m_fAnimationTime += Time.deltaTime;
@@ -170,7 +170,7 @@ public class CtrlIconMonster : CtrlIconBase {
 
 			int iDispFrame = m_iAnimationFrame + 1;
 
-			string strName = "chara" + m_dataMonster.monster_id.ToString () + "_move" + iDispFrame.ToString();
+			string strName = string.Format( "chara{0:D2}_move{1}" , m_dataMonster.monster_id , iDispFrame);
 			m_sprIcon.sprite2D = SpriteManager.Instance.Load( string.Format( "texture/monster/{0}.png" , strName ));
 		}
 		return;
@@ -200,7 +200,7 @@ public class CtrlIconMonster : CtrlIconBase {
 
 			int iDispFrame = m_iAnimationFrame + 1;
 
-			string strName = "chara" + m_dataMonster.monster_id.ToString () + "_eat" + iDispFrame.ToString();
+			string strName = string.Format( "chara{0:D2}_eat{1}", m_dataMonster.monster_id , iDispFrame);
 			m_sprIcon.sprite2D = SpriteManager.Instance.Load( string.Format( "texture/monster/{0}.png" , strName ));
 		}
 		return;
