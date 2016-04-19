@@ -5,12 +5,12 @@ public class CtrlYesNoButton : ButtonManager {
 
 	#region SerializeField
 	[SerializeField]
-	private UISprite m_sprYes;
+	private UI2DSprite m_sprYes;
 	[SerializeField]
 	private BoxCollider m_bcYes;
 
 	[SerializeField]
-	private UISprite m_sprNo;
+	private UI2DSprite m_sprNo;
 	[SerializeField]
 	private BoxCollider m_bcNo;
 	#endregion
