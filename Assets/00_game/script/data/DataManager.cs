@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public class DataManager : DataManagerBase <DataManager>{
 
+	public readonly string SPREAD_SHEET = "14HLMZIPB21WrMf80gqsJw-R1BKMLFJt8haok36uSI5o";
+	public readonly string SPREAD_SHEET_CONFIG_SHEET = "od6";
+
 	public override void Initialize ()
 	{
 		base.Initialize ();
@@ -47,6 +50,9 @@ public class DataManager : DataManagerBase <DataManager>{
 	}
 
 	public void DataSave(){
+		#if !UNITY_EDITOR
+		Debug.LogError ("save");
+		#endif
 		m_dataKvs.Save (DataKvs.FILE_NAME);
 		dataMonster.Save (DataMonster.FILENAME);
 		dataStaff.Save (DataStaff.FILENAME);
@@ -225,7 +231,6 @@ public class DataManager : DataManagerBase <DataManager>{
 
 	void OnApplicationPause(bool pauseStatus) {
 		///Debug.LogError ("here");
-		Initialize ();
 		if (pauseStatus) {
 			DataSave ();
 

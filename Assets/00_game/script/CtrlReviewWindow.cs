@@ -51,7 +51,7 @@ public class CtrlReviewWindow : MonoBehaviour {
 		switch (m_eStep) {
 		case STEP.LOAD:
 			if (bInit) {
-				m_switchSprite.SetSprite ("texture/image/popup_review.png");
+				m_switchSprite.SetSprite ("texture/ui/popup_review.png");
 			}
 			if (SpriteManager.Instance.IsIdle ()) {
 				m_eStep = STEP.IDLE;

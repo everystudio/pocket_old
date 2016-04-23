@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using NendUnityPlugin.AD;
 
 public class GameMain : MonoBehaviour {
 
@@ -153,6 +154,8 @@ public class GameMain : MonoBehaviour {
 			m_csUniWebView.Load( "http://ad.xnosserver.com/apps/bokunodoubutsuen_ios/ad.html" );
 			*/
 			SetStatus (STATUS.PARK);
+			AdsManager.Instance.Initialize ();
+
 		}
 
 		//Debug.Log (TutorialManager.Instance.m_eStep);
@@ -204,6 +207,11 @@ public class GameMain : MonoBehaviour {
 			m_PageList [(int)m_eStatus].Close ();
 			m_PageList [(int)_eStatus].Initialize ();
 			m_eStatus = _eStatus;
+
+			if (m_eStatus != STATUS.PARK) {
+				AdsManager.Instance.CallInterstitial ();
+			}
+
 		}
 		return;
 	}

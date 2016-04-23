@@ -1,7 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using NendUnityPlugin.AD;
 
-public class AdsManager : MonoBehaviour {
+public class AdsManager : Singleton<AdsManager> {
+
+	[SerializeField]
+	private NendAdIcon m_nendAdIcon;
+	[SerializeField]
+	private NendAdBanner m_nendAdBanner;
 
 
 	#if UNITY_IPHONE
@@ -28,6 +34,11 @@ public class AdsManager : MonoBehaviour {
 	public static readonly string IMOBILE_SID_RECT = "412437";
 	#endif
 
+	public void CallInterstitial(){
+		// 通常表示
+		NendAdInterstitial.Instance.Show();
+	}
+	/*
 	protected static AdsManager instance = null;
 	public static AdsManager Instance {
 		get {
@@ -47,11 +58,23 @@ public class AdsManager : MonoBehaviour {
 			return instance;
 		}
 	}
-
-	public void Initialize(){
+	*/
+	public override void Initialize ()
+	{
 	}
+
+	#if USE_IMOBILE
 	private int m_iIMobileBannerId = 0;
+	#endif
 	public void ShowAdBanner( bool _bFlag ){
+
+		if (_bFlag) {
+			m_nendAdBanner.Show ();
+		} else {
+			m_nendAdBanner.Hide ();
+		}
+
+		#if USE_IMOBILE
 		if (_bFlag) {
 			if (m_iIMobileBannerId == 0) {
 				#if (UNITY_IPHONE || UNITY_ANDROID ) && !UNITY_EDITOR
@@ -80,11 +103,14 @@ public class AdsManager : MonoBehaviour {
 				#endif
 			}
 		}
+		#endif
 	}
-
+#if USE_IMOBILE
 	static private int m_iIMobileIconId = 0;
+#endif
 	public void ShowIcon( GameObject _goIcon , bool _bFlag ){
 
+	#if USE_IMOBILE
 		string strSid = IMOBILE_SID_ICON;
 		if (_bFlag) {
 
@@ -122,10 +148,9 @@ public class AdsManager : MonoBehaviour {
 			#else
 			#endif
 		}
-
-		/*		
+#endif
 		#if UNITY_ANDROID
-		NendAdIcon script = _goIcon.GetComponent<NendAdIcon> ();
+		NendAdIcon script = m_nendAdIcon;
 		if (script == null) {
 			Debug.Log ("ShowIcon script=null! ");
 
@@ -139,13 +164,19 @@ public class AdsManager : MonoBehaviour {
 			script.Pause();
 		}
 		#endif
-		*/
 		return;
 	}
 
 	// Use this for initialization
 	void Start () {
-	
+		//Debug.LogError ("AdsManager Start");
+		#if UNITY_IPHONE
+		NendAdInterstitial.Instance.Load("46ee0b186cac0cbb2681ab10f6ec1de605e72b14", "562605");
+		#elif UNITY_ANDROID
+		NendAdInterstitial.Instance.Load("5ac03f9f1f7b354bfdfb0f423ba6696a694ad27c", "554786");
+		#else
+		...
+		#endif
 	}
 	
 	// Update is called once per frame

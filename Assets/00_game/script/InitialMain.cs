@@ -3,14 +3,21 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using System;
-
+using EveryStudioLibrary;
 using Prime31;
 
 public class InitialMain : MonoBehaviour {
 
+	public bool CONFIG_UPDATE = false;
 	public enum STEP
 	{
 		NONE				= 0,
+
+		CHECK_CONFIG		,
+		CHECK_UPDATE		,
+		UPDATE_DOWNLOAD		,
+		DATA_DOWNLOAD		,
+
 		DATAMANAGER_SETUP	,
 		SOUND_LOAD			,
 		REVIEW				,
@@ -23,6 +30,7 @@ public class InitialMain : MonoBehaviour {
 		DB_BACKUP_CHECK		,
 		DB_BACKUP			,
 		END					,
+		NETWORK_ERROR		,
 		MAX					,
 	}
 	public STEP m_eStep;
@@ -35,11 +43,14 @@ public class InitialMain : MonoBehaviour {
 	public CtrlOjisanCheck m_ojisanCheck;
 	public UITexture m_texBack;
 	public UtilSwitchSprite m_SwitchSpriteBack;
+	public List<SpreadSheetData> m_ssdSample;
 
 	public ButtonBase m_btnTutorialReset;
 	public ButtonBase m_btnCacheClear;
+	public ButtonBase m_btnNetworkError;
 
 	public CtrlReviewWindow m_reviewWindow;
+	private int m_iNetworkSerial;
 
 	public CtrlLoading m_csLoading;
 	[SerializeField]
@@ -72,11 +83,11 @@ public class InitialMain : MonoBehaviour {
 		QualitySettings.vSyncCount = 0;
 
 		m_eStep = STEP.IDLE;
-		m_eStep = STEP.DATAMANAGER_SETUP;
+		m_eStep = STEP.CHECK_CONFIG;
 		m_eStepPre = STEP.MAX;
 
 		//m_SwitchSpriteBack.SetSprite ("garalley_003");
-		m_SwitchSpriteBack.SetSprite ("texture/back/bg001.png");
+		//m_SwitchSpriteBack.SetSprite ("texture/back/bg001.png");
 		//m_SwitchSpriteBack.SetSprite ("tutorial777");
 
 		SoundManager.Instance.PlayBGM ("farming" , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/bgm");
@@ -107,6 +118,71 @@ public class InitialMain : MonoBehaviour {
 
 		switch (m_eStep) {
 
+		case STEP.CHECK_CONFIG:
+			if (bInit) {
+				m_iNetworkSerial = CommonNetwork.Instance.RecieveSpreadSheet (
+					DataManager.Instance.SPREAD_SHEET,
+					DataManager.Instance.SPREAD_SHEET_CONFIG_SHEET);
+			}
+			if (CommonNetwork.Instance.IsConnected (m_iNetworkSerial)) {
+				// 一度終了に向かうように設定
+				m_eStep = STEP.DATAMANAGER_SETUP;
+				TNetworkData data = EveryStudioLibrary.CommonNetwork.Instance.GetData (m_iNetworkSerial);
+				Debug.Log (data.m_strData);
+				Debug.Log (data.m_dictRecievedData);
+				m_ssdSample = EveryStudioLibrary.CommonNetwork.Instance.ConvertSpreadSheetData (data.m_dictRecievedData);
+				CsvConfig config_data = new CsvConfig ();
+				config_data.Input (m_ssdSample);
+				if (false == config_data.Read (CsvConfig.KEY_CONFIG_VERSION).Equals (DataManager.Instance.config.Read (CsvConfig.KEY_CONFIG_VERSION)) || CONFIG_UPDATE == true) {
+					config_data.Save (CsvConfig.FILENAME_CONFIG);
+					DataManager.Instance.config.Load (CsvConfig.FILENAME_CONFIG);
+					m_eStep = STEP.CHECK_UPDATE;
+				}
+			} else if (CommonNetwork.Instance.IsError (m_iNetworkSerial ) ) {
+				m_eStep = STEP.NETWORK_ERROR;
+			} else {
+			}
+			break;
+
+
+		case STEP.CHECK_UPDATE:
+			if (false == DataManager.Instance.config.Read (FileDownloadManager.KEY_DOWNLOAD_VERSION).Equals (DataManager.Instance.kvs_data.Read (FileDownloadManager.KEY_DOWNLOAD_VERSION))) {
+				m_eStep = STEP.UPDATE_DOWNLOAD;
+			} else {
+				m_eStep = STEP.DATAMANAGER_SETUP;
+			}
+			break;
+
+		case STEP.UPDATE_DOWNLOAD:
+			if (bInit) {
+				m_iNetworkSerial = CommonNetwork.Instance.RecieveSpreadSheet (
+					DataManager.Instance.SPREAD_SHEET ,
+					DataManager.Instance.config.Read ("download"));
+			}
+			if (CommonNetwork.Instance.IsConnected (m_iNetworkSerial)) {
+				TNetworkData data = EveryStudioLibrary.CommonNetwork.Instance.GetData (m_iNetworkSerial);
+				m_ssdSample = EveryStudioLibrary.CommonNetwork.Instance.ConvertSpreadSheetData (data.m_dictRecievedData);
+				CsvDownload download_list = new CsvDownload();
+				download_list.Input (m_ssdSample);
+				download_list.Save (FileDownloadManager.FILENAME_DOWNLOAD_LIST);
+				m_eStep = STEP.DATA_DOWNLOAD;
+			}
+			break;
+
+		case STEP.DATA_DOWNLOAD:
+			if (bInit) {
+				CsvDownload download_list = new CsvDownload ();
+				download_list.Load (FileDownloadManager.FILENAME_DOWNLOAD_LIST);
+				Debug.Log (TimeManager.StrGetTime ());
+				FileDownloadManager.Instance.Download ( DataManager.Instance.config.ReadInt( FileDownloadManager.KEY_DOWNLOAD_VERSION) , download_list.list);
+			}
+			if (FileDownloadManager.Instance.IsIdle ()) {
+				m_eStep = STEP.CHECK_UPDATE;
+				DataManager.Instance.kvs_data.WriteInt (FileDownloadManager.KEY_DOWNLOAD_VERSION, DataManager.Instance.config.ReadInt (FileDownloadManager.KEY_DOWNLOAD_VERSION));
+				DataManager.Instance.kvs_data.Save (DataKvs.FILE_NAME);
+			}
+			break;
+
 		case STEP.DATAMANAGER_SETUP:
 			if (bInit) {
 				/*
@@ -115,6 +191,7 @@ public class InitialMain : MonoBehaviour {
 				Debug.Log (script.list.Count);
 				script.list.Add (new DataItem ());
 				*/
+
 			}
 
 
@@ -201,29 +278,43 @@ public class InitialMain : MonoBehaviour {
 			if (true) {
 				//if (m_tkKvsOpen.Completed) {
 
-				List<DataItemParam> data_item_list =  DataManager.Instance.m_dataItem.All;
-				// 最初しか通らない
-				if (data_item_list.Count == 0) {
-					Debug.LogError ("here");
-					m_dbKvs.WriteInt (DefineOld.USER_SYAKKIN,300000000);
-					m_dbKvs.WriteInt (DefineOld.USER_TICKET,5);
-					m_dbKvs.WriteInt (DefineOld.USER_SYOJIKIN,10000);
-					m_dbKvs.Save (CsvKvs.FILE_NAME);
-					var skitMasterTable = new MasterTableMapChip ();
-					skitMasterTable.Load ();
-					var csvItem = new CsvItem ();
-					csvItem.Load ();
-					foreach (MapChipCSV csvMapChip in skitMasterTable.All) {
-						DataItemParam data = new DataItemParam (csvMapChip , csvItem );
-						DataManager.Instance.m_dataItem.list.Add (data);
+				if (DataManager.Instance.m_csvItem.list.Count == 0) {
+					CsvItem initial_csv_item = new CsvItem ();
+					initial_csv_item.Load ("csv/master/InitialCsvItem");
+					foreach (CsvItemParam param in initial_csv_item.list) {
+						DataManager.Instance.m_csvItem.list.Add (param);
+					}
+				}
+				if (DataManager.Instance.m_csvMonster.list.Count == 0) {
+					CsvMonster initial_csv_monster = new CsvMonster ();
+					initial_csv_monster.Load ("csv/master/InitialCsvMonster");
+					foreach (CsvMonsterParam param in initial_csv_monster.list) {
+						DataManager.Instance.m_csvMonster.list.Add (param);
 					}
 				}
 
+				if (DataManager.Instance.m_dataItem.list.Count == 0) {
+					DataManager.Instance.data_kvs.WriteInt (DefineOld.USER_SYAKKIN,300000000);
+					DataManager.Instance.data_kvs.WriteInt (DefineOld.USER_TICKET,5);
+					DataManager.Instance.data_kvs.WriteInt (DefineOld.USER_SYOJIKIN,10000);
+
+					DataItem initial_data_item = new DataItem ();
+					initial_data_item.Load ("csv/master/InitialDataItem");
+					foreach (DataItemParam param in initial_data_item.list) {
+						DataManager.Instance.m_dataItem.list.Add (param);
+					}
+				}
+
+				if (DataManager.Instance.dataMonster.list.Count == 0) {
+					DataMonster initial_data_monster = new DataMonster ();
+					initial_data_monster.Load ("csv/master/InitialDataMonster");
+					foreach (DataMonsterParam param in initial_data_monster.list) {
+						DataManager.Instance.dataMonster.list.Add (param);
+					}
+				}
 				List<DataWorkParam> data_work_list = m_dbWork.All;
 				if (data_work_list.Count == 0) {
-					var csvWork = new CsvWork ();
-					csvWork.Load ();
-					foreach (CsvWorkParam csv_work_data in csvWork.All) {
+					foreach (CsvWorkParam csv_work_data in DataManager.Instance.m_csvWork.All) {
 						DataWorkParam data = new DataWorkParam (csv_work_data);
 						// 最初に出現していいのはappear_work_id== 0とlevel<=1のものだけ
 						if (data.appear_work_id == 0 && data.level <= 1 ) {
@@ -358,7 +449,16 @@ public class InitialMain : MonoBehaviour {
 			}
 			*/
 			break;
-
+		case STEP.NETWORK_ERROR:
+			if (bInit) {
+				m_btnNetworkError.gameObject.SetActive (true);
+				m_btnNetworkError.TriggerClear ();
+			}
+			if (m_btnNetworkError.ButtonPushed) {
+				m_btnNetworkError.gameObject.SetActive (false);
+				m_eStep = STEP.CHECK_CONFIG;
+			}
+			break;
 		default:
 			break;
 		}

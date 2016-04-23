@@ -164,8 +164,8 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: G:/repository/bokuno.zoo/xnospass.keystore
-  AndroidKeyaliasName: xnos.s.inc@gmail.com
+  AndroidKeystoreName: G:/repository/pocket/everystudio_everystudio_everypass.keystore
+  AndroidKeyaliasName: everystudio
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
   androidEnableBanner: 1
@@ -371,8 +371,8 @@ PlayerSettings:
   psmSplashimage: {fileID: 0}
   spritePackerPolicy: 
   scriptingDefineSymbols:
-    4: USE_NGUI;NOUSE_MINIJSON;USE_EASYTOUCH;NO_USE_UNITY_ADS
-    7: USE_NGUI;NOUSE_MINIJSON;USE_EASYTOUCH;NO_USE_UNITY_ADS
+    4: USE_NGUI;USE_EASYTOUCH;NO_USE_UNITY_ADS
+    7: USE_NGUI;USE_EASYTOUCH;NO_USE_UNITY_ADS
   metroPackageName: bokuno_doubutsuen
   metroPackageVersion: 
   metroCertificatePath: 

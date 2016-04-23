@@ -90,7 +90,7 @@ public class CtrlPopupWork : MonoBehaviourEx{
 
 		case STEP.INITIALIZE:
 			if (bInit) {
-				m_switchSprite.SetSprite ("texture/image/work_clear.png");
+				m_switchSprite.SetSprite ("texture/ui/work_clear.png");
 			}
 
 			//Debug.LogError (SpriteManager.Instance.IsIdle ());
