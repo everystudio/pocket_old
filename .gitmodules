@@ -1,3 +1,6 @@
 [submodule "Assets/everystudio-library"]
 	path = Assets/everystudio-library
 	url = https://github.com/everystudio/everystudio-library
+[submodule "Assets/pocket.Resources"]
+	path = Assets/pocket.Resources
+	url = https://github.com/everystudio/pocket.Resources
