@@ -5,19 +5,13 @@ using System.Collections.Generic;
 
 
 
-using Prime31;
-public class GoogleIABEventListener : MonoBehaviour
+namespace Prime31
+{
+	public class GoogleIABEventListener : MonoBehaviour
 	{
 #if UNITY_ANDROID
-
-		void Start(){
-			DontDestroyOnLoad(gameObject);
-		}
-
 		void OnEnable()
 		{
-			Debug.Log ("GoogleIABEventListener OnEnable");
-
 			// Listen to all events for illustration purposes
 			GoogleIABManager.billingSupportedEvent += billingSupportedEvent;
 			GoogleIABManager.billingNotSupportedEvent += billingNotSupportedEvent;
@@ -33,7 +27,6 @@ public class GoogleIABEventListener : MonoBehaviour
 	
 		void OnDisable()
 		{
-			Debug.Log ("GoogleIABEventListener OnDisable");
 			// Remove all event handlers
 			GoogleIABManager.billingSupportedEvent -= billingSupportedEvent;
 			GoogleIABManager.billingNotSupportedEvent -= billingNotSupportedEvent;
@@ -50,13 +43,13 @@ public class GoogleIABEventListener : MonoBehaviour
 	
 		void billingSupportedEvent()
 		{
-			Debug.LogError( "billingSupportedEvent" );
+			Debug.Log( "billingSupportedEvent" );
 		}
 	
 	
 		void billingNotSupportedEvent( string error )
 		{
-			Debug.LogError( "billingNotSupportedEvent: " + error );
+			Debug.Log( "billingNotSupportedEvent: " + error );
 		}
 	
 	
@@ -82,14 +75,13 @@ public class GoogleIABEventListener : MonoBehaviour
 	
 		void purchaseSucceededEvent( GooglePurchase purchase )
 		{
-			Debug.LogError( "purchaseSucceededEvent: " + purchase );
-			GoogleIAB.consumeProduct (purchase.productId);
+			Debug.Log( "purchaseSucceededEvent: " + purchase );
 		}
 	
 	
 		void purchaseFailedEvent( string error, int response )
 		{
-			Debug.LogError( "purchaseFailedEvent: " + error + ", response: " + response );
+			Debug.Log( "purchaseFailedEvent: " + error + ", response: " + response );
 		}
 	
 	
@@ -108,5 +100,6 @@ public class GoogleIABEventListener : MonoBehaviour
 #endif
 	}
 
+}
 	
 	

@@ -1,7 +1,5 @@
 fileFormatVersion: 2
-guid: cf01a040b0c94490aa03b11455305d66
-timeCreated: 1445943539
-licenseType: Free
+guid: 1a519032884f54e3b837de282b630689
 PluginImporter:
   serializedVersion: 1
   iconMap: {}
@@ -11,10 +9,6 @@ PluginImporter:
     Any:
       enabled: 1
       settings: {}
-    Editor:
-      enabled: 0
-      settings:
-        DefaultValueInitialized: true
   userData: 
   assetBundleName: 
   assetBundleVariant: 
