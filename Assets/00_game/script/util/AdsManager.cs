@@ -108,7 +108,7 @@ public class AdsManager : Singleton<AdsManager> {
 #if USE_IMOBILE
 	static private int m_iIMobileIconId = 0;
 #endif
-	public void ShowIcon( GameObject _goIcon , bool _bFlag ){
+	public void ShowIcon( bool _bFlag ){
 
 	#if USE_IMOBILE
 		string strSid = IMOBILE_SID_ICON;

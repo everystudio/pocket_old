@@ -208,7 +208,7 @@ public class GameMain : MonoBehaviour {
 			m_PageList [(int)_eStatus].Initialize ();
 			m_eStatus = _eStatus;
 
-			if (m_eStatus != STATUS.PARK) {
+			if (m_eStatus != STATUS.PARK && !TutorialManager.Instance.IsTutorial ()) {
 				AdsManager.Instance.CallInterstitial ();
 			}
 
@@ -220,6 +220,7 @@ public class GameMain : MonoBehaviour {
 	void Start () {
 		initialize ();
 		AdsManager.Instance.ShowAdBanner (true);
+		AdsManager.Instance.ShowIcon (true);
 	}
 	
 	// Update is called once per frame

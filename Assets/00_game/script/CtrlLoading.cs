@@ -18,7 +18,7 @@ public class CtrlLoading : MonoBehaviour {
 
 	void Start(){
 		m_fTimer = 0.0f;
-		m_goLoadingRoot.SetActive (false);
+		//m_goLoadingRoot.SetActive (false);
 	}
 
 	public void ViewPercent( float _fProgress ){

@@ -87,7 +87,7 @@ public class InitialMain : MonoBehaviour {
 		m_eStepPre = STEP.MAX;
 
 		//m_SwitchSpriteBack.SetSprite ("garalley_003");
-		//m_SwitchSpriteBack.SetSprite ("texture/back/bg001.png");
+		m_SwitchSpriteBack.SetSprite ("texture/back/bg001.png");
 		//m_SwitchSpriteBack.SetSprite ("tutorial777");
 
 		SoundManager.Instance.PlayBGM ("farming" , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/bgm");

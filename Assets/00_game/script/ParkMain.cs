@@ -72,13 +72,13 @@ public class ParkMain : PageBase2 {
 		if (m_parkMainController != null) {
 			m_parkMainController.enabled = false;
 		}
-		AdsManager.Instance.ShowIcon (gameObject, true);
+		AdsManager.Instance.ShowIcon ( true);
 		//Debug.LogError ("initialize");
 
 	}
 	protected override void close(){
 		m_sprBackground.sprite2D = SpriteManager.Instance.Load ("texture/back/bg_table.png");
-		AdsManager.Instance.ShowIcon (gameObject, false);
+		AdsManager.Instance.ShowIcon ( false);
 		//Debug.LogError ("close");
 
 	}
