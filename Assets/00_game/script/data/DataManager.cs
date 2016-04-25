@@ -25,10 +25,19 @@ public class DataManager : DataManagerBase <DataManager>{
 		//int iHeight= PlayerPrefs.GetInt (DefineOld.USER_HEIGHT);
 
 		//m_tDataUser.Initialize (iWidth,iHeight);
+		AllLoad();
+		foreach( CsvLocalNotificationData data in csv_localNotification ){
+			LocalNotificationManager.Instance.Add (data);
+		}
+		return;
+	}
+
+	public void AllLoad(){
 		kvs_data.Load( DataKvs.FILE_NAME );
 		m_csvItem.Load ();
 		m_csvMonster.Load ();
 		dataMonster.Load (DataMonster.FILENAME);
+		dataStaff.Load (DataStaff.FILENAME);
 		//Debug.LogError ("here");
 		m_dataItem.Load (DataItem.FILENAME);
 
@@ -43,10 +52,6 @@ public class DataManager : DataManagerBase <DataManager>{
 		m_csvWord.Load ();
 		m_csvTutorial.Load ();
 		m_csvLocalNotification.Load ();
-		foreach( CsvLocalNotificationData data in csv_localNotification ){
-			LocalNotificationManager.Instance.Add (data);
-		}
-		return;
 	}
 
 	public void DataSave(){
@@ -81,10 +86,8 @@ public class DataManager : DataManagerBase <DataManager>{
 		}
 	}
 
-	public List<CsvItemParam> m_ItemMasterList = new List<CsvItemParam>();
 	static public List<CsvItemParam> itemMaster {
-		get{ return Instance.m_ItemMasterList; }
-		set{ Instance.m_ItemMasterList = value; }
+		get{ return Instance.m_csvItem.list; }
 	}
 	static public CsvItemParam GetItemMaster( int _iItemId ){
 		foreach( CsvItemParam data in itemMaster ){

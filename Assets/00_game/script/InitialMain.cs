@@ -180,6 +180,7 @@ public class InitialMain : MonoBehaviour {
 				m_eStep = STEP.CHECK_UPDATE;
 				DataManager.Instance.kvs_data.WriteInt (FileDownloadManager.KEY_DOWNLOAD_VERSION, DataManager.Instance.config.ReadInt (FileDownloadManager.KEY_DOWNLOAD_VERSION));
 				DataManager.Instance.kvs_data.Save (DataKvs.FILE_NAME);
+				DataManager.Instance.AllLoad ();
 			}
 			break;
 
@@ -273,6 +274,7 @@ public class InitialMain : MonoBehaviour {
 			break;
 
 		case STEP.DB_SETUP:
+			Debug.LogError (STEP.DB_SETUP); 
 			if (bInit) {
 			}
 			if (true) {
@@ -313,6 +315,7 @@ public class InitialMain : MonoBehaviour {
 					}
 				}
 				List<DataWorkParam> data_work_list = m_dbWork.All;
+				Debug.LogError (data_work_list.Count);
 				if (data_work_list.Count == 0) {
 					foreach (CsvWorkParam csv_work_data in DataManager.Instance.m_csvWork.All) {
 						DataWorkParam data = new DataWorkParam (csv_work_data);

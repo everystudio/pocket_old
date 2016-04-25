@@ -80,7 +80,7 @@ public class DataStaff : CsvData<DataStaffParam>
 		string strNow = TimeManager.StrNow ();
 
 		DataStaffParam insert_data = new DataStaffParam ();
-		insert_data.staff_serial = list.Count;
+		insert_data.staff_serial = list.Count + 1;
 		insert_data.staff_id = _iStaffId;
 		insert_data.office_serial = _iOfficeItemSerial;
 		insert_data.item_serial = _iCageSerial;

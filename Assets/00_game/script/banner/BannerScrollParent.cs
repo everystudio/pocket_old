@@ -71,6 +71,8 @@ public class BannerScrollParent : MonoBehaviourEx {
 	public void Display( List<DataItemParam> _itemList , int _iIndex , string _strButton = "" ){
 		BannerBaseClear ();
 		foreach (DataItemParam data in _itemList) {
+
+			Debug.LogError (string.Format ("serial:{0} item_id:{1}", data.item_serial, data.item_id));
 			GameObject objBanner = PrefabManager.Instance.MakeObject ("prefab/PrefBannerItem" , m_Grid.gameObject );
 			BannerItem script = objBanner.GetComponent<BannerItem> ();
 			script.Initialize (data, GameMain.Instance.m_iCostNokori);
@@ -104,6 +106,7 @@ public class BannerScrollParent : MonoBehaviourEx {
 	public void Display( List<DataStaffParam> _StaffList , int _iIndex , string _strButton = "" ){
 		BannerBaseClear ();
 		foreach (DataStaffParam data in _StaffList) {
+			Debug.LogError (string.Format ("serial:{0} item_serial:{1} staff_id:{2}", data.m_staff_serial, data.item_serial, data.staff_id));
 			GameObject objBanner = PrefabManager.Instance.MakeObject ("prefab/PrefBannerStaff" , m_Grid.gameObject );
 			BannerStaff script = objBanner.GetComponent<BannerStaff> ();
 			script.Initialize (data, GameMain.Instance.m_iCostNokori);

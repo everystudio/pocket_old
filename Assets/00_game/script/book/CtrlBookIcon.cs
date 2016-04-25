@@ -37,7 +37,7 @@ public class CtrlBookIcon : ButtonBase {
 		return bRet;
 	}
 	public bool Initialize( int _iMonsterId , GameObject _posDisplay ){
-		return Initialize (MasterData.Monster (_iMonsterId), _posDisplay);
+		return Initialize (DataManager.Instance.m_csvMonster.Select (_iMonsterId), _posDisplay);
 	}
 
 	public int GetMonsterId(){

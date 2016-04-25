@@ -8,9 +8,7 @@ public class CtrlIconStaff : CtrlIconBase {
 		myTransform.localPosition = GetMovePos ();
 		m_sprIcon = _sprite;
 		m_dataStaff = _dataStaff;
-		Debug.LogError (m_sprIcon.depth);
 		m_sprIcon.depth += 1;
-		Debug.LogError (m_sprIcon.depth);
 		m_eStep = STEP.IDLE;
 		m_eStepPre = STEP.MAX;
 

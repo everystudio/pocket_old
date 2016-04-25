@@ -30,29 +30,6 @@ public class MasterData : MonoBehaviour {
 		return;
 	}
 
-	private List<CsvMonsterParam> m_monsterDataList = new List<CsvMonsterParam>();
-	static public List<CsvMonsterParam> MonsterList {
-		get{
-			if (0 == Instance.m_monsterDataList.Count) {
-				var csvMonster = new CsvMonster ();
-				csvMonster.Load ();
-				foreach (CsvMonsterParam csv_data in csvMonster.All) {
-					Instance.m_monsterDataList.Add (csv_data);
-				}
-			}
-			return Instance.m_monsterDataList;
-		}
-	}
-	static public CsvMonsterParam Monster( int _iMonsterId ){
-		foreach (CsvMonsterParam monster in MonsterList) {
-			if (monster.monster_id == _iMonsterId) {
-				return monster;
-			}
-		}
-		return new CsvMonsterParam ();
-	}
-
-
 }
 
 

@@ -104,6 +104,9 @@ public class BannerItem : BannerBase {
 	public bool Initialize( DataItemParam _data , int _iCostNokori ){
 
 		CsvItemParam item_master = DataManager.GetItemMaster (_data.item_id);
+
+		Debug.LogError (string.Format ("name:{0} item_id:{1}", item_master.name, item_master.item_id));
+
 		Initialize (item_master , _iCostNokori );
 		m_iItemSerial = _data.item_serial;
 
