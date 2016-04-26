@@ -1313,8 +1313,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 907960116}
-  - {fileID: 1001300458}
+  - {fileID: 464723161}
+  - {fileID: 1893119762}
   m_Father: {fileID: 284385265}
   m_RootOrder: 3
 --- !u!114 &206654376
@@ -3214,6 +3214,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 19e5a796a4ba34e239acf478255c58b5, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &464723161 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 464723160}
 --- !u!1 &481395060
 GameObject:
   m_ObjectHideFlags: 0
@@ -3567,8 +3571,8 @@ MonoBehaviour:
       apiKey: beb4ad9cf0c30063c81257ee389236f064b8a3d4
       spotID: 554784
     iOS:
-      apiKey: 47f2e5c74f7f00f3eea121f368c6693ccf63b02b
-      spotID: 562636
+      apiKey: 1b54ca9818ca21f1e7b2c02c0398afa65830bcfa
+      spotID: 562603
   automaticDisplay: 1
   outputLog: 1
   adjustSize: 1
@@ -5157,10 +5161,6 @@ MonoBehaviour:
   hideInactive: 0
   keepWithinPanel: 0
   sorted: 0
---- !u!4 &907960116 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 483878, guid: 19e5a796a4ba34e239acf478255c58b5, type: 2}
-  m_PrefabInternal: {fileID: 464723160}
 --- !u!1 &926574099
 GameObject:
   m_ObjectHideFlags: 0
@@ -5911,10 +5911,6 @@ MonoBehaviour:
   mFixedAspect: 0
   mPixelSize: 1
   nextSprite: {fileID: 0}
---- !u!4 &1001300458 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 450112, guid: 1e8fb9981c374429bb991b1e7db27c89, type: 2}
-  m_PrefabInternal: {fileID: 1893119761}
 --- !u!1 &1037281882
 GameObject:
   m_ObjectHideFlags: 0
@@ -10506,6 +10502,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1e8fb9981c374429bb991b1e7db27c89, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &1893119762 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 1893119761}
 --- !u!1 &1915396964
 GameObject:
   m_ObjectHideFlags: 0
