@@ -72,6 +72,7 @@ public class LocalNotificationManager : MonoBehaviour {
 			//TODO
 			#if UNITY_IPHONE
 
+			/*
 			foreach( CsvLocalNotificationData data in m_localNotificationDataList ){
 				ISN_LocalNotification local_notification = new ISN_LocalNotification (
 					DateTime.Now.AddSeconds (data.second),
@@ -81,6 +82,7 @@ public class LocalNotificationManager : MonoBehaviour {
 				id_list.Add( local_notification.Id );
 				IOSNotificationController.Instance.ScheduleNotification (local_notification);
 			}
+			*/
 
 			#elif UNITY_ANDROID
 
@@ -104,9 +106,12 @@ public class LocalNotificationManager : MonoBehaviour {
 		} else {
 			#if UNITY_IPHONE
 			// こっちの削除はなくてもいいらしい
+			/*
 			foreach( int set_id in id_list ){
+
 				IOSNotificationController.Instance.CancelLocalNotificationById( set_id );
 			}
+			*/
 			//IOSNotificationController.Instance.CancelAllLocalNotifications ();
 			#elif UNITY_ANDROID && !UNITY_EDITOR
 			for( int i = 0 ; i < m_localNotificationDataList.Count ; i++ ){

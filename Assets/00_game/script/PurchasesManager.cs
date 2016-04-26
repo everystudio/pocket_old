@@ -66,7 +66,7 @@ public class PurchasesManager : MonoBehaviour {
 		instance.m_eStatus = STATUS.BUYING;
 
 		#if UNITY_IPHONE
-		IOSInAppPurchaseManager.Instance.BuyProduct(productId);
+		//IOSInAppPurchaseManager.Instance.BuyProduct(productId);
 		#elif UNITY_ANDROID
 		GoogleIAB.purchaseProduct( productId);
 		#endif
@@ -82,6 +82,7 @@ public class PurchasesManager : MonoBehaviour {
 			//You do not have to add products by code if you already did it in seetings guid
 			//Windows -> IOS Native -> Edit Settings
 			//Billing tab.
+			/*
 			IOSInAppPurchaseManager.Instance.AddProductId(TICKET_010);
 			IOSInAppPurchaseManager.Instance.AddProductId(TICKET_055);
 			IOSInAppPurchaseManager.Instance.AddProductId(TICKET_125);
@@ -94,6 +95,7 @@ public class PurchasesManager : MonoBehaviour {
 			IOSInAppPurchaseManager.OnTransactionComplete += OnTransactionComplete;
 			IOSInAppPurchaseManager.OnRestoreComplete += OnRestoreComplete;
 			IOSInAppPurchaseManager.instance.LoadStore ();
+			*/
 			#elif UNITY_ANDROID
 
 			GoogleIABManager.billingSupportedEvent += billingSupportedEvent;
@@ -134,28 +136,6 @@ public class PurchasesManager : MonoBehaviour {
 	//public Action<ISN_Result> OnStoreKitInitComplete = delegate{};
 
 
-	private static void OnStoreKitInitComplete (ISN_Result result) {
-		IOSInAppPurchaseManager.OnStoreKitInitComplete -= OnStoreKitInitComplete;
-
-		if(result.IsSucceeded) {
-			Debug.Log("Inited successfully, Available products count: " + IOSInAppPurchaseManager.Instance.Products.Count.ToString());
-			/*
-			foreach(IOSProductTemplate tpl in IOSInAppPurchaseManager.Instance.Products) {
-				Debug.Log (string.Format ("id:{0} title:{1} description:{2} price:{3} localizedPrice:{4} currencySymbol:{5} currencyCode:{6}" ,
-					tpl.Id,
-					tpl.Title,
-					tpl.Description,
-					tpl.Price,
-					tpl.LocalizedPrice,
-					tpl.CurrencySymbol,
-					tpl.CurrencyCode));
-				Debug.Log("-------------");
-			}
-			*/
-		} else {
-			Debug.LogError("StoreKit Init Failed.  Error code: " + result.Error.Code + "\n" + "Error description:" + result.Error.Description);
-		}
-	}
 	/*
 	private static void OnStoreKitInitComplete(ISN_Result result) {
 		if(result.IsSucceeded) {
@@ -188,56 +168,6 @@ public class PurchasesManager : MonoBehaviour {
 		}
 				*/
 	}
-
-	private static void OnTransactionComplete (IOSStoreKitResult result) {
-
-		Debug.Log("OnTransactionComplete: " + result.ProductIdentifier);
-		Debug.Log("OnTransactionComplete: state: " + result.State);
-		instance.m_bPurchased = true;
-		switch(result.State) {
-		case InAppPurchaseState.Purchased:
-		case InAppPurchaseState.Restored:
-			//Our product been succsesly purchased or restored
-			//So we need to provide content to our user depends on productIdentifier
-			UnlockProducts(result.ProductIdentifier);
-			instance.m_eStatus = STATUS.SUCCESS;
-			break;
-		case InAppPurchaseState.Deferred:
-			//iOS 8 introduces Ask to Buy, which lets parents approve any purchases initiated by children
-			//You should update your UI to reflect this deferred state, and expect another Transaction Complete  to be called again with a new transaction state 
-			//reflecting the parent’s decision or after the transaction times out. Avoid blocking your UI or gameplay while waiting for the transaction to be updated.
-			instance.m_eStatus = STATUS.FAILD;
-			break;
-		case InAppPurchaseState.Failed:
-			//Our purchase flow is failed.
-			//We can unlock intrefase and repor user that the purchase is failed. 
-			Debug.Log("Transaction failed with error, code: " + result.Error.Code);
-			Debug.Log("Transaction failed with error, description: " + result.Error.Description);
-			instance.m_eStatus = STATUS.FAILD;
-			break;
-		}
-
-		if(result.State == InAppPurchaseState.Failed) {
-		IOSNativePopUpManager.showMessage("Transaction Failed", "Error code: " + result.Error.Code + "\n" + "Error description:" + result.Error.Description);
-		} else {
-		IOSNativePopUpManager.showMessage("Store Kit Response", "product " + result.ProductIdentifier + " state: " + result.State.ToString());
-		}
-
-	}
-
-	static void HandleOnVerificationComplete (IOSStoreKitVerificationResponse response) {
-		IOSNativePopUpManager.showMessage("Verification", "Transaction verification status: " + response.status.ToString());
-
-		Debug.Log("ORIGINAL JSON: " + response.originalJSON);
-	}
-
-	private static void OnRestoreComplete (IOSStoreKitRestoreResult res) {
-		if(res.IsSucceeded) {
-			IOSNativePopUpManager.showMessage("Success", "Restore Compleated");
-		} else {
-			IOSNativePopUpManager.showMessage("Error: " + res.Error.Code, res.Error.Description);
-		}
-	}	
 
 	#region Android
 
