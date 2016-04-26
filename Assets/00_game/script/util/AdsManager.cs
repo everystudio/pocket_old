@@ -67,9 +67,13 @@ public class AdsManager : Singleton<AdsManager> {
 	public override void Initialize ()
 	{
 		#if UNITY_ANDROID
-		m_nendAdIcon = m_goAdBanner.GetComponent<NendAdIcon> ();
+		if( m_nendAdIcon == null ){
+			m_nendAdIcon = m_goAdIcon.GetComponent<NendAdIcon> ();
+		}
 		#endif
-		m_nendAdBanner = m_goAdBanner.GetComponent<NendAdBanner> ();
+		if (m_nendAdBanner == null) {
+			m_nendAdBanner = m_goAdBanner.GetComponent<NendAdBanner> ();
+		}
 	}
 
 	#if USE_IMOBILE
