@@ -5,8 +5,13 @@ using NendUnityPlugin.AD;
 public class AdsManager : Singleton<AdsManager> {
 
 	[SerializeField]
-	private NendAdIcon m_nendAdIcon;
+	private GameObject m_goAdIcon;
 	[SerializeField]
+	private GameObject m_goAdBanner;
+
+	#if UNITY_ANDROID
+	private NendAdIcon m_nendAdIcon;
+	#endif
 	private NendAdBanner m_nendAdBanner;
 
 
@@ -61,6 +66,10 @@ public class AdsManager : Singleton<AdsManager> {
 	*/
 	public override void Initialize ()
 	{
+		#if UNITY_ANDROID
+		m_nendAdIcon = m_goAdBanner.GetComponent<NendAdIcon> ();
+		#endif
+		m_nendAdBanner = m_goAdBanner.GetComponent<NendAdBanner> ();
 	}
 
 	#if USE_IMOBILE
