@@ -41,14 +41,23 @@ public class DataStaffParam : CsvDataParam {
 		double dCount = diffSec / csv_staff.expenditure_interval;
 
 		double dRet = dCount * csv_staff.expenditure;
-		if (_bCollect && 0 < dRet ) {
+		if (_bCollect && 1 < dRet ) {
 
 			int iAmari = (int)diffSec % csv_staff.expenditure_interval;
+
+			//Debug.LogError( string.Format( "amari:{0} diffSec:{1} interval:{2}" , iAmari , diffSec, csv_staff.expenditure_interval));
 			string strResetTime = TimeManager.StrGetTime (iAmari * -1);
+			strResetTime = TimeManager.StrGetTime ();
+			//Debug.LogError (TimeManager.Instance.GetOffsetTime (setting_time, iAmari));
 
 			Dictionary< string , string > dict = new Dictionary< string , string > ();
 			dict.Add ("setting_time", "\"" + strResetTime + "\"");
 			DataManager.Instance.dataStaff.Update (staff_serial, dict);
+			/*
+			foreach (DataStaffParam param in DataManager.Instance.dataStaff.list) {
+				Debug.LogError (string.Format ("staff_serial:{0} setting_time:{1} strResetTime:{2}", param.staff_serial, param.setting_time , strResetTime));
+			}
+			*/
 		}
 		//int iCount = 
 
