@@ -136,9 +136,12 @@ PlayerSettings:
     type: 3}
   iPadPortraitSplashScreen: {fileID: 2800000, guid: 2f642f067bb954fe891d347c6497c060,
     type: 3}
-  iPadHighResPortraitSplashScreen: {fileID: 0}
-  iPadLandscapeSplashScreen: {fileID: 0}
-  iPadHighResLandscapeSplashScreen: {fileID: 0}
+  iPadHighResPortraitSplashScreen: {fileID: 2800000, guid: 2f642f067bb954fe891d347c6497c060,
+    type: 3}
+  iPadLandscapeSplashScreen: {fileID: 2800000, guid: 2f642f067bb954fe891d347c6497c060,
+    type: 3}
+  iPadHighResLandscapeSplashScreen: {fileID: 2800000, guid: 2f642f067bb954fe891d347c6497c060,
+    type: 3}
   appleTVSplashScreen: {fileID: 0}
   tvOSSmallIconLayers: []
   tvOSLargeIconLayers: []

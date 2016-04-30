@@ -8,9 +8,12 @@ public class AdsManager : Singleton<AdsManager> {
 	private GameObject m_goAdIcon;
 	[SerializeField]
 	private GameObject m_goAdBanner;
+	[SerializeField]
+	private GameObject m_goAdNativePanel;
 
 	#if UNITY_ANDROID
 	private NendAdIcon m_nendAdIcon;
+	private bool m_bIsIcon = true;
 	#endif
 	private NendAdBanner m_nendAdBanner;
 
@@ -43,27 +46,7 @@ public class AdsManager : Singleton<AdsManager> {
 		// 通常表示
 		NendAdInterstitial.Instance.Show();
 	}
-	/*
-	protected static AdsManager instance = null;
-	public static AdsManager Instance {
-		get {
-			if (instance == null) {
-				GameObject obj = GameObject.Find ("AdsManager");
-				if (obj == null) {
-					obj = new GameObject("AdsManager");
-					//Debug.LogError ("Not Exist AtlasManager!!");
-				}
-				instance = obj.GetComponent<AdsManager> ();
-				if (instance == null) {
-					//Debug.LogError ("Not Exist AtlasManager Script!!");
-					instance = obj.AddComponent<AdsManager>() as AdsManager;
-				}
-				instance.Initialize ();
-			}
-			return instance;
-		}
-	}
-	*/
+
 	public override void Initialize ()
 	{
 		#if UNITY_ANDROID
@@ -74,6 +57,8 @@ public class AdsManager : Singleton<AdsManager> {
 		if (m_nendAdBanner == null) {
 			m_nendAdBanner = m_goAdBanner.GetComponent<NendAdBanner> ();
 		}
+		// 最初はでないようにする
+		m_goAdNativePanel.SetActive (false);
 	}
 
 	#if USE_IMOBILE
@@ -86,96 +71,39 @@ public class AdsManager : Singleton<AdsManager> {
 		} else {
 			m_nendAdBanner.Hide ();
 		}
-
-		#if USE_IMOBILE
-		if (_bFlag) {
-			if (m_iIMobileBannerId == 0) {
-				#if (UNITY_IPHONE || UNITY_ANDROID ) && !UNITY_EDITOR
-				IMobileSdkAdsUnityPlugin.registerInline(IMOBILE_PID, IMOBILE_MID, IMOBILE_SID_BANNER);
-
-				// 広告の取得を開始します
-				IMobileSdkAdsUnityPlugin.start(IMOBILE_SID_BANNER);
-				// 広告の表示位置を指定して表示します(画面左下)
-				m_iIMobileBannerId = (int)IMobileSdkAdsUnityPlugin.show(IMOBILE_SID_BANNER,
-				IMobileSdkAdsUnityPlugin.AdType.BANNER,
-				IMobileSdkAdsUnityPlugin.AdAlignPosition.CENTER,
-				IMobileSdkAdsUnityPlugin.AdValignPosition.BOTTOM);
-				#else
-				#endif
-			} else {
-				#if (UNITY_IPHONE || UNITY_ANDROID ) && !UNITY_EDITOR
-				IMobileSdkAdsUnityPlugin.setVisibility(m_iIMobileBannerId, true);
-				#else
-				#endif
-			}
-		} else {
-			if (m_iIMobileBannerId != 0) {
-				#if (UNITY_IPHONE || UNITY_ANDROID ) && !UNITY_EDITOR
-				IMobileSdkAdsUnityPlugin.setVisibility (m_iIMobileBannerId, false);
-				#else
-				#endif
-			}
-		}
-		#endif
 	}
+
 #if USE_IMOBILE
 	static private int m_iIMobileIconId = 0;
 #endif
 	public void ShowIcon( bool _bFlag ){
 
-	#if USE_IMOBILE
-		string strSid = IMOBILE_SID_ICON;
-		if (_bFlag) {
-
-			if (m_iIMobileIconId == 0) {
-				#if UNITY_ANDROID  // && !UNITY_EDITOR
-				IMobileSdkAdsUnityPlugin.registerInline(IMOBILE_PID, IMOBILE_MID, strSid);
-				var iconParams = new IMobileIconParams ();
-				iconParams.iconNumber = 2; // アイコンの数を6個に
-				iconParams.iconTitleFontColor = "#000000"; // タイトルの色を黒に
-				iconParams.iconTitleShadowEnable = false; // タイトルの影を非表示に
-				iconParams.iconTitleEnable = false;
-
-				// 広告の取得を開始します
-				IMobileSdkAdsUnityPlugin.start(strSid);
-				// 広告の表示位置を指定して表示します(画面左下)
-				m_iIMobileIconId = (int)IMobileSdkAdsUnityPlugin.show(strSid,
-				IMobileSdkAdsUnityPlugin.AdType.ICON,
-				0 , 90 ,iconParams );
-				/*
-				IMobileSdkAdsUnityPlugin.AdAlignPosition.LEFT,
-				IMobileSdkAdsUnityPlugin.AdValignPosition.MIDDLE);
-				*/
-				#else
-				#endif
-			} else {
-				#if UNITY_ANDROID //&& !UNITY_EDITOR
-				IMobileSdkAdsUnityPlugin.setVisibility(m_iIMobileIconId, true);
-				#else
-				#endif
-			}
-
-		} else {
-			#if UNITY_ANDROID //&& !UNITY_EDITOR
-			IMobileSdkAdsUnityPlugin.setVisibility(m_iIMobileIconId, false);
-			#else
-			#endif
-		}
-#endif
 		#if UNITY_ANDROID
 		NendAdIcon script = m_nendAdIcon;
 		if (script == null) {
 			Debug.Log ("ShowIcon script=null! ");
-
 		} else if (_bFlag) {
-			Debug.Log ("Show Icon! ");
-			script.Show ();
-			script.Resume ();
+			//Debug.Log ("Show Icon! ");
+			if( m_bIsIcon ){
+				script.Show ();
+				script.Resume ();
+			}
+			else {
+				m_goAdNativePanel.SetActive( true );
+			}
 		} else {
-			Debug.Log ("Hide Icon! ");
-			script.Hide();
-			script.Pause();
+			//Debug.Log ("Hide Icon! ");
+			if( m_bIsIcon ){
+				script.Hide();
+				script.Pause();
+			}
+			else {
+				m_goAdNativePanel.SetActive( false );
+			}
+			m_bIsIcon = !m_bIsIcon;
 		}
+		#elif UNITY_IPHONE
+		m_goAdNativePanel.SetActive( _bFlag );
 		#endif
 		return;
 	}
