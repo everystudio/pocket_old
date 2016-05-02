@@ -53,8 +53,11 @@ public class PageBase2 : MonoBehaviourEx {
 		}
 		// BannerBase.MODEの設定
 		BannerBase.Mode = searchData.m_eBannerMode;
-
-		//Debug.Log (searchData.m_eTableType);
+		/*
+		Debug.LogError(searchData.m_eTableType);
+		Debug.LogError( strWhere );
+		Debug.Log (searchData.m_eTableType);
+		*/
 		switch (searchData.m_eTableType) {
 		case GameMain.TABLE_TYPE.WORK:
 			_parent.Display (DataManager.Instance.dataWork.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );
@@ -64,7 +67,6 @@ public class PageBase2 : MonoBehaviourEx {
 			_parent.Display (DataManager.Instance.m_csvItem.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );
 			break;
 		case GameMain.TABLE_TYPE.ITEM:
-			Debug.LogError (strWhere);
 			_parent.Display (DataManager.Instance.m_dataItem.Select (strWhere) , _iSwitchIndex , tabData.m_strSwitchHeader );
 			break;
 		case GameMain.TABLE_TYPE.MONSTER:

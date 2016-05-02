@@ -48,6 +48,7 @@ public class CtrlDispOffice : CtrlItemDetailBase {
 		m_goRootPosition.transform.localPosition = Vector3.zero;
 		// ここ別にbaseいらないね
 		m_goBlackBack = PrefabManager.Instance.MakeObject ("prefab/PrefBlackBack", m_goRootPosition);
+		m_goBlackBack.name = string.Format ("{0}(fromCtrlDispOffice)", m_goBlackBack.name);
 		base.Initialize (_iItemSerial);
 
 		return;
