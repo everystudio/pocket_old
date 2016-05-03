@@ -29,6 +29,7 @@ public class CsvItemParam : CsvDataParam {
 	public int m_open_item_id;
 	public int m_revenue_up2;
 	public int m_add_coin;
+	public int m_anim;
 
 
 
@@ -54,6 +55,7 @@ public class CsvItemParam : CsvDataParam {
 	public int open_item_id { get{ return m_open_item_id; } set{ m_open_item_id = value; } }
 	public int revenue_up2 { get{ return m_revenue_up2; } set{ m_revenue_up2 = value; } }
 	public int add_coin { get{ return m_add_coin; } set{ m_add_coin = value; } }
+	public int anim { get{ return m_anim; } set{ m_anim = value; } }
 
 
 	public void Copy( CsvItemParam _data ){
@@ -80,6 +82,7 @@ public class CsvItemParam : CsvDataParam {
 		revenue_up2 = _data.revenue_up2;
 		add_coin = _data.add_coin;
 		item_id = _data.item_id;
+		anim = _data.anim;
 
 	}
 
