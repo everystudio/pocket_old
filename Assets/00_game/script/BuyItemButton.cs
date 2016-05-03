@@ -4,7 +4,7 @@ using System.Collections;
 public class BuyItemButton : MonoBehaviourEx {
 
 	[SerializeField]
-	private UISprite m_sprImage;
+	private UI2DSprite m_sprImage;
 	[SerializeField]
 	private UILabel m_lbText;
 
