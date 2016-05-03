@@ -19,6 +19,13 @@ public class CtrlFieldItem : MonoBehaviourEx {
 	public STEP m_eStepPre;
 	public bool m_bEditting;
 
+	#region Animation
+	private float m_fAnimationTimer;
+	const float ANIMATION_INTERVAL = 1.0f;
+	private int m_iAnimationIndex;
+	private int m_iAnimationNum;
+	#endregion
+
 	public DefineOld.ROAD m_eRoad;
 
 	public List<CtrlIconRoot> m_iconRootList = new List<CtrlIconRoot> ();
@@ -143,8 +150,8 @@ public class CtrlFieldItem : MonoBehaviourEx {
 
 	}
 
-	private void change_sprite( UI2DSprite _spr , int _iItemId ){
-		string strName = "item" + string.Format( "{0:D2}_01" , _iItemId );
+	private void change_sprite( UI2DSprite _spr , int _iItemId , int _iIndex = 1){
+		string strName = "item" + string.Format( "{0:D2}_{1:D2}" , _iItemId , _iIndex );
 
 		change_sprite (_spr, strName);
 
@@ -165,8 +172,10 @@ public class CtrlFieldItem : MonoBehaviourEx {
 		m_dataItemParam.x = _iX;
 		m_dataItemParam.y = _iY;
 
-		change_sprite (m_sprItem, _iItemId);
 		CsvItemParam master = DataManager.Instance.m_csvItem.Select (_iItemId);
+		m_iAnimationNum = master.anim;
+		m_iAnimationIndex = 1;
+		change_sprite (m_sprItem, _iItemId , m_iAnimationIndex );
 
 		m_dataItemParam.width = master.size;
 		m_dataItemParam.height= master.size;
@@ -174,6 +183,7 @@ public class CtrlFieldItem : MonoBehaviourEx {
 		m_dataItemParam.category = master.category;
 
 		m_CsvItemParam = master;
+
 
 		SetPos (_iX, _iY);
 
@@ -387,8 +397,24 @@ public class CtrlFieldItem : MonoBehaviourEx {
 
 		case STEP.IDLE:
 			if (bInit) {
-				change_sprite (m_sprItem, m_dataItemParam.item_id);
+
+				m_fAnimationTimer = 0.0f;
+				m_iAnimationNum = m_CsvItemParam.anim;
+				m_iAnimationIndex = 1;
+				change_sprite (m_sprItem, m_dataItemParam.item_id , m_iAnimationIndex );
 				m_fCheckBuildTime = 0.0f;
+			}
+
+			if (1 < m_iAnimationNum) {
+				m_fAnimationTimer += Time.deltaTime;
+				if (ANIMATION_INTERVAL < m_fAnimationTimer) {
+					m_fAnimationTimer -= ANIMATION_INTERVAL;
+					m_iAnimationIndex += 1;
+					if (m_CsvItemParam.anim < m_iAnimationIndex) {
+						m_iAnimationIndex = 1;
+					}
+					change_sprite (m_sprItem, m_dataItemParam.item_id , m_iAnimationIndex );
+				}
 			}
 
 			if (0 < m_iconRootList.Count) {
@@ -409,6 +435,11 @@ public class CtrlFieldItem : MonoBehaviourEx {
 					}
 				}
 			}
+
+
+
+
+
 			break;
 
 		case STEP.EDITTING:
