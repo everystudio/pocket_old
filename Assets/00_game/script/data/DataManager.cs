@@ -7,6 +7,10 @@ public class DataManager : DataManagerBase <DataManager>{
 	public readonly string SPREAD_SHEET = "14HLMZIPB21WrMf80gqsJw-R1BKMLFJt8haok36uSI5o";
 	public readonly string SPREAD_SHEET_CONFIG_SHEET = "od6";
 
+	public readonly string KEY_ITEM_VERSION = "item_version";
+	public readonly string KEY_MONSTER_VERSION = "monster_version";
+	public readonly string KEY_WORK_VERSION = "work_version";
+
 	public override void Initialize ()
 	{
 		base.Initialize ();
@@ -43,7 +47,7 @@ public class DataManager : DataManagerBase <DataManager>{
 
 		m_csvItemDetail.Load ();
 
-		m_csvWork.Load ();
+		//m_csvWork.Load ();
 		dataWork.Load (DataWork.FILENAME);
 
 		m_csvStaff.Load ();
@@ -151,21 +155,22 @@ public class DataManager : DataManagerBase <DataManager>{
 		}
 		return new CsvItemDetailData ();
 	}
-
+	/*
 	public CsvWork m_csvWork = new CsvWork();
 	static public List<CsvWorkParam> csv_work {
 		get{ 
 			return Instance.m_csvWork.All;
 		}
 	}
-	static public CsvWorkParam GetWork( int _iWorkId ){
-		foreach (CsvWorkParam work in csv_work) {
+	*/
+	static public DataWorkParam GetWork( int _iWorkId ){
+		foreach (DataWorkParam work in Instance.dataWork.list) {
 			if (work.work_id == _iWorkId) {
 				return work;
 			}
 		}
 		Debug.LogError ("ignore staff_id:" + _iWorkId.ToString ());
-		return new CsvWorkParam ();
+		return new DataWorkParam ();
 	}
 	public DataWork dataWork = new DataWork ();
 	public DataMonster dataMonster = new DataMonster ();

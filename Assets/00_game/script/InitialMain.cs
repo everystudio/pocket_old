@@ -17,6 +17,9 @@ public class InitialMain : MonoBehaviour {
 		CHECK_UPDATE		,
 		UPDATE_DOWNLOAD		,
 		DATA_DOWNLOAD		,
+		UPDATE_ITEM_DATA	,
+		UPDATE_MONSTER_DATA	,
+		UPDATE_WORK_DATA	,
 
 		DATAMANAGER_SETUP	,
 		SOUND_LOAD			,
@@ -114,6 +117,7 @@ public class InitialMain : MonoBehaviour {
 		if (m_eStepPre != m_eStep) {
 			m_eStepPre  = m_eStep;
 			bInit = true;
+			//Debug.LogError (m_eStep);
 		}
 
 		switch (m_eStep) {
@@ -124,6 +128,10 @@ public class InitialMain : MonoBehaviour {
 					DataManager.Instance.SPREAD_SHEET,
 					DataManager.Instance.SPREAD_SHEET_CONFIG_SHEET);
 			}
+			if (m_csLoading != null) {
+				m_csLoading.ViewPercent ("更新データ確認中", 0.0f);
+			}
+
 			if (CommonNetwork.Instance.IsConnected (m_iNetworkSerial)) {
 				// 一度終了に向かうように設定
 				m_eStep = STEP.DATAMANAGER_SETUP;
@@ -148,6 +156,12 @@ public class InitialMain : MonoBehaviour {
 		case STEP.CHECK_UPDATE:
 			if (false == DataManager.Instance.config.Read (FileDownloadManager.KEY_DOWNLOAD_VERSION).Equals (DataManager.Instance.kvs_data.Read (FileDownloadManager.KEY_DOWNLOAD_VERSION))) {
 				m_eStep = STEP.UPDATE_DOWNLOAD;
+			} else if (false == DataManager.Instance.config.Read (DataManager.Instance.KEY_ITEM_VERSION).Equals (DataManager.Instance.kvs_data.Read (DataManager.Instance.KEY_ITEM_VERSION))) {
+				m_eStep = STEP.UPDATE_ITEM_DATA;
+			} else if (false == DataManager.Instance.config.Read (DataManager.Instance.KEY_MONSTER_VERSION).Equals (DataManager.Instance.kvs_data.Read (DataManager.Instance.KEY_MONSTER_VERSION))) {
+				m_eStep = STEP.UPDATE_MONSTER_DATA;
+			} else if (false == DataManager.Instance.config.Read (DataManager.Instance.KEY_WORK_VERSION).Equals (DataManager.Instance.kvs_data.Read (DataManager.Instance.KEY_WORK_VERSION))) {
+				m_eStep = STEP.UPDATE_WORK_DATA;
 			} else {
 				m_eStep = STEP.DATAMANAGER_SETUP;
 			}
@@ -176,12 +190,85 @@ public class InitialMain : MonoBehaviour {
 				Debug.Log (TimeManager.StrGetTime ());
 				FileDownloadManager.Instance.Download ( DataManager.Instance.config.ReadInt( FileDownloadManager.KEY_DOWNLOAD_VERSION) , download_list.list);
 			}
+			if (m_csLoading != null) {
+				m_csLoading.ViewPercent ("データダウンロード中", 0.0f);
+			}
+
 			if (FileDownloadManager.Instance.IsIdle ()) {
 				m_eStep = STEP.CHECK_UPDATE;
 				DataManager.Instance.kvs_data.WriteInt (FileDownloadManager.KEY_DOWNLOAD_VERSION, DataManager.Instance.config.ReadInt (FileDownloadManager.KEY_DOWNLOAD_VERSION));
 				DataManager.Instance.kvs_data.Save (DataKvs.FILE_NAME);
 				DataManager.Instance.AllLoad ();
 			}
+			break;
+
+		case STEP.UPDATE_ITEM_DATA:
+			if (0 < DataManager.Instance.m_csvItem.list.Count) {
+				CsvItem item_master = new CsvItem ();
+				item_master.Load ("csv/master/InitialCsvItem");
+				foreach (CsvItemParam param in item_master.list) {
+					CsvItemParam temp = DataManager.Instance.m_csvItem.Select (param.item_id);
+					if (temp.item_id != 0) {
+						param.status = temp.status;
+					} else {
+						item_master.list.Add (param);
+					}
+				}
+				item_master.Save (CsvItem.FilePath);
+			}
+
+			if (m_csLoading != null) {
+				m_csLoading.ViewPercent ("データ更新中", 0.0f);
+			}
+			DataManager.Instance.kvs_data.WriteInt (DataManager.Instance.KEY_ITEM_VERSION, DataManager.Instance.config.ReadInt (DataManager.Instance.KEY_ITEM_VERSION));
+			DataManager.Instance.kvs_data.Save (DataKvs.FILE_NAME);
+			DataManager.Instance.AllLoad ();
+			m_eStep = STEP.CHECK_UPDATE;
+			break;
+		case STEP.UPDATE_MONSTER_DATA:
+			if (0 < DataManager.Instance.m_csvMonster.list.Count) {
+				CsvMonster monster_master = new CsvMonster ();
+				monster_master.Load ("csv/master/InitialCsvMonster");
+				foreach (CsvMonsterParam param in monster_master.list) {
+					CsvMonsterParam temp = DataManager.Instance.m_csvMonster.Select (param.monster_id);
+					if (temp.monster_id != 0) {
+						param.status = temp.status;
+					} else {
+						monster_master.list.Add (param);
+					}
+				}
+				monster_master.Save (CsvMonster.FilePath);
+			}
+			if (m_csLoading != null) {
+				m_csLoading.ViewPercent ("データ更新中", 0.0f);
+			}
+			DataManager.Instance.kvs_data.WriteInt (DataManager.Instance.KEY_MONSTER_VERSION, DataManager.Instance.config.ReadInt (DataManager.Instance.KEY_MONSTER_VERSION));
+			DataManager.Instance.kvs_data.Save (DataKvs.FILE_NAME);
+			DataManager.Instance.AllLoad ();
+			m_eStep = STEP.CHECK_UPDATE;
+			break;
+
+		case STEP.UPDATE_WORK_DATA:
+			if (0 < DataManager.Instance.dataWork.list.Count) {
+				CsvWork work_master = new CsvWork();
+				work_master.Load ("csv/master/InitialCsvWork");
+				foreach (CsvWorkParam param in work_master.list) {
+					DataWorkParam temp = DataManager.Instance.dataWork.SelectOne (string.Format ("work_id = {0}", param.work_id));
+					if (temp.work_id != 0) {
+						temp.Copy (param, temp.status);
+					} else {
+						DataManager.Instance.dataWork.list.Add (new DataWorkParam (param));
+					}
+				}
+				DataManager.Instance.dataWork.Save (DataWork.FILENAME);
+			}
+			if (m_csLoading != null) {
+				m_csLoading.ViewPercent ("データ更新中", 0.0f);
+			}
+			DataManager.Instance.kvs_data.WriteInt (DataManager.Instance.KEY_WORK_VERSION, DataManager.Instance.config.ReadInt (DataManager.Instance.KEY_WORK_VERSION));
+			DataManager.Instance.kvs_data.Save (DataKvs.FILE_NAME);
+			DataManager.Instance.AllLoad ();
+			m_eStep = STEP.CHECK_UPDATE;
 			break;
 
 		case STEP.DATAMANAGER_SETUP:
@@ -317,7 +404,10 @@ public class InitialMain : MonoBehaviour {
 				List<DataWorkParam> data_work_list = m_dbWork.All;
 				Debug.LogError (data_work_list.Count);
 				if (data_work_list.Count == 0) {
-					foreach (CsvWorkParam csv_work_data in DataManager.Instance.m_csvWork.All) {
+					CsvWork initial_csv_work = new CsvWork ();
+					initial_csv_work.Load ("csv/master/InitialCsvWork");
+
+					foreach (CsvWorkParam csv_work_data in initial_csv_work.list) {
 						DataWorkParam data = new DataWorkParam (csv_work_data);
 						// 最初に出現していいのはappear_work_id== 0とlevel<=1のものだけ
 						if (data.appear_work_id == 0 && data.level <= 1 ) {

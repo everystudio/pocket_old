@@ -281,7 +281,12 @@ public class CtrlFieldItem : MonoBehaviourEx {
 		//Debug.LogError (string.Format ("x={0} y={1}", _iX, _iY));
 		myTransform.localPosition = (DefineOld.CELL_X_DIR.normalized * DefineOld.CELL_X_LENGTH * _iX) + (DefineOld.CELL_Y_DIR.normalized * DefineOld.CELL_Y_LENGTH * _iY);
 
-		int iDepth = 100 - (_iX + _iY);// - (m_dataItemParam.width-1);// + (m_dataItemParam.height-1));
+		int iOffset = m_dataItemParam.width - 1;
+		if (iOffset < 0) {
+			iOffset = 0;
+		}
+
+		int iDepth = 100 - (_iX + _iY) - iOffset;// + (m_dataItemParam.height-1));
 
 		if (m_bEditting) {
 			iDepth += 10;		// こんだけ上なら

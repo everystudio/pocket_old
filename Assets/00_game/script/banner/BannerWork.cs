@@ -84,7 +84,7 @@ public class BannerWork : BannerBase {
 	}
 
 	public static string GetSpriteName ( int _iWorkId ){
-		CsvWorkParam work_data = DataManager.GetWork (_iWorkId);
+		DataWorkParam work_data = DataManager.GetWork (_iWorkId);
 		string strRet = "";
 		if (0 < work_data.mission_staff) {
 			strRet = "staff_icon" + work_data.mission_staff.ToString ();

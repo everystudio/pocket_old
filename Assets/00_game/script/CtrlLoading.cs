@@ -21,6 +21,17 @@ public class CtrlLoading : MonoBehaviour {
 		//m_goLoadingRoot.SetActive (false);
 	}
 
+	public void ViewPercent( string _strMessage , float _fProgress ){
+
+		string strTemp = "";
+		for (int i = 0; i < m_iLoopCount % 4; i++) {
+			strTemp += "・";
+		}
+		m_lbLoading.text = string.Format ("{0}{1}", _strMessage, strTemp);
+
+
+	}
+
 	public void ViewPercent( float _fProgress ){
 
 		m_goLoadingRoot.SetActive (true);
@@ -31,12 +42,9 @@ public class CtrlLoading : MonoBehaviour {
 		if (iProgress == 100) {
 			strTemp = "Load Finished";
 		} else {
-			for (int i = 0; i < m_iLoopCount % 4; i++) {
-				strTemp += "・";
-			}
 		}
-		m_lbLoading.text = strTemp;
-		m_lbPercent.text = string.Format( "{0} %" , iProgress );
+		ViewPercent (strTemp , _fProgress);
+		//m_lbPercent.text = string.Format( "{0} %" , iProgress );
 	}
 
 	void Update(){

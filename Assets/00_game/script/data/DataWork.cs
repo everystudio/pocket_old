@@ -51,9 +51,12 @@ public class DataWorkParam : CsvDataParam{
 
 	public DataWorkParam(){
 	}
-	public DataWorkParam( CsvWorkParam _work ){
+	public DataWorkParam( CsvWorkParam _work , int _iStatus = 0){
+		Copy (_work, _iStatus);
+	}
+	public void Copy(CsvWorkParam _work , int _iStatus ){
 		work_id = _work.work_id;
-		status = 0;
+		status = _iStatus;
 		title = _work.title;
 		description = _work.description;
 		type = _work.type;
