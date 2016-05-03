@@ -268,6 +268,7 @@ public class CtrlFieldItem : MonoBehaviourEx {
 	}
 
 	public void SetPos( int _iX , int _iY ){
+		//Debug.LogError (string.Format ("x={0} y={1}", _iX, _iY));
 		myTransform.localPosition = (DefineOld.CELL_X_DIR.normalized * DefineOld.CELL_X_LENGTH * _iX) + (DefineOld.CELL_Y_DIR.normalized * DefineOld.CELL_Y_LENGTH * _iY);
 
 		int iDepth = 100 - (_iX + _iY);// - (m_dataItemParam.width-1);// + (m_dataItemParam.height-1));

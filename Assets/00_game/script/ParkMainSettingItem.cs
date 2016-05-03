@@ -197,7 +197,6 @@ public class ParkMainSettingItem : ParkMainController {
 
 		switch (m_eStep) {
 
-
 		case STEP.IDLE:
 			if (bInit) {
 				InputManager.Info.TouchON = false;
@@ -213,6 +212,7 @@ public class ParkMainSettingItem : ParkMainController {
 
 
 			} else if (m_YesNoButtonManager.ButtonPushed) {
+				//Debug.LogError (m_YesNoButtonManager.Index);
 				if (m_YesNoButtonManager.Index == 0) {
 
 					bool bAbleSet = Grid.AbleSettingItem (m_editItemMaster, m_iEditItemX, m_iEditItemY, m_DontSetGridList);
@@ -237,7 +237,7 @@ public class ParkMainSettingItem : ParkMainController {
 
 				if ( Screen.height * 0.2f < InputManager.Info.TouchPoint.y ) {
 					if (GameMain.GetGrid (InputManager.Info.TouchPoint, out iGridX, out iGridY)) {
-						if (GameMain.GridHit (iGridX, iGridY, m_editItem.m_dataItemParam, out m_iEditOffsetX, out m_iEditOffsetY)) {
+						if (GameMain.GridHit (iGridX, iGridY, m_iEditItemX , m_iEditItemY , m_editItem.m_dataItemParam.width , m_editItem.m_dataItemParam.height, out m_iEditOffsetX, out m_iEditOffsetY)) {
 							//iSelectSerial = data_item.item_serial;
 							m_eStep = STEP.EDIT_TOUCH;
 							//Debug.Log ("hit");
@@ -264,8 +264,8 @@ public class ParkMainSettingItem : ParkMainController {
 
 					m_iEditItemX = m_iTempX;
 					m_iEditItemY = m_iTempY;
-					m_editItem.m_dataItemParam.x = m_iEditItemX;
-					m_editItem.m_dataItemParam.y = m_iEditItemY;
+					//m_editItem.m_dataItemParam.x = m_iEditItemX;
+					//m_editItem.m_dataItemParam.y = m_iEditItemY;
 					bool bAbleSet = Grid.AbleSettingItem (m_editItemMaster, m_iEditItemX, m_iEditItemY, m_DontSetGridList);
 					m_editItem.SetEditAble (bAbleSet);
 				}
@@ -315,15 +315,15 @@ public class ParkMainSettingItem : ParkMainController {
 						m_editItem.SetPos (iGridX - m_iEditOffsetX, iGridY - m_iEditOffsetY);
 						m_iEditItemX = iGridX - m_iEditOffsetX;
 						m_iEditItemY = iGridY - m_iEditOffsetY;
-						m_editItem.m_dataItemParam.x = m_iEditItemX;
-						m_editItem.m_dataItemParam.y = m_iEditItemY;
+						//m_editItem.m_dataItemParam.x = m_iEditItemX;
+						//m_editItem.m_dataItemParam.y = m_iEditItemY;
 						bool bAbleSet = Grid.AbleSettingItem (m_editItemMaster, m_iEditItemX, m_iEditItemY, m_DontSetGridList);
 						m_editItem.SetEditAble (bAbleSet);
 
 					}
 				}
 
-				int iWidth = (int)(Screen.width * 0.1f);
+				int iWidth = (int)(Screen.width * 0.05f);
 				float fDelta = 20.0f;
 
 				if (InputManager.Info.TouchPoint.x < iWidth) {
@@ -391,7 +391,7 @@ public class ParkMainSettingItem : ParkMainController {
 
 			m_editItem.EditEnd (GameMain.Instance.m_iSettingItemSerial);
 
-			Debug.Log (m_editItem.m_dataItemParam.width);
+			//Debug.Log (m_editItem.m_dataItemParam.width);
 			GameMain.ParkRoot.AddFieldItem (m_editItem);
 			GameMain.Instance.HeaderRefresh ();
 			//m_fieldItemList.Add (m_editItem);
@@ -413,7 +413,7 @@ public class ParkMainSettingItem : ParkMainController {
 
 				//DataItem return_data_item = GameMain.dbItem.Select (string.Format (" item_serial = {0} " , GameMain.Instance.m_iSettingItemSerial ));
 
-				Debug.LogError (GameMain.Instance.m_iSettingItemSerial);
+				//Debug.LogError (GameMain.Instance.m_iSettingItemSerial);
 
 				DataItemParam return_data_item = DataManager.Instance.m_dataItem.Select (GameMain.Instance.m_iSettingItemSerial );
 				m_iEditItemX = return_data_item.x;
@@ -421,8 +421,6 @@ public class ParkMainSettingItem : ParkMainController {
 				m_eStep = STEP.SETTING;
 
 				SoundManager.Instance.PlaySE (SoundName.BUTTON_CANCEL, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
-
-
 			} else {
 				Destroy (m_editItem.gameObject);
 				m_eStep = STEP.END;

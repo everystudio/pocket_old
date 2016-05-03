@@ -38,6 +38,10 @@ public class DataItemParam : CsvDataParam{
 
 	public DataItemParam(){
 	}
+	public DataItemParam Clone(){
+		return (DataItemParam)MemberwiseClone ();
+	}
+
 	public DataItemParam( MapChipCSV _mapChip , CsvItem _csvItem ){
 
 		CsvItemParam item_data = new CsvItemParam ();
@@ -252,7 +256,7 @@ public class DataItem : CsvData<DataItemParam>{
 	public DataItemParam Select( int _iSerial ){
 		foreach (DataItemParam param in list) {
 			if (param.item_serial == _iSerial) {
-				return param;
+				return param.Clone();
 			}
 		}
 		return new DataItemParam ();
@@ -334,6 +338,7 @@ public class DataItem : CsvData<DataItemParam>{
 	}
 
 	public void Update( int _iSerial , int _iStatus , int _iX , int _iY ){
+		//Debug.LogError (string.Format ("serial={0} status={1} x={2} y={3}", _iSerial, _iStatus, _iX, _iY));
 		foreach (DataItemParam data in list) {
 			if (data.item_serial == _iSerial) {
 				data.status = _iStatus;
@@ -346,6 +351,7 @@ public class DataItem : CsvData<DataItemParam>{
 
 
 	public void Update( int _iSerial , Dictionary<string , string > _dict , bool _bDebugLog = true){
+		//Debug.LogError (string.Format ("serial={0} ", _iSerial));
 		foreach (DataItemParam data in list) {
 			if (data.item_serial == _iSerial) {
 				data.Set (_dict);

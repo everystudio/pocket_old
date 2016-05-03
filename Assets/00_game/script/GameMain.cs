@@ -424,8 +424,31 @@ public class GameMain : MonoBehaviour {
 	static public bool GetGrid( Vector2 _inputPoint , out int _iX , out int _iY ){
 		return GetGrid (ParkRoot.gameObject, _inputPoint, out _iX, out _iY );
 	}
+	static public bool GridHit( int _iX , int _iY , int _iItemX , int _iItemY , int _iItemWidth , int _iItemHeight , out int _iOffsetX , out int _iOffsetY ){
+		_iOffsetX = 0;
+		_iOffsetY = 0;
+
+		//Debug.Log ("x:" + _dataItem.x.ToString () + " y:" + _dataItem.y.ToString () + " w:" + _dataItem.width.ToString () + " h:" + _dataItem.height.ToString ());
+
+		bool bHit = false;
+		for (int x = _iItemX; x < _iItemX + _iItemWidth; x++) {
+			for (int y = _iItemY; y < _iItemY + _iItemHeight; y++) {
+				if (_iX == x && _iY == y) {
+
+					_iOffsetX = x - _iItemX;
+					_iOffsetY = y - _iItemY;
+					bHit = true;
+					break;
+				}
+			}
+		}
+		return bHit;
+	}
 
 	static public bool GridHit( int _iX , int _iY , DataItemParam _dataItem , out int _iOffsetX , out int _iOffsetY ){
+
+		return GridHit (_iX, _iY, _dataItem.x, _dataItem.y, _dataItem.width, _dataItem.height, out _iOffsetX, out _iOffsetY);
+		/*
 		_iOffsetX = 0;
 		_iOffsetY = 0;
 
@@ -444,6 +467,7 @@ public class GameMain : MonoBehaviour {
 			}
 		}
 		return bHit;
+		*/
 	}
 
 	static public bool GridHit( int _iX , int _iY , DataItemParam _dataItem ){
