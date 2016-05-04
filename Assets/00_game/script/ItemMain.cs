@@ -34,6 +34,9 @@ public class ItemMain : PageBase2 {
 	private List<GameObject> m_goBannerList = new List<GameObject> ();
 
 	protected override void initialize(){
+
+		GoogleAnalytics.Instance.Log (DataManager.Instance.GA_ITEM_MAIN);
+
 		m_goBannerList.Clear ();
 		if (m_pageHeader != null) {
 			Destroy (m_pageHeader.gameObject);

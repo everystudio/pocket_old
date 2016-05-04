@@ -51,6 +51,8 @@ public class BookMain : PageBase2 {
 
 		m_background.SetSprite ("texture/back/bg002.png");
 
+		GoogleAnalytics.Instance.Log (DataManager.Instance.GA_BOOK_MAIN);
+
 
 		List<CsvMonsterParam> data_list = DataManager.Instance.m_csvMonster.list;
 

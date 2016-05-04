@@ -90,7 +90,7 @@ public class CtrlCollectGold : MonoBehaviourEx {
 
 			m_iCollectGold = iCollectGold;
 			if (0 < m_iCollectGold) {
-				SoundManager.Instance.PlaySE ("se_cash" , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
+				SoundManager.Instance.PlaySE ("se_cash", "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 
 				DataManager.user.AddCollect ();
 				DataManager.user.AddGold (m_iCollectGold);
@@ -105,6 +105,10 @@ public class CtrlCollectGold : MonoBehaviourEx {
 						work.MissionClear ();
 					}
 				}
+				GoogleAnalytics.Instance.Log (DataManager.Instance.GA_COLLECT_SUCCESS);
+			} else {
+				GoogleAnalytics.Instance.Log (DataManager.Instance.GA_COLLECT_FAIL);
+
 			}
 		}
 		return;

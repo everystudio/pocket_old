@@ -11,6 +11,7 @@ public class CtrlItemDetailBuildupCage : CtrlItemDetailBuildupBase {
 	}
 
 	override protected void buildup(){
+		GoogleAnalytics.Instance.Log (DataManager.Instance.GA_BUILDUP_CAGE);
 		CsvItemDetailData detail_pre_data = DataManager.GetItemDetail (m_dataItemParam.item_id, m_dataItemParam.level);
 
 		int iCostPre = detail_pre_data.cost;
