@@ -37,6 +37,7 @@ public class WorkMain : PageBase2 {
 
 	protected override void initialize(){
 		m_pageHeader = makeHeader ("header_work" , WORK_TABS[0].m_strWordKey);
+		GoogleAnalytics.Instance.Log (DataManager.Instance.GA_WORK_MAIN);
 
 		makeCloseButton ();
 

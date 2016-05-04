@@ -11,6 +11,7 @@ public class CtrlItemDetailBuildupOffice : CtrlItemDetailBuildupBase {
 	}
 
 	override protected void buildup(){
+		GoogleAnalytics.Instance.Log (DataManager.Instance.GA_BUILDUP_OFFICE);
 
 		int iCostPre = m_dataItemParam.cost_max;
 		int iCostAfter = m_dataItemParam.cost_max;

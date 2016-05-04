@@ -347,6 +347,8 @@ public class InitialMain : MonoBehaviour {
 			if (m_btnStart.ButtonPushed) {
 				m_eStep = STEP.DB_SETUP;
 				SoundManager.Instance.PlaySE ("se_cleanup" , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
+
+				GoogleAnalytics.Instance.Log ("push_start");
 			} else if (m_btnBackup.ButtonPushed) {
 
 				string backupDB = System.IO.Path.Combine (Application.persistentDataPath, DefineOld.DB_NAME_DOUBTSUEN_BK );

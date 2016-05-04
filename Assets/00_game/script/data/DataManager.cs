@@ -11,6 +11,16 @@ public class DataManager : DataManagerBase <DataManager>{
 	public readonly string KEY_MONSTER_VERSION = "monster_version";
 	public readonly string KEY_WORK_VERSION = "work_version";
 
+	public readonly string GA_START = "push_start";
+	public readonly string GA_BOOK_MAIN= "book_main";
+	public readonly string GA_ITEM_MAIN = "item_main";
+	public readonly string GA_WORK_MAIN = "work_main";
+	public readonly string GA_COLLECT_SUCCESS = "collect_success";
+	public readonly string GA_COLLECT_FAIL = "collect_fail";
+	public readonly string GA_BUILDUP_CAGE = "buildup_cage";
+	public readonly string GA_BUILDUP_OFFICE = "buildup_office";
+
+
 	public override void Initialize ()
 	{
 		base.Initialize ();
