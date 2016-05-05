@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
 public class DataManager : DataManagerBase <DataManager>{
 
@@ -19,6 +20,103 @@ public class DataManager : DataManagerBase <DataManager>{
 	public readonly string GA_COLLECT_FAIL = "collect_fail";
 	public readonly string GA_BUILDUP_CAGE = "buildup_cage";
 	public readonly string GA_BUILDUP_OFFICE = "buildup_office";
+
+	/*
+	 * 
+
+DROP TABLE IF EXISTS (new_table);
+CREATE TABLE new_table (
+  test_key VARCHAR(255) NOT NULL,
+  test_value text NOT NULL,
+  PRIMARY KEY(test_key)
+);
+
+
+insert into new_table (test_key,test_value) values ('insert_key' , 'insert_value');
+	*/
+	IEnumerator send( string _filename , string _key ,string _strTime  ){
+		string strScreenShotURL= "http://every-studio.com/html/test.php";
+		//string strScreenShotURL= "http://every-studio.com/html/test.php?test_key={0}{1}&test_value={2}";
+		string test_value = "";
+		string filename = "";
+		FileInfo fi;
+		StreamReader sr;
+
+		filename = string.Format ("{0}.csv", _filename);
+		string fullpath = System.IO.Path.Combine (Application.persistentDataPath , filename);
+		fi = new FileInfo(fullpath);
+		sr = new StreamReader(fi.OpenRead());
+
+		test_value = sr.ReadToEnd ();
+		test_value = Base64.Encode (test_value);
+		string result = string.Format (strScreenShotURL, SystemInfo.deviceUniqueIdentifier, _key,test_value);
+		Debug.LogError (result);
+		Debug.LogError (Base64.Decode (test_value));
+		WWWForm wf = new WWWForm ();
+		wf.AddField ("test_key", string.Format ("{0}{2}{1}", SystemInfo.deviceUniqueIdentifier, _key , _strTime));
+		wf.AddField ("test_value", string.Format ("{0}", test_value));
+		//WWW w = new WWW (result , wf);
+		WWW w = new WWW (strScreenShotURL , wf);
+		yield return w;
+
+		if (w.error != null){
+			Debug.Log(w.error);
+		}
+		else{
+			Debug.Log("Image Uploaded!");
+		}
+	}
+	public void send_data(){
+
+		Debug.LogError ("upload_test start");
+		//string strScreenShotURL= "http://every-studio.com/html/test.php?test_key={0}{1}&test_value={2}";
+
+		string strTime = TimeManager.StrGetTime ();
+		strTime = strTime.Replace("-" , "").Replace(":","").Replace(" ","");
+		strTime = string.Format ("({0})", strTime);
+		StartCoroutine(send (DataItem.FILENAME, "dataitem" , strTime));
+		StartCoroutine(send (DataStaff.FILENAME, "datastaff" , strTime));
+		StartCoroutine(send (DataMonster.FILENAME, "datamonster" , strTime));
+		StartCoroutine (send (DataWork.FILENAME, "datawork" , strTime));
+		StartCoroutine (send (DataKvs.FILE_NAME, "datakvs" , strTime));
+
+		/*
+
+		// We should only read the screen after all rendering is complete
+		yield return new WaitForEndOfFrame();
+
+		// Create a texture the size of the screen, RGB24 format
+		var width = Screen.width;
+		var height = Screen.height;
+		var tex = new Texture2D( width, height, TextureFormat.RGB24, false );
+
+		// Read screen contents into the texture
+		tex.ReadPixels( new Rect(0, 0, width, height), 0, 0 );
+		tex.Apply();
+
+		// Encode texture into PNG
+		var bytes = tex.EncodeToPNG();
+		Destroy( tex );
+
+		// Create a Web Form
+		var form = new WWWForm();
+		form.AddField("frameCount", Time.frameCount.ToString());
+		form.AddBinaryData("file", bytes, "screenShot.png", "image/png");
+
+		// Upload to a cgi script
+		WWW w = new WWW(strScreenShotURL, form);
+		yield return w;
+
+		if (w.error != null){
+			Debug.Log(w.error);
+		}
+		else{
+			Debug.Log("Image Uploaded!");
+		}
+
+		*/
+		Debug.LogError ("upload_test end");
+	}
 
 
 	public override void Initialize ()
