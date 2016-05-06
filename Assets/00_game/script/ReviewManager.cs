@@ -66,6 +66,7 @@ public class ReviewManager : MonoBehaviourEx {
 		}
 		PlayerPrefs.SetInt (KEY_STATUS, (int)m_eStatus);
 		PlayerPrefs.SetInt (KEY_COUNT, m_iReviewIntervalCount);
+		PlayerPrefs.Save ();
 		return;
 	}
 

@@ -67,26 +67,35 @@ public class CtrlParkRoot : MonoBehaviourEx {
 			}
 
 			// 所属しているモンスターのみを取り出す
+			//Debug.LogError ("monster start");
 			List<DataMonsterParam> monster_list = DataManager.Instance.dataMonster.Select (" item_serial != 0 ");
 			foreach (DataMonsterParam monster in monster_list) {
-
+				//Debug.Log (monster.item_serial);
 				CtrlFieldItem fielditem = GetFieldItem (monster.item_serial);
-				GameObject objIcon = PrefabManager.Instance.MakeObject ("prefab/PrefIcon", fielditem.gameObject);
-				CtrlIconRoot iconRoot = objIcon.GetComponent<CtrlIconRoot> ();
-				//iconRoot.m_iSize = fielditem.m_dataItemParam.width;
-				iconRoot.Initialize (monster , fielditem );
-				fielditem.Add (iconRoot);
+				if (fielditem != null) {
+					GameObject objIcon = PrefabManager.Instance.MakeObject ("prefab/PrefIcon", fielditem.gameObject);
+					CtrlIconRoot iconRoot = objIcon.GetComponent<CtrlIconRoot> ();
+					//iconRoot.m_iSize = fielditem.m_dataItemParam.width;
+					iconRoot.Initialize (monster, fielditem);
+					fielditem.Add (iconRoot);
+				}
 			}
+			//Debug.LogError ("monster end");
 
+			//Debug.LogError ("staff start");
 			List<DataStaffParam> staff_list = DataManager.Instance.dataStaff.Select (" item_serial != 0 ");
 			foreach (DataStaffParam staff in staff_list) {
 				CtrlFieldItem fielditem = GetFieldItem (staff.item_serial);
-				GameObject objIcon = PrefabManager.Instance.MakeObject ("prefab/PrefIcon", fielditem.gameObject);
-				CtrlIconRoot iconRoot = objIcon.GetComponent<CtrlIconRoot> ();
-				//iconRoot.m_iSize = fielditem.m_dataItemParam.width;
-				iconRoot.Initialize (staff , fielditem );
-				fielditem.Add (iconRoot);
+				//Debug.Log (staff.item_serial);
+				if (fielditem != null) {
+					GameObject objIcon = PrefabManager.Instance.MakeObject ("prefab/PrefIcon", fielditem.gameObject);
+					CtrlIconRoot iconRoot = objIcon.GetComponent<CtrlIconRoot> ();
+					//iconRoot.m_iSize = fielditem.m_dataItemParam.width;
+					iconRoot.Initialize (staff, fielditem);
+					fielditem.Add (iconRoot);
+				}
 			}
+			//Debug.LogError ("staff end");
 		}
 
 		m_bInitialized = true;

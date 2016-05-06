@@ -349,6 +349,12 @@ public class InitialMain : MonoBehaviour {
 				SoundManager.Instance.PlaySE ("se_cleanup" , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
 
 				GoogleAnalytics.Instance.Log ("push_start");
+
+
+				PlayerPrefs.SetInt (DefineOld.USER_WIDTH, 45);
+				PlayerPrefs.SetInt (DefineOld.USER_HEIGHT, 45);
+				PlayerPrefs.Save ();
+
 			} else if (m_btnBackup.ButtonPushed) {
 
 				string backupDB = System.IO.Path.Combine (Application.persistentDataPath, DefineOld.DB_NAME_DOUBTSUEN_BK );
@@ -404,7 +410,6 @@ public class InitialMain : MonoBehaviour {
 					}
 				}
 				List<DataWorkParam> data_work_list = m_dbWork.All;
-				Debug.LogError (data_work_list.Count);
 				if (data_work_list.Count == 0) {
 					CsvWork initial_csv_work = new CsvWork ();
 					initial_csv_work.Load ("csv/master/InitialCsvWork");

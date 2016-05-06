@@ -298,6 +298,7 @@ public class BannerItem : BannerBase {
 				DataManager.user.m_iHeight += DefineOld.EXPAND_FIELD;
 				PlayerPrefs.SetInt (DefineOld.USER_WIDTH, DataManager.user.m_iWidth);
 				PlayerPrefs.SetInt (DefineOld.USER_HEIGHT, DataManager.user.m_iHeight);
+				PlayerPrefs.Save ();
 			}
 			if (m_ojisanCheck.IsYes ()) {
 				GameMain.ListRefresh = true;

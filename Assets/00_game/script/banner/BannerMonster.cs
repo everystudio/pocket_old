@@ -104,7 +104,7 @@ public class BannerMonster : BannerBase {
 		m_bIsUserData = true;
 
 		//Debug.Log (m_dataMonsterMaster.cost);
-		Debug.Log (_iCostNokori);
+		//Debug.Log (_iCostNokori);
 		m_bAbleUse = DataManager.user.AbleBuy (0, 0, m_csvMonsterParam.cost, _iCostNokori, 0, 0, ref m_eReason);
 		SetReasonSprite (m_sprReason, m_eReason);
 		if (BannerBase.Mode == BannerBase.MODE.MONSTER_DETAIL) {
