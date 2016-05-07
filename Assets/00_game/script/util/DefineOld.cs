@@ -176,6 +176,7 @@ public class DefineOld : MonoBehaviour {
 		MAX				,
 	}
 	static public int ITEM_ID_ROAD = 15;
+	static public int ITEM_ID_GATE = 999;
 
 	static public string GetProductId( int _iItemId , ref int _iTicketNum ){
 		string strRet = "";
