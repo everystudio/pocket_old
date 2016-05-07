@@ -45,7 +45,7 @@ public class CtrlVisitor : MonoBehaviourEx {
 	private Vector3 m_v3TargetPosition;
 
 	private float INTERVAL = 1.0f;
-	private float INTERVAL_ANIMATION = 1.0f;
+	private float INTERVAL_ANIMATION = 0.4f;
 
 	[SerializeField]
 	private UI2DSprite m_sprChara;
@@ -202,6 +202,7 @@ public class CtrlVisitor : MonoBehaviourEx {
 
 			m_fAnimationTimer += Time.deltaTime;
 			if (INTERVAL_ANIMATION < m_fAnimationTimer) {
+				m_fAnimationTimer -= INTERVAL_ANIMATION;
 				m_iAnimationFrame += 1;
 				if (2 <= m_iAnimationFrame) {
 					m_iAnimationFrame = 0;
