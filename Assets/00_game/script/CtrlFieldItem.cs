@@ -171,6 +171,9 @@ public class CtrlFieldItem : MonoBehaviourEx {
 
 		m_dataItemParam.x = _iX;
 		m_dataItemParam.y = _iY;
+		if (_iItemId == DefineOld.ITEM_ID_GATE) {
+			gameObject.AddComponent<CtrlGate>().Initialize(_iX,_iY);
+		}
 
 		CsvItemParam master = DataManager.Instance.m_csvItem.Select (_iItemId);
 		m_iAnimationNum = master.anim;
