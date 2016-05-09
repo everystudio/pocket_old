@@ -142,8 +142,8 @@ public class InitialMain : MonoBehaviour {
 				CsvConfig config_data = new CsvConfig ();
 				config_data.Input (m_ssdSample);
 				if (false == config_data.Read (CsvConfig.KEY_CONFIG_VERSION).Equals (DataManager.Instance.config.Read (CsvConfig.KEY_CONFIG_VERSION)) || CONFIG_UPDATE == true) {
-					config_data.Save (CsvConfig.FILENAME_CONFIG);
-					DataManager.Instance.config.Load (CsvConfig.FILENAME_CONFIG);
+					config_data.Save (CsvConfig.FILE_NAME);
+					DataManager.Instance.config.Load (CsvConfig.FILE_NAME);
 					m_eStep = STEP.CHECK_UPDATE;
 				}
 			} else if (CommonNetwork.Instance.IsError (m_iNetworkSerial ) ) {
@@ -370,7 +370,7 @@ public class InitialMain : MonoBehaviour {
 			break;
 
 		case STEP.DB_SETUP:
-			Debug.LogError (STEP.DB_SETUP); 
+			//Debug.LogError (STEP.DB_SETUP); 
 			if (bInit) {
 			}
 			if (true) {

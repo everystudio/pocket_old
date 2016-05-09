@@ -226,10 +226,21 @@ public class BannerItem : BannerBase {
 						break;
 
 					case DefineOld.Item.Category.TICKET:
-						m_eStep = STEP.TICKET_CHECK;
+
+						if (m_ItemMaster.need_coin <= DataManager.user.m_iGold) {
+							m_eStep = STEP.TICKET_CHECK;
+						} else {
+							m_bAbleUse = false;
+							SetEnableIcon (m_bAbleUse);
+						}
 						break;
 					case DefineOld.Item.Category.GOLD:
-						m_eStep = STEP.GOLD_CHECK;
+						if (m_ItemMaster.need_ticket <= DataManager.user.m_iTicket) {
+							m_eStep = STEP.GOLD_CHECK;
+						} else {
+							m_bAbleUse = false;
+							SetEnableIcon (m_bAbleUse);
+						}
 						break;
 					default:
 						GameMain.Instance.PreSettingItemId = 0;
@@ -308,6 +319,7 @@ public class BannerItem : BannerBase {
 			break;
 
 		case STEP.TICKET_CHECK:
+			/*
 			if (bInit) {
 				string strBuyProductId = DefineOld.GetProductId (m_ItemMaster.item_id , ref m_iTicketNum );
 				PurchasesManager.buyItem (strBuyProductId);
@@ -318,10 +330,29 @@ public class BannerItem : BannerBase {
 					m_eStep = STEP.TICKET_BUY;
 				}
 			}
+			*/
+			if (bInit) {
+				string strBuyProductId = DefineOld.GetProductId (m_ItemMaster.item_id , ref m_iTicketNum );
+				GameObject objOjisan = PrefabManager.Instance.MakeObject ("prefab/PrefOjisanCheck", gameObject.transform.parent.parent.parent.parent.gameObject );
+				m_ojisanCheck = objOjisan.GetComponent<CtrlOjisanCheck> ();
+				//m_ojisanCheck.Initialize ( string.Format("ゴールドををチケットに\n変換します\nよろしいですか"  ));
+				m_ojisanCheck.Initialize ( string.Format("ゴールドををチケットに\n変換します\n\n{0}枚→ {1}枚\nよろしいですか" , DataManager.user.m_iTicket ,DataManager.user.m_iTicket+m_iTicketNum ));
+			}
+			if (m_ojisanCheck.IsYes ()) {
+				SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
+				Destroy (m_ojisanCheck.gameObject);
+				m_eStep = STEP.TICKET_BUY;
+			} else if (m_ojisanCheck.IsNo ()) {
+				SoundManager.Instance.PlaySE (SoundName.BUTTON_PUSH, "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/se");
+				Destroy (m_ojisanCheck.gameObject);
+				m_eStep = STEP.IDLE;
+			} else {
+			}
 			break;
 
 		case STEP.TICKET_BUY:
 			Debug.Log (string.Format ("add ticket num:{0}" , m_iTicketNum ));
+			DataManager.user.AddGold (-1*m_ItemMaster.need_coin);
 			DataManager.user.AddTicket (m_iTicketNum);
 			GameMain.Instance.HeaderRefresh ();
 			m_eStep = STEP.IDLE;
