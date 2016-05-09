@@ -40,10 +40,10 @@ public class CtrlIconMonster : CtrlIconBase {
 		int iCleanLevel = 0;
 		int iMealLevel = 0;
 		m_dataMonster.GetConditions (ref iCleanLevel, ref iMealLevel);
-		if (iCleanLevel < 5) {
+		if (m_goDust != null ||  iCleanLevel < 5) {
 			bRet = true;
 			Destroy (m_goDust);
-
+			m_goDust = null;
 			Dictionary< string , string > dict = new Dictionary< string , string > ();
 			dict.Add ("clean_time", "\"" + TimeManager.StrGetTime () + "\"");
 			DataManager.Instance.dataMonster.Update (m_dataMonster.monster_serial, dict);
