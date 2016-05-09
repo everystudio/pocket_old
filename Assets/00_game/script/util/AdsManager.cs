@@ -59,6 +59,8 @@ public class AdsManager : Singleton<AdsManager> {
 		}
 		// 最初はでないようにする
 		m_goAdNativePanel.SetActive (false);
+
+
 	}
 
 	#if USE_IMOBILE

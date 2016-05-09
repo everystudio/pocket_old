@@ -130,6 +130,15 @@ public class GameMain : MonoBehaviour {
 	private void initialize(){
 		m_eMoveStatus = STATUS.NONE;
 		m_iMoveTab = 0;
+
+		string strUnityAdsAppId = "";
+		#if UNITY_ANDROID
+		strUnityAdsAppId = DataManager.Instance.config.Read( DataManager.Instance.KEY_UNITYADS_APP_ID_ANDROID );
+		#elif UNITY_IOS
+		strUnityAdsAppId = DataManager.Instance.config.Read( DataManager.Instance.KEY_UNITYADS_APP_ID_IOS );
+		#endif
+		UnityAdsSupporter.Instance.Initialize (strUnityAdsAppId);
+
 		if (m_bInitialized == false) {
 			int iWidth = PlayerPrefs.GetInt (DefineOld.USER_WIDTH);
 			int iHeight= PlayerPrefs.GetInt (DefineOld.USER_HEIGHT);
@@ -397,23 +406,24 @@ public class GameMain : MonoBehaviour {
 
 		//レイを投射してオブジェクトを検出
 		if (Physics.Raycast (ray, out hit, fDistance)) {
+			if (hit.collider.gameObject.name.Equals ("parkRoot")) {
+				GameObject objPoint = new GameObject ();
+				objPoint.transform.position = hit.point;
+				objPoint.transform.parent = _goRoot.transform;
 
-			GameObject objPoint = new GameObject ();
-			objPoint.transform.position = hit.point;
-			objPoint.transform.parent = _goRoot.transform;
+				// ここの計算式は後で見直します
+				int calc_x = Mathf.FloorToInt ((objPoint.transform.localPosition.x + (objPoint.transform.localPosition.y * 2.0f)) / 160.0f);
+				int calc_y = Mathf.FloorToInt (((objPoint.transform.localPosition.y * 2.0f) - objPoint.transform.localPosition.x) / 160.0f);
+				//Debug.Log ("calc_x=" +  calc_x.ToString () + " calc_y=" +  calc_y.ToString ());
 
-			// ここの計算式は後で見直します
-			int calc_x = Mathf.FloorToInt ((objPoint.transform.localPosition.x + (objPoint.transform.localPosition.y * 2.0f)) / 160.0f);
-			int calc_y = Mathf.FloorToInt (((objPoint.transform.localPosition.y * 2.0f) - objPoint.transform.localPosition.x) / 160.0f);
-			//Debug.Log ("calc_x=" +  calc_x.ToString () + " calc_y=" +  calc_y.ToString ());
+				bRet = true;
+				_iX = calc_x;
+				_iY = calc_y;
 
-			bRet = true;
-			_iX = calc_x;
-			_iY = calc_y;
+				//Debug.LogError (string.Format ("x:{0} y:{1} posx{2} posy{3}", calc_x, calc_y, objPoint.transform.localPosition.x, objPoint.transform.localPosition.y));
 
-			//Debug.LogError (string.Format ("x:{0} y:{1} posx{2} posy{3}", calc_x, calc_y, objPoint.transform.localPosition.x, objPoint.transform.localPosition.y));
-
-			Destroy (objPoint);
+				Destroy (objPoint);
+			}
 		}
 		return bRet;
 	}

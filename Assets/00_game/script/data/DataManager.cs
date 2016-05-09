@@ -21,6 +21,9 @@ public class DataManager : DataManagerBase <DataManager>{
 	public readonly string GA_BUILDUP_CAGE = "buildup_cage";
 	public readonly string GA_BUILDUP_OFFICE = "buildup_office";
 
+	public readonly string KEY_UNITYADS_APP_ID_ANDROID = "unityads_app_id_android";
+	public readonly string KEY_UNITYADS_APP_ID_IOS = "unityads_app_id_ios";
+	public readonly string KEY_UNITYADS_LASTPLAY_TIME = "unityads_lastplay_time";
 	/*
 	 * 
 
@@ -145,6 +148,7 @@ insert into new_table (test_key,test_value) values ('insert_key' , 'insert_value
 	}
 
 	public void AllLoad(){
+		config.Load (CsvConfig.FILE_NAME);
 		kvs_data.Load( DataKvs.FILE_NAME );
 		m_csvItem.Load ();
 		m_csvMonster.Load ();
