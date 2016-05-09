@@ -320,7 +320,7 @@ public class BannerMonster : BannerBase {
 					int iConditionFine = (int)DefineOld.Monster.CONDITION.FINE;
 					dict.Add ("condition", iConditionFine.ToString ());
 					DateTime setDate = TimeManager.GetNow ();
-					setDate = setDate.AddSeconds (-1 * 60 * 60 * 2);
+					//setDate = setDate.AddSeconds (-1 * 60 * 60 * 2);
 					string strSetTime = setDate.ToString (TimeManager.DATE_FORMAT);
 
 					dict.Add ("clean_time", string.Format ("\"{0}\" ", strSetTime)); 
