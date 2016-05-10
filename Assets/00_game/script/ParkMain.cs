@@ -130,8 +130,8 @@ public class ParkMain : PageBase2 {
 
 		case STEP.IDLE:
 			if (bInit) {
-				SoundManager.Instance.PlayBGM (SoundName.BGM_MAIN , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/bgm");
-
+				SoundManager.Instance.PlayBGM (DataManager.Instance.config.Read(DataManager.Instance.KEY_BGM_PARK)  , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/bgm/maou");
+				//SoundManager.Instance.PlayBgmMidi( "sound/midi/bgm" , DataManager.Instance.config.Read(DataManager.Instance.KEY_BGM_PARK) , "sound/midi/bank" , "GMBank.bank" );
 				m_eEditMode = ParkMain.EDIT_MODE.NORMAL;
 				m_footer.gameObject.SetActive (true);
 

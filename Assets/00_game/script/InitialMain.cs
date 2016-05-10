@@ -93,8 +93,8 @@ public class InitialMain : MonoBehaviour {
 		m_SwitchSpriteBack.SetSprite ("texture/back/bg001.png");
 		//m_SwitchSpriteBack.SetSprite ("tutorial777");
 
-		SoundManager.Instance.PlayBGM ("farming" , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/bgm");
-
+		//SoundManager.Instance.PlayBGM ("farming" , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/bgm");
+		SoundManager.Instance.PlayBGM ( "maoudamashii_5_village01" , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/bgm/maou");
 		#if UNITY_ANDROID
 		GoogleIAB.enableLogging (true);
 		string key = "your public key from the Android developer portal here";

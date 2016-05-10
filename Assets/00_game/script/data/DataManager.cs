@@ -24,6 +24,14 @@ public class DataManager : DataManagerBase <DataManager>{
 	public readonly string KEY_UNITYADS_APP_ID_ANDROID = "unityads_app_id_android";
 	public readonly string KEY_UNITYADS_APP_ID_IOS = "unityads_app_id_ios";
 	public readonly string KEY_UNITYADS_LASTPLAY_TIME = "unityads_lastplay_time";
+
+	public readonly string KEY_BGM_START= "bgm_start";
+	public readonly string KEY_BGM_PARK = "bgm_park";
+	public readonly string KEY_BGM_BOOK = "bgm_book";
+	public readonly string KEY_BGM_WORK = "bgm_work";
+	public readonly string KEY_BGM_SHOP = "bgm_shop";
+
+
 	/*
 	 * 
 

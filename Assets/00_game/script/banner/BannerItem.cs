@@ -332,7 +332,7 @@ public class BannerItem : BannerBase {
 			}
 			*/
 			if (bInit) {
-				string strBuyProductId = DefineOld.GetProductId (m_ItemMaster.item_id , ref m_iTicketNum );
+				DefineOld.GetProductId (m_ItemMaster.item_id , ref m_iTicketNum );
 				GameObject objOjisan = PrefabManager.Instance.MakeObject ("prefab/PrefOjisanCheck", gameObject.transform.parent.parent.parent.parent.gameObject );
 				m_ojisanCheck = objOjisan.GetComponent<CtrlOjisanCheck> ();
 				//m_ojisanCheck.Initialize ( string.Format("ゴールドををチケットに\n変換します\nよろしいですか"  ));
