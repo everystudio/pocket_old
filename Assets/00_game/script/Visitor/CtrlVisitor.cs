@@ -52,6 +52,8 @@ public class CtrlVisitor : MonoBehaviourEx {
 
 	private void setSprite (int _iType, int _iFrame){
 		m_sprChara.sprite2D = SpriteManager.Instance.Load (string.Format ("texture/ui/people{0}_{1:D2}", _iType, _iFrame));
+		m_sprChara.width = (int)m_sprChara.sprite2D.texture.width;
+		m_sprChara.height = (int)m_sprChara.sprite2D.texture.height;
 	}
 
 	private Vector3 getPosition( int _iX , int _iY ){

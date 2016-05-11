@@ -53,7 +53,8 @@ public class CtrlIconStaff : CtrlIconBase {
 			//m_sprIcon.atlas = AtlasManager.Instance.GetAtlas (strName);
 			//m_sprIcon.spriteName = strName;
 			m_sprIcon.sprite2D = SpriteManager.Instance.Load( string.Format( "texture/staff/{0}.png" , strName ));
-
+			m_sprIcon.width = (int)m_sprIcon.sprite2D.texture.width;
+			m_sprIcon.height = (int)m_sprIcon.sprite2D.texture.height;
 		}
 	}
 
@@ -77,8 +78,8 @@ public class CtrlIconStaff : CtrlIconBase {
 				strName += "_2";
 			}
 			m_sprIcon.sprite2D = SpriteManager.Instance.Load( string.Format( "texture/staff/{0}.png" , strName ));
-
-
+			m_sprIcon.width = (int)m_sprIcon.sprite2D.texture.width;
+			m_sprIcon.height = (int)m_sprIcon.sprite2D.texture.height;
 		}
 		return;
 	}
