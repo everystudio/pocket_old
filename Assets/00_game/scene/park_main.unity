@@ -5004,7 +5004,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -51.5, y: 14.7}
+  m_AnchoredPosition: {x: -45, y: 10.8}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &785162588
@@ -7609,6 +7609,7 @@ MonoBehaviour:
   m_eStepPre: 0
   m_goPanelFront: {fileID: 1464941435}
   m_sprImage: {fileID: 139842034}
+  m_fTimerCheck: 0
 --- !u!1001 &1334272830
 Prefab:
   m_ObjectHideFlags: 0
@@ -8054,8 +8055,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -125, y: -243}
-  m_SizeDelta: {x: 250, y: 190}
+  m_AnchoredPosition: {x: -112, y: -239.7}
+  m_SizeDelta: {x: 224, y: 190}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1371154838
 MonoBehaviour:
@@ -8448,7 +8449,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -56.7, y: 74.1}
+  m_AnchoredPosition: {x: -39.8, y: 61.575012}
   m_SizeDelta: {x: 90.4, y: 21.55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1454144950
@@ -11909,7 +11910,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 46.449978, y: 14.700014}
+  m_AnchoredPosition: {x: 46.449978, y: 10.800058}
   m_SizeDelta: {x: 92.9, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2101418937
