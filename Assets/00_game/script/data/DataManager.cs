@@ -31,6 +31,11 @@ public class DataManager : DataManagerBase <DataManager>{
 	public readonly string KEY_BGM_WORK = "bgm_work";
 	public readonly string KEY_BGM_SHOP = "bgm_shop";
 
+	public readonly string KEY_HELP_ACTION_MOVIE_PROB = "key_help_action_movie_prob";
+	public readonly string KEY_HELP_ACTION_TWITTER_PROB = "key_help_action_twitter_prob";
+
+	public readonly string KEY_SHARE_MESSAGE_ANDROID = "key_share_message_android";
+	public readonly string KEY_SHARE_MESSAGE_IOS = "key_share_message_ios";
 
 	/*
 	 * 
@@ -351,6 +356,21 @@ insert into new_table (test_key,test_value) values ('insert_key' , 'insert_value
 		get{ 
 			return Instance.m_csvLocalNotification.All;
 		}
+	}
+
+	public CtrlHelp.ACTION_TYPE GetHelpActionType(){
+
+		int[] prob_arr = new int[(int)CtrlHelp.ACTION_TYPE.MAX] { 0 , 100 , 100 };
+
+		if (config.HasKey (KEY_HELP_ACTION_MOVIE_PROB)) {
+			prob_arr [(int)CtrlHelp.ACTION_TYPE.MOVIE] = config.ReadInt (KEY_HELP_ACTION_MOVIE_PROB);
+		}
+		if (config.HasKey (KEY_HELP_ACTION_TWITTER_PROB)) {
+			prob_arr [(int)CtrlHelp.ACTION_TYPE.TWITTER] = config.ReadInt (KEY_HELP_ACTION_TWITTER_PROB);
+		}
+		CtrlHelp.ACTION_TYPE eRet = (CtrlHelp.ACTION_TYPE)UtilRand.GetIndex (prob_arr);
+
+		return eRet;
 	}
 
 	#endregion

@@ -96,6 +96,7 @@ public class InitialMain : MonoBehaviour {
 		//SoundManager.Instance.PlayBGM ("farming" , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/bgm");
 		SoundManager.Instance.PlayBGM ( "maoudamashii_5_village01" , "https://s3-ap-northeast-1.amazonaws.com/every-studio/app/sound/bgm/maou");
 		#if UNITY_ANDROID
+		/*
 		GoogleIAB.enableLogging (true);
 		string key = "your public key from the Android developer portal here";
 		key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsqFXrg2t62dru/VFQYyxd2m1kORBbrAGxDxiSAkh3ybaXJtJWNcej/YAxKx7Orrtfq+pU965U2FnU3K54xddts2UGCI9O6TSU0AoKbwFYj+okfF21firsEqZd4aYtVYQ471flWj3ZEG9u2YpIzjGykUQadsxO4Y/OcRbdUn9289Mc0JAbdepmN9yRnvgBJWKZF/c0mBrM4ISfF5TVip2Tp+BXACqblOb+TQZjOB0OeVPxYpdy5k3eJTcQuwiLmYxgpEBL3tIT7grxVROgk8YYncncaZR7Q/wWlsFgFTNMRaF2bPI8apLiA7eIyKv5zbmhbE7YLBXUvkuoHbAqDQrLQIDAQAB";
@@ -105,6 +106,7 @@ public class InitialMain : MonoBehaviour {
 		//下はテスト用
 		//key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArGLKSb92Imt43S40ArCXfTmQ31c+pFQTM0Dza3j/Tn4cqjwccjQ/jej68GgVyGXGC2gT/EtbcVVA+bHugXmyv73lGBgmQlzBL41WYTKolO8Z6pVWTeHBtsT7RcHKukoKiONZ7NiQ9P5t6CCPBB2sXQOp1y3ryVbv01xXlM+hB6HkkKxrT6lIjTbtiVXCHAJvqPexPbqVIfGjBaXH/oHKxEBxYDaa6PTUsU3OP3MTx63ycTEnEMsQlA1W6ZuTFIa5Jd3cVlfQI7uovEzAbIlUfwcnxVOUWASiYe81eQiD1BMl+JeCRhfd5e8D4n0LOA12rHm1F3fC9ZoIEjpNB+BRhwIDAQAB";
 		GoogleIAB.init( key );
+				*/
 		#endif
 
 
@@ -129,7 +131,7 @@ public class InitialMain : MonoBehaviour {
 					DataManager.Instance.SPREAD_SHEET_CONFIG_SHEET);
 			}
 			if (m_csLoading != null) {
-				m_csLoading.ViewPercent ("更新データ確認中", 0.0f);
+				m_csLoading.ViewPercent ("ネットワーク接続中", 0.0f);
 			}
 
 			if (CommonNetwork.Instance.IsConnected (m_iNetworkSerial)) {
@@ -137,7 +139,7 @@ public class InitialMain : MonoBehaviour {
 				m_eStep = STEP.DATAMANAGER_SETUP;
 				TNetworkData data = EveryStudioLibrary.CommonNetwork.Instance.GetData (m_iNetworkSerial);
 				Debug.Log (data.m_strData);
-				Debug.Log (data.m_dictRecievedData);
+				//Debug.Log (data.m_dictRecievedData);
 				m_ssdSample = EveryStudioLibrary.CommonNetwork.Instance.ConvertSpreadSheetData (data.m_dictRecievedData);
 				CsvConfig config_data = new CsvConfig ();
 				config_data.Input (m_ssdSample);
@@ -150,10 +152,15 @@ public class InitialMain : MonoBehaviour {
 				m_eStep = STEP.NETWORK_ERROR;
 			} else {
 			}
+
 			break;
 
 
 		case STEP.CHECK_UPDATE:
+			if (m_csLoading != null) {
+				m_csLoading.ViewPercent ("更新データ確認中", 0.0f);
+			}
+
 			if (false == DataManager.Instance.config.Read (FileDownloadManager.KEY_DOWNLOAD_VERSION).Equals (DataManager.Instance.kvs_data.Read (FileDownloadManager.KEY_DOWNLOAD_VERSION))) {
 				m_eStep = STEP.UPDATE_DOWNLOAD;
 			} else if (false == DataManager.Instance.config.Read (DataManager.Instance.KEY_ITEM_VERSION).Equals (DataManager.Instance.kvs_data.Read (DataManager.Instance.KEY_ITEM_VERSION))) {
@@ -173,6 +180,10 @@ public class InitialMain : MonoBehaviour {
 					DataManager.Instance.SPREAD_SHEET ,
 					DataManager.Instance.config.Read ("download"));
 			}
+			if (m_csLoading != null) {
+				m_csLoading.ViewPercent ("ダウンロードリスト更新中", 0.0f);
+			}
+
 			if (CommonNetwork.Instance.IsConnected (m_iNetworkSerial)) {
 				TNetworkData data = EveryStudioLibrary.CommonNetwork.Instance.GetData (m_iNetworkSerial);
 				m_ssdSample = EveryStudioLibrary.CommonNetwork.Instance.ConvertSpreadSheetData (data.m_dictRecievedData);
@@ -218,7 +229,7 @@ public class InitialMain : MonoBehaviour {
 			}
 
 			if (m_csLoading != null) {
-				m_csLoading.ViewPercent ("データ更新中", 0.0f);
+				m_csLoading.ViewPercent ("アイテムデータ更新中", 0.0f);
 			}
 			DataManager.Instance.kvs_data.WriteInt (DataManager.Instance.KEY_ITEM_VERSION, DataManager.Instance.config.ReadInt (DataManager.Instance.KEY_ITEM_VERSION));
 			DataManager.Instance.kvs_data.Save (DataKvs.FILE_NAME);
@@ -240,7 +251,7 @@ public class InitialMain : MonoBehaviour {
 				monster_master.Save (CsvMonster.FilePath);
 			}
 			if (m_csLoading != null) {
-				m_csLoading.ViewPercent ("データ更新中", 0.0f);
+				m_csLoading.ViewPercent ("キャラデータ更新中", 0.0f);
 			}
 			DataManager.Instance.kvs_data.WriteInt (DataManager.Instance.KEY_MONSTER_VERSION, DataManager.Instance.config.ReadInt (DataManager.Instance.KEY_MONSTER_VERSION));
 			DataManager.Instance.kvs_data.Save (DataKvs.FILE_NAME);
@@ -263,7 +274,7 @@ public class InitialMain : MonoBehaviour {
 				DataManager.Instance.dataWork.Save (DataWork.FILENAME);
 			}
 			if (m_csLoading != null) {
-				m_csLoading.ViewPercent ("データ更新中", 0.0f);
+				m_csLoading.ViewPercent ("お仕事データ更新中", 0.0f);
 			}
 			DataManager.Instance.kvs_data.WriteInt (DataManager.Instance.KEY_WORK_VERSION, DataManager.Instance.config.ReadInt (DataManager.Instance.KEY_WORK_VERSION));
 			DataManager.Instance.kvs_data.Save (DataKvs.FILE_NAME);
