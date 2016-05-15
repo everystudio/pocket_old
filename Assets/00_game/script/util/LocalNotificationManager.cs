@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class LocalNotificationManager : MonoBehaviour {
 
-	public List<CsvLocalNotificationData> m_localNotificationDataList = new List<CsvLocalNotificationData>();
+	private List<CsvLocalNotificationParam> m_localNotificationDataList = new List<CsvLocalNotificationParam>();
 
 	public List<string> add_message_list = new List<string>();
 
@@ -48,17 +48,17 @@ public class LocalNotificationManager : MonoBehaviour {
 
 	}
 
-	public bool Add( CsvLocalNotificationData _data ){
+	public bool Add( CsvLocalNotificationParam _param ){
 
 		bool bHit = false;
-		foreach (CsvLocalNotificationData data in m_localNotificationDataList) {
-			if (data.id == _data.id) {
+		foreach (CsvLocalNotificationParam param in m_localNotificationDataList) {
+			if (param.id == _param.id) {
 				bHit = true;
 			}
 		}
 		if (bHit == false) {
-			m_localNotificationDataList.Add (_data);
-			add_message_list.Add (_data.message);
+			m_localNotificationDataList.Add (_param);
+			add_message_list.Add (_param.message);
 
 			//Debug.Log (string.Format ("second:{0} message{1}", _data.second, _data.message));
 		}
@@ -94,10 +94,10 @@ public class LocalNotificationManager : MonoBehaviour {
 			localnotificate_list.Add( iTemp );
 			*/
 
-			foreach( CsvLocalNotificationData data in m_localNotificationDataList ){
+			foreach( CsvLocalNotificationParam param in m_localNotificationDataList ){
 				//Debug.LogError( string.Format( "add local notification:{0}" , data.message ));
 
-				m_plugin2.Call ("sendNotification", (long)data.second , iTemp , data.title, data.message);
+				m_plugin2.Call ("sendNotification", (long)param.second , iTemp , param.title, param.message);
 				iTemp += 1;
 				//iTemp = EtceteraAndroid.scheduleNotification( data.second, data.title, data.message, data.message, data.message );
 			}

@@ -1,13 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CsvLocalNotification : MasterTableBase<CsvLocalNotificationData> {
-
-	private static readonly string FilePath = "csv/local_notification";
-	public void Load() { Load(FilePath); }
-}
-	
-public class CsvLocalNotificationData : MasterBase
+public class CsvLocalNotificationParam : CsvDataParam
 {
 	public int id { get; private set; }
 	public int type { get; private set; }
@@ -16,6 +10,11 @@ public class CsvLocalNotificationData : MasterBase
 	public string message { get; private set; }
 }
 
+public class CsvLocalNotificationData : CsvData<CsvLocalNotificationParam> {
+
+	private static readonly string FilePath = "csv/local_notification";
+	public void Load() { Load(FilePath); }
+}
 
 
 

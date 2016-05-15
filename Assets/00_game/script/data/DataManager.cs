@@ -154,8 +154,8 @@ insert into new_table (test_key,test_value) values ('insert_key' , 'insert_value
 
 		//m_tDataUser.Initialize (iWidth,iHeight);
 		AllLoad();
-		foreach( CsvLocalNotificationData data in csv_localNotification ){
-			LocalNotificationManager.Instance.Add (data);
+		foreach( CsvLocalNotificationParam param in csv_localNotification ){
+			LocalNotificationManager.Instance.Add (param);
 		}
 		return;
 	}
@@ -351,8 +351,8 @@ insert into new_table (test_key,test_value) values ('insert_key' , 'insert_value
 		}
 	}
 
-	public CsvLocalNotification m_csvLocalNotification = new CsvLocalNotification();
-	static public List<CsvLocalNotificationData> csv_localNotification {
+	public CsvLocalNotificationData m_csvLocalNotification = new CsvLocalNotificationData();
+	static public List<CsvLocalNotificationParam> csv_localNotification {
 		get{ 
 			return Instance.m_csvLocalNotification.All;
 		}
