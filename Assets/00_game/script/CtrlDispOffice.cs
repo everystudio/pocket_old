@@ -41,6 +41,7 @@ public class CtrlDispOffice : CtrlItemDetailBase {
 		if (m_goRootPosition == null) {
 			m_goRootPosition = new GameObject ();
 		}
+		Debug.LogError ("here");
 		m_goRootPosition.name = "ctrldispoffice_rootposition";		// 別に名付ける必要はなかったんですけどね
 		m_goRootPosition.transform.parent = _rootPosition.transform;
 		m_goRootPosition.transform.localScale = Vector3.one;
@@ -48,7 +49,9 @@ public class CtrlDispOffice : CtrlItemDetailBase {
 		m_goRootPosition.transform.localPosition = Vector3.zero;
 		// ここ別にbaseいらないね
 		m_goBlackBack = PrefabManager.Instance.MakeObject ("prefab/PrefBlackBack", m_goRootPosition);
-		m_goBlackBack.name = string.Format ("{0}(fromCtrlDispOffice)", m_goBlackBack.name);
+		m_goBlackBack.name = DataManager.Instance.KEY_TOUCHABLE_FIELD_NAME;
+		m_goBlackBack.transform.localPosition = new Vector3 (0.0f, 0.0f, -10.0f);
+		//m_goBlackBack.name = string.Format ("{0}(fromCtrlDispOffice)", m_goBlackBack.name);
 		base.Initialize (_iItemSerial);
 
 		return;

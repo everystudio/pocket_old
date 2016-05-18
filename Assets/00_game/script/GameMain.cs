@@ -406,7 +406,8 @@ public class GameMain : MonoBehaviour {
 
 		//レイを投射してオブジェクトを検出
 		if (Physics.Raycast (ray, out hit, fDistance)) {
-			if (hit.collider.gameObject.name.Equals ("parkRoot")) {
+			Debug.Log (hit.collider.gameObject.name);
+			if (hit.collider.gameObject.name.Equals (DataManager.Instance.KEY_TOUCHABLE_FIELD_NAME)) {
 				GameObject objPoint = new GameObject ();
 				objPoint.transform.position = hit.point;
 				objPoint.transform.parent = _goRoot.transform;

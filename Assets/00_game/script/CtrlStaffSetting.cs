@@ -33,7 +33,8 @@ public class CtrlStaffSetting : MonoBehaviour {
 		m_iSetStaffSerial = _iStaffSerial;
 
 		GameObject dispRoot = gameObject.transform.parent.parent.parent.parent.gameObject;
-	
+
+
 		//GameObject obj = PrefabManager.Instance.MakeObject ("prefab/PrefDispOffice", gameObject.transform.parent.parent.parent.parent.gameObject);
 		GameObject obj = PrefabManager.Instance.MakeObject ("prefab/PrefDispOffice", dispRoot );
 		m_dispOffice = obj.GetComponent< CtrlDispOffice> ();
@@ -50,7 +51,7 @@ public class CtrlStaffSetting : MonoBehaviour {
 		GameObject objYesNo = PrefabManager.Instance.MakeObject ("prefab/PrefYesNoButton", GameMain.PanelFront );
 		objYesNo.transform.localPosition = new Vector3 (0.0f, -400.0f, 0.0f);
 		m_buttonYesNo = objYesNo.GetComponent<CtrlYesNoButton> ();
-
+		m_buttonYesNo.ButtonInit ();
 
 		m_buttonYesNo.EnableButtonYes (false);
 

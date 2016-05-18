@@ -5006,7 +5006,7 @@ GameObject:
   - 114: {fileID: 711463183}
   - 65: {fileID: 711463184}
   m_Layer: 8
-  m_Name: parkRoot
+  m_Name: parkRootTouchable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
