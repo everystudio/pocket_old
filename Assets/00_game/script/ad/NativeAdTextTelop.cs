@@ -18,6 +18,7 @@ public class NativeAdTextTelop : MonoBehaviourEx {
 	private int FONT_SIZE = 17;
 	//private float INTERVAL = 1.0f;
 	private float BACK_WIDTH = 92.0f;
+	private float BACK_HEIGHT= 10.0f;
 	//private float m_fTimer;
 
 	private string m_strPr;
@@ -45,7 +46,7 @@ public class NativeAdTextTelop : MonoBehaviourEx {
 	}
 
 	public void Loaded(NendAdNativeView view){
-		myTransform.localPosition = new Vector3 (BACK_WIDTH - (0.5f*BACK_WIDTH) , 0.0f, 0.0f);
+		myTransform.localPosition = new Vector3 (BACK_WIDTH - (0.5f*BACK_WIDTH) , BACK_HEIGHT*-0.25f, 0.0f);
 		//Debug.LogError ("NativeAdTextTelop.Loaded");
 		nativeAdView = view;
 		//m_strPr = nativeAdView.GetPrText ();
@@ -74,13 +75,13 @@ public class NativeAdTextTelop : MonoBehaviourEx {
 			//m_eStep = STEP.MOVE;
 			//myTransform.localPosition = new Vector3 (BACK_WIDTH, 0.0f, 0.0f);
 			//m_textTelop.rectTransform.localPosition = new Vector3 (0.0f, 0.0f, 0.0f);
-			myTransform.localPosition = new Vector3 (BACK_WIDTH - (0.5f*BACK_WIDTH) , 0.0f, 0.0f);
+			myTransform.localPosition = new Vector3 (BACK_WIDTH - (0.5f*BACK_WIDTH) , BACK_HEIGHT*-0.25f, 0.0f);
 			//Debug.LogError (m_textTelop.rectTransform.position.x);
 			m_eStep = STEP.MOVE;
 			break;
 		case STEP.MOVE:
 
-			myTransform.localPosition = new Vector3 (myTransform.localPosition.x - (14.0f * Time.deltaTime), 0.0f, 0.0f);
+			myTransform.localPosition = new Vector3 (myTransform.localPosition.x - (14.0f * Time.deltaTime), BACK_HEIGHT*-0.25f, 0.0f);
 
 			if (myTransform.localPosition.x < -1.0f*m_fTelopWidth - (0.5f*BACK_WIDTH) ) {
 				m_eStep = STEP.SETUP;

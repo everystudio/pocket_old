@@ -482,7 +482,7 @@ RectTransform:
   - {fileID: 1371154837}
   - {fileID: 1751081427}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -601,7 +601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14681d33daaab43d98b1c91f21764083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_goAdIcon: {fileID: 1617311030}
+  m_goAdIcon: {fileID: 0}
   m_goAdBanner: {fileID: 564414013}
   m_goAdNativePanelList:
   - {fileID: 1751081426}
@@ -617,7 +617,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 11
 --- !u!1 &133999127
 GameObject:
   m_ObjectHideFlags: 0
@@ -4465,7 +4465,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
 --- !u!1 &625393759
 GameObject:
   m_ObjectHideFlags: 0
@@ -4497,7 +4497,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000076294, y: 9.4}
+  m_AnchoredPosition: {x: -0.0000076294, y: 8.1}
   m_SizeDelta: {x: 80, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &625393761
@@ -4651,7 +4651,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000015259, y: -34.3}
+  m_AnchoredPosition: {x: -0.000015259, y: -35.6}
   m_SizeDelta: {x: 92, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &682405198
@@ -4962,7 +4962,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
 --- !u!114 &707536358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5987,7 +5987,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
 --- !u!1 &942458556
 GameObject:
   m_ObjectHideFlags: 0
@@ -9836,79 +9836,6 @@ MonoBehaviour:
   mFixedAspect: 0
   mPixelSize: 1
   nextSprite: {fileID: 0}
---- !u!1 &1617311030
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1617311032}
-  - 114: {fileID: 1617311031}
-  m_Layer: 0
-  m_Name: NendAdIcon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1617311031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1617311030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9097ca3ae34f740b7ad7a613a0c8693e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  account:
-    apiKey: a6c5ade01e0f23e1403d7d9072ba79c0f5767e17
-    spotID: 554785
-  automaticDisplay: 1
-  orientation: 0
-  gravity: 0200000004000000
-  margin:
-    left: 0
-    top: 100
-    right: 0
-    bottom: 0
-  icon:
-  - tag: 0
-    size: 75
-    spaceEnabled: 1
-    titleVisible: 1
-    titleColor: '#000000'
-    gravity: 
-    margin:
-      left: 0
-      top: 0
-      right: 0
-      bottom: 0
-  - tag: 0
-    size: 75
-    spaceEnabled: 1
-    titleVisible: 1
-    titleColor: '#000000'
-    gravity: 
-    margin:
-      left: 0
-      top: 0
-      right: 0
-      bottom: 0
---- !u!4 &1617311032
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1617311030}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.034652684, y: 0.068490386, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
 --- !u!1 &1654194260
 GameObject:
   m_ObjectHideFlags: 0
@@ -10804,7 +10731,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1751081427
 RectTransform:
   m_ObjectHideFlags: 0

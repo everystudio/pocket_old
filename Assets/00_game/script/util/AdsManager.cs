@@ -14,7 +14,7 @@ public class AdsManager : Singleton<AdsManager> {
 	private int m_iAdNativePanelIndex;
 
 	#if UNITY_ANDROID
-	private NendAdIcon m_nendAdIcon;
+	//private NendAdIcon m_nendAdIcon;
 	//private bool m_bIsIcon = true;
 	#endif
 	private NendAdBanner m_nendAdBanner;
@@ -51,11 +51,6 @@ public class AdsManager : Singleton<AdsManager> {
 
 	public override void Initialize ()
 	{
-		#if UNITY_ANDROID
-		if( m_nendAdIcon == null ){
-			m_nendAdIcon = m_goAdIcon.GetComponent<NendAdIcon> ();
-		}
-		#endif
 		if (m_nendAdBanner == null) {
 			m_nendAdBanner = m_goAdBanner.GetComponent<NendAdBanner> ();
 		}
