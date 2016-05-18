@@ -331,14 +331,14 @@ insert into new_table (test_key,test_value) values ('insert_key' , 'insert_value
 			return Instance.m_csvTime.All;
 		}
 	}
-	public CsvWord m_csvWord = new CsvWord();
-	static public List<CsvWordData> csv_word {
+	public CsvWordData m_csvWord = new CsvWordData();
+	static public List<CsvWordParam> csv_word {
 		get{ 
 			return Instance.m_csvWord.All;
 		}
 	}
 	public string GetWord( string _strKey ){
-		foreach (CsvWordData data in csv_word) {
+		foreach (CsvWordParam data in csv_word) {
 			if (_strKey.Equals (data.key) == true) {
 				return data.word;
 			}
