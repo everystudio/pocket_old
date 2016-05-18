@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using NendUnityPlugin.AD;
 
 public class AdsManager : Singleton<AdsManager> {
@@ -9,11 +10,12 @@ public class AdsManager : Singleton<AdsManager> {
 	[SerializeField]
 	private GameObject m_goAdBanner;
 	[SerializeField]
-	private GameObject m_goAdNativePanel;
+	private List<GameObject> m_goAdNativePanelList;
+	private int m_iAdNativePanelIndex;
 
 	#if UNITY_ANDROID
 	private NendAdIcon m_nendAdIcon;
-	private bool m_bIsIcon = true;
+	//private bool m_bIsIcon = true;
 	#endif
 	private NendAdBanner m_nendAdBanner;
 
@@ -58,9 +60,11 @@ public class AdsManager : Singleton<AdsManager> {
 			m_nendAdBanner = m_goAdBanner.GetComponent<NendAdBanner> ();
 		}
 		// 最初はでないようにする
-		m_goAdNativePanel.SetActive (false);
-
-
+		foreach (GameObject obj in m_goAdNativePanelList) {
+			obj.SetActive (false);
+		}
+		m_iAdNativePanelIndex = m_goAdNativePanelList.Count-1;
+		m_goAdNativePanelList [m_iAdNativePanelIndex].SetActive (false);
 	}
 
 	#if USE_IMOBILE
@@ -80,33 +84,11 @@ public class AdsManager : Singleton<AdsManager> {
 #endif
 	public void ShowIcon( bool _bFlag ){
 
-		#if UNITY_ANDROID
-		NendAdIcon script = m_nendAdIcon;
-		if (script == null) {
-			Debug.Log ("ShowIcon script=null! ");
-		} else if (_bFlag) {
-			//Debug.Log ("Show Icon! ");
-			if( m_bIsIcon ){
-				script.Show ();
-				script.Resume ();
-			}
-			else {
-				m_goAdNativePanel.SetActive( true );
-			}
-		} else {
-			//Debug.Log ("Hide Icon! ");
-			if( m_bIsIcon ){
-				script.Hide();
-				script.Pause();
-			}
-			else {
-				m_goAdNativePanel.SetActive( false );
-			}
-			m_bIsIcon = !m_bIsIcon;
+		if (_bFlag == true) {
+			m_iAdNativePanelIndex += 1;
+			m_iAdNativePanelIndex %= m_goAdNativePanelList.Count;
 		}
-		#elif UNITY_IPHONE
-		m_goAdNativePanel.SetActive( _bFlag );
-		#endif
+		m_goAdNativePanelList[m_iAdNativePanelIndex].SetActive( _bFlag );
 		return;
 	}
 

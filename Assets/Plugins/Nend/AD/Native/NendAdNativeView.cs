@@ -48,6 +48,13 @@
 		[SerializeField] private NendAdNativeImage adImage;
 		[SerializeField] private NendAdNativeImage logoImage;
 
+		public string GetPrText(){
+			return m_NativeAd.GetAdvertisingExplicitlyText ((int)advertisingExplicitly);
+		}
+		public string GetShortText(){
+			return m_NativeAd.ShortText;
+		}
+
 		#region AdEvents
 
 		/// <summary>
@@ -78,7 +85,6 @@
 		private IImpressionTracker m_ImpressionTracker = null;
 		private float m_TimeElapsed = .0f;
 		private HashSet<IValidatable> m_Validatables = new HashSet<IValidatable> ();
-
 		/// <summary>
 		/// Gets or sets the view tag.
 		/// </summary>
