@@ -79,8 +79,20 @@ public class AdsManager : Singleton<AdsManager> {
 #endif
 	public void ShowIcon( bool _bFlag ){
 
+		int[] prob_table = new int[2]{
+			DataManager.Instance.config.HasKey( "nativead_1_prob" ) ? DataManager.Instance.config.ReadInt( "nativead_1_prob" ) : 0 ,
+			DataManager.Instance.config.HasKey( "nativead_2_prob" ) ? DataManager.Instance.config.ReadInt( "nativead_2_prob" ) : 0 				
+		};
+		int buf = 0;
+		foreach (int temp in prob_table) {
+			buf += temp;
+		}
+		if (buf == 0) {
+			return;
+		}
+
 		if (_bFlag == true) {
-			m_iAdNativePanelIndex += 1;
+			m_iAdNativePanelIndex = UtilRand.GetIndex (prob_table);
 			m_iAdNativePanelIndex %= m_goAdNativePanelList.Count;
 		}
 		m_goAdNativePanelList[m_iAdNativePanelIndex].SetActive( _bFlag );

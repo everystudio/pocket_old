@@ -3495,6 +3495,7 @@ MonoBehaviour:
   m_eStepPre: 0
   m_sprite: {fileID: 0}
   m_sprite2D: {fileID: 461489632}
+  m_spriteImage: {fileID: 0}
   m_strSpriteName: 
 --- !u!114 &461489632
 MonoBehaviour:
@@ -5240,6 +5241,7 @@ MonoBehaviour:
   m_eStepPre: 0
   m_sprite: {fileID: 0}
   m_sprite2D: {fileID: 763402672}
+  m_spriteImage: {fileID: 0}
   m_strSpriteName: 
 --- !u!114 &763402672
 MonoBehaviour:
@@ -6335,6 +6337,7 @@ MonoBehaviour:
   m_eStepPre: 0
   m_sprite: {fileID: 0}
   m_sprite2D: {fileID: 968394833}
+  m_spriteImage: {fileID: 0}
   m_strSpriteName: 
 --- !u!114 &968394833
 MonoBehaviour:
@@ -7561,6 +7564,7 @@ MonoBehaviour:
   m_eStepPre: 0
   m_sprite: {fileID: 0}
   m_sprite2D: {fileID: 1183366431}
+  m_spriteImage: {fileID: 0}
   m_strSpriteName: 
 --- !u!114 &1183366431
 MonoBehaviour:
@@ -7945,6 +7949,7 @@ MonoBehaviour:
   m_eStepPre: 0
   m_sprite: {fileID: 0}
   m_sprite2D: {fileID: 1282910083}
+  m_spriteImage: {fileID: 0}
   m_strSpriteName: 
 --- !u!114 &1282910083
 MonoBehaviour:
@@ -9915,6 +9920,7 @@ MonoBehaviour:
   m_eStepPre: 0
   m_sprite: {fileID: 0}
   m_sprite2D: {fileID: 1654194265}
+  m_spriteImage: {fileID: 0}
   m_strSpriteName: 
 --- !u!114 &1654194265
 MonoBehaviour:
@@ -10410,6 +10416,7 @@ MonoBehaviour:
   m_eStepPre: 0
   m_sprite: {fileID: 0}
   m_sprite2D: {fileID: 1720107957}
+  m_spriteImage: {fileID: 0}
   m_strSpriteName: 
 --- !u!114 &1720107957
 MonoBehaviour:
@@ -10546,6 +10553,7 @@ MonoBehaviour:
   m_eStepPre: 0
   m_sprite: {fileID: 0}
   m_sprite2D: {fileID: 1732215150}
+  m_spriteImage: {fileID: 0}
   m_strSpriteName: 
 --- !u!114 &1732215150
 MonoBehaviour:
@@ -10725,6 +10733,8 @@ GameObject:
   - 114: {fileID: 1751081430}
   - 114: {fileID: 1751081429}
   - 114: {fileID: 1751081428}
+  - 114: {fileID: 1751081432}
+  - 114: {fileID: 1751081433}
   m_Layer: 5
   m_Name: PanelNendAdNativeView2
   m_TagString: Untagged
@@ -10835,6 +10845,38 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1751081426}
+--- !u!114 &1751081432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1751081426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecb14c79234564c198c611529bb207c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_bSizeSet: 0
+  m_iWidth: 0
+  m_iHeight: 0
+  m_eStep: 0
+  m_eStepPre: 0
+  m_sprite: {fileID: 0}
+  m_sprite2D: {fileID: 0}
+  m_spriteImage: {fileID: 1751081430}
+  m_strSpriteName: 
+--- !u!114 &1751081433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1751081426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 288fffbee343567469973261b6855322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_strSpriteName: texture/ad/PR2.png
 --- !u!1 &1752485497
 GameObject:
   m_ObjectHideFlags: 0
