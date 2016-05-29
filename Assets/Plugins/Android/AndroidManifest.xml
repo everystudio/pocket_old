@@ -3,7 +3,6 @@
   <supports-screens android:smallScreens="true" android:normalScreens="true" android:largeScreens="true" android:xlargeScreens="true" android:anyDensity="true" />
   <uses-permission android:name="android.permission.INTERNET" />
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-  <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
   #ストアでアプリ内課金を許可する
   <uses-permission android:name="com.android.vending.BILLING" />
