@@ -4,3 +4,6 @@
 [submodule "Assets/pocket.Resources"]
 	path = Assets/pocket.Resources
 	url = https://github.com/everystudio/pocket.Resources
+[submodule "Assets/pocket.Game"]
+	path = Assets/pocket.Game
+	url = https://github.com/everystudio/pocket.Game

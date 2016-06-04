@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/00_game/scene/initial.unity
+    path: Assets/pocket.Game/scene/initial.unity
   - enabled: 1
-    path: Assets/00_game/scene/park_main.unity
+    path: Assets/pocket.Game/scene/park_main.unity
