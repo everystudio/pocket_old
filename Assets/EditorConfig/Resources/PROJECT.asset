@@ -18,10 +18,10 @@ MonoBehaviour:
     enabled: 1
   m_PlayerSettingData:
     companyName: 
-    productName: "\u30DD\u30B1\u30C3\u30C8\u52D5\u7269\u5712"
-    bundleIdentifier: jp.everystudio.pocket.zoo
-    bundleVersion: 1.0.4
-    iPhoneBundleIdentifier: jp.everystudio.pocket.zoo
+    productName: "\u30DD\u30B1\u30C3\u30C8\u809D\u8A66\u3057"
+    bundleIdentifier: jp.everystudio.pocket.kimodameshi
+    bundleVersion: 0.0.1
+    iPhoneBundleIdentifier: jp.everystudio.pocket.kimodameshi
     icon: {fileID: 2800000, guid: 5309c9f1976894c609f7b7bd64f55f8e, type: 3}
     iconiPhone:
     - {fileID: 0}
