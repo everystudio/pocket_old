@@ -105,7 +105,7 @@ PlayerSettings:
   stripEngineCode: 1
   iPhoneStrippingLevel: 0
   iPhoneScriptCallOptimization: 0
-  iPhoneBuildNumber: 7
+  iPhoneBuildNumber: 8
   ForceInternetPermission: 0
   ForceSDCardPermission: 0
   CreateWallpaper: 0
@@ -374,7 +374,7 @@ PlayerSettings:
   psmSplashimage: {fileID: 0}
   spritePackerPolicy: 
   scriptingDefineSymbols:
-    4: USE_NGUI;USE_EASYTOUCH
+    4: USE_NGUI;USE_EASYTOUCH;USE_UNITY_ADS
     7: USE_NGUI;USE_EASYTOUCH;USE_UNITY_ADS
   metroPackageName: bokuno_doubutsuen
   metroPackageVersion: 
