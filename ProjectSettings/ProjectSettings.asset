@@ -90,14 +90,14 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleIdentifier: jp.everystudio.pocket.zoo
-  bundleVersion: 1.0.8
+  bundleVersion: 1.1.0
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   xboxOneDisableKinectGpuReservation: 0
   virtualRealitySupported: 0
   productGUID: 41f7a042a5b4640d9b02a0ed49c6ec18
-  AndroidBundleVersionCode: 108
+  AndroidBundleVersionCode: 110
   AndroidMinSdkVersion: 9
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -105,7 +105,7 @@ PlayerSettings:
   stripEngineCode: 1
   iPhoneStrippingLevel: 0
   iPhoneScriptCallOptimization: 0
-  iPhoneBuildNumber: 8
+  iPhoneBuildNumber: 10
   ForceInternetPermission: 0
   ForceSDCardPermission: 0
   CreateWallpaper: 0
