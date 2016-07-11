@@ -23,7 +23,7 @@ public class MapChipBase<U> : MonoBehaviourEx where U : DataMapChipBaseParam{
 	}
 	public ROAD_CONNECTION m_eRoadConnection;
 
-	public virtual void Initialize<U>( U _param ) {
+	public virtual void Initialize( U _param ) {
 		m_MapChipParam = _param;
 	}
 	public virtual void Initialize( int _x , int _y , int _mapchipId ){
@@ -57,7 +57,7 @@ public class MapChipBase<U> : MonoBehaviourEx where U : DataMapChipBaseParam{
 
 
 	// 自分おお店の周りに接続された道路があるかチェック＆セット
-	public void CheckAroundConnectRoad<T,U>( MapRoot<T,U> _mapRoot ) where T : MapChipBase<U> where U : DataMapChipBaseParam{
+	public void CheckAroundConnectRoad<T>( MapRoot<T,U> _mapRoot ) where T : MapChipBase<U> {
 		MapChipBase<U>  mapchip = null;
 		for (int x = param.x; x < param.x + param.width; x++) {
 			int iYMin = param.y - 1;

@@ -23,7 +23,7 @@ public class MapRoot<T,U> : MonoBehaviourEx where T : MapChipBase<U> where U : D
 		myTransform.localPosition += new Vector3 (_fX, _fY, 0.0f); 
 	}
 
-	public void Initialize<U>( List<U> _paramList , string _strMapData ) where U : DataMapChipBaseParam {
+	public void Initialize( List<U> _paramList , string _strMapData )  {
 		if (m_bInitialized) {
 			return;
 		}
@@ -162,7 +162,6 @@ public class MapRoot<T,U> : MonoBehaviourEx where T : MapChipBase<U> where U : D
 		return bRet;
 	}
 
-
 	protected void checkRaodSub( int _iX , int _iY ){
 
 		// 自分のところは普通に調べる
@@ -217,9 +216,7 @@ public class MapRoot<T,U> : MonoBehaviourEx where T : MapChipBase<U> where U : D
 			default:
 				break;
 			}
-
 		}
-
 
 		return;
 	}
