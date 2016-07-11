@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class MapRoot<T,U> : MonoBehaviourEx where T : MapChipBase<U> where U : DataMapChipBaseParam {
+public class MapRootBase<T,U> : MonoBehaviourEx where T : MapChipBase<U> where U : DataMapChipBaseParam {
 
 	private MapData m_mapData;
 	public MapData map_data{

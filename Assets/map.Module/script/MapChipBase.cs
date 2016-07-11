@@ -57,7 +57,7 @@ public class MapChipBase<U> : MonoBehaviourEx where U : DataMapChipBaseParam{
 
 
 	// 自分おお店の周りに接続された道路があるかチェック＆セット
-	public void CheckAroundConnectRoad<T>( MapRoot<T,U> _mapRoot ) where T : MapChipBase<U> {
+	public void CheckAroundConnectRoad<T>( MapRootBase<T,U> _mapRoot ) where T : MapChipBase<U> {
 		MapChipBase<U>  mapchip = null;
 		for (int x = param.x; x < param.x + param.width; x++) {
 			int iYMin = param.y - 1;

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MapRootSample : MapRoot<MapChipSample,DataMapChipSampleParam> {
+public class MapRootSample : MapRootBase<MapChipSample,DataMapChipSampleParam> {
 
 }
