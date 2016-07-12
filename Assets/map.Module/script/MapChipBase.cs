@@ -4,9 +4,15 @@ using System.Collections.Generic;
 
 // テンプレートだと、Tからはじめるのがよくありますが、親のクラスにあわせるためにUでDataMapChipBaseParamを宣言します
 
-public class MapChipBase<U> : MonoBehaviourEx where U : DataMapChipBaseParam{
+abstract public class MapChipBase<U> : MonoBehaviourEx where U : DataMapChipBaseParam , new(){
 
-	private U m_MapChipParam;
+	protected MapData m_mapData;
+	public MapData mapData{
+		get{
+			return m_mapData;
+		}
+	}
+	private U m_MapChipParam = new U();
 	public U param{
 		get{
 			return m_MapChipParam;
@@ -23,11 +29,19 @@ public class MapChipBase<U> : MonoBehaviourEx where U : DataMapChipBaseParam{
 	}
 	public ROAD_CONNECTION m_eRoadConnection;
 
-	public virtual void Initialize( U _param ) {
-		m_MapChipParam = _param;
+	protected abstract void initialize (int _x, int _y, int _item_id);
+
+	public virtual void Initialize(MapData _mapData, int _x , int _y , int _item_id ){
+		m_mapData = _mapData;
+		if (m_MapChipParam == null) {
+			m_MapChipParam = new U ();
+			m_MapChipParam.SetParam (_item_id,_x, _y);
+		}
+		initialize (_x, _y, _item_id);
 	}
-	public virtual void Initialize( int _x , int _y , int _mapchipId ){
-		
+	public virtual void Initialize( MapData _mapData , U _param ) {
+		m_MapChipParam = _param;
+		Initialize (_mapData, _param.x, _param.y, _param.item_id);
 	}
 
 	// 自分が道かどうか

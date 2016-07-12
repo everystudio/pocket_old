@@ -2,14 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class MapRootBase<T,U> : MonoBehaviourEx where T : MapChipBase<U> where U : DataMapChipBaseParam {
+public class MapRootBase<T,U> : MonoBehaviourEx where T : MapChipBase<U> where U : DataMapChipBaseParam , new(){
 
 	private MapData m_mapData;
 	public MapData map_data{
 		get{
 			if (m_mapData == null) {
 				m_mapData = new MapData ();
-				m_mapData.Load ("csv/map_data");
+				m_mapData.Load ("data/map_data");
 			}
 			return m_mapData;
 		}
@@ -28,6 +28,9 @@ public class MapRootBase<T,U> : MonoBehaviourEx where T : MapChipBase<U> where U
 			return;
 		}
 		// m_mapDataを直接利用するのは基本ここだけにする
+		if (m_mapData == null) {
+			m_mapData = new MapData ();
+		}
 		m_mapData.Load (_strMapData);
 
 		myTransform.localPosition = new Vector3 (0.0f, -300.0f, 0.0f);
@@ -44,13 +47,13 @@ public class MapRootBase<T,U> : MonoBehaviourEx where T : MapChipBase<U> where U
 					//GameObject obj = PrefabManager.Instance.MakeScript<T> (prefab, gameObject);
 
 					T script = PrefabManager.Instance.AddGameObject<T> (gameObject);
+					script.gameObject.name = string.Format ("fielditem_{0:D2}_{1:D2}" ,x,y);
 
-					script.gameObject.name = "fielditem_" + x.ToString () + "_" + y.ToString ();
 					//CtrlFieldItem script = obj.GetComponent<CtrlFieldItem> ();
 					bool bHit = false;
 					foreach (U param in _paramList) {
 						if (param.x == x && param.y == y) {
-							script.Initialize (param);
+							script.Initialize (map_data,param);
 							bHit = true;
 
 							for (int dx = param.x; dx < param.x + param.width; dx++) {
@@ -64,10 +67,10 @@ public class MapRootBase<T,U> : MonoBehaviourEx where T : MapChipBase<U> where U
 					}
 					if (bHit == false) {
 						int iDummyItemId = 0;
-						if (x == DataManager.user.m_iWidth || y == DataManager.user.m_iHeight) {
+						if (x == map_data.GetWidth() || y == map_data.GetHeight()) {
 							iDummyItemId = -1;
 						}
-						script.Initialize (x, y, iDummyItemId);
+						script.Initialize ( map_data, x, y, iDummyItemId);
 					}
 					m_mapchipList.Add (script);
 				}
