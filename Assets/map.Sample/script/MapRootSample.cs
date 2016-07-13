@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class MapRootSample : MapRootBase<MapChipSample,DataMapChipSampleParam> {
 
+	public Camera m_setCamera;
+
 	void Start(){
 
 		// 画像読み込み
@@ -31,7 +33,27 @@ public class MapRootSample : MapRootBase<MapChipSample,DataMapChipSampleParam> {
 
 		List<DataMapChipSampleParam> param_list = mapchip_sample.list;
 
-		Initialize (param_list,"data/map_data");
+		Initialize (param_list,"data/map_data" , m_setCamera );
+
+	}
+
+	void Update(){
+
+		if (InputManager.Instance.Info.TouchUp) {
+			InputManager.Instance.Info.TouchUp = false;
+			int iGridX = 0;
+			int iGridY = 0;
+
+			if (GetGrid (InputManager.Instance.Info.TouchPoint, out iGridX, out iGridY)) {
+				Debug.Log (string.Format ("grid({0},{1})", iGridX, iGridY));
+
+			} else {
+				Debug.Log ("no hit");
+			}
+		}
+			
+
+
 
 	}
 

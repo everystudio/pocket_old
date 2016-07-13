@@ -470,7 +470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04df5b30be7e87049bfe5e8fee1e5750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_mapchipList: []
+  m_setCamera: {fileID: 29219528}
 --- !u!1 &1448487803
 GameObject:
   m_ObjectHideFlags: 0

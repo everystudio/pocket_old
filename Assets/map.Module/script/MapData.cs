@@ -3,6 +3,8 @@ using System.Collections;
 
 public class MapData : CsvKvs {
 
+	public readonly string TOUCHABLE_NAME = "map_touchable_gameobject_name";
+
 	public readonly string WIDTH = "map_width";
 	public readonly string HEIGHT = "map_height";
 
@@ -12,6 +14,21 @@ public class MapData : CsvKvs {
 	public readonly string DIR_YX = "dir_yx";
 	public readonly string DIR_YY = "dir_yy";
 	//static public readonly Vector3 CELL_Y_DIR = new Vector3 (-80.0f, 40.0f, 0.0f);
+
+	private string m_strTouchableObjectName;
+	public string TouchableObjectName{
+		get{
+			if (m_strTouchableObjectName == null || m_strTouchableObjectName.Equals ("")) {
+				if (HasKey (TOUCHABLE_NAME)) {
+					m_strTouchableObjectName = Read (TOUCHABLE_NAME);
+				} else {
+					Debug.LogError ("no TOUCHABLE_NAME");
+					m_strTouchableObjectName = "error";
+				}
+			}
+			return m_strTouchableObjectName;			
+		}
+	}
 
 	private Vector3 m_v3CellXDir;
 	public Vector3 CELL_X_DIR{

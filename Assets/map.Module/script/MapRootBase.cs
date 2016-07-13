@@ -15,15 +15,17 @@ public class MapRootBase<T,U> : MonoBehaviourEx where T : MapChipBase<U> where U
 		}
 	}
 	
-	private bool m_bInitialized;
+	protected bool m_bInitialized;
+	protected BoxCollider m_boxCollider;
+	protected Camera m_camera;
 
-	public List<T> m_mapchipList = new List<T>();
+	protected List<T> m_mapchipList = new List<T>();
 
 	public void MoveAdd( float _fX , float _fY ){
 		myTransform.localPosition += new Vector3 (_fX, _fY, 0.0f); 
 	}
 
-	public void Initialize( List<U> _paramList , string _strMapData )  {
+	public void Initialize( List<U> _paramList , string _strMapData , Camera _camera)  {
 		if (m_bInitialized) {
 			return;
 		}
@@ -31,6 +33,16 @@ public class MapRootBase<T,U> : MonoBehaviourEx where T : MapChipBase<U> where U
 		if (m_mapData == null) {
 			m_mapData = new MapData ();
 		}
+
+		// カメラお設定
+		m_camera = _camera;
+
+		// 大きすぎるけどとりあえず困らないでしょ
+		// 必要があれば外部化する
+		m_boxCollider = gameObject.AddComponent<BoxCollider> ();
+		m_boxCollider.size = new Vector3( 10000.0f , 10000.0f , 0.0f );
+		m_boxCollider.center = new Vector3( 0.0f , 10000.0f*0.5f , 0.0f );
+
 		m_mapData.Load (_strMapData);
 
 		myTransform.localPosition = new Vector3 (0.0f, -300.0f, 0.0f);
@@ -223,6 +235,121 @@ public class MapRootBase<T,U> : MonoBehaviourEx where T : MapChipBase<U> where U
 
 		return;
 	}
+
+	// 無理やり入力を解除したい場合はここを継承して利用
+	public virtual bool ForceInterceptInput(){
+		return false;
+	}
+
+	/**
+	 * 当たり判定関連の処理
+	 * 
+	 * 
+	 * */
+	public bool GetGrid( GameObject _goRoot , Vector2 _inputPoint , out int _iX , out int _iY , Camera _camera ){
+		_iX = 0;
+		_iY = 0;
+
+		if (ForceInterceptInput() == true ) {
+			return false;
+		}
+
+		bool bRet = false;
+		RaycastHit hit;
+
+		//Debug.Log (_camera);
+		Ray ray = _camera.ScreenPointToRay (new Vector3 (_inputPoint.x, _inputPoint.y, 0.0f));
+		float fDistance = 100.0f;
+
+		_iX = 0;
+		_iY = 0;
+
+		//レイを投射してオブジェクトを検出
+		if (Physics.Raycast (ray, out hit, fDistance)) {
+			//Debug.Log (hit.collider.gameObject.name);
+			if (hit.collider.gameObject.name.Equals (map_data.TouchableObjectName)) {
+				GameObject objPoint = new GameObject ();
+				objPoint.transform.position = hit.point;
+				objPoint.transform.parent = _goRoot.transform;
+
+				// ここの計算式は後で見直します
+				int calc_x = Mathf.FloorToInt ((objPoint.transform.localPosition.x + (objPoint.transform.localPosition.y * 2.0f)) / 160.0f);
+				int calc_y = Mathf.FloorToInt (((objPoint.transform.localPosition.y * 2.0f) - objPoint.transform.localPosition.x) / 160.0f);
+				//Debug.Log ("calc_x=" +  calc_x.ToString () + " calc_y=" +  calc_y.ToString ());
+				bRet = true;
+				_iX = calc_x;
+				_iY = calc_y;
+
+				//Debug.LogError (string.Format ("x:{0} y:{1} posx{2} posy{3}", calc_x, calc_y, objPoint.transform.localPosition.x, objPoint.transform.localPosition.y));
+				Destroy (objPoint);
+			}
+		}
+		return bRet;
+	}
+
+	public bool GetGrid( GameObject _goRoot , Vector2 _inputPoint , out int _iX , out int _iY ){
+		return GetGrid (_goRoot, _inputPoint, out _iX, out _iY, m_camera );
+	}
+	public bool GetGrid( Vector2 _inputPoint , out int _iX , out int _iY ){
+		return GetGrid (gameObject, _inputPoint, out _iX, out _iY );
+	}
+	public bool GridHit( int _iX , int _iY , int _iItemX , int _iItemY , int _iItemWidth , int _iItemHeight , out int _iOffsetX , out int _iOffsetY ){
+		_iOffsetX = 0;
+		_iOffsetY = 0;
+
+		//Debug.Log ("x:" + _dataItem.x.ToString () + " y:" + _dataItem.y.ToString () + " w:" + _dataItem.width.ToString () + " h:" + _dataItem.height.ToString ());
+
+		bool bHit = false;
+		for (int x = _iItemX; x < _iItemX + _iItemWidth; x++) {
+			for (int y = _iItemY; y < _iItemY + _iItemHeight; y++) {
+				if (_iX == x && _iY == y) {
+
+					_iOffsetX = x - _iItemX;
+					_iOffsetY = y - _iItemY;
+					bHit = true;
+					break;
+				}
+			}
+		}
+		return bHit;
+	}
+
+	public bool GridHit( int _iX , int _iY , DataItemParam _dataItem , out int _iOffsetX , out int _iOffsetY ){
+
+		return GridHit (_iX, _iY, _dataItem.x, _dataItem.y, _dataItem.width, _dataItem.height, out _iOffsetX, out _iOffsetY);
+		/*
+		_iOffsetX = 0;
+		_iOffsetY = 0;
+
+		//Debug.Log ("x:" + _dataItem.x.ToString () + " y:" + _dataItem.y.ToString () + " w:" + _dataItem.width.ToString () + " h:" + _dataItem.height.ToString ());
+
+		bool bHit = false;
+		for (int x = _dataItem.x; x < _dataItem.x + _dataItem.width; x++) {
+			for (int y = _dataItem.y; y < _dataItem.y + _dataItem.height; y++) {
+				if (_iX == x && _iY == y) {
+
+					_iOffsetX = x - _dataItem.x;
+					_iOffsetY = y - _dataItem.y;
+					bHit = true;
+					break;
+				}
+			}
+		}
+		return bHit;
+		*/
+	}
+
+	public bool GridHit( int _iX , int _iY , DataItemParam _dataItem ){
+
+		int iOffsetX = 0;
+		int iOffsetY = 0;
+
+		return GridHit (_iX, _iY, _dataItem, out iOffsetX, out iOffsetY);
+	}
+
+
+
+
 
 	// Update is called once per frame
 	void Update () {
