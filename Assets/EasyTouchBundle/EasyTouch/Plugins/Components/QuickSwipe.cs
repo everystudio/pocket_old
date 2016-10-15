@@ -58,7 +58,9 @@ public class QuickSwipe : QuickBase {
 	}
 	
 	void UnsubscribeEvent(){
+		EasyTouch.On_Drag -= On_Drag;
 		EasyTouch.On_Swipe -= On_Swipe;
+		EasyTouch.On_DragEnd -= On_DragEnd;
 		EasyTouch.On_SwipeEnd -= On_SwipeEnd;
 	}
 	#endregion
