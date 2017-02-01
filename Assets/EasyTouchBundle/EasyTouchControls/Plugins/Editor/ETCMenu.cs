@@ -146,7 +146,7 @@ public static class ETCMenu{
 
 		// TouchInput
 		/*
-		#if !UNITY_5_3
+		#if !UNITY_5_3_OR_NEWER
 		if ( GameObject.FindObjectOfType(typeof(TouchInputModule)) ){
 			TouchInputModule tm = (TouchInputModule)GameObject.FindObjectOfType(typeof(TouchInputModule));
 			//tm.allowActivationOnStandalone = true;
@@ -159,7 +159,7 @@ public static class ETCMenu{
 	
 	static void AddEventSystem(){
 
-		//#if UNITY_5_3
+		//#if UNITY_5_3_OR_NEWER
 		new GameObject("EventSystem",typeof(EventSystem), typeof(StandaloneInputModule));
 		//#else
 		//new GameObject("EventSystem",typeof(EventSystem), typeof(TouchInputModule), typeof(StandaloneInputModule));

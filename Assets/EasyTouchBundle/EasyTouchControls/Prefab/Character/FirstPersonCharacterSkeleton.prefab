@@ -5,13 +5,13 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 401464}
-  - 20: {fileID: 2093162}
-  - 92: {fileID: 9226152}
-  - 124: {fileID: 12453366}
-  - 81: {fileID: 8118712}
+  - component: {fileID: 401464}
+  - component: {fileID: 2093162}
+  - component: {fileID: 9226152}
+  - component: {fileID: 12453366}
+  - component: {fileID: 8118712}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -24,10 +24,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 470912}
-  - 143: {fileID: 14336552}
+  - component: {fileID: 470912}
+  - component: {fileID: 14336552}
   m_Layer: 0
   m_Name: FirstPersonCharacterSkeleton
   m_TagString: Player
@@ -44,10 +44,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.512, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 470912}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &470912
 Transform:
   m_ObjectHideFlags: 1
@@ -57,11 +57,11 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.8591013, y: 0.95, z: 5.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 401464}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &2093162
 Camera:
   m_ObjectHideFlags: 1

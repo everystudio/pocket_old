@@ -20,6 +20,12 @@ If you like EasyTouch, don't forget a write a review on the asset store :-)
 
 Look at Youtube channel for new EasyTouch 5 features : https://www.youtube.com/playlist?list=PL_xsQKiLfGUYpZt7uDepdadHo7GBGbozH
 
+EasyTouch Bundle 5.0.12
+***********************
+* PlayMaker Add-on => 1.0.2
+* EasyTouch => 5.0.8
+* EasyTouch Controls => 2.0.7
+
 EasyTouch Bundle 5.0.11
 ***********************
 * PlayMaker Add-on => 1.0.2

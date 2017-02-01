@@ -7,7 +7,9 @@ http://www.thehedgehogteam.com/Forum/
 		the.hedgehog.team@gmail.com
 
 **********************************************
-* This QuickSwipe event unsubscribe
+EasyTouch 5.0.8
+===============
+* Fixe warning on Unity 5.4.X
 
 EasyTouch 5.0.7
 ===============
@@ -16,6 +18,7 @@ EasyTouch 5.0.7
 EasyTouch 5.0.6
 ===============
 * Quick gesture use System GUID instead Unity GUID to prevent error in constructor since Unity 5.4 
+* This QuickSwipe event unsubscribe
 
 EasyTouch 5.0.5
 ===============
