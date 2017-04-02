@@ -1,0 +1,209 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b67d30fa674db487abf481dcf3d9ec11, type: 3}
+  m_Name: AssetBundleGraph
+  m_EditorClassIdentifier: 
+  m_allNodes:
+  - m_name: Loader0
+    m_id: 419d50aa-ff1a-47ac-bd17-4f448bff4ede
+    m_kind: 0
+    m_x: 25
+    m_y: 113
+    m_scriptClassName: 
+    m_filter: []
+    m_inputPoints: []
+    m_outputPoints:
+    - id: 025f6a19-31d2-4eab-8184-b91e7b42c71b
+      label: +
+      parentId: 419d50aa-ff1a-47ac-bd17-4f448bff4ede
+      isInput: 0
+      buttonRect:
+        serializedVersion: 2
+        x: 111
+        y: 32.5
+        width: 10
+        height: 23
+    m_loaderLoadPath:
+      m_values:
+      - targetGroup: 0
+        value: pocket.Resources/AssetBundles
+    m_exporterExportPath:
+      m_values: []
+    m_groupingKeyword:
+      m_values: []
+    m_bundleConfigBundleNameTemplate:
+      m_values: []
+    m_scriptInstanceData:
+      m_values: []
+    m_variants: []
+    m_bundleConfigUseGroupAsVariants: 0
+    m_bundleBuilderEnabledBundleOptions:
+      m_values: []
+    m_exporterExportOption:
+      m_values: []
+    m_prefabBuilderReplacePrefabOptions: 0
+  - m_name: BundleBuilder0
+    m_id: 16f027a1-59cf-4d46-9cb5-e74dc7e616be
+    m_kind: 7
+    m_x: 355
+    m_y: 269
+    m_scriptClassName: 
+    m_filter: []
+    m_inputPoints:
+    - id: 279609d5-23aa-4273-92dc-0570da7698b8
+      label: '-'
+      parentId: 16f027a1-59cf-4d46-9cb5-e74dc7e616be
+      isInput: 1
+      buttonRect:
+        serializedVersion: 2
+        x: 0
+        y: 29.5
+        width: 21
+        height: 29
+    m_outputPoints:
+    - id: 44c001dd-dee7-42f0-b54b-1876a83a2c81
+      label: +
+      parentId: 16f027a1-59cf-4d46-9cb5-e74dc7e616be
+      isInput: 0
+      buttonRect:
+        serializedVersion: 2
+        x: 129
+        y: 32.5
+        width: 10
+        height: 23
+    m_loaderLoadPath:
+      m_values: []
+    m_exporterExportPath:
+      m_values: []
+    m_groupingKeyword:
+      m_values: []
+    m_bundleConfigBundleNameTemplate:
+      m_values: []
+    m_scriptInstanceData:
+      m_values: []
+    m_variants: []
+    m_bundleConfigUseGroupAsVariants: 0
+    m_bundleBuilderEnabledBundleOptions:
+      m_values:
+      - targetGroup: 0
+        value: 0
+    m_exporterExportOption:
+      m_values: []
+    m_prefabBuilderReplacePrefabOptions: 0
+  - m_name: BundleConfig0
+    m_id: e578c38a-ec5c-4c64-9759-5567e2506838
+    m_kind: 6
+    m_x: 163
+    m_y: 247
+    m_scriptClassName: 
+    m_filter: []
+    m_inputPoints:
+    - id: dafce9d5-38c1-4a8c-b483-acb41d2c7778
+      label: '-'
+      parentId: e578c38a-ec5c-4c64-9759-5567e2506838
+      isInput: 1
+      buttonRect:
+        serializedVersion: 2
+        x: 0
+        y: 29.5
+        width: 21
+        height: 29
+    m_outputPoints:
+    - id: 7d8410ff-c976-45a5-a74c-fd2a6973ce58
+      label: +
+      parentId: e578c38a-ec5c-4c64-9759-5567e2506838
+      isInput: 0
+      buttonRect:
+        serializedVersion: 2
+        x: 126
+        y: 32.5
+        width: 10
+        height: 23
+    m_loaderLoadPath:
+      m_values: []
+    m_exporterExportPath:
+      m_values: []
+    m_groupingKeyword:
+      m_values: []
+    m_bundleConfigBundleNameTemplate:
+      m_values:
+      - targetGroup: 0
+        value: bundle_*
+    m_scriptInstanceData:
+      m_values: []
+    m_variants: []
+    m_bundleConfigUseGroupAsVariants: 0
+    m_bundleBuilderEnabledBundleOptions:
+      m_values: []
+    m_exporterExportOption:
+      m_values: []
+    m_prefabBuilderReplacePrefabOptions: 0
+  - m_name: Exporter1
+    m_id: b1966a93-9b70-4fee-b1f0-8948d429ef84
+    m_kind: 8
+    m_x: 603
+    m_y: 187
+    m_scriptClassName: 
+    m_filter: []
+    m_inputPoints:
+    - id: 3d76a8ea-22db-4615-b10b-878bd2082a1a
+      label: '-'
+      parentId: b1966a93-9b70-4fee-b1f0-8948d429ef84
+      isInput: 1
+      buttonRect:
+        serializedVersion: 2
+        x: 0
+        y: 29.5
+        width: 21
+        height: 29
+    m_outputPoints: []
+    m_loaderLoadPath:
+      m_values: []
+    m_exporterExportPath:
+      m_values:
+      - targetGroup: 0
+        value: Build
+    m_groupingKeyword:
+      m_values: []
+    m_bundleConfigBundleNameTemplate:
+      m_values: []
+    m_scriptInstanceData:
+      m_values: []
+    m_variants: []
+    m_bundleConfigUseGroupAsVariants: 0
+    m_bundleBuilderEnabledBundleOptions:
+      m_values: []
+    m_exporterExportOption:
+      m_values:
+      - targetGroup: 0
+        value: 1
+    m_prefabBuilderReplacePrefabOptions: 0
+  m_allConnections:
+  - m_id: a975ae89-57bb-4c60-aa43-d9a75e820c12
+    m_fromNodeId: e578c38a-ec5c-4c64-9759-5567e2506838
+    m_fromNodeConnectionPointId: 7d8410ff-c976-45a5-a74c-fd2a6973ce58
+    m_toNodeId: 16f027a1-59cf-4d46-9cb5-e74dc7e616be
+    m_toNodeConnectionPoiontId: 279609d5-23aa-4273-92dc-0570da7698b8
+    m_label: +
+  - m_id: 0f3a1bd5-261b-43d2-85ff-25f136409dc0
+    m_fromNodeId: 419d50aa-ff1a-47ac-bd17-4f448bff4ede
+    m_fromNodeConnectionPointId: 025f6a19-31d2-4eab-8184-b91e7b42c71b
+    m_toNodeId: e578c38a-ec5c-4c64-9759-5567e2506838
+    m_toNodeConnectionPoiontId: dafce9d5-38c1-4a8c-b483-acb41d2c7778
+    m_label: +
+  - m_id: 9125f239-2d78-4d8b-8036-a197149fda84
+    m_fromNodeId: 16f027a1-59cf-4d46-9cb5-e74dc7e616be
+    m_fromNodeConnectionPointId: 44c001dd-dee7-42f0-b54b-1876a83a2c81
+    m_toNodeId: b1966a93-9b70-4fee-b1f0-8948d429ef84
+    m_toNodeConnectionPoiontId: 3d76a8ea-22db-4615-b10b-878bd2082a1a
+    m_label: +
+  m_lastModified: 131356155804210000
+  m_version: 1

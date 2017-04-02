@@ -1,0 +1,67 @@
+ManifestFileVersion: 0
+CRC: 1638730433
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 30eb2a795d56da86e69f37cecb085b87
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 6d2f911f7d2d6bc66cff8fb8bab4442d
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 49
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4d0c51bb0b6e93049af5e88f93826e3b, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/pocket.Resources/AssetBundles/atlas/ad001.png
+- Assets/pocket.Resources/AssetBundles/atlas/tutorial003.png
+- Assets/pocket.Resources/AssetBundles/atlas/tutorial002.png
+- Assets/pocket.Resources/AssetBundles/atlas/item003.png
+- Assets/pocket.Resources/AssetBundles/atlas/monster001.png
+- Assets/pocket.Resources/AssetBundles/atlas/back002.txt
+- Assets/pocket.Resources/AssetBundles/atlas/tutorial001.txt
+- Assets/pocket.Resources/AssetBundles/atlas/monster002.txt
+- Assets/pocket.Resources/AssetBundles/atlas/tutorial002.txt
+- Assets/pocket.Resources/AssetBundles/atlas/item005.png
+- Assets/pocket.Resources/AssetBundles/atlas/ui003.txt
+- Assets/pocket.Resources/AssetBundles/atlas/tutorial003.txt
+- Assets/pocket.Resources/AssetBundles/atlas/back002.png
+- Assets/pocket.Resources/AssetBundles/atlas/tutorial001.png
+- Assets/pocket.Resources/AssetBundles/atlas/ui001.txt
+- Assets/pocket.Resources/AssetBundles/atlas/ad001.txt
+- Assets/pocket.Resources/AssetBundles/atlas/monster002.png
+- Assets/pocket.Resources/AssetBundles/atlas/monster001.txt
+- Assets/pocket.Resources/AssetBundles/atlas/back001.txt
+- Assets/pocket.Resources/AssetBundles/atlas/item002.txt
+- Assets/pocket.Resources/AssetBundles/atlas/item004.txt
+- Assets/pocket.Resources/AssetBundles/atlas/ui002.txt
+- Assets/pocket.Resources/AssetBundles/atlas/AtlasAd001.mat
+- Assets/pocket.Resources/AssetBundles/atlas/item001.txt
+- Assets/pocket.Resources/AssetBundles/atlas/staff001.txt
+- Assets/pocket.Resources/AssetBundles/atlas/item004.png
+- Assets/pocket.Resources/AssetBundles/atlas/item002.png
+- Assets/pocket.Resources/AssetBundles/atlas/ui001.png
+- Assets/pocket.Resources/AssetBundles/atlas/item005.txt
+- Assets/pocket.Resources/AssetBundles/atlas/ui003.png
+- Assets/pocket.Resources/AssetBundles/atlas/staff001.png
+- Assets/pocket.Resources/AssetBundles/atlas/item003.txt
+- Assets/pocket.Resources/AssetBundles/atlas/item001.png
+- Assets/pocket.Resources/AssetBundles/atlas/back001.png
+- Assets/pocket.Resources/AssetBundles/atlas/AtlasAd001.prefab
+- Assets/pocket.Resources/AssetBundles/atlas/ui002.png
+Dependencies: []
