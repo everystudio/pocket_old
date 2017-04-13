@@ -1806,26 +1806,8 @@ MonoBehaviour:
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  - m_assetDatabaseId: b864aa7136fb181439b2adf1b367da5a
-    m_importFrom: Assets/everystudio-library/02_ScriptsForAssetBundleSystem/Editor/AssetbundlesMenuItems.cs
-    m_exportTo: 
-    m_variantName: 
-    m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
   - m_assetDatabaseId: d3c4ced252d188b46a9d48699a9475da
     m_importFrom: Assets/everystudio-library/02_ScriptsForAssetBundleSystem/Editor/BuildScript.cs
-    m_exportTo: 
-    m_variantName: 
-    m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  - m_assetDatabaseId: 20cf6a20479a62441a6c5cd4005d5d76
-    m_importFrom: Assets/everystudio-library/02_ScriptsForAssetBundleSystem/AssetBundleLoadOperation.cs
-    m_exportTo: 
-    m_variantName: 
-    m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  - m_assetDatabaseId: 887363708ca3ffd409b36466a85ced85
-    m_importFrom: Assets/everystudio-library/02_ScriptsForAssetBundleSystem/AssetBundleManager.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
@@ -3109,61 +3091,61 @@ MonoBehaviour:
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: d2d0cb87b03c98c40a52d4e2781246b9
-    m_importFrom: Assets/everystudio-library/script/Base64.cs
+    m_importFrom: Assets/everystudio-library/script/Util/Base64.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: c6bd161639bec4b77b23c230ae3ca388
-    m_importFrom: Assets/everystudio-library/script/ButtonBase.cs
+    m_importFrom: Assets/everystudio-library/script/Util/ButtonBase.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 03936343dda724beebf5aa51e3fdda07
-    m_importFrom: Assets/everystudio-library/script/ButtonManager.cs
+    m_importFrom: Assets/everystudio-library/script/Managers/ButtonManager.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 2c6bec263e487405a9f1533bb7a5ff88
-    m_importFrom: Assets/everystudio-library/script/CommonNetwork.cs
+    m_importFrom: Assets/everystudio-library/script/Util/CommonNetwork.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: a1bc932e709b445bc84a4953cc29e704
-    m_importFrom: Assets/everystudio-library/script/ConfigManager.cs
+    m_importFrom: Assets/everystudio-library/script/Managers/ConfigManager.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 84cd5e9c3117e431aa4d130d6ad6a98c
-    m_importFrom: Assets/everystudio-library/script/CtrlDispNumber.cs
+    m_importFrom: Assets/everystudio-library/script/Util/CtrlDispNumber.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 358a9f1088d8c4cea9b6b69df6f336a7
-    m_importFrom: Assets/everystudio-library/script/CtrlDispNumbers.cs
+    m_importFrom: Assets/everystudio-library/script/Util/CtrlDispNumbers.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: b26e64b6477fb4577b691040540008fd
-    m_importFrom: Assets/everystudio-library/script/DataManagerBase.cs
+    m_importFrom: Assets/everystudio-library/script/Managers/DataManagerBase.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 7812d74d68b8d42e19003c739a37b3e9
-    m_importFrom: Assets/everystudio-library/script/DataManagerCore.cs
+    m_importFrom: Assets/everystudio-library/script/Managers/DataManagerCore.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 556e74410196a41d2b97f918f44c9372
-    m_importFrom: Assets/everystudio-library/script/Define.cs
+    m_importFrom: Assets/everystudio-library/script/DefineBase.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
@@ -3175,91 +3157,85 @@ MonoBehaviour:
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 3d77941e39a67344287996900fcb3fec
-    m_importFrom: Assets/everystudio-library/script/FileDownload.cs
+    m_importFrom: Assets/everystudio-library/script/Util/FileDownload.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: cf6bb50dd1ce1f44ebe43f896019144b
-    m_importFrom: Assets/everystudio-library/script/FileDownloadManager.cs
+    m_importFrom: Assets/everystudio-library/script/Managers/FileDownloadManager.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 62cd79211310149f3a516eb4d63681d0
-    m_importFrom: Assets/everystudio-library/script/InputManager.cs
+    m_importFrom: Assets/everystudio-library/script/Managers/InputManager.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: a0c87a78aa37249d4bdf8835b562813f
-    m_importFrom: Assets/everystudio-library/script/InputSupport.cs
+    m_importFrom: Assets/everystudio-library/script/Util/InputSupport.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: f40f3b1a21f9a47428b73937e68c08a9
-    m_importFrom: Assets/everystudio-library/script/Keta.cs
+    m_importFrom: Assets/everystudio-library/script/Util/Keta.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: d5bb8ad1472b348a1b0ea30638ecbca6
-    m_importFrom: Assets/everystudio-library/script/LogUtil.cs
+    m_importFrom: Assets/everystudio-library/script/Util/LogUtil.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: d9e3c87207afa46dabebc1c81403e1b1
-    m_importFrom: Assets/everystudio-library/script/MonoBehaviourEx.cs
+    m_importFrom: Assets/everystudio-library/script/Util/MonoBehaviourEx.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: c994fa956f6ab564d89436a023d015a8
-    m_importFrom: Assets/everystudio-library/script/PageBase.cs
+    m_importFrom: Assets/everystudio-library/script/Util/PageBase.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 8988536eb045c4389b83299bf9d8361e
-    m_importFrom: Assets/everystudio-library/script/PrefabManager.cs
+    m_importFrom: Assets/everystudio-library/script/Managers/PrefabManager.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: ba6a65f019f22490491228a7e29a947d
-    m_importFrom: Assets/everystudio-library/script/Singleton.cs
+    m_importFrom: Assets/everystudio-library/script/Util/Singleton.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 5d69e5a584708984da45a44e6359496a
-    m_importFrom: Assets/everystudio-library/script/SoundHolder.cs
+    m_importFrom: Assets/everystudio-library/script/Sound/SoundHolder.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: fde639ead3c23405eb2d86e8b31acdd5
-    m_importFrom: Assets/everystudio-library/script/SoundManager.cs
+    m_importFrom: Assets/everystudio-library/script/Managers/SoundManager.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 5ebc2febf1410401099d0d3ec4f6942f
-    m_importFrom: Assets/everystudio-library/script/SoundPlayerSupport.cs
+    m_importFrom: Assets/everystudio-library/script/Sound/SoundPlayerSupport.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: fa18c8b9b47dc5042ba906edbdb9a222
     m_importFrom: Assets/everystudio-library/script/SpreadSheetData.cs
-    m_exportTo: 
-    m_variantName: 
-    m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  - m_assetDatabaseId: 4e433bd5a2b3f40be8211ed4862dbb9a
-    m_importFrom: Assets/everystudio-library/script/SpriteManager.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
@@ -3271,61 +3247,61 @@ MonoBehaviour:
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 03f21da9d14f24da4b01bb59eb01099e
-    m_importFrom: Assets/everystudio-library/script/SupportQuaternion.cs
+    m_importFrom: Assets/everystudio-library/script/Util/SupportQuaternion.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 21e0e63e5124841fdb24c72018802613
-    m_importFrom: Assets/everystudio-library/script/Textreader.cs
+    m_importFrom: Assets/everystudio-library/script/Util/Textreader.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: d774a4cd892bf4fe5a9881e719e55e9d
-    m_importFrom: Assets/everystudio-library/script/TimeManager.cs
+    m_importFrom: Assets/everystudio-library/script/Managers/TimeManager.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: e46ba0e03cd764b5cacda4286cb266c9
-    m_importFrom: Assets/everystudio-library/script/UtilAssetBundleAtlas.cs
+    m_importFrom: Assets/everystudio-library/script/AssetBundle/UtilAssetBundleAtlas.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 00f5d17fa45da4ec491a887b649aaa9b
-    m_importFrom: Assets/everystudio-library/script/UtilAssetBundleAudio.cs
+    m_importFrom: Assets/everystudio-library/script/AssetBundle/UtilAssetBundleAudio.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 11642fe44cb4249dfa2627a49558ae34
-    m_importFrom: Assets/everystudio-library/script/UtilAssetBundleBase.cs
+    m_importFrom: Assets/everystudio-library/script/AssetBundle/UtilAssetBundleBase.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 0197b2aa48f24424e884deb9a8a7dfd8
-    m_importFrom: Assets/everystudio-library/script/UtilAssetBundlePrefab.cs
+    m_importFrom: Assets/everystudio-library/script/AssetBundle/UtilAssetBundlePrefab.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 74fc1cdd51f834749a16f182c2bfca10
-    m_importFrom: Assets/everystudio-library/script/UtilAssetBundleSprite.cs
+    m_importFrom: Assets/everystudio-library/script/AssetBundle/UtilAssetBundleSprite.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: e79c5acaec69042efa56a5c3a99b6677
-    m_importFrom: Assets/everystudio-library/script/UtilRand.cs
+    m_importFrom: Assets/everystudio-library/script/Util/UtilRand.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: ecb14c79234564c198c611529bb207c5
-    m_importFrom: Assets/everystudio-library/script/UtilSwitchSprite.cs
+    m_importFrom: Assets/everystudio-library/script/Util/UtilSwitchSprite.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
