@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 1339068388
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: de1b6b8914d2a05cfb2f165a9b29a0f4
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c516f2a3b2b6b67ef759f6410a790acd
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundles/bgm/maoudamashii_4_field04.mp3
+Dependencies: []

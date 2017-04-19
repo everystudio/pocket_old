@@ -1,0 +1,14 @@
+ManifestFileVersion: 0
+CRC: 2823194341
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 5a06cf33327ef3e3bdcb4b77ea80e0c4
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 31d6cfe0d16ae931b73c59d7e0c089c0
+HashAppended: 0
+ClassTypes: []
+Assets:
+- Assets/pocket.Game/scene/main.unity
+Dependencies: []

@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 1218580161
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 97e8d52f98f613c6638f9f5c0f2d9fbd
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c516f2a3b2b6b67ef759f6410a790acd
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundles/se/select_button.mp3
+Dependencies: []

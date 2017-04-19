@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 3885985280
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: b59743cbae1e48167295d500c09cd459
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c516f2a3b2b6b67ef759f6410a790acd
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundles/se/tabchange.mp3
+Dependencies: []

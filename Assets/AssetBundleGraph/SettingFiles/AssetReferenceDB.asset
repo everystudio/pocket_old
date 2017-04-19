@@ -2244,12 +2244,6 @@ MonoBehaviour:
     m_variantName: 
     m_assetTypeString: UnityEngine.AnimationClip, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  - m_assetDatabaseId: 93401f3d43f9cad4ab939e356c9baaff
-    m_importFrom: Assets/everystudio-library/Editor/Atlas/JsonSplitSprite.cs
-    m_exportTo: 
-    m_variantName: 
-    m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
   - m_assetDatabaseId: 8b5ff29f1bab66c45b6d458033e69d12
     m_importFrom: Assets/everystudio-library/Editor/BuildPostProcessor.cs
     m_exportTo: 
@@ -2287,7 +2281,7 @@ MonoBehaviour:
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: ad92ece70eabf4da99f71da8ac29990b
-    m_importFrom: Assets/everystudio-library/EditorConfig/ProjectData.cs
+    m_importFrom: Assets/everystudio-library/script/Managers/ProjectData.cs
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.MonoScript, UnityEditor, Version=0.0.0.0, Culture=neutral,
@@ -8017,7 +8011,7 @@ MonoBehaviour:
     m_assetTypeString: UnityEditor.SceneAsset, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 17e1f682ab84c4ba7874c789bf4fa403
-    m_importFrom: Assets/pocket.Game/scene/park_main.unity
+    m_importFrom: Assets/pocket.Game/scene/main.unity
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEditor.SceneAsset, UnityEditor, Version=0.0.0.0, Culture=neutral,
@@ -8809,13 +8803,13 @@ MonoBehaviour:
     m_assetTypeString: UnityEditor.DefaultAsset, UnityEditor, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 20e63e60d3d506e4f9b9757425b7b7cf
-    m_importFrom: Assets/pocket.Resources/resources/atlas/ad001.png
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/ad001.png
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: b0752fc7a87af4c4da44b26e6844fff2
-    m_importFrom: Assets/pocket.Resources/resources/atlas/ad001.txt
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/ad001.txt
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.TextAsset, UnityEngine, Version=0.0.0.0, Culture=neutral,
@@ -8833,193 +8827,193 @@ MonoBehaviour:
     m_assetTypeString: UnityEngine.GameObject, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 74d384de79f28554cafd246fd5472cc9
-    m_importFrom: Assets/pocket.Resources/resources/atlas/back001.png
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/back001.png
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: e8a5a9881025d4d4e9388994b7780b57
-    m_importFrom: Assets/pocket.Resources/resources/atlas/back001.txt
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/back001.txt
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.TextAsset, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 28091e7665c28294b88dd3fc8f60f3c6
-    m_importFrom: Assets/pocket.Resources/resources/atlas/back002.png
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/back002.png
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: a9a88483c260b1344b278a3570089c26
-    m_importFrom: Assets/pocket.Resources/resources/atlas/back002.txt
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/back002.txt
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.TextAsset, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: aa136e9eb1e939f4ba51d27ab2c88abc
-    m_importFrom: Assets/pocket.Resources/resources/atlas/item001.png
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/item001.png
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 3eefef4ca079a8246b53c8199fc51a2e
-    m_importFrom: Assets/pocket.Resources/resources/atlas/item001.txt
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/item001.txt
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.TextAsset, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 73818a8d92bbc9441ad042f09ab6f580
-    m_importFrom: Assets/pocket.Resources/resources/atlas/item002.png
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/item002.png
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: aefae8b887f03ea46bb0bbe68b7823e0
-    m_importFrom: Assets/pocket.Resources/resources/atlas/item002.txt
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/item002.txt
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.TextAsset, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: d745fc32af16e644b8a9a444c218355e
-    m_importFrom: Assets/pocket.Resources/resources/atlas/item003.png
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/item003.png
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: b9efb66eb877f724683e8f9229df8791
-    m_importFrom: Assets/pocket.Resources/resources/atlas/item003.txt
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/item003.txt
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.TextAsset, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 5348513da0e372d44a0bb859eb9dcb72
-    m_importFrom: Assets/pocket.Resources/resources/atlas/item004.png
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/item004.png
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 89df82d88881d174792759429ba62c05
-    m_importFrom: Assets/pocket.Resources/resources/atlas/item004.txt
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/item004.txt
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.TextAsset, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: edeae2c48813545409a9d37108153248
-    m_importFrom: Assets/pocket.Resources/resources/atlas/item005.png
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/item005.png
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: df2309bd62df6df4fb74f651e1666cbd
-    m_importFrom: Assets/pocket.Resources/resources/atlas/item005.txt
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/item005.txt
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.TextAsset, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 65ae82e28928a2749997e69307d9fa4e
-    m_importFrom: Assets/pocket.Resources/resources/atlas/monster001.png
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/monster001.png
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: de4b3a185a19f8744b49393f156b977a
-    m_importFrom: Assets/pocket.Resources/resources/atlas/monster001.txt
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/monster001.txt
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.TextAsset, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: b1a4880813ae08343bd886287c28e948
-    m_importFrom: Assets/pocket.Resources/resources/atlas/monster002.png
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/monster002.png
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: fc91d214967582849a949fb17d44eb1f
-    m_importFrom: Assets/pocket.Resources/resources/atlas/monster002.txt
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/monster002.txt
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.TextAsset, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: ac1cb11e096556c47a399456cf17c57e
-    m_importFrom: Assets/pocket.Resources/resources/atlas/staff001.png
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/staff001.png
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 0ef3396cf7d26e84e89f502a77d57abc
-    m_importFrom: Assets/pocket.Resources/resources/atlas/staff001.txt
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/staff001.txt
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.TextAsset, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 0f90e9376e688f64383dab9ffb9afa5e
-    m_importFrom: Assets/pocket.Resources/resources/atlas/tutorial001.png
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/tutorial001.png
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 433557f3f3c8e604eacbff0ad64460f9
-    m_importFrom: Assets/pocket.Resources/resources/atlas/tutorial001.txt
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/tutorial001.txt
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.TextAsset, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 65a81ae10df075745ae65c5caaa18b65
-    m_importFrom: Assets/pocket.Resources/resources/atlas/tutorial002.png
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/tutorial002.png
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: f9c81f247dea88441aad6673783b0037
-    m_importFrom: Assets/pocket.Resources/resources/atlas/tutorial002.txt
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/tutorial002.txt
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.TextAsset, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 5d0303e1723ad9f40a4b70be1c447f23
-    m_importFrom: Assets/pocket.Resources/resources/atlas/tutorial003.png
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/tutorial003.png
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: c7aeaa05058343a4ba588a4dfd4cdbb0
-    m_importFrom: Assets/pocket.Resources/resources/atlas/tutorial003.txt
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/tutorial003.txt
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.TextAsset, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 911697bd0d748df4ab7ca0f2d030bf9f
-    m_importFrom: Assets/pocket.Resources/resources/atlas/ui001.png
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/ui001.png
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: b2269367942409540ba288d87a02d1f5
-    m_importFrom: Assets/pocket.Resources/resources/atlas/ui001.txt
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/ui001.txt
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.TextAsset, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: ef4328efe3e76264aa4a12a2d678059c
-    m_importFrom: Assets/pocket.Resources/resources/atlas/ui002.png
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/ui002.png
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: b311607a9e7a67c46b7accce700a4568
-    m_importFrom: Assets/pocket.Resources/resources/atlas/ui002.txt
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/ui002.txt
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.TextAsset, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 65b3addd0b9306641b7eaee37e28f229
-    m_importFrom: Assets/pocket.Resources/resources/atlas/ui003.png
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/ui003.png
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.Texture2D, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - m_assetDatabaseId: 8943f8e497dda314a9ba0cd652360494
-    m_importFrom: Assets/pocket.Resources/resources/atlas/ui003.txt
+    m_importFrom: Assets/pocket.Resources/AssetBundles/atlas/ui003.txt
     m_exportTo: 
     m_variantName: 
     m_assetTypeString: UnityEngine.TextAsset, UnityEngine, Version=0.0.0.0, Culture=neutral,
