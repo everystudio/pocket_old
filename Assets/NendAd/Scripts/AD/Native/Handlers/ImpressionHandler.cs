@@ -47,6 +47,12 @@
 
 		private void CheckImpression ()
 		{
+			if (IsViewable())
+			{
+				Log.I("The {0} is viewable!", gameObject.name);
+				OnImpression();
+			}
+		/*
 			Log.I ("Checking whether the {0} is viewable.", gameObject.name);
 			Vector3 cameraRelative = Camera.main.transform.InverseTransformPoint (gameObject.transform.position);
 			if (0 < cameraRelative.z) {
@@ -59,10 +65,12 @@
 				Log.I ("The {0} is viewable!", gameObject.name);
 				OnImpression ();
 			}
+			*/
 		}
 
 		protected bool CheckViewablePercentage (Corner adCorner)
 		{
+			return true;
 			Rect screenSize = Camera.main.pixelRect;
 			Log.D ("screenSize: {0}, left: {1}, top: {2}, right: {3}, bottom: {4}",
 				screenSize, adCorner.left, adCorner.top, adCorner.right, adCorner.bottom);

@@ -7,5 +7,3 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/pocket.Game/scene/initial.unity
-  - enabled: 1
-    path: Assets/pocket.Game/scene/park_main.unity

@@ -1,67 +1,67 @@
 ManifestFileVersion: 0
-CRC: 830411635
+CRC: 1920600165
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: assets/assetbundles/bgm/maoudamashii_5_village01
+      Name: scene_main
       Dependencies: {}
     Info_1:
-      Name: assets/assetbundles/bgm/maoudamashii_5_village04
-      Dependencies: {}
-    Info_2:
-      Name: assets/assetbundles/bgm/maoudamashii_4_field04
-      Dependencies: {}
-    Info_3:
-      Name: assets/assetbundles/bgm/maoudamashii_5_town16
-      Dependencies: {}
-    Info_4:
       Name: assets/assetbundles/bgm/maoudamashii_4_field10
       Dependencies: {}
+    Info_2:
+      Name: assets/assetbundles/se/setins
+      Dependencies: {}
+    Info_3:
+      Name: assets/assetbundles/se/setanimal
+      Dependencies: {}
+    Info_4:
+      Name: assets/assetbundles/se/fooddrop
+      Dependencies: {}
     Info_5:
-      Name: scene_main
+      Name: assets/assetbundles/se/se_cure
       Dependencies: {}
     Info_6:
       Name: assets/assetbundles/se/tabchange
       Dependencies: {}
     Info_7:
-      Name: assets/assetbundles/se/btn_cancel
+      Name: assets/assetbundles/bgm/maoudamashii_4_field04
       Dependencies: {}
     Info_8:
       Name: assets/assetbundles/se/select_button
       Dependencies: {}
     Info_9:
-      Name: assets/assetbundles/se/btn_normal
+      Name: assets/assetbundles/se/se_work_clear
       Dependencies: {}
     Info_10:
-      Name: assets/assetbundles/se/fooddrop
+      Name: assets/assetbundles/se/btn_cancel
       Dependencies: {}
     Info_11:
-      Name: assets/assetbundles/se/buildup
+      Name: assets/assetbundles/bgm/maoudamashii_5_village04
       Dependencies: {}
     Info_12:
-      Name: assets/assetbundles/se/setanimal
+      Name: assets/assetbundles/se/btn_normal
       Dependencies: {}
     Info_13:
-      Name: assets/assetbundles/se/setins
+      Name: assets/assetbundles/bgm/maoudamashii_5_village01
       Dependencies: {}
     Info_14:
-      Name: assets/assetbundles/se/se_eat
+      Name: assets/assetbundles/bgm/maoudamashii_5_town16
       Dependencies: {}
     Info_15:
-      Name: assets/assetbundles/se/se_levelup
+      Name: assets/assetbundles/se/se_cash
       Dependencies: {}
     Info_16:
-      Name: assets/assetbundles/se/se_eating
+      Name: assets/assetbundles/se/se_eat
       Dependencies: {}
     Info_17:
       Name: assets/assetbundles/se/se_cleanup
       Dependencies: {}
     Info_18:
-      Name: assets/assetbundles/se/se_cure
+      Name: assets/assetbundles/se/se_levelup
       Dependencies: {}
     Info_19:
-      Name: assets/assetbundles/se/se_work_clear
+      Name: assets/assetbundles/se/se_eating
       Dependencies: {}
     Info_20:
-      Name: assets/assetbundles/se/se_cash
+      Name: assets/assetbundles/se/buildup
       Dependencies: {}
