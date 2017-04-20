@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 4170084011
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 6d7126bae1193be6d81cf43bb9e871e7
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c516f2a3b2b6b67ef759f6410a790acd
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundles/se/fooddrop.mp3
+Dependencies: []

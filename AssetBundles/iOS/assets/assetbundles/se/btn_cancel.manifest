@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 2572951637
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 47ca1b981a2dbb6a8528c36823dcd4b6
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c516f2a3b2b6b67ef759f6410a790acd
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundles/se/btn_cancel.mp3
+Dependencies: []
