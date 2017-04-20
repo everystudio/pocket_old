@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 1304118627
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 74e8a8f464d362ce05e5fd3781da7019
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c516f2a3b2b6b67ef759f6410a790acd
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundles/se/setins.mp3
+Dependencies: []

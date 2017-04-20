@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 3938421849
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 0f48f553e8437c7ae8885dc4f64beccf
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c516f2a3b2b6b67ef759f6410a790acd
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundles/bgm/maoudamashii_5_village01.mp3
+Dependencies: []

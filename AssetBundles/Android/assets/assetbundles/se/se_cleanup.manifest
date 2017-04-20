@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 2902376525
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: b03869395548d5593026fcbe6c89a83e
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c516f2a3b2b6b67ef759f6410a790acd
+HashAppended: 0
+ClassTypes:
+- Class: 83
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundles/se/se_cleanup.mp3
+Dependencies: []
